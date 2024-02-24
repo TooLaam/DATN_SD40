@@ -1,4 +1,4 @@
-# Dự án shop bán son Meo
+# Dự án shop bán giày thể thao SD40
 # Công nghệ sử dụng:  
   * Front-end: HTML, CSS, Javascript, Bootstrap,JSP
   * Back-end: Spring Data JPA, SQL Server
