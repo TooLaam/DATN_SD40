@@ -75,7 +75,7 @@
     <nav class="nav-search">
         <div class="row">
             <div class="col-md-2 col-4">
-                <a href="/home/index.html"><img src="/assets/img/logo.png" class="logo" alt="logo" />
+                <a href="/home/index.html"><img src="/assets/img/SD40logo.png" class="logo" alt="logo" />
                 </a>
             </div>
             <div class="col-md-10 col-8">
@@ -120,7 +120,7 @@
                             <button type="submit" class="btn login">LOG IN</button>
                         </div>
 
-                        <a href="/home"><img src="/assets/img/logo.png" class="logo" style="margin-top: 6rem;" alt="logo" /></a>
+                        <a href="/home"><img src="/assets/img/SD40.png" class="logo" style="margin-top: 6rem;" alt="logo" /></a>
                     </form>
                 </div>
             </div>

@@ -13,7 +13,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="/assets/img/favicons.png" rel="icon">
+    <link href="/assets/img/SD40.png" rel="icon">
     <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
@@ -32,18 +32,20 @@
 
     <!-- Template Main CSS File -->
     <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/ctsp.css" rel="stylesheet">
 
 
 </head>
 
 <body>
 
+
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="/statisticsResult" class="logo d-flex align-items-center">
-            <img src="/assets/img/logo.png" alt="LOGO">
+        <a  class="logo d-flex align-items-center">
+            <img src="/assets/img/logoSD40.png" width="150px" height="400px" alt="LOGO">
             <%--<span class="d-none d-lg-block">LOGO</span>--%>
         </a>
         <i class="toggle-sidebar-btn">
@@ -55,17 +57,17 @@
         </i>
     </div><!-- End Logo -->
 
-    <div class="search-bar">
-        <form class="search-form d-flex align-items-center" method="POST" action="#">
-            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-            <button type="submit" title="Search">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
-                     viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                </svg>
-            </button>
-        </form>
-    </div><!-- End Search Bar -->
+<%--    <div class="search-bar">--%>
+<%--        <form class="search-form d-flex align-items-center" method="POST" action="#">--%>
+<%--            <input type="text" name="query" placeholder="Search" title="Enter search keyword">--%>
+<%--            <button type="submit" title="Search">--%>
+<%--                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"--%>
+<%--                     viewBox="0 0 16 16">--%>
+<%--                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>--%>
+<%--                </svg>--%>
+<%--            </button>--%>
+<%--        </form>--%>
+<%--    </div><!-- End Search Bar -->--%>
 
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
@@ -96,7 +98,7 @@
                      class="bi bi-bar-chart-line-fill" viewBox="0 0 16 16">
                     <path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z"/>
                 </svg>
-                <span>Overview</span>
+                <span>Tổng quan</span>
             </a>
         </li><!-- End Dashboard Nav -->
 
@@ -106,7 +108,7 @@
                      class="bi bi-shop" viewBox="0 0 16 16">
                     <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z"/>
                 </svg>
-                <span>Product Management</span><i
+                <span>Quản lý sản phẩm</span><i
                     class="ms-auto">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-chevron-down" viewBox="0 0 16 16">
@@ -117,35 +119,30 @@
             </a>
             <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="/product/index">
+                    <a href="/sanpham/index">
                         <i class="bi bi-circle"></i>
-                        <span>Product</span>
+                        <span>Sản phẩm</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/product_detail/index">
-                        <i class="bi bi-circle"></i><span>Product_Detail</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/category/index">
+                    <a href="/thuonghieu/index">
                         <i class="bi bi-circle"></i>
-                        <span>Category</span>
+                        <span>Thương hiệu</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/color/index">
-                        <i class="bi bi-circle"></i><span>Color</span>
+                    <a href="/mausac/index">
+                        <i class="bi bi-circle"></i><span>Màu sắc</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/brand/index">
-                        <i class="bi bi-circle"></i><span>Brand</span>
+                    <a href="/theloai/index">
+                        <i class="bi bi-circle"></i><span>Thể loại</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/voucher/index">
-                        <i class="bi bi-circle"></i><span>Voucher</span>
+                    <a href="/kichco/index">
+                        <i class="bi bi-circle"></i><span>Kích cở</span>
                     </a>
                 </li>
             </ul>
@@ -157,7 +154,7 @@
                      class="bi bi-person-fill" viewBox="0 0 16 16">
                     <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
                 </svg>
-                <span>User Management</span><i
+                <span>Quản lý User</span><i
                     class="ms-auto">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-chevron-down" viewBox="0 0 16 16">
@@ -170,12 +167,12 @@
                 <li>
                     <a href="/employee/index">
                         <i class="bi bi-circle"></i>
-                        <span>Employee</span>
+                        <span>Nhân viên</span>
                     </a>
                 </li>
                 <li>
                     <a href="/customer/index">
-                        <i class="bi bi-circle"></i><span>Customer</span>
+                        <i class="bi bi-circle"></i><span>Khách hàng</span>
                     </a>
                 </li>
             </ul>
@@ -290,6 +287,8 @@
     </svg>
 </a>
 
+
+
 <!-- Vendor JS Files -->
 <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
 <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -302,6 +301,7 @@
 
 <!-- Template Main JS File -->
 <script src="/assets/js/main.js"></script>
+<script src="/assets/js/ctsp.js"></script>
 
 </body>
 
