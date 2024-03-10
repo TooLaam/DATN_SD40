@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+
 @Service
 public class SanPhamImpl implements SanPhamService {
     @Autowired
@@ -45,5 +46,15 @@ public class SanPhamImpl implements SanPhamService {
     @Override
     public void save(String ten, String moTa, String hinhAnh, Long thuongHieu, Long theLoai) {
         sanPhamRepository.save(ten,moTa,hinhAnh,thuongHieu,theLoai);
+    }
+
+    @Override
+    public List<SanPham> getList() {
+        return sanPhamRepository.findAll();
+    }
+
+    @Override
+    public SanPham findTheoId(Long id) {
+        return sanPhamRepository.findById(id).get();
     }
 }

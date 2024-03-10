@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
-@Service
+
 public interface SanPhamService {
     List<Object[]> getAllTongSL();
     List<Object[]> getAllSPChuaSL();
@@ -16,6 +16,6 @@ public interface SanPhamService {
     SanPham timSPCuoi();
     void save(String ten,String moTa,String hinhAnh,Long thuongHieu,Long theLoai);
 
-
-
+    List<SanPham> getList();
+    SanPham findTheoId(Long id);
 }
