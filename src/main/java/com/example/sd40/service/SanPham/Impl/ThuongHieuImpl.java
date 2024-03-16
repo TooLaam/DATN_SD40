@@ -41,4 +41,9 @@ public class ThuongHieuImpl implements ThuongHieuService {
     public void add(ThuongHieu thuongHieu) {
         thuongHieuRepository.save(thuongHieu);
     }
+
+    @Override
+    public List<ThuongHieu> listTLConDung() {
+        return thuongHieuRepository.listTLConDung();
+    }
 }

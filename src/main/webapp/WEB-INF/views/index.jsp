@@ -13,8 +13,8 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="/assets/img/SD40.png" rel="icon">
-    <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="/assets/img/pngtree-sneakers-png-image_3989154.jpg" rel="icon">
+    <link href="/assets/img/pngtree-sneakers-png-image_3989154.jpg" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -45,7 +45,7 @@
 
     <div class="d-flex align-items-center justify-content-between">
         <a  class="logo d-flex align-items-center">
-            <img src="/assets/img/logoSD40.png" width="150px" height="400px" alt="LOGO">
+            <img src="/assets/img/SD40.png" width="150px" height="400px" alt="LOGO">
             <%--<span class="d-none d-lg-block">LOGO</span>--%>
         </a>
         <i class="toggle-sidebar-btn">
@@ -142,7 +142,12 @@
                 </li>
                 <li>
                     <a href="/kichco/index">
-                        <i class="bi bi-circle"></i><span>Kích cở</span>
+                        <i class="bi bi-circle"></i><span>Kích cỡ</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/giamgia/index">
+                        <i class="bi bi-circle"></i><span>Giảm giá sản phẩm</span>
                     </a>
                 </li>
             </ul>

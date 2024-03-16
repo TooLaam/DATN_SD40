@@ -39,7 +39,13 @@ public class SanPhamImpl implements SanPhamService {
 
     @Override
     public SanPham timSPCuoi() {
-        return sanPhamRepository.findFirstByOrderById();
+
+        return sanPhamRepository.findFirstByOrderByIdDesc();
+    }
+
+    @Override
+    public List<SanPham> findByName(String ten, Long idSP) {
+        return sanPhamRepository.findByName(ten,idSP);
     }
 
     @Override

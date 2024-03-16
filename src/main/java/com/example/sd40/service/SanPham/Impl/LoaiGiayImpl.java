@@ -40,4 +40,9 @@ public class LoaiGiayImpl implements LoaiGiayService {
     public void add(TheLoai theLoai) {
         loaiGiayRepository.save(theLoai);
     }
+
+    @Override
+    public List<TheLoai> listTLConDung() {
+        return loaiGiayRepository.listTLConDung();
+    }
 }

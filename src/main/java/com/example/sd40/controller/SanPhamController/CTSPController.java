@@ -42,6 +42,8 @@ public class CTSPController {
     ThuongHieuService thuongHieuService;
     @Autowired
     LoaiGiayService loaiGiayService;
+    @Autowired
+    GiamGiaService giamGiaService;
 
     @GetMapping("/hienthi/{id}")
     public String hienThi(Model model,
@@ -63,6 +65,7 @@ public class CTSPController {
         model.addAttribute("sp",sanPhamService.detail(id));
         model.addAttribute("listKC",ctspService.findKCTheoSP(id,ms));
         model.addAttribute("listMS",ctspmshaService.findMSTheoSP(id));
+        model.addAttribute("giaDaGiam",giamGiaService.hienThiTienDaGiam(id,ms));
         model.addAttribute("listHA",ctspmshaService.getHAbySPandMS(id,ms));
         model.addAttribute("ms",mauSacService.detail(ms));
         model.addAttribute("view","/SanPham/SanPham/CTSPKC.jsp");
@@ -77,6 +80,50 @@ public class CTSPController {
         model.addAttribute("sp",sanPhamService.detail(id));
         model.addAttribute("listMSDangCo",ctspmshaService.findMSTheoSP(id));
         model.addAttribute("listMSChuaCo",ctspmshaService.getMSNotInCTSPMSByIdsp(id));
+        model.addAttribute("view","/SanPham/SanPham/themMS.jsp");
+        return "index";
+    }
+
+    @GetMapping("/giamGia/{id}")
+    public String giamGia(Model model,
+                             @PathVariable("id") Long id
+
+    ){
+        SanPham sanPham = sanPhamService.detail(id);
+
+        if (sanPham.getGiamGIa() == null){
+            model.addAttribute("sp",sanPhamService.detail(id));
+            model.addAttribute("listGG",giamGiaService.getAll());
+            model.addAttribute("view","/SanPham/SanPham/giamGia.jsp");
+            return "index";
+        }
+        model.addAttribute("sp",sanPhamService.detail(id));
+        model.addAttribute("listGG",giamGiaService.findByIDSP(id));
+        model.addAttribute("view","/SanPham/SanPham/giamGia.jsp");
+        return "index";
+    }
+    @PostMapping("/updategiamGia/{id}")
+    public String UpdateGiamGia(Model model,
+                          @PathVariable("id") Long id,
+                                @RequestParam("giamGia") Long giamGia
+
+    ){
+        giamGiaService.updateGG(giamGia,id);
+        return "redirect:/ctsp/giamGia/" + id;
+    }
+
+    @GetMapping("/updateMS/{idsp}/{idms}")
+    public String updateMS(Model model,
+                             @PathVariable("idsp") Long idsp,
+                             @PathVariable("idms") Long idms
+
+    ){
+        model.addAttribute("sp",sanPhamService.detail(idsp));
+        model.addAttribute("ms",idms);
+        model.addAttribute("listMSDangCo",ctspmshaService.findMSTheoSP(idsp));
+        model.addAttribute("listHA",ctspmshaService.getHAbySPandMS(idsp,idms));
+
+        model.addAttribute("listMSChuaCo",ctspmshaService.getMSNotInCTSPMSByIdsp(idsp));
         model.addAttribute("view","/SanPham/SanPham/themMS.jsp");
         return "index";
     }
@@ -116,10 +163,11 @@ public class CTSPController {
         return "index";
     }
 
-    @PostMapping("/updateMS")
+    @PostMapping("/addMS")
     public String updateMS(@RequestParam("id") Long id,
                            @RequestParam("mauSac") Long mauSac,
-                           @RequestParam("image")MultipartFile image
+                           @RequestParam("image")MultipartFile image,
+                           @RequestParam("giaHienHanh") BigDecimal giaHienHanh
                            ) throws IOException {
         ChiTietSanPhamMauSacHinhAnh chiTietSanPhamMauSacHinhAnh = new ChiTietSanPhamMauSacHinhAnh();
         Date currentDate = new Date(System.currentTimeMillis());
@@ -145,6 +193,7 @@ public class CTSPController {
             chiTietSanPhamMauSacHinhAnh.setNgayTao(currentDate);
             chiTietSanPhamMauSacHinhAnh.setTrangThai(0);
             chiTietSanPhamMauSacHinhAnh.setNgaySua(currentDate);
+            chiTietSanPhamMauSacHinhAnh.setGiaHienHanh(giaHienHanh);
             ctspmshaService.add(chiTietSanPhamMauSacHinhAnh);
         } else {
             // Xử lý khi không có ảnh mới được tải lên
@@ -153,6 +202,7 @@ public class CTSPController {
             chiTietSanPhamMauSacHinhAnh.setNgayTao(currentDate);
             chiTietSanPhamMauSacHinhAnh.setTrangThai(0);
             chiTietSanPhamMauSacHinhAnh.setNgaySua(currentDate);
+            chiTietSanPhamMauSacHinhAnh.setGiaHienHanh(giaHienHanh);
             ctspmshaService.add(chiTietSanPhamMauSacHinhAnh);
         }
 
@@ -160,12 +210,22 @@ public class CTSPController {
         return "redirect:/ctsp/hienthithemkc/" + id+"/"+mauSac;
     }
 
-    @PostMapping("/updateHA/{idsp}/{idms}")
+    @PostMapping("/updateHA/{idsp}")
     public String updateSP(@PathVariable("idsp")Long idsp,
-                           @PathVariable("idms")Long idms,
-                           @RequestParam("image")MultipartFile image
+                           @RequestParam("idms")String idms,
+                           @RequestParam("image")MultipartFile image,Model model,
+                           @RequestParam("giaHienHanh")BigDecimal giaHienHanh
                            ) throws IOException {
         Date currentDate = new Date(System.currentTimeMillis());
+
+        if (idms.isBlank()){
+            model.addAttribute("sp",sanPhamService.detail(idsp));
+            model.addAttribute("err","Vui lòng chọn màu sắc muốn cập nhật ở danh sách !!!");
+            model.addAttribute("listMSDangCo",ctspmshaService.findMSTheoSP(idsp));
+            model.addAttribute("listMSChuaCo",ctspmshaService.getMSNotInCTSPMSByIdsp(idsp));
+            model.addAttribute("view","/SanPham/SanPham/themMS.jsp");
+            return "index";
+        }
 
         if (image != null && !image.isEmpty()) {
             String originalFileName = image.getOriginalFilename();
@@ -182,7 +242,7 @@ public class CTSPController {
 
             File img = new File(uploadPath, fileName);
             image.transferTo(img);
-            ctspmshaService.updateHA(fileName,idsp,idms,currentDate);
+            ctspmshaService.updateHA(fileName,idsp,Long.valueOf(idms),currentDate,giaHienHanh);
         } else {
             // Xử lý khi không có ảnh mới được tải lên
 
@@ -197,7 +257,7 @@ public class CTSPController {
                            @PathVariable("idms")Long idms,
                            @PathVariable("idkc")Long idkc,
                            @RequestParam("soLuong") int soLuong,
-                           @RequestParam("giaHienHanh") BigDecimal giaHienHanh,
+
                            @RequestParam("trangThai") int trangThai,
                            @PathVariable("idctsp")Long idCTSP
                            ){
@@ -206,7 +266,6 @@ public class CTSPController {
         ChiTietSanPhamMauSacHinhAnh chiTietSanPhamMauSacHinhAnh= ctspmshaService.getHAbySPandMS(idsp,idms);
         ChiTietSanPham chiTietSanPham = ctspService.findCTSP(chiTietSanPhamMauSacHinhAnh.getId(),idkc);
         chiTietSanPham.setNgaySua(currentDate);
-        chiTietSanPham.setGiaHienHanh(giaHienHanh);
         chiTietSanPham.setSoLuong(soLuong);
         chiTietSanPham.setTrangThai(trangThai);
         ctspService.updateCTSP(chiTietSanPham);
@@ -218,7 +277,6 @@ public class CTSPController {
                            @PathVariable("idms")Long idms,
                            @RequestParam("kichCo")Long idKC,
                            @RequestParam("soLuong") int soLuong,
-                           @RequestParam("giaHienHanh") BigDecimal giaHienHanh,
                            @RequestParam("trangThai") int trangThai
 
     ){
@@ -230,7 +288,6 @@ public class CTSPController {
         chiTietSanPham.setChiTietSanPhamMauSacHinhAnh(chiTietSanPhamMauSacHinhAnh);
         chiTietSanPham.setNgayTao(currentDate);
         chiTietSanPham.setKichCo(kichCoService.detail(idKC));
-        chiTietSanPham.setGiaHienHanh(giaHienHanh);
         chiTietSanPham.setSoLuong(soLuong);
         chiTietSanPham.setTrangThai(trangThai);
         ctspService.updateCTSP(chiTietSanPham);
@@ -239,8 +296,8 @@ public class CTSPController {
 
     @GetMapping("/hienThiaddSP")
     public String hienThiaddSP(Model model){
-        model.addAttribute("listTL",loaiGiayService.findAll());
-        model.addAttribute("listTH",thuongHieuService.getAll());
+        model.addAttribute("listTL",loaiGiayService.listTLConDung());
+        model.addAttribute("listTH",thuongHieuService.listTLConDung());
         model.addAttribute("view","/SanPham/SanPham/addSP.jsp");
         return "index";
     }
@@ -270,16 +327,6 @@ public class CTSPController {
             File img = new File(uploadPath, fileName);
             image.transferTo(img);
 
-
-            SanPham sanPham1 = new SanPham();
-//            sanPham1.setTen(ten);
-//            sanPham1.setTheLoai(loaiGiayService.detail(theLoai));
-//            sanPham1.setThuongHieu(thuongHieuService.detail(thuongHieu));
-//            sanPham1.setMoTa(moTa);
-//            sanPham1.setNgaySua(currentDate);
-//            sanPham1.setNgayTao(currentDate);
-//            sanPham1.setTrangThai(0);
-//            sanPham1.setHinhAnhDaiDien(fileName);
             sanPhamService.save(ten,moTa,fileName,thuongHieu,theLoai);
             SanPham sanPham2 = sanPhamService.timSPCuoi();
             return "redirect:/ctsp/themmausac/"+sanPham2.getId();

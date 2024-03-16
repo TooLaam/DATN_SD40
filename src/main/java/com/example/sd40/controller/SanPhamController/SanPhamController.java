@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -58,10 +59,20 @@ public class SanPhamController {
                          @RequestParam("trangThai") int trangThai,
                          @RequestParam("image") MultipartFile image,
                          @RequestParam("thuongHieu") Long thuongHieu,
-                         @RequestParam("theLoai") Long theLoai
+                         @RequestParam("theLoai") Long theLoai,Model model
                          ) throws IOException {
 
         Date currentDate = new Date(System.currentTimeMillis());
+        List<SanPham> sanPhams = sanPhamService.findByName(ten,id);
+        if(!sanPhams.isEmpty()){
+            model.addAttribute("sp",sanPhamService.detail(id));
+            model.addAttribute("listTH",thuongHieuService.getAll());
+            model.addAttribute("listTL",loaiGiayService.findAll());
+            model.addAttribute("err","Tên này đã trùng với sản phẩm khác. Vui lòng chọn tên khác !!!");
+            model.addAttribute("view","/SanPham/SanPham/detail.jsp");
+
+            return "index";
+        }
 
         if (image != null && !image.isEmpty()) {
             String originalFileName = image.getOriginalFilename();

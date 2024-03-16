@@ -26,11 +26,19 @@ public interface SanPhamRepository extends JpaRepository<SanPham,Long> {
     @Query("select sp from SanPham sp where sp.ten=?1 and sp.thuongHieu.id=?2 and sp.theLoai.id = ?3")
     SanPham findSPCoTonTaiKhong(String ten, Long thuongHien, Long theLoai);
 
-    SanPham findFirstByOrderById();
+    @Query("select sp from SanPham sp where sp.ten=?1 and sp.id not in (?2)")
+    List<SanPham> findByName(String ten, Long idSP);
+
+    SanPham findLastByOrderById();
+
+//    @Query("select sp from SanPham sp order by sp.id desc ")
+//    SanPham finSPCuoi();
+
+    SanPham findFirstByOrderByIdDesc();
 
     @Transactional
     @Modifying
-    @Query(value = "insert into san_pham(ten,mo_ta,ngay_tao,ngay_sua,hinh_anh_dai_dien,trang_thai,thuong_hieu_id,loai_giay_id) values(?1,?2,getdate(),getdate(),?3,0,?4,?5)",nativeQuery = true)
+    @Query(value = "insert into san_pham(ten,mo_ta,ngay_tao,ngay_sua,hinh_anh_dai_dien,trang_thai,thuong_hieu_id,the_loai_id) values(?1,?2,getdate(),getdate(),?3,0,?4,?5)",nativeQuery = true)
     void save(String ten,String moTa,String hinhAnh,Long thuongHieu,Long theLoai);
 
 }

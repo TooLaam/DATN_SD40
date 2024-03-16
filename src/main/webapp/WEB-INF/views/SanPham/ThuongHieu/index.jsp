@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
@@ -80,8 +81,8 @@
                                     aria-selected="true">Chi tiết
                             </button>
                         </li>
-                        <li class="${active == null?"nav-link":"nav-link active"}" role="presentation">
-                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                        <li class="nav-item" role="presentation">
+                            <button class="${active == null?"nav-link":"nav-link active"}" id="profile-tab" data-bs-toggle="tab"
                                     data-bs-target="#profile" type="button" role="tab" aria-controls="profile"
                                     aria-selected="false">Thêm mới
                             </button>
@@ -165,6 +166,10 @@
 
     </div>
 </section>
+
+
+
+
 
 
 

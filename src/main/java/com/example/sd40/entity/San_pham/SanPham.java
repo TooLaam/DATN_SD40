@@ -52,9 +52,17 @@ public class SanPham {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
-            name = "loai_giay_id",
+            name = "the_loai_id",
             referencedColumnName = "id",
             nullable = true
     )
     private TheLoai theLoai;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+            name = "giam_gia_id",
+            referencedColumnName = "id",
+            nullable = true
+    )
+    private GiamGIa giamGIa;
 }

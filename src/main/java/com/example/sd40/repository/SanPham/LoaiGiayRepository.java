@@ -13,6 +13,8 @@ public interface LoaiGiayRepository extends JpaRepository<TheLoai, Long> {
 
     @Query("select th from TheLoai th where th.ten =?1")
     List<TheLoai> findByName(String ten);
-    @Query("select th from TheLoai th where th.ten =?1 and th.id not in (select t from TheLoai t where t.id = ?2)")
+    @Query("select th from TheLoai th where th.ten =?1 and th.id not in (select t.id from TheLoai t where t.id = ?2)")
     List<TheLoai> findByNameUpdate(String ten,Long id);
+    @Query("select th from TheLoai th where th.trangThai = 0")
+    List<TheLoai> listTLConDung();
 }

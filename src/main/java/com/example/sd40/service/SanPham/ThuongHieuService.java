@@ -13,4 +13,5 @@ public interface ThuongHieuService {
     void update(ThuongHieu thuongHieu);
     List<ThuongHieu> findByName(String ten);
     void add(ThuongHieu thuongHieu);
+    List<ThuongHieu> listTLConDung();
 }

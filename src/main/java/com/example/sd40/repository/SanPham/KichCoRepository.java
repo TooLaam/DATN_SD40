@@ -12,6 +12,6 @@ public interface KichCoRepository extends JpaRepository<KichCo,Long> {
 
     @Query("select th from KichCo th where th.ten =?1")
     List<KichCo> findByName(String ten);
-    @Query("select th from KichCo th where th.ten =?1 and th.Id not in (select t from KichCo t where t.Id = ?2)")
+    @Query("select th from KichCo th where th.ten =?1 and th.Id not in (select t.Id from KichCo t where t.Id = ?2)")
     List<KichCo> findByNameUpdate(String ten,Long id);
 }

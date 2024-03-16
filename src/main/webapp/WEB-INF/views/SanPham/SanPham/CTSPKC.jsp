@@ -24,7 +24,12 @@
                         <div class="product-details">
                             <div class="col-md-7">
                                 <div class="product-info">
-                                    <h2 style="font-weight: bold;">(${sp.ma})${sp.ten}</h2><br><br>
+                                    <h2>
+                                        <strong style="display: inline;">(${sp.ma})${sp.ten} </strong>
+                                        <span><c:if test="${sp.giamGIa != null && sp.giamGIa.mucGiam >0}" >
+                                            <p style="color: red;display: inline">(- ${sp.giamGIa.mucGiam}%)</p>
+                                        </c:if></span>
+                                    </h2>
                                     <div>
                                         <strong style="font-weight: bold;">Thương hiệu: </strong> <span>${sp.thuongHieu.ten}</span>  <br><br>
                                     </div>
@@ -52,17 +57,23 @@
                                         <%--                                        <a href="/sanpham/detail/${sp[0]}" class="btn btn-success" ></a>--%>
                                     </c:forEach><br><br>
 
+                                    <div >
+                                        <strong>Giá hiện hành:     </strong>  ${listHA.giaHienHanh} <br><br>
+                                    </div>
+                                    <strong style="display: inline;">Giá đã giảm:  </strong>
+                                    <span><c:if test="${sp.giamGIa != null && sp.giamGIa.mucGiam >0}" >
+                                        <p style="display: inline">${giaDaGiam[2]}</p>
+                                    </c:if></span>
+
+
                                     <div>
                                         <strong>Size: </strong> <span id="hienten"></span>
                                     </div>
                                     <c:forEach items="${listKC}" var="ms">
-                                        <button onclick="getData('${ms[2]}','${ms[3]==0?"Còn bán":"Ngừng bán"}','${ms[4]}',${ms[1]})" class="btn btn-success" style="margin-left: 30px" >${ms[1]}</button>
+                                        <a onclick="getData('${ms[2]}','${ms[3]==0?"Còn bán":"Ngừng bán"}','${ms[1]}')" class="btn btn-success" style="margin-left: 30px" >${ms[1]}</a>
                                     </c:forEach><br><br>
                                     <div >
                                         <strong>Số lượng:     </strong>    <span id="hiensl"> </span> <br><br>
-                                    </div>
-                                    <div >
-                                        <strong>Giá hiện hành:     </strong> <span id="hiengia"> </span> <br><br>
                                     </div>
 
                                     <div>
@@ -73,38 +84,16 @@
                                 </div>
                             </div>
                             <div class="col-md-5">
-<%--                                <div class="product-images">--%>
-<%--                                    <div class="image-carousel">--%>
-<%--                                        <div class="slide active">--%>
-<%--                                            <img src="/assets/img/product/${sp.hinhAnhDaiDien}" style="padding-top: 60px" width="320px" height="450px">--%>
-<%--                                        </div>--%>
-<%--                                        &lt;%&ndash;                                            <div class="slide">&ndash;%&gt;--%>
-<%--                                        &lt;%&ndash;                                                <img src="image2.jpg" alt="Image 2">&ndash;%&gt;--%>
-<%--                                        &lt;%&ndash;                                            </div>&ndash;%&gt;--%>
-<%--                                        <c:forEach items="${listHA}" var="ha">--%>
-<%--                                            <div class="slide">--%>
-<%--                                                <img src="/assets/img/product/${ha.hinhAnh}" style="padding-top: 60px" width="320px" height="450px alt="Image 3">--%>
-<%--                                            </div>--%>
-<%--                                        </c:forEach>--%>
-
-<%--                                    </div>--%>
-<%--                                    <div class="controls">--%>
-<%--                                        <button class="prev">&#10094;</button>--%>
-<%--                                        <button class="next">&#10095;</button>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-                                    <form action="/ctsp/updateHA/${sp.id}/${ms.id}" method="post" enctype="multipart/form-data">
                                         <img src="/assets/img/product/${listHA.hinhAnh}" style="padding-top: 60px" width="320px" height="450px">
-                                        <input type="file" name="image" accept="image/*" class="form-control"
-                                               value="${listHA.hinhAnh}">
-                                        <button class="btn btn-primary">Cập nhật hình ảnh</button>
-                                    </form>
+
+
                             </div>
 
                         </div>
                     </div>
 
-                    <a href="/ctsp/themmausac/${sp.id}"  type="submit" class="btn btn-primary">Thêm màu sắc cho sản phẩm</a>
+                    <a href="/ctsp/themmausac/${sp.id}"  type="submit" class="btn btn-primary">Thêm/chỉnh sửa màu sắc cho sản phẩm</a>
+                    <a href="/ctsp/giamGia/${sp.id}"  type="submit" class="btn btn-primary">Giảm giá sản phẩm</a>
                     <a href="/ctsp/hienthithemkc/${sp.id}/${ms.id}"  type="submit" class="btn btn-primary">Thêm/Sửa kích cỡ cho sản phẩm</a>
 
                     <%--                    </form>--%>
@@ -117,11 +106,11 @@
 
 </section>
 <script>
-    function getData(sl,trangThai,gia,ten) {
-        document.getElementById("hiensl").innerHTML = sl;
-        document.getElementById("hientrangThai").innerHTML = trangThai;
-        document.getElementById("hiengia").innerHTML = gia;
-        document.getElementById("hienten").innerHTML = ten;
+    function getData(sl,trangThai,ten) {
+        console.log(sl, trangThai, ten);
+        document.getElementById("hiensl").textContent  = sl;
+        document.getElementById("hientrangThai").textContent  = trangThai;
+        document.getElementById("hienten").textContent  = ten;
         }
 </script>
 

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+
 public interface CTSPService {
     List<Object[]> findKCTheoSP(Long idsp, Long idms);
     List<KichCo> findKCNotInCTSP(Long idCTSPHAMMS);

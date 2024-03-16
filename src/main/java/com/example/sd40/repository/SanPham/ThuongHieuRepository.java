@@ -11,7 +11,9 @@ import java.util.List;
 public interface ThuongHieuRepository extends JpaRepository<ThuongHieu,Long> {
     @Query("select th from ThuongHieu th where th.ten =?1")
     List<ThuongHieu> findByName(String ten);
-    @Query("select th from ThuongHieu th where th.ten =?1 and th.id not in (select t from ThuongHieu t where t.id = ?2)")
+    @Query("select th from ThuongHieu th where th.ten =?1 and th.id not in (select t.id from ThuongHieu t where t.id = ?2)")
     List<ThuongHieu> findByNameUpdate(String ten,Long id);
+    @Query("select th from ThuongHieu th where th.trangThai =0")
+    List<ThuongHieu> listTLConDung();
 
 }
