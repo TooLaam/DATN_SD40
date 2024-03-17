@@ -16,6 +16,10 @@ import java.util.List;
 public interface GiamGiaRepository extends JpaRepository<GiamGIa, Long> {
     @Query("select th from GiamGIa th where th.ten =?1")
     List<GiamGIa> findByName(String ten);
+
+    @Query("select th from GiamGIa th where th.trangThai=0 ORDER BY CASE WHEN th.ten = 'Không' THEN 0 ELSE 1 END, th.Id")
+    List<GiamGIa> listGGConDung();
+
     @Query("select th from GiamGIa th where th.ten =?1 and th.Id not in (select t.Id from GiamGIa t where t.Id = ?2)")
     List<GiamGIa> findByNameUpdate(String ten,Long id);
 

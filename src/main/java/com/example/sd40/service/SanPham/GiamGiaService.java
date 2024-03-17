@@ -14,4 +14,5 @@ public interface GiamGiaService {
     List<GiamGIa> findByIDSP(Long idsp);
     void updateGG(Long giamGia,Long idsp);
     Object hienThiTienDaGiam(Long idsp,Long idms);
+    List<GiamGIa> listGGConDung();
 }

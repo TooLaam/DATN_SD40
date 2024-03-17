@@ -109,3 +109,37 @@
     background-color: #00575C4D;
     transition: all 0.3s ease-in-out;
 }
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.icon-small {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+    margin-top: 1px/* Điều chỉnh khoảng cách giữa icon và văn bản */
+}
+.button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: black;
+    background-color: gainsboro;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 10px; /* Khoảng cách giữa các nút */
+    margin-bottom: 50px;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+.filter-brand a.active {
+    font-weight: bold;
+    color: blue; /* Hoặc bất kỳ màu sắc nào bạn muốn */
+}
+

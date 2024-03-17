@@ -36,9 +36,18 @@ public interface SanPhamRepository extends JpaRepository<SanPham,Long> {
 
     SanPham findFirstByOrderByIdDesc();
 
+//    @Query("select ct.sanPham.id, ct.sanPham.ten, ct.sanPham.hinhAnhDaiDien , ct.sanPham.soLuongDaBan,ct.sanPham.giamGIa.mucGiam ,MAX ((ct.giaHienHanh*(100-ct.sanPham.giamGIa.mucGiam))/100),MIN ((ct.giaHienHanh*(100-ct.sanPham.giamGIa.mucGiam))/100),MAX (ct.giaHienHanh),MIN (ct.giaHienHanh) from ChiTietSanPhamMauSacHinhAnh ct group by ct.sanPham.id, ct.sanPham.ten, ct.sanPham.hinhAnhDaiDien , ct.sanPham.soLuongDaBan,ct.giaHienHanh,ct.sanPham.giamGIa.mucGiam,ct.sanPham.ngayTao order by ct.sanPham.ngayTao desc")
+@Query(value = "select top(4) san_pham.id,san_pham.ten,san_pham.hinh_anh_dai_dien,san_pham.so_luong_da_ban,giam_gia.muc_giam,cast( MAX((chi_tiet_san_pham_mau_sac.gia_hien_hanh*(100-giam_gia.muc_giam))/100) as INT),CAST(MIN((chi_tiet_san_pham_mau_sac.gia_hien_hanh*(100-giam_gia.muc_giam))/100) as INT) ,CAST( MAX(chi_tiet_san_pham_mau_sac.gia_hien_hanh) as INT),CAST(MIN(chi_tiet_san_pham_mau_sac.gia_hien_hanh) as INT)  from san_pham join chi_tiet_san_pham_mau_sac on san_pham.id = chi_tiet_san_pham_mau_sac.san_pham_id join giam_gia on giam_gia.id = san_pham.giam_gia_id group by san_pham.hinh_anh_dai_dien,giam_gia.muc_giam, san_pham.id,san_pham.ten,san_pham.so_luong_da_ban,san_pham.ngay_tao  order by san_pham.ngay_tao desc" ,nativeQuery = true)
+    List<Object> findAllByOrderNgayTaoDesc();
+
+//    @Query("select ct.sanPham.id, ct.sanPham.ten, ct.sanPham.hinhAnhDaiDien , ct.sanPham.soLuongDaBan,ct.sanPham.giamGIa.mucGiam ,MAX ((ct.giaHienHanh*(100-ct.sanPham.giamGIa.mucGiam))/100),MIN ((ct.giaHienHanh*(100-ct.sanPham.giamGIa.mucGiam))/100),MAX (ct.giaHienHanh),MIN (ct.giaHienHanh) from ChiTietSanPhamMauSacHinhAnh ct group by ct.sanPham.id, ct.sanPham.ten, ct.sanPham.hinhAnhDaiDien , ct.sanPham.soLuongDaBan,ct.giaHienHanh,ct.sanPham.giamGIa.mucGiam order by ct.sanPham.soLuongDaBan desc")
+@Query(value = "select top(4) san_pham.id,san_pham.ten,san_pham.hinh_anh_dai_dien,san_pham.so_luong_da_ban,giam_gia.muc_giam,cast( MAX((chi_tiet_san_pham_mau_sac.gia_hien_hanh*(100-giam_gia.muc_giam))/100) as INT),CAST(MIN((chi_tiet_san_pham_mau_sac.gia_hien_hanh*(100-giam_gia.muc_giam))/100) as INT) ,CAST( MAX(chi_tiet_san_pham_mau_sac.gia_hien_hanh) as INT),CAST(MIN(chi_tiet_san_pham_mau_sac.gia_hien_hanh) as INT)  from san_pham join chi_tiet_san_pham_mau_sac on san_pham.id = chi_tiet_san_pham_mau_sac.san_pham_id join giam_gia on giam_gia.id = san_pham.giam_gia_id group by san_pham.hinh_anh_dai_dien,giam_gia.muc_giam, san_pham.id,san_pham.ten,san_pham.so_luong_da_ban,san_pham.ngay_tao  order by san_pham.so_luong_da_ban desc" ,nativeQuery = true)
+    List<Object> findAllByOrderSLDaBanDesc();
+
     @Transactional
     @Modifying
-    @Query(value = "insert into san_pham(ten,mo_ta,ngay_tao,ngay_sua,hinh_anh_dai_dien,trang_thai,thuong_hieu_id,the_loai_id) values(?1,?2,getdate(),getdate(),?3,0,?4,?5)",nativeQuery = true)
-    void save(String ten,String moTa,String hinhAnh,Long thuongHieu,Long theLoai);
+    @Query(value = "insert into san_pham(ten,mo_ta,ngay_tao,ngay_sua,hinh_anh_dai_dien,trang_thai,thuong_hieu_id,the_loai_id,giam_gia_id) values(?1,?2,getdate(),getdate(),?3,0,?4,?5,?6)",nativeQuery = true)
+    void save(String ten,String moTa,String hinhAnh,Long thuongHieu,Long theLoai,Long giamGia);
+
 
 }

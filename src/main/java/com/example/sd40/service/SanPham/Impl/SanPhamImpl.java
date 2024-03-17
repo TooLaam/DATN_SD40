@@ -49,7 +49,17 @@ public class SanPhamImpl implements SanPhamService {
     }
 
     @Override
-    public void save(String ten, String moTa, String hinhAnh, Long thuongHieu, Long theLoai) {
-        sanPhamRepository.save(ten,moTa,hinhAnh,thuongHieu,theLoai);
+    public void save(String ten, String moTa, String hinhAnh, Long thuongHieu, Long theLoai,Long giamGia) {
+        sanPhamRepository.save(ten,moTa,hinhAnh,thuongHieu,theLoai,giamGia);
+    }
+
+    @Override
+    public List<Object> findAllByOrderByNgayTaoDesc() {
+        return sanPhamRepository.findAllByOrderNgayTaoDesc();
+    }
+
+    @Override
+    public List<Object> findAllByOrderSLDaBanDesc() {
+        return sanPhamRepository.findAllByOrderSLDaBanDesc();
     }
 }

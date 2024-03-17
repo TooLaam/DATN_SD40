@@ -9,90 +9,53 @@
         <div class="container">
             <div class="row">
                 <div class="col-3">
-                    <h6 class="filter">Recent Post</h6>
+                    <h6 class="filter">Bài đăng gần đây</h6>
                     <ul class="list-unstyled">
                         <li>
-                            <a href="/blogPage1">Latest Black Rouge Lipstick Color Palette 2022 - 2023</a>
+                            <a href="/blogPage1">Sneaker News: Khám Phá Sâu Sắc Thế Giới Sneaker</a>
                         </li>
                         <hr>
                         <li>
-                            <a href="/blogPage2">Latest Romand Lipstick Color Palette 2022 - 2023</a>
+                            <a href="/blogPage2">Highsnobiety: Nền Tảng Đa Dạng Về Thời Trang Và Sneaker</a>
                         </li>
                         <hr>
                         <li>
-                            <a href="/blogPage5">Where to Buy Genuine Bbia Lipstick? Which Color Is The Best
-                                Seller?</a>
+                            <a href="/blogPage3">Hypebeast: Trải Nghiệm Đẳng Cấp Với Thế Giới Sneaker</a>
                         </li>
                     </ul>
-                    <h6 class="filter">Most liked post</h6>
+                    <h6 class="filter">Bài đăng được yêu thích nhất</h6>
                     <ul class="list-unstyled">
                         <li>
-                            <a href="/blogPage2">Latest Romand Lipstick Color Palette 2022 - 2023</a>
+                            <a href="/blogPage4">Complex Sneakers: Khám Phá Sự Đa Dạng Của Thế Giới Sneaker</a>
                         </li>
                         <li>
-                            <a href="/blogPage3">Latest Bbia Lipstick Color Palette 2022 - 2023</a>
+                            <a href="/blogPage5">Sneaker Freaker: Khám Phá Đẳng Cấp Trong Thế Giới Sneaker</a>
                         </li>
                         <li>
-                            <a href="/blogPage4">Latest Merzy Lipstick Color Palette 2022 - 2023</a>
+                            <a href="/blogPage1">Sneaker News: Khám Phá Sâu Sắc Thế Giới Sneaker</a>
                         </li>
                     </ul>
                 </div>
                 <div class="col-9">
                     <div class="content">
-                        <h3 class="title">Latest Bbia Lipstick Color Palette 2022 - 2023</h3>
-                        <img src="/assets/img/posts/post3.jpeg" width="100%" alt="" />
-                        <h3>Genuine Bbia Lipstick Color Palette, Latest 2022 - 2023</h3>
-                        <p>Korean lipstick fans will definitely be looking for <strong><a href="#">The most detailed
-                                    Bbia lipstick color palette</a></strong> with the hope of "getting lost" in a garden
-                            filled with the most brilliant colors in the world lipstick. Bbia has an extremely diverse
-                            list of lipstick lines and a huge Bbia lipstick color palette. Having this list in hand is
-                            sure that conquering true love lipstick color is not far away. Bbia is not a strange brand
-                            to lipstick fans. The company has so many lines from lipsticks, cream lipsticks to lip
-                            glosses... that have been making waves for a long time. Don't make you wait too long, list
-                            the latest Bbia lipstick color palette below.</p>
-                        <img src="/assets/img/posts/postPage3_01.jpg" width="100%" alt="" />
-                        <h3>Bbia Asia Edition lipstick color palette ver 2</h3>
-                        <p>This is a completely new lipstick line from Bbia. Son Bbia Asian Edition ver 2 is inspired by
-                            the country of Vietnam with the names of famous tourist lands.</p>
-                        <h4>Bbia A6 Mystery Sapa lipstick – red earth</h4>
-                        <img src="/assets/img/posts/postPage3_1.jpg" width="100%" alt="" />
-                        <p><strong><a href="#">Bbia A6 cream lipstick</a> </strong>pulls you to the majestic Sapa land
-                            of rolling clouds and mountains. The magical earthy red color makes everyone admire when
-                            used. This is definitely the national red lipstick, everyone will fall in love with it. A
-                            feeling that no one can resist.</p>
-                        <h4>Bbia A7 Hilling Mui Ne lipstick – earthy orange</h4>
-                        <img src="/assets/img/posts/postPage3_2.jpg" width="100%" alt="" />
-                        <h4>Black Rouge A02 PINK RED lipstick is the most beautiful</h4>
-                        <p>The famous tourist paradise of Mui Ne is the inspiration to create<strong> <a href="#">Bbia
-                                    A7 cream lipstick</a>. </strong>The earthy orange color is as hot as sand dunes,
-                            easily burning all eyes. The sexy lipstick color created with orange and earthy brown blends
-                            like no other. The color is extremely flattering, every girl is looking for it.</p>
-                        <h4>Bbia A8 Dragon Ha Long Bay lipstick – earthy orange brown</h4>
-                        <img src="/assets/img/posts/postPage3_3.jpg" width="100%" alt="" />
-                        <p><strong><a href="#">Son kem Bbia A8</a> </strong>là sắc nâu cam đất quyền lực lấy cảm hứng từ
-                            vùng Vịnh biển đẹp nhất Việt Nam, là kỳ quan thiên nhiên thế giới – Vịnh Hạ Long. Son nâu
-                            cam quyến rũ và khí chất tạo nên sự khác biệt cho người dùng. Với màu son này thì không phô
-                            diễn vẫn xuất sắc. Son cực kỳ tôn da.</p>
-                        <h4>Bbia A9 Kingdom Hue lipstick – coffee brown</h4>
-                        <img src="/assets/img/posts/postPage3_4.jpg" width="100%" alt="" />
-                        <p><strong><a href="#">Bbia A9 cream lipstick</a> </strong>is called Kingdom Hue. This color has
-                            the quiet, classic and poetic quality of the ancient capital of Hue. Coffee brown is the
-                            name of this Bbia Last Velvet Lip Tint shade. The lipstick version is exclusively for
-                            Vietnam so of course it is very flattering to Asian skin. The lipstick color has a strong
-                            Hue vibe, both luxurious and still trendy. Lipstick balances brown and orange so you can use
-                            it with complete peace of mind.</p>
-                        <h4>Bbia A10 Spring Da Lat lipstick – earthy pink red</h4>
-                        <img src="/assets/img/posts/postPage3_5.jpg" width="100%" alt="" />
-                        <p>The romantic lipstick color inspired by Da Lat is<strong> <a href="#">Bbia A10 cream
-                                    lipstick</a>. </strong>The red and pink color is inspired by spring in the city of
-                            flowers. The lipstick mixes beautiful and harmonious colors that are hard to resist on the
-                            lips.</p>
-                        <h4>Bbia A11 Sunset Phu Quoc lipstick – earthy orange red</h4>
-                        <img src="/assets/img/posts/postPage3_6.jpg" width="100%" alt="" />
-                        <p><strong><a href="#">Bbia A11 cream lipstick</a> </strong>inspired by Phu Quoc sunset. This is
-                            = a beautiful earthy red-orange tone like a romantic sunset on the most beautiful island in
-                            Vietnam. This lipstick color is extremely trendy, worthy of being a best-seller in the
-                            latest Bbia lipstick color palette.</p>
+                        <h3 class="title">Hypebeast: Trải Nghiệm Đẳng Cấp Với Thế Giới Sneaker</h3>
+                        <img src="/assets/img/posts/th (2).jpg" width="100%" alt="" />
+
+                        <p>Hypebeast là một trong những địa chỉ không thể bỏ qua đối với những ai đam mê văn hóa đường phố và thời trang sneaker. Với sự kết hợp hoàn hảo giữa tin tức, đánh giá sản phẩm và bài viết chất lượng, Hypebeast mang đến cho người đọc những trải nghiệm đầy cảm hứng trong thế giới sneaker.</p>
+
+                        <h3>Tin Tức Hàng Ngày</h3>
+                        <img src="/assets/img/posts/th (15).jpg" width="100%" alt="" />
+                        <p><a href="#">Hypebeast cung cấp những cập nhật tin tức hàng ngày về thế giới sneaker, bao gồm các thông tin về bản hợp tác mới, sự kiện triển lãm, và những phát hành giày đặc biệt. Với tốc độ cập nhật nhanh chóng và đáng tin cậy, bạn sẽ luôn biết được những gì đang xảy ra trong cộng đồng sneaker.</a> </p>
+                        <img src="/assets/img/posts/th (16).jpg" width="100%" alt="" />
+                        <h4>Đánh Giá Sản Phẩm</h4>
+                        <p><strong><a href="#"> Để giúp bạn đưa ra quyết định mua hàng thông minh, Hypebeast cung cấp những bài đánh giá chất lượng về các mẫu giày mới nhất trên thị trường. Từ việc đo lường thoải mái đến phân tích về chất lượng và hiệu suất, các bài đánh giá của Hypebeast giúp bạn hiểu rõ hơn về sản phẩm trước khi quyết định mua.</a></strong></p>
+                        <img src="/assets/img/posts/th (17).jpg" width="100%" alt="" />
+                        <h4>Xu Hướng & Phong Cách</h4>
+                        <p><strong><a href="#"> Bên cạnh việc cung cấp thông tin và đánh giá, Hypebeast cũng là nơi để bạn tìm kiếm cảm hứng cho phong cách cá nhân của mình. Từ cách kết hợp giày thể thao với các trang phục khác nhau đến việc thảo luận về các xu hướng và phong cách mới nhất, bạn sẽ luôn tìm thấy những ý tưởng sáng tạo và độc đáo trên Hypebeast.
+                        </a></strong></p>
+                        <img src="/assets/img/posts/th (18).jpg" width="100%" alt="" />
+                        <p><strong><a href="#">Với một sự kết hợp hoàn hảo giữa tin tức, đánh giá sản phẩm và cảm hứng phong cách, Hypebeast là một điểm đến lý tưởng cho những ai đam mê thế giới sneaker và văn hóa đường phố.</a></strong></p>
+                        <img src="/assets/img/posts/th (19).jpg" width="100%" alt="" />
                     </div>
                     <br>
                 </div>

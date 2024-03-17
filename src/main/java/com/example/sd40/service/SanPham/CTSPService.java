@@ -13,6 +13,12 @@ public interface CTSPService {
     List<ChiTietSanPham> findCTSP2(Long idCTSPHAMS);
     ChiTietSanPham findCTSP(Long idCTSPHAMS,Long idkc);
     void updateCTSP(ChiTietSanPham chiTietSanPham);
+    List<Object> getAllSPCus();
+    Object tongSLSP();
+    List<Object> getAllSPCusByTL(Long idTL);
+    List<Object> getAllSPCusByTH(Long idTH);
+    Object tongSLSPByTH(Long idTH);
+    Object tongSLSPByTL(Long idTL);
 
 
 

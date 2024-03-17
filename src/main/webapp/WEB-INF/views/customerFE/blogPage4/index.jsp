@@ -9,78 +9,56 @@
     <div class="container">
       <div class="row">
         <div class="col-3">
-          <h6 class="filter">Recent Post</h6>
+          <h6 class="filter">Bài đăng gần đây</h6>
           <ul class="list-unstyled">
             <li>
-              <a href="/blogPage1">Latest Black Rouge Lipstick Color Palette 2022 - 2023</a>
+              <a href="/blogPage1">Sneaker News: Khám Phá Sâu Sắc Thế Giới Sneaker</a>
             </li>
             <hr>
             <li>
-              <a href="/blogPage2">Latest Romand Lipstick Color Palette 2022 - 2023</a>
+              <a href="/blogPage2">Highsnobiety: Nền Tảng Đa Dạng Về Thời Trang Và Sneaker</a>
             </li>
             <hr>
             <li>
-              <a href="/blogPage5">Where to Buy Genuine Bbia Lipstick? Which Color Is The Best Seller?</a>
+              <a href="/blogPage3">Hypebeast: Trải Nghiệm Đẳng Cấp Với Thế Giới Sneaker</a>
             </li>
           </ul>
-          <h6 class="filter">Most liked post</h6>
+          <h6 class="filter">Bài đăng được yêu thích nhất</h6>
           <ul class="list-unstyled">
             <li>
-              <a href="/blogPage2">Latest Romand Lipstick Color Palette 2022 - 2023</a>
+              <a href="/blogPage4">Complex Sneakers: Khám Phá Sự Đa Dạng Của Thế Giới Sneaker</a>
             </li>
             <li>
-              <a href="/blogPage3">Latest Bbia Lipstick Color Palette 2022 - 2023</a>
+              <a href="/blogPage5">Sneaker Freaker: Khám Phá Đẳng Cấp Trong Thế Giới Sneaker</a>
             </li>
             <li>
-              <a href="/blogPage4">Latest Merzy Lipstick Color Palette 2022 - 2023</a>
+              <a href="/blogPage1">Sneaker News: Khám Phá Sâu Sắc Thế Giới Sneaker</a>
             </li>
           </ul>
         </div>
         <div class="col-9">
           <div class="content">
-            <h3 class="title">Latest Merzy Lipstick Color Palette 2022 - 2023</h3>
-            <img src="/assets/img/posts/post4.jpeg" width="100%" alt="" />
-            <h3>Merzy Lipstick Color Palette Full, Hottest 2022 - 2023</h3>
-            <p>Merzy is a professional cosmetics brand from Korea. In addition to the Merzy V6 lipstick color that is a
-              hit, the Merzy lipstick color palette is also really full of great lipsticks. The company introduces many
-              trendy, sophisticated lipstick colors with classy and youthful appearance. It's not difficult to find a
-              Merzy lipstick in the makeup bag of modern women. The company's heat is constantly cooling down and
-              Merzy's impressive lipstick collection seems to enhance the user experience. List the full color palette
-              from Merzy below. Everything you are looking for is complete and continuously updated. Division <strong><a
-                  href="#">lipstick color palette Merzy</a></strong> follows each specific line for the whole family to
-              easily follow.</p>
-            <h3>Merzy limited edition lipstick color palette</h3>
-            <h4>Merzy V6 blue lipstick – Be Yourself is the most beautiful brick red color</h4>
-            <img src="/assets/img/posts/postPage4_1.jpg" width="100%" alt="" />
-            <p>The classic brick red lipstick color of the Velvet Tint collection is introduced in the Be Yourself
-              version. <strong><a href="#">Mery V6 lipstick with blue shell</a> </strong>has a blue-silver shell as a
-              statement of personal beauty for the user. This divine shade is super flattering.</p>
-            <h4>Merzy V6 red lipstick – Another Me is the hottest brick red color</h4>
-            <img src="/assets/img/posts/postPage4_2.jpg" width="100%" alt="" />
-            <p>Also a limited edition and <strong><a href="#">This Merzy V6 red lipstick</a></strong> is limited with
-              the idea of Another Me. The lipstick is still that classic brick red, but the red exterior is surprisingly
-              unique. This shade is exactly what modern women expect.</p>
-            <h3>Merzy Bite The Beat Mellow Tint lipstick color palette</h3>
-            <h4>Merzy M1 Mahogany lipstick – deep red brown</h4>
-            <img src="/assets/img/posts/postPage4_3.jpg" width="100%" alt="" />
-            <p>Smooth matte foundation by <strong><a href="#">Merzy M1 lipstick</a> Mahogany</strong> makes the deep
-              red-brown lipstick color irresistible. The lipstick completely covers the lips with the warmth of red
-              tones. Brown color makes the five senses more harmonious.</p>
-            <h4>Merzy M2 Jane Chili lipstick – brick red brown</h4>
-            <img src="/assets/img/posts/postPage4_4.jpg" width="100%" alt="" />
-            <p>Best-seller of this collection is<strong> <a href="#">Merzy lipstick color M2</a> Jane Chili</strong>.
-              Brick red and brown is the standard "national crush", pursued by thousands of women. Red lipstick
-              transforms vividly and seductively.</p>
-            <h4>Merzy M3 Spice Brick lipstick – earthy orange</h4>
-            <img src="/assets/img/posts/postPage4_5.jpg" width="100%" alt="" />
-            <p>Everyone's eyes will not be able to escape the attractive "maze" of <strong><a href="#">Merzy M3
-                  lipstick</a> Spice Brick</strong>. The main earthy orange lipstick color is orange, but the key is the
-              added earthy brown color. Lipstick is both flattering and can be applied to many occasions. Extremely
-              trendy colors.&nbsp;</p>
-            <h4>Merzy M4 Bian Rose lipstick – deep plum brown</h4>
-            <img src="/assets/img/posts/postPage4_6.jpg" width="100%" alt="" />
-            <p><strong>Merzy M4 lipstick Bian Rose</strong> has never lacked attraction and color Deep plum brown, is an
-              interesting highlight in the trendy and stylish Bite The Beat Mellow Tint line.</p>
+            <h3 class="title">Complex Sneakers: Khám Phá Sự Đa Dạng Của Thế Giới Sneaker</h3>
+            <img src="/assets/img/posts/th (30).jpg" width="100%" alt="" />
+
+            <p>Complex Sneakers là một phần của Complex Media, một nền tảng truyền thông về thời trang và văn hóa đường phố. Với một sự kết hợp độc đáo giữa tin tức, đánh giá sản phẩm và phân tích sâu sắc, Complex Sneakers là một điểm đến không thể bỏ qua cho những ai yêu thích giày thể thao.</p>
+
+            <h3>Tin Tức & Sự Kiện</h3>
+            <img src="/assets/img/posts/th (20).jpg" width="100%" alt="" />
+            <p><a href="#">Sneaker News cung cấp thông tin liên tục về các sự kiện, triển lãm,
+              và phát hành mới nhất trong ngành công nghiệp sneaker.
+              Từ những thông tin chính thức về các bản hợp tác đặc biệt đến những hình ảnh đầu tiên về các mẫu giày sắp ra mắt,
+              bạn sẽ luôn cập nhật với những thông tin nóng hổi từ Sneaker News.</a> </p>
+            <img src="/assets/img/posts/th (21).jpg" width="100%" alt="" />
+            <h4>Đánh Giá Sản Phẩm</h4>
+            <p><strong><a href="#">Để giúp bạn đưa ra quyết định mua hàng thông minh, Sneaker News cung cấp những bài đánh giá chất lượng và chi tiết về các mẫu giày mới nhất trên thị trường. Từ việc kiểm tra chất lượng đến đánh giá về thoải mái và hiệu suất, mỗi bài đánh giá của Sneaker News đều giúp bạn hiểu rõ hơn về sản phẩm trước khi quyết định mua.</a></strong></p>
+            <img src="/assets/img/posts/th (22).jpg" width="100%" alt="" />
+            <h4>Phân Tích Sâu Sắc</h4>
+            <p><strong><a href="#">Bên cạnh việc cung cấp thông tin và đánh giá, Sneaker News cũng là nơi để bạn tìm hiểu sâu hơn về lịch sử và những câu chuyện đằng sau từng đôi giày. Từ nguồn gốc của các biểu tượng sneaker đến những câu chuyện về những bản hợp tác đặc biệt, phần phân tích của Sneaker News là nguồn thông tin hữu ích cho cả người mới bắt đầu và người hâm mộ nhiệt huyết của thế giới sneaker.
+            </a></strong></p>
+            <img src="/assets/img/posts/th (23).jpg" width="100%" alt="" />
+            <p><strong><a href="#">Với một sự kết hợp độc đáo của tin tức, đánh giá, và phân tích sâu sắc, Sneaker News không chỉ là một blog thông tin, mà còn là một cộng đồng cho những ai đam mê văn hóa sneaker.</a></strong></p>
+            <img src="/assets/img/posts/th (24).jpg" width="100%" alt="" />
           </div>
           <br>
         </div>

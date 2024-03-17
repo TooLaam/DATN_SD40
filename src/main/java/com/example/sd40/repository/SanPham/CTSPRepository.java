@@ -24,4 +24,37 @@ public interface CTSPRepository extends JpaRepository<ChiTietSanPham,Long> {
     @Query("select ctsp from ChiTietSanPham ctsp where ctsp.chiTietSanPhamMauSacHinhAnh.Id=?1 and ctsp.kichCo.Id=?2")
     ChiTietSanPham findCTSP(Long idCTSPHAMS,Long idkc);
 
+    @Query("select sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,ctsp.soLuong," +
+            " max((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100),Min((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100)," +
+            " Max(ctsphams.giaHienHanh),Min(ctsphams.giaHienHanh)" +
+            " from ChiTietSanPham ctsp join ChiTietSanPhamMauSacHinhAnh ctsphams on ctsp.chiTietSanPhamMauSacHinhAnh.Id = ctsphams.Id" +
+            " join SanPham sp on ctsphams.sanPham.id = sp.id where ctsp.soLuong >0" +
+            " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,ctsp.soLuong")
+    List<Object> getAllSPCus();
+
+    @Query("select sum(ct.soLuong) from ChiTietSanPham ct ")
+    Object tongSLSP();
+
+    @Query("select sum(ct.soLuong) from ChiTietSanPham ct where ct.chiTietSanPhamMauSacHinhAnh.sanPham.theLoai.id=?1")
+    Object tongSLSPByTL(Long idTL);
+
+    @Query("select sum(ct.soLuong) from ChiTietSanPham ct where ct.chiTietSanPhamMauSacHinhAnh.sanPham.thuongHieu.id=?1")
+    Object tongSLSPByTH(Long idTH);
+
+    @Query("select sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,ctsp.soLuong," +
+            " max((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100),Min((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100)," +
+            " Max(ctsphams.giaHienHanh),Min(ctsphams.giaHienHanh)" +
+            " from ChiTietSanPham ctsp join ChiTietSanPhamMauSacHinhAnh ctsphams on ctsp.chiTietSanPhamMauSacHinhAnh.Id = ctsphams.Id" +
+            " join SanPham sp on ctsphams.sanPham.id = sp.id where ctsp.soLuong >0 and sp.thuongHieu.id = ?1" +
+            " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,ctsp.soLuong,sp.thuongHieu.id")
+    List<Object> getAllSPCusByTH(Long idTH);
+
+    @Query("select sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,ctsp.soLuong," +
+            " max((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100),Min((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100)," +
+            " Max(ctsphams.giaHienHanh),Min(ctsphams.giaHienHanh)" +
+            " from ChiTietSanPham ctsp join ChiTietSanPhamMauSacHinhAnh ctsphams on ctsp.chiTietSanPhamMauSacHinhAnh.Id = ctsphams.Id" +
+            " join SanPham sp on ctsphams.sanPham.id = sp.id where ctsp.soLuong >0 and sp.theLoai.id = ?1" +
+            " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,ctsp.soLuong,sp.theLoai.id")
+    List<Object> getAllSPCusByTL(Long idTL);
+
 }

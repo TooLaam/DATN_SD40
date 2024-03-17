@@ -48,6 +48,15 @@
                                         </c:forEach>
                                     </select>
 
+                                    <p>Giảm giá sản phẩm: </p>
+                                    <select  class="form-select" aria-label="Default select example"name="giamGia" >
+                                        <c:forEach items="${listGG}" var="ms">
+                                            <option value="${ms.id}" >
+                                                    ${ms.ten}
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+
                                     <div>
                                         Hình ảnh đại diện :
                                         <input required type="file" name="image" accept="image/*" class="form-control"

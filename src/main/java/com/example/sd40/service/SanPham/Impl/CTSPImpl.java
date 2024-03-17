@@ -36,4 +36,34 @@ public class CTSPImpl implements CTSPService {
     public void updateCTSP(ChiTietSanPham chiTietSanPham) {
         ctspRepository.save(chiTietSanPham);
     }
+
+    @Override
+    public List<Object> getAllSPCus() {
+        return ctspRepository.getAllSPCus();
+    }
+
+    @Override
+    public Object tongSLSP() {
+        return ctspRepository.tongSLSP();
+    }
+
+    @Override
+    public List<Object> getAllSPCusByTL(Long idTL) {
+        return ctspRepository.getAllSPCusByTL(idTL);
+    }
+
+    @Override
+    public List<Object> getAllSPCusByTH(Long idTH) {
+        return ctspRepository.getAllSPCusByTH(idTH);
+    }
+
+    @Override
+    public Object tongSLSPByTH(Long idTH) {
+        return ctspRepository.tongSLSPByTH(idTH);
+    }
+
+    @Override
+    public Object tongSLSPByTL(Long idTL) {
+        return ctspRepository.tongSLSPByTL(idTL);
+    }
 }

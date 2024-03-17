@@ -46,4 +46,9 @@ public class ThuongHieuImpl implements ThuongHieuService {
     public List<ThuongHieu> listTLConDung() {
         return thuongHieuRepository.listTLConDung();
     }
+
+    @Override
+    public List<Object> listTLHome() {
+        return thuongHieuRepository.listTLHome();
+    }
 }

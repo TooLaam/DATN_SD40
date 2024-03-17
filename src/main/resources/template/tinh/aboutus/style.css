@@ -176,7 +176,24 @@ footer .fa{
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
 }
+.caption>.discounted-price {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #ff0000; /* Màu nền */
+    color: #ffffff; /* Màu chữ */
+    padding: 5px; /* Khoảng cách padding */
+    border-radius: 5px; /* Bo tròn viền */
+
+}
+
 .caption>.price{
+    font-size: large;
+    font-weight: 500;
+    color: #00575C;
+    text-decoration: line-through; /* Thêm gạch ngang */
+}
+.caption>.priceGiam{
     font-size: large;
     font-weight: 500;
     color: #00575C;

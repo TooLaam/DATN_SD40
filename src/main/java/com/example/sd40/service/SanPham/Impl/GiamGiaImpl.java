@@ -55,4 +55,9 @@ public class GiamGiaImpl implements GiamGiaService {
     public Object hienThiTienDaGiam(Long idsp,Long idms) {
         return giamGiaRepository.hienThiTienDaGiam(idsp,idms);
     }
+
+    @Override
+    public List<GiamGIa> listGGConDung() {
+        return giamGiaRepository.listGGConDung();
+    }
 }

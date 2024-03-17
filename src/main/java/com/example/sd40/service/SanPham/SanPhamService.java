@@ -15,7 +15,9 @@ public interface SanPhamService {
     SanPham findSPCoTonTaiKhong(String ten, Long thuongHien, Long theLoai);
     SanPham timSPCuoi();
     List<SanPham> findByName(String ten, Long idSP);
-    void save(String ten,String moTa,String hinhAnh,Long thuongHieu,Long theLoai);
+    void save(String ten,String moTa,String hinhAnh,Long thuongHieu,Long theLoai,Long giamGia);
+    List<Object> findAllByOrderByNgayTaoDesc();
+    List<Object> findAllByOrderSLDaBanDesc();
 
 
 

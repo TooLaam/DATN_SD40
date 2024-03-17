@@ -7,7 +7,7 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link href="/assets/img/favicons.png" rel="icon">
+    <link href="/assets/img/pngtree-sneakers-png-image_3989154.jpg" rel="icon">
     <link rel="stylesheet" href="/assets/css/styleFE.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"/>
@@ -20,8 +20,7 @@
 
 <body>
 <div id="freeShip">
-    <span>FREE SHIPPING with $20 Purchase </span>
-    <a href="#">Details</a>
+    <span>Miễn phí giao hàng với hóa đơn từ 1.000.000đ</span>
 </div>
 <div class="container">
     <ul class="nav justify-content-end">
@@ -47,7 +46,7 @@
     <nav class="nav-search my-2">
         <ul class="navbar mx-auto mb-lg-0 list-unstyled">
             <li class="nav-item">
-                <a href="/home"><img src="/assets/img/logo.png" width="200" alt="logo"/>
+                <a href="/home"><img src="/assets/img/SD40.png" width="200" alt="logo"/>
                 </a>
             </li>
             <li class="nav-item">
@@ -89,19 +88,19 @@
 <div class="nav-shadow">
     <ul class="nav nav-underline nav-justified container">
         <li class="nav-item">
-            <a class="nav-link" href="/home">home</a>
+            <a class="nav-link" href="/home">Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/product/indexcus">lips</a>
+            <a class="nav-link" href="/sanphamcus">Sản phẩm</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/brand/indexcus">brands</a>
+            <a class="nav-link" href="/brand/indexcus">Giảm giá</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/blog">blogs</a>
+            <a class="nav-link" href="/blog">Blogs</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/aboutus">about us</a>
+            <a class="nav-link" href="/aboutus">Thông tin về chúng tôi</a>
         </li>
     </ul>
 </div>
@@ -117,12 +116,12 @@
             <div class="col-md-4 col-12">
                 <div class="row">
                     <div class="col-md-12 col-12">
-                        <img src="/assets/img/logo.png" class="logo" alt="logo"/>
-                        <p id="text_logo">We Have Everything For Lipstick Here!</p>
+                        <img src="/assets/img/SD40.png" class="logo" alt="logo" width="70%"/>
+                        <p id="text_logo">Ở đây chúng tôi có bán giày!</p>
                     </div>
                     <div class="col-md-12 col-12">
-                        <p id="text_subscribe">Subscribe To Our Newsletter</p>
-                        <p id="text_blog">New blogs about lipsticks every week!</p>
+                        <p id="text_subscribe">Theo dõi ngay!</p>
+                        <p id="text_blog">Những câu chuyện về giày thể thao được cập nhật hằng tuần</p>
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" placeholder="YOUR EMAIL ADDRESS"
                                    aria-label="Recipient's username" aria-describedby="button-addon2"/>

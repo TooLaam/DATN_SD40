@@ -7,23 +7,46 @@
 
 <br>
     <div class="container">
-        <h5 style="font-weight: bold;">MEOW - EVERYTHING IS AVAILABLE, BUY IT ALL AT MEOW</h5>
-        <p>Meow - fun, reliable, safe and free online shopping app! With Meow's guarantee, you will shop online with peace of mind and faster than ever!</p>
-        <h6 style="font-weight: bold;">ONLINE SHOPPING AND SALES SIMPLE, QUICK AND SAFE</h6>
-        <p>If you are looking for an online shopping website, Meow.vn is a great choice for you. Meow is a website that sells lipstick. Therefore, buying and selling on Meow becomes faster and simpler. You can chat directly with the seller to ask directly about the item you want to buy. If you want to buy genuine, reputable product lines, <a href="" class="link-text">Meow</a> is the ideal choice for you. So that you can easily learn and use the product, <a href="" class="link-text">Meow Blog - Meow's official information blog</a> - will help you find your own knowledge. about beauty secrets, consumer news and surprisingly attractive offers.</p>
-        <p>Coming to Meow, the opportunity to become a seller is easier than ever. With just a few taps on the website, you can immediately post your products for sale. Not only that, sellers can <a href="" class="link-text">create promotions on Meow</a> to attract buyers with products at attractive prices. When you log in to Meow Seller Channel, you can easily classify products, track orders, take care of customers and immediately update shop activities.</p>
-        <h6 style="font-weight: bold;">VISIT THE MEOW WEBSITE NOW TO BUY ONLINE ANYTIME, ANYWHERE</h6>
-        <p>The advantage of the Meow website is that it allows you to buy and sell goods anytime, anywhere. You can download the Meow app and post products to sell quickly and conveniently. In addition, the Meow website also has the following advantages:</p>
+        <h1>SD40 - Thế Giới Giày Thể Thao Đầy Màu Sắc</h1>
+        <p>Chào mừng bạn đến với SD40 - nơi mà đam mê và phong cách gặp nhau để tạo nên những bước đi đầy phong cách và tự tin trên mọi con đường. SD40 không chỉ là một cửa hàng bán giày thể thao, mà còn là điểm đến lý tưởng cho những người yêu thể thao và thời trang với sự đa dạng về sản phẩm và dịch vụ chất lượng.</p>
+
+        <h2>Mua Sắm Trực Tuyến Đơn Giản, Nhanh Chóng và An Toàn</h2>
+        <p>Nếu bạn đang tìm kiếm một cửa hàng mua sắm giày thể thao trực tuyến, SD40.vn chính là lựa chọn hàng đầu là nơi để bạn mua sắm các dòng giày thể thao hàng đầu từ các thương hiệu uy tín, mà còn là nơi bạn có thể tìm thấy sự đa dạng trong mẫu mã và giá cả phù hợp với túi tiền của mình.</p>
+
+        <h2>Chất Lượng và An Toàn là Ưu Tiên Hàng Đầu</h2>
+        <p>Tại SD40, chúng tôi cam kết cung cấp các sản phẩm chất lượng từ những thương hiệu uy tín và được kiểm định. Mỗi đôi giày được bán trên website đều đi kèm với đầy đủ tem nhãn và bảo hành từ nhà sản xuất. Quá trình thanh toán tại SD40 luôn diễn ra nhanh chóng và an toàn, giúp bạn yên tâm hơn khi mua sắm trực tuyến.</p>
+
+        <h2>Khám Phá Thế Giới Giày Thể Thao Tại SD40</h2>
+        <p>Với một cơ sở dữ liệu sản phẩm phong phú, SD40 cung cấp mọi thứ từ các dòng giày chạy bộ, đi bộ đến giày thể thao cho các hoạt động thể thao cụ thể như bóng đá, bóng rổ và tennis. Bạn cũng có thể tìm thấy những mẫu giày thời trang phù hợp cho các hoạt động hàng ngày hoặc dự tiệc tại SD40.</p>
+
+        <h2>Ưu Đãi Đặc Biệt Tại SD40</h2>
+        <p>Ngoài việc cung cấp các sản phẩm chất lượng, SD40 còn thường xuyên có những chương trình khuyến mãi hấp dẫn. Tận hưởng các ưu đãi giảm giá, quà tặng và voucher cho các đơn hàng mua sắm trên website. Đừng bỏ lỡ cơ hội sở hữu những đôi giày thể thao ưng ý với giá ưu đãi từ SD40!</p>
+
+        <h2>Dịch Vụ Chăm Sóc Khách Hàng Tận Tình</h2>
+        <p>Tại SD40, chúng tôi luôn đặt sự hài lòng của khách hàng lên hàng đầu. Đội ngũ chăm sóc khách hàng của chúng tôi luôn sẵn lòng hỗ trợ bạn trong mọi vấn đề từ việc chọn lựa sản phẩm đến quá trình đặt hàng và giao nhận hàng. Nếu bạn có bất kỳ câu hỏi hay yêu cầu nào, đừng ngần ngại liên hệ với chúng tôi. Chúng tôi luôn sẵn lòng giúp đỡ bạn một cách tận tình và nhanh chóng</p>
+
+        <h2>Thế Giới Giày Thể Thao Đa Dạng và Phong Phú</h2>
+        <p>Với một bộ sưu tập đa dạng và phong phú, SD40 không chỉ là nơi mua sắm mà còn là nguồn cảm hứng cho các tín đồ thể thao và thời trang. Tại đây, bạn có thể dễ dàng lựa chọn từ các dòng giày thể thao chính hãng, đến các phụ kiện và trang phục thể thao phong cách. Bất kể bạn là một vận động viên chuyên nghiệp hay một người yêu thể thao cá nhân, SD40 sẽ đồng hành cùng bạn trên mọi bước đường.</p>
+
+        <h2>Thảo Luận và Chia Sẻ Tại Cộng Đồng SD40</h2>
+        <p>Để tạo ra một không gian giao lưu và chia sẻ cho cộng đồng yêu thể thao, SD40 cũng tổ chức các sự kiện, thảo luận và hoạt động giao lưu thường xuyên. Tham gia vào cộng đồng SD40, bạn sẽ có cơ hội gặp gỡ và trò chuyện với những người có cùng sở thích, cũng như được cập nhật thông tin về các xu hướng mới nhất trong thế giới thể thao và thời trang.</p>
+
+        <h2>Hãy Ghé Thăm SD40 Ngay Hôm Nay!</h2>
+        <p>Hãy trải nghiệm sự thuận tiện và hứng thú của việc mua sắm tại SD40 ngay hôm nay. Khám phá bộ sưu tập đa dạng, nhận các ưu đãi hấp dẫn và tham gia vào cộng đồng của chúng tôi. SD40 - nơi bạn có thể tìm thấy mọi thứ về giày thể thao, từ những mẫu mới nhất đến các dòng sản phẩm phổ biến và chất lượng nhất trên thị trường.</p>
+
+        <h2>Liên Hệ Với Chúng Tôi</h2>
+        <p>Nếu bạn cần hỗ trợ hoặc có bất kỳ câu hỏi nào, đừng ngần ngại liên hệ với chúng tôi qua các kênh dưới đây:</p>
         <ul>
-            <li>Friendly interface, simple, easy to use. You will easily see featured products immediately as well as easily access the search box, shopping cart or instant chat feature.</li>
-            <li>The website integrates technology to conveniently manage purchase and sales orders on the same account. You will be both a buyer and a seller very flexibly and easily.</li>
-            <li>Update promotion information, <a href="" class="link-text">Meow Flash Sale</a> quickly and continuously.</li>
+            <li>Địa chỉ: 143 Đường Phúc Diễn, Quận Bắc Từ Liêm, Thành phố Hà Nội</li>
+            <li>Số điện thoại: 0123 456 789</li>
+            <li>Email: lamnhph23964@fpt.edu.vn</li>
+            <li>Website: <a href="http://localhost:8080/home">www.sd40.vn</a></li>
+            <li>Facebook: <a href="https://www.facebook.com/abcdedgfrhhhhh/">Hoàng Lâm</a></li>
         </ul>
-        <p>At Meow, you can save <a href="" class="link-text">Meow discount codes</a> and <a href="" class="link-text">free shipping</a> nationwide. Besides, Meow will also have major annual promotional campaigns such as <a href="" class="link-text">Super Consumer Festival 15.3</a>, <a href="" class="link-text">Meow 4.4 sale</a>, <a href="" class="link-text">Meow 5.5 sale</a>, <a href="" class="link-text">Meow sale 7.7</a>, <a href="" class="link-text">Meow sale 8.8</a>, <a href="" class="link-text">Meow sale 9.9</a>, <a href="" class="link-text">Meow 10.10 sale</a>,<a href="" class="link-text">Meow 11.11 sale</a>, <a href="" class="link-text">Meow Birthday sale </a>; <a href="" class="link-text">Tet Promotion</a> feel free to hunt for quality <a href="" class="link-text">Tet gifts</a>. This is the time for shoppers to quickly choose their favorite items at record-breaking prices. In addition, you can also enjoy hunting sales on days of the month such as <a href="" class="link-text">Mid-month sale</a> and <a href="" class="link-text">End-of-month sale</a> to receive your salary. </p>
-        <h6 style="font-weight: bold;">BUY HIGH QUALITY BRANDS AT GOOD PRICES AT MEOW</h6>
-        <p>Besides <a href="" class="link-text">Meow Premium</a>, Meow also has many great promotions for <a href="" class="link-text">branded goods up to 50% off</a>. In addition to free shipping codes, Meow also has discount codes distributed each month from many genuine stores participating in this promotion. Besides, Meow also gathers many famous brands distributed and sold by reputable retailers on Meow, <a href="" class="link-text">top hot deal products for you to hunt for sale</a> always updated every hour, every day, bringing you a variety of choices, from top famous cosmetic brands such as <a href="" class="link-text">Black Rouge, MAC, 3CE,...</a>
-        <h6 style="font-weight: bold;">BUY GENUINE PRODUCTS FROM BIG BRANDS WITH MEOW</h6>
-        <p>Shopping on Meow is always an impressive experience. No matter what <a href="" class="link-text">type of lipstick</a> you want to buy, Meow will also ensure to provide you with satisfactory products. Payment transactions at Meow are always guaranteed to take place quickly and safely. Another issue that customers are always concerned about is whether purchasing on Meow is guaranteed.</p>
-        <p>Meow always commits that all products on Meow, especially Meow Mall, are genuine products, with full labels and warranty from the seller. In addition, Meow protects buyers and sellers by holding the transaction amount until the buyer confirms acceptance of the order and there are no requests for complaints, returns or refunds. Payment will then be sent to the seller. Come to Meow today to buy cheap online products and experience great customer service here. Especially when shopping on Meow Mall, you will receive free shipping, home delivery and 7 days free returns. In addition, customers can use <a href="" class="link-text">Meow Coin</a> to exchange for high-value discount codes and attractive service vouchers. Next are <a href="" class="link-text">Meow Home Club</a>, <a href="" class="link-text">Meow Mum Club</a>, <a href="" class="link-text">Meow Beauty Club</a> and <a href="" class="link-text">Meow Book Club</a> with exclusive offers from major brands whose customers have signed up as members. Visit Meow today!</p>
+
+        <p>Chúng tôi rất vui lòng được phục vụ và giúp đỡ bạn!</p>
+        </body>
+        </html>
+
     </div>
 <br />

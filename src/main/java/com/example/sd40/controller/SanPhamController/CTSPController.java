@@ -298,6 +298,7 @@ public class CTSPController {
     public String hienThiaddSP(Model model){
         model.addAttribute("listTL",loaiGiayService.listTLConDung());
         model.addAttribute("listTH",thuongHieuService.listTLConDung());
+        model.addAttribute("listGG",giamGiaService.listGGConDung());
         model.addAttribute("view","/SanPham/SanPham/addSP.jsp");
         return "index";
     }
@@ -306,6 +307,7 @@ public class CTSPController {
                         @RequestParam("moTa")String moTa,
                         @RequestParam("thuongHieu")Long thuongHieu,
                         @RequestParam("theLoai")Long theLoai,
+                        @RequestParam("giamGia")Long giamGia,
                         @RequestParam("image") MultipartFile image
                         ) throws IOException {
         SanPham sanPham = sanPhamService.findSPCoTonTaiKhong(ten, thuongHieu, theLoai);
@@ -327,7 +329,7 @@ public class CTSPController {
             File img = new File(uploadPath, fileName);
             image.transferTo(img);
 
-            sanPhamService.save(ten,moTa,fileName,thuongHieu,theLoai);
+            sanPhamService.save(ten,moTa,fileName,thuongHieu,theLoai,giamGia);
             SanPham sanPham2 = sanPhamService.timSPCuoi();
             return "redirect:/ctsp/themmausac/"+sanPham2.getId();
         }

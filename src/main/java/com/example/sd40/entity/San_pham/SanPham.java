@@ -41,6 +41,9 @@ public class SanPham {
     @Column(name = "hinh_anh_dai_dien")
     private String hinhAnhDaiDien;
 
+    @Column(name = "so_luong_da_ban")
+    private String soLuongDaBan;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "thuong_hieu_id",

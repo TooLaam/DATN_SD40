@@ -28,6 +28,7 @@
 
                                     <th>STT</th>
                                     <th>Tên</th>
+                                    <th>Hình ảnh</th>
                                     <th>Trạng thái</th>
                                     <th>Ngày tạo</th>
                                     <th>Ngày sửa gần nhất</th>
@@ -40,6 +41,8 @@
                                     <tr>
                                         <th scope="row">${tt.index+1}</th>
                                         <td><strong>${mau.ten}</strong></td>
+                                        <td><img src="/assets/img/brand/${mau.hinhAnh}" alt="/assets/img/brand/${mau.hinhAnh}"  width="100px" height="100px"></td>
+
                                         <td><p style="color:${mau.trangThai==0?"chartreuse":"red"}">${mau.trangThai == 0 ? "Còn sử dụng" : "Ngừng sử dụng"}</p></td>
                                         <td>${mau.ngayTao}</td>
                                         <td>${mau.ngaySua}</td>
@@ -108,6 +111,14 @@
                                 </c:if>
 
                                 <div>
+                                    Hình ảnh :
+                                    <img src="/assets/img/brand/${th.hinhAnh}" height="100px" width="100px">
+                                    <%--                                    <input class="form-control" name="image" type="file" value="${mau.image}">--%>
+                                    <input required type="file" name="image" accept="image/*" class="form-control"
+                                           value="${th.hinhAnh}">
+                                </div>
+
+                                <div>
                                     Ngày tạo :
                                     <input class="form-control" readonly name="ngayTao" value="${th.ngayTao}">
                                 </div>
@@ -138,6 +149,10 @@
                                     Tên :
                                     <input class="form-control" required name="ten">
                                 </div>
+                                <div>
+                                    Hình ảnh :
+                                    <input required type="file" name="image" accept="image/*" class="form-control"></div>
+                                <div>
                                 <div>
                                     Trạng thái :<br>
                                     <input type="radio" name="status" checked value="0"> Còn sử dụng <br>
