@@ -23,6 +23,10 @@ import java.util.List;
 @Getter
 @Setter
 public class VaiTro {
+    public VaiTro(String ten) {
+        this.ten = ten;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -34,4 +38,6 @@ public class VaiTro {
     @JsonIgnore
     @OneToMany(mappedBy = "vaiTro",fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     private List<TaiKhoan> taiKhoanList;
+
+
 }
