@@ -17,6 +17,7 @@ public interface NhanVienService {
 
     TaiKhoan update(NhanVienRequyest requyest);
 
+    
     boolean delete(Long id);
 
     TaiKhoan detail(Long id);
