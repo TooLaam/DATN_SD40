@@ -14,7 +14,10 @@ public interface SanPhamService {
     void update(String ten, String moTa,Integer trangThai, String hinhAnh, Long thuongHieu, Long theLoai, Long id, Date ngayTao);
     SanPham findSPCoTonTaiKhong(String ten, Long thuongHien, Long theLoai);
     SanPham timSPCuoi();
-    void save(String ten,String moTa,String hinhAnh,Long thuongHieu,Long theLoai);
+    List<SanPham> findByName(String ten, Long idSP);
+    void save(String ten,String moTa,String hinhAnh,Long thuongHieu,Long theLoai,Long giamGia);
+    List<Object> findAllByOrderByNgayTaoDesc();
+    List<Object> findAllByOrderSLDaBanDesc();
 
     List<SanPham> getList();
     SanPham findTheoId(Long id);

@@ -11,6 +11,6 @@ import java.util.List;
 public interface MauSacRepository extends JpaRepository<Mau_sac,Long> {
     @Query("select th from Mau_sac th where th.ten =?1")
     List<Mau_sac> findByName(String ten);
-    @Query("select th from Mau_sac th where th.ten =?1 and th.Id not in (select t from Mau_sac t where t.Id = ?2)")
+    @Query("select th from Mau_sac th where th.ten =?1 and th.Id not in (select t.Id from Mau_sac t where t.Id = ?2)")
     List<Mau_sac> findByNameUpdate(String ten,Long id);
 }

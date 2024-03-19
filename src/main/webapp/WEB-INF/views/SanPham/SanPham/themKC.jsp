@@ -99,10 +99,6 @@
                                     <input type="number" class="form-control" name="soLuong" value="${ctsp.soLuong}">
 
                                 </div>
-                                <div>
-                                    Giá hiện hành :
-                                    <input type="number" class="form-control"  name="giaHienHanh" value="${ctsp.giaHienHanh}">
-                                </div>
 
                                 <div>
                                     Trạng thái : <br>
@@ -133,10 +129,7 @@
                                     <input type="number" name="soLuong"  class="form-control"></div>
 
 
-                                    <div>
-                                        Giá hiện hành :
-                                        <input type="number" name="giaHienHanh" class="form-control"></div>
-                                    <div>
+
                                         Trạng thái :<br>
                                         <input type="radio" name="trangThai" checked value="0"> Còn bán<br>
                                         <input type="radio" name="trangThai" value="1"> Ngừng bán

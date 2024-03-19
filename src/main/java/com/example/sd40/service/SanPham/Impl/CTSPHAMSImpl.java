@@ -7,6 +7,7 @@ import com.example.sd40.service.SanPham.CTSPMSHAService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 @Service
@@ -39,7 +40,7 @@ public class CTSPHAMSImpl implements CTSPMSHAService {
     }
 
     @Override
-    public void updateHA(String hinhAnh, Long idsp, Long idms, Date ngaySua) {
-        ctspmshaRepository.updateHA(hinhAnh,idsp,idms,ngaySua);
+    public void updateHA(String hinhAnh, Long idsp, Long idms, Date ngaySua, BigDecimal giaHienHanh) {
+        ctspmshaRepository.updateHA(hinhAnh,idsp,idms,ngaySua,giaHienHanh);
     }
 }

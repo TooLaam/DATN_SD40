@@ -14,4 +14,5 @@ public interface LoaiGiayService {
     void update(TheLoai theLoai);
     List<TheLoai> findByName(String Ten);
     void add(TheLoai theLoai);
+    List<TheLoai> listTLConDung();
 }

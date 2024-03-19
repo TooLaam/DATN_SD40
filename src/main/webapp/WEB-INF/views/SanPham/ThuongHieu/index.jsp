@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
@@ -27,6 +28,7 @@
 
                                     <th>STT</th>
                                     <th>Tên</th>
+                                    <th>Hình ảnh</th>
                                     <th>Trạng thái</th>
                                     <th>Ngày tạo</th>
                                     <th>Ngày sửa gần nhất</th>
@@ -39,6 +41,8 @@
                                     <tr>
                                         <th scope="row">${tt.index+1}</th>
                                         <td><strong>${mau.ten}</strong></td>
+                                        <td><img src="/assets/img/brand/${mau.hinhAnh}" alt="/assets/img/brand/${mau.hinhAnh}"  width="100px" height="100px"></td>
+
                                         <td><p style="color:${mau.trangThai==0?"chartreuse":"red"}">${mau.trangThai == 0 ? "Còn sử dụng" : "Ngừng sử dụng"}</p></td>
                                         <td>${mau.ngayTao}</td>
                                         <td>${mau.ngaySua}</td>
@@ -80,8 +84,8 @@
                                     aria-selected="true">Chi tiết
                             </button>
                         </li>
-                        <li class="${active == null?"nav-link":"nav-link active"}" role="presentation">
-                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                        <li class="nav-item" role="presentation">
+                            <button class="${active == null?"nav-link":"nav-link active"}" id="profile-tab" data-bs-toggle="tab"
                                     data-bs-target="#profile" type="button" role="tab" aria-controls="profile"
                                     aria-selected="false">Thêm mới
                             </button>
@@ -105,6 +109,14 @@
                                 <c:if test="${errUpdate != null}" >
                                     <p style="color: red">${errUpdate}</p>
                                 </c:if>
+
+                                <div>
+                                    Hình ảnh :
+                                    <img src="/assets/img/brand/${th.hinhAnh}" height="100px" width="100px">
+                                    <%--                                    <input class="form-control" name="image" type="file" value="${mau.image}">--%>
+                                    <input required type="file" name="image" accept="image/*" class="form-control"
+                                           value="${th.hinhAnh}">
+                                </div>
 
                                 <div>
                                     Ngày tạo :
@@ -138,6 +150,10 @@
                                     <input class="form-control" required name="ten">
                                 </div>
                                 <div>
+                                    Hình ảnh :
+                                    <input required type="file" name="image" accept="image/*" class="form-control"></div>
+                                <div>
+                                <div>
                                     Trạng thái :<br>
                                     <input type="radio" name="status" checked value="0"> Còn sử dụng <br>
                                     <input type="radio" name="status" value="1"> Ngừng sử dụng
@@ -165,6 +181,10 @@
 
     </div>
 </section>
+
+
+
+
 
 
 

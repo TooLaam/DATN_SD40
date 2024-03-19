@@ -11,7 +11,7 @@ import java.util.Date;
 @Setter
 @Entity
 @Builder
-@Table(name = "loai_giay")
+@Table(name = "the_loai")
 public class TheLoai {
     @jakarta.persistence.Id
     @Column(name = "id")

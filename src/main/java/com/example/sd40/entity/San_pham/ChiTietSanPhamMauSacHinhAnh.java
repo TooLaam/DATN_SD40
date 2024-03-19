@@ -3,6 +3,7 @@ package com.example.sd40.entity.San_pham;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -30,6 +31,9 @@ public class ChiTietSanPhamMauSacHinhAnh {
 
     @Column(name = "ngay_sua")
     private Date ngaySua;
+
+    @Column(name = "gia_hien_hanh")
+    private BigDecimal giaHienHanh;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(

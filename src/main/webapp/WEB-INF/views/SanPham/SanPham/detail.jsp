@@ -23,34 +23,21 @@
                                 <input type="text" class="form-control" name="id" value="${sp.id}" readonly />
 
                                 <b><label class="form-label">Mã:</label></b>
-                                <input type="text" disabled class="form-control" value="${sp.ma}" name="ma" />
-<%--                                <c:if test="${errName != null}" >--%>
-<%--                                    <p style="color: red">${errName}</p>--%>
-<%--                                </c:if>--%>
+                                <input type="text" readonly class="form-control" value="${sp.ma}" name="ma" />
 
                                 <b> <label class="form-label">Tên sản phẩm</label></b>
-                                <input type="text" class="form-control" value="${sp.ten}" name="ten" />
-<%--                                <c:if test="${errDate != null}" >--%>
-<%--                                    <p style="color: red">${errDate}</p>--%>
-<%--                                </c:if>--%>
-<%--                                <c:if test="${errDateAfter != null}" >--%>
-<%--                                    <p style="color: red">${errDateAfter}</p>--%>
-<%--                                </c:if>--%>
+                                <input type="text" required class="form-control" value="${sp.ten}" name="ten" />
+                                <c:if test="${err != null}" >
+                                    <p style="color: red">${err}</p>
+                                </c:if>
+
 
                                 <b> <label class="form-label">Mô tả: </label></b>
-                                <input type="text" class="form-control" style="width: 450px;height: 150px;"  value="${sp.moTa}" name="moTa" />
-<%--                                <c:if test="${errAdd != null}" >--%>
-<%--                                    <p style="color: red">${errAdd}</p>--%>
-<%--                                </c:if>--%>
+                                <input required type="text" class="form-control" style="width: 450px;height: 150px;"  value="${sp.moTa}" name="moTa" />
+
 
                                 <b><label class="form-label">Ngày tạo: </label></b>
                                 <label  name="ngayTao">${sp.ngayTao}</label><br>
-<%--                                <c:if test="${errPhone != null}" >--%>
-<%--                                    <p style="color: red">${errPhone}</p>--%>
-<%--                                </c:if>--%>
-<%--                                <c:if test="${errPhoneErrr != null}" >--%>
-<%--                                    <p style="color: red">${errPhoneErrr}</p>--%>
-<%--                                </c:if>--%>
 
                                 <b><label class="form-label">Ngày sửa gần nhất: </label></b>
                                 <label  name="ngaySua">${sp.ngaySua}</label><br>
@@ -67,12 +54,9 @@
                                 <label class="form-label">Ngừng sử dụng</label><br><br>
                                 <b><label class="form-label">Hình ảnh đại diện: </label></b>
                                 <img src="/assets/img/product/${sp.hinhAnhDaiDien}" height="100px" width="100px">
-                                <%--                                    <input class="form-control" name="image" type="file" value="${mau.image}">--%>
-                                <input type="file" name="image" accept="image/*" class="form-control"
-                                       >
-<%--                                <c:if test="${errEmail != null}" >--%>
-<%--                                    <p style="color: red">${errEmail}</p>--%>
-<%--                                </c:if>--%>
+
+                                <input required type="file" name="image" accept="image/*" class="form-control">
+
 
 
                                 <b><label class="form-label">Thương hiệu</label></b>

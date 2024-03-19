@@ -4,9 +4,10 @@ import com.example.sd40.entity.San_pham.ChiTietSanPham;
 import com.example.sd40.entity.San_pham.KichCo;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
-@Service
+
 public interface CTSPService {
     List<Object[]> findKCTheoSP(Long idsp, Long idms);
     List<KichCo> findKCNotInCTSP(Long idCTSPHAMMS);
@@ -15,6 +16,15 @@ public interface CTSPService {
     ChiTietSanPham findById(Long id);
     ChiTietSanPham findCTSP(Long idCTSPHAMS,Long idkc);
     void updateCTSP(ChiTietSanPham chiTietSanPham);
+    List<Object> getAllSPCus();
+    Object tongSLSP();
+    List<Object> getAllSPCusByTL(Long idTL);
+    List<Object> getAllSPCusByTH(Long idTH);
+    Object tongSLSPByTH(Long idTH);
+    Object tongSLSPByTL(Long idTL);
+    List<Object> getAllSPCusByGia(BigDecimal giaMin, BigDecimal giaMax);
+    List<Object> getAllSPCusByGiamGia();
+    Object detailSanPhamCus(Long idsp);
 
 
 

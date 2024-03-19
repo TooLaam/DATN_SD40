@@ -25,7 +25,13 @@
                                 <div class="col-md-7">
                                     <div class="product-info">
 
-                                        <h2>(${sp.ma})${sp.ten}</h2><br>
+                                        <h2>
+                                            <strong style="display: inline;">(${sp.ma})${sp.ten} </strong>
+                                            <span><c:if test="${sp.giamGIa != null && sp.giamGIa.mucGiam >0}" >
+                                                <p style="color: red;display: inline">(- ${sp.giamGIa.mucGiam}%)</p>
+                                            </c:if></span>
+                                        </h2>
+                                        <br>
                                         <p>Thương hiệu: ${sp.thuongHieu.ten}</p><br>
                                         <p>Thể loại: ${sp.theLoai.ten}</p><br>
                                         <p>Mô tả sản phẩm: ${sp.moTa}</p>
@@ -37,13 +43,13 @@
                                             </a>
                                             <%--                                        <a href="/sanpham/detail/${sp[0]}" class="btn btn-success" ></a>--%>
                                         </c:forEach>
-
+                                        <p>Giá hiện hành: </p><br>
                                         <p>Size: </p>
                                         <c:forEach items="${listKC}" var="ms">
                                             <a class="btn btn-success" style="margin-left: 30px" >${ms[1]}</a>
                                         </c:forEach>
                                         <p>Số lượng: </p><br>
-                                        <p>Giá hiện hành: </p><br>
+
                                         <p> Trạng thái: </p><br>
 
                                     </div>
@@ -77,7 +83,8 @@
 
 
 
-                        <a href="/ctsp/themmausac/${sp.id}"  type="submit" class="btn btn-primary">Thêm màu sắc cho sản phẩm</a>
+                        <a href="/ctsp/themmausac/${sp.id}"  type="submit" class="btn btn-primary">Thêm/chỉnh sửa màu sắc cho sản phẩm</a>
+                        <a href="/ctsp/giamGia/${sp.id}"  type="submit" class="btn btn-primary">Giảm giá sản phẩm</a>
 <%--                    </form>--%>
 
                 </div>

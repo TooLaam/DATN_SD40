@@ -24,8 +24,6 @@ public class ChiTietSanPham {
     @Column(name = "so_luong")
     private Integer soLuong;
 
-    @Column(name = "gia_hien_hanh")
-    private BigDecimal giaHienHanh;
 
     @Column(name = "ngay_tao")
     private Date ngayTao;
