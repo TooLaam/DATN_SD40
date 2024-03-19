@@ -11,9 +11,9 @@
     <div class="row">
         <c:forEach items="${listTH}" var="sp" >
                 <div class="col-md-3 col-6">
-                    <a href="/product/indexcus/banner/${sp[0]}" class="link-recommend">
+                    <a href="/sanphamcus/thuonghieucus/${sp[0]}" class="link-recommend">
                         <img src="/assets/img/brand/${sp[2]}" class="img-recommend" alt="" />
-                        <div class="overlay">${sp[1]}(${sp[3]})</div>
+                        <div class="overlay">${sp[1]}</div>
                     </a>
                 </div>
         </c:forEach>
@@ -24,7 +24,7 @@
             <c:forEach items="${listSPNew}" var="sp">
                 <div class="col-md-3 col-6">
                     <div class="thumnail">
-                        <a href="/product_detail/indexcus/${sp[0]}">
+                        <a href="/detailsanphamcus/${sp[0]}">
                             <img src="/assets/img/product/${sp[2]}">
                             <div class="caption">
                                 <p>${sp[1]}</p>
@@ -75,7 +75,7 @@
             <c:forEach items="${listSPBest}" var="sp">
                 <div class="col-md-3 col-6">
                     <div class="thumnail">
-                        <a href="/product_detail/indexcus/${sp[0]}">
+                        <a href="/detailsanphamcus/${sp[0]}">
                             <img src="/assets/img/product/${sp[2]}">
                             <div class="caption">
                                 <p>${sp[1]}</p>

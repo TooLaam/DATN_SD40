@@ -11,15 +11,29 @@
 <br/>
 <div class="container">
     <div class="content">
-        <span class="text-content">${TL.ten}</span>
-        <c:choose>
-            <c:when test="${tongSLSP == null}">
-                <span class="available">(0)</span>
-            </c:when>
-            <c:otherwise>
-                <span class="available">(${tongSLSP})</span>
-            </c:otherwise>
-        </c:choose>
+
+            <c:choose>
+                <c:when test="${giaMin==0}">
+                    <span class="text-content">Giá : Dưới <fmt:formatNumber value="${giaMax}" pattern="###,###"/>đ  </span>
+                </c:when>
+                <c:when test="${giaMax==1000000000}">
+                    <span class="text-content">Giá : Trên <fmt:formatNumber value="${giaMin}" pattern="###,###"/>đ  </span>
+                </c:when>
+                <c:otherwise>
+                <span class="text-content">Giá : <fmt:formatNumber value="${giaMin}" pattern="###,###"/>đ - <fmt:formatNumber value="${giaMax}" pattern="###,###"/>đ </span>
+                </c:otherwise>
+            </c:choose>
+
+
+            <c:choose>
+                <c:when test="${tongSLSP == null}">
+                    <span class="available">(0)</span>
+                </c:when>
+                <c:otherwise>
+                    <span class="available">(${tongSLSP})</span>
+                </c:otherwise>
+            </c:choose>
+
     </div>
     <div class="row">
         <div class="col-3">
@@ -55,6 +69,7 @@
                 <c:forEach items="${listSP}" var="sp" varStatus="loop">
                     <div class="col-md-4 col-6 product-item" style="display: ${loop.index < 6 ? 'block' : 'none'}">
                         <div class="thumnail">
+
                             <a href="/detailsanphamcus/${sp[0]}">
                                 <img src="/assets/img/product/${sp[2]}">
                                 <div class="caption">
@@ -89,6 +104,9 @@
                                             </c:choose>
                                         </c:otherwise>
                                     </c:choose>
+                                    <c:if test="${err != null}">
+                                        <p>${err}</p>
+                                    </c:if>
                                 </div>
                             </a>
                         </div>

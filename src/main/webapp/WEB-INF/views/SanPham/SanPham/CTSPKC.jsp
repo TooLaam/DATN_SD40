@@ -73,7 +73,7 @@
                                         <a onclick="getData('${ms[2]}','${ms[3]==0?"Còn bán":"Ngừng bán"}','${ms[1]}')" class="btn btn-success" style="margin-left: 30px" >${ms[1]}</a>
                                     </c:forEach><br><br>
                                     <div >
-                                        <strong>Số lượng:     </strong>    <span id="hiensl"> </span> <br><br>
+                                        <strong>Số lượng:     </strong>    <span id="hiensl">600 </span> <br><br>
                                     </div>
 
                                     <div>

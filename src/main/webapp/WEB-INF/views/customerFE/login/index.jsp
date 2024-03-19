@@ -1,4 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -12,7 +15,7 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <title>Document</title>
+    <title>Login</title>
 </head>
 
 <body>
@@ -20,12 +23,10 @@
         <nav class="nav-search">
             <div class="row">
                 <div class="col-md-2 col-4">
-                    <a href="/home"><img src="/assets/img/logo.png" class="logo" alt="logo" />
+                    <a href="/home"><img src="/assets/img/SD40.png" class="logo" alt="logo" />
                     </a>
                 </div>
-                <div class="col-md-10 col-8">
-                    <a href="#" class="link-text" id="help">Need Help?</a>
-                </div>
+
             </div>
         </nav>
     </div>
@@ -38,7 +39,7 @@
                     <div class="form">
                     <h3>Log in</h3>
                     <div class="text-log">
-                        <span>New to Meow Shop?</span>
+                        <span>Bạn chưa có tài khoản?</span>
                         <a href="/customer/signup" class="link-text">Sign up</a>
                     </div>
                         <form action="/customer/loginOK" method="post">
@@ -63,7 +64,7 @@
                                 <button type="submit" class="btn login">LOG IN</button>
                             </div>
 
-                            <a href="/home"><img src="/assets/img/logo.png" class="logo" style="margin-top: 6rem;" alt="logo" /></a>
+                            <a href="/home"><img src="/assets/img/SD40logo.png" class="logo" style="margin-top: 6rem;" alt="logo" /></a>
                         </form>
                     </div>
                 </div>

@@ -24,9 +24,9 @@
 </div>
 <div class="container">
     <ul class="nav justify-content-end">
-        <li class="nav-item">
-            <a class="nav-link" href="#">Help</a>
-        </li>
+<%--        <li class="nav-item">--%>
+<%--            <a class="nav-link" href="#">Help</a>--%>
+<%--        </li>--%>
         <c:choose>
             <c:when test="${CustomerName == null}">
                 <li class="nav-item">
@@ -74,12 +74,13 @@
                                 <span class="fa fa-sticky-note"></span>
                             </a>
                         </li>
+                        <li>
+                            <a href="/viewOrderCart">
+                                <span class="fa fa-shopping-cart"></span>
+                            </a>
+                        </li>
                     </c:if>
-                    <li>
-                        <a href="/viewOrderCart">
-                            <span class="fa fa-shopping-cart"></span>
-                        </a>
-                    </li>
+
                 </ul>
             </li>
         </ul>
@@ -94,7 +95,7 @@
             <a class="nav-link" href="/sanphamcus">Sản phẩm</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/brand/indexcus">Giảm giá</a>
+            <a class="nav-link" href="/sanphamcusgiamgia">Giảm giá</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/blog">Blogs</a>
@@ -116,7 +117,7 @@
             <div class="col-md-4 col-12">
                 <div class="row">
                     <div class="col-md-12 col-12">
-                        <img src="/assets/img/SD40.png" class="logo" alt="logo" width="70%"/>
+                        <img src="/assets/img/SD40.png" width="70%" class="logoFE" alt="logo" />
                         <p id="text_logo">Ở đây chúng tôi có bán giày!</p>
                     </div>
                     <div class="col-md-12 col-12">
@@ -200,9 +201,9 @@
                             </li>
                         </ul>
                         <span class="text_footer">Show us your cat with:</span>
-                        <span class="text_footer">#meowshop</span>
+                        <span class="text_footer">#sd40sport</span>
                         <br/>
-                        <span class="text_footer">#themeowshop</span>
+                        <span class="text_footer">#sd40sport</span>
                     </div>
                     <div class="col-md-4 col-6">
                         <p class="text_content_footer">Policies</p>
@@ -227,7 +228,7 @@
         <br/>
         <hr/>
         <div id="Copyright">
-            Copyright © 2023 The Meow Shop. All rights reserved
+            Copyright © 2023 SD40 Sport. All rights reserved
         </div>
     </div>
 </footer>

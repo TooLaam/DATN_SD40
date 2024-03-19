@@ -71,4 +71,5 @@ public class HomeController {
         model.addAttribute("view", "/aboutus/index.jsp");
         return "/customerFE/index";
     }
+
 }

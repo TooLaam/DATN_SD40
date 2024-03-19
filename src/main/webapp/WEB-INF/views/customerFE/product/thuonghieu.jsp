@@ -12,7 +12,14 @@
 <div class="container">
     <div class="content">
         <span class="text-content">${TH.ten}</span>
-        <span class="available">(${tongSLSP})</span>
+        <c:choose>
+            <c:when test="${tongSLSP == null}">
+                <span class="available">(0)</span>
+            </c:when>
+            <c:otherwise>
+                <span class="available">(${tongSLSP})</span>
+            </c:otherwise>
+        </c:choose>
     </div>
     <div class="row">
         <div class="col-3">
@@ -31,16 +38,16 @@
             </c:forEach>
             <h6 class="filter">Giá</h6>
             <div class="filter-brand">
-                <a href="/product/indexcus/price/0/15">Dưới 200.000</a>
+                <a href="/sanphamcus/mucGia/0/200000">Dưới 200.000</a>
             </div>
             <div class="filter-brand">
-                <a href="/product/indexcus/price/16/25">200.000 - 500.000</a>
+                <a href="/sanphamcus/mucGia/200000/500000">200.000 - 500.000</a>
             </div>
             <div class="filter-brand">
-                <a href="/product/indexcus/price/26/35">500.000 - 1.000.000</a>
+                <a href="/sanphamcus/mucGia/500000/1000000">500.000 - 1.000.000</a>
             </div>
             <div class="filter-brand">
-                <a href="/product/indexcus/price/36/10000">Trên 1.000.000</a>
+                <a href="/sanphamcus/mucGia/1000000/1000000000">Trên 1.000.000</a>
             </div>
         </div>
         <div class="col-9">
@@ -48,7 +55,7 @@
                 <c:forEach items="${listSP}" var="sp" varStatus="loop">
                     <div class="col-md-4 col-6 product-item" style="display: ${loop.index < 6 ? 'block' : 'none'}">
                         <div class="thumnail">
-                            <a href="/product_detail/indexcus/${sp[0]}">
+                            <a href="/detailsanphamcus/${sp[0]}">
                                 <img src="/assets/img/product/${sp[2]}">
                                 <div class="caption">
                                     <p>${sp[1]}(${sp[5]})</p>

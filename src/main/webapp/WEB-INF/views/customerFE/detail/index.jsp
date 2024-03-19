@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <head>
     <style>
@@ -7,134 +8,139 @@
     </style>
 </head>
 
-<br/>
 <div class="container">
     <div class="row">
         <div class="col-6 row">
             <div class="product-content-big-img col-9">
-                <img src="/assets/img/product/${image.name}" alt="" />
+                <img width="100%" src="/assets/img/product/${sp[2]}" alt="" />
             </div>
             <div class="product-content-small-img col-3">
-                <c:forEach items="${listImage}" var="sp">
-                    <img src="/assets/img/product/${sp.name}" alt="" />
+                <c:forEach items="${listHA}" var="sp">
+                    <img width="100%" src="/assets/img/product/${sp.hinhAnh}" alt="" />
                 </c:forEach>
             </div>
         </div>
         <div class="col-6">
-            <h5>${productDetail.name}</h5>
-            <p>${productDetail.sold} <span class="sold">Sold</span></p>
-            <p class="price">$${productDetail.price}</p>
-            <div class="product-content-product-color">
-                <p><span style="font-weight: bold;">Color: </span><span class="product-content-product-color-name">${productDetail.color.name}</span></p>
-                <ul class="list-inline">
-                    <c:forEach items="${listColor}" var="color">
-                        <c:choose>
-                            <c:when test="${color.productDetailId == productDetail.id}">
-                                <li class="list-inline-item">
-                                    <a href="/product_detail/indexcus/${color.productDetailId}" class="product-content-product-color-img-active">
-                                        <img src="/assets/img/color/${color.image}" alt="" value="${color.id}" />
-                                    </a>
-                                </li>
-                            </c:when>
-                            <c:otherwise>
-                                <li class="list-inline-item">
-                                    <a href="/product_detail/indexcus/${color.productDetailId}" class="product-content-product-color-img">
-                                        <img src="/assets/img/color/${color.image}" alt="" value="${color.id}" />
-                                    </a>
-                                </li>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
-                </ul>
-            </div>
+
+            <c:choose>
+                <c:when test="${sp[4]>0}">
+                    <c:choose>
+                        <c:when test="${sp[7]==sp[6]}">
+                            <h5>${sp[1]} <span class="discounted-price" style="color: red">(-${sp[4]}%)</span></h5>
+                            <p><span class="text-content">${sp[3]} Đã bán | ${sp[5]} Sản phẩm có sẵn</span></p>
+                            <p><span class="text-content">Thương hiệu: ${SP1.thuongHieu.ten}  |  Thể loại: ${SP1.theLoai.ten}</span></p>
+
+                            <span style="text-decoration: line-through" class="priceGiam">$ <fmt:formatNumber value="${sp[8]}" pattern="###,###"/>đ </span>
+                            <p class="price">$ <fmt:formatNumber value="${sp[6]}" pattern="###,###"/>đ </p>
+
+
+                        </c:when>
+                        <c:otherwise>
+                            <h5>${sp[1]} <span class="discounted-price" style="color: red">(-${sp[4]}%)</span></h5>
+                            <p><span class="text-content">${sp[3]} Đã bán | </span>
+                            <span class="text-content" id="hiensl">${sp[5]}  </span>
+                                <span class="text-content">Sản phẩm có sẵn</span>
+                            </p>
+                            <p><span class="text-content">Thương hiệu: ${SP1.thuongHieu.ten}  |  Thể loại: ${SP1.theLoai.ten}</span></p>
+
+                            <span style="text-decoration: line-through" class="priceGiam">$ <fmt:formatNumber value="${sp[9]}" pattern="###,###"/>đ - <fmt:formatNumber value="${sp[8]}" pattern="###,###"/>đ</span>
+                            <p class="price">$ <fmt:formatNumber value="${sp[7]}" pattern="###,###"/>đ - <fmt:formatNumber value="${sp[6]}" pattern="###,###"/>đ </p>
+
+                        </c:otherwise>
+                    </c:choose>
+                </c:when>
+
+                <c:otherwise>
+                    <c:choose>
+                        <c:when test="${sp[7]==sp[6]}">
+                            <h5>${sp[1]}</h5>
+                            <p><span class="text-content">${sp[3]} Đã bán | ${sp[5]} Sản phẩm có sẵn</span></p>
+                            <p><span class="text-content">Thương hiệu: ${SP1.thuongHieu.ten}  |  Thể loại: ${SP1.theLoai.ten}</span></p>
+
+                            <span class="price">$ <fmt:formatNumber value="${sp[8]}" pattern="###,###"/>đ </span>
+                        </c:when>
+                        <c:otherwise>
+                            <h5>${sp[1]}</h5>
+                            <p><span class="text-content">${sp[3]} Đã bán | ${sp[5]} Sản phẩm có sẵn</span></p>
+                            <p><span class="text-content">Thương hiệu: ${SP1.thuongHieu.ten}  |  Thể loại: ${SP1.theLoai.ten}</span></p>
+
+
+                            <span class="price" >$ <fmt:formatNumber value="${sp[9]}" pattern="###,###"/>đ - <fmt:formatNumber value="${sp[8]}" pattern="###,###"/>đ</span>
+                        </c:otherwise>
+                    </c:choose>
+
+
+                </c:otherwise>
+            </c:choose>
+
+            <p><span style="font-weight: bold;">Color: </span></p>
+
+            <c:forEach items="${listMS}" var="ms">
+                <a href="/hienthiKCCus/${sp[0]}/${ms[0]}" class="btn btn-light" style="margin-left: 30px;background-color: gainsboro">
+                    <img width="100%" style="width: 20px;height: 20px" src="/assets/img/color/${ms[2]}" alt="Icon" class="icon">
+                    <span class="text">${ms[1]}</span>
+                </a>
+            </c:forEach>
+<%--            <span id="hienid">aloooo</span>--%>
+            <p><span style="font-weight: bold;">Kích cỡ: </span></p>
+
+<%--            <input id="inputid" style="display: none" name="kichCo">--%>
+            <c:forEach items="${listKC}" var="ms">
+                <a onclick="getData('${ms[2]}','${ms[0]}')" class="btn btn-success" style="margin-left: 30px" >${ms[1]}</a>
+            </c:forEach><br><br>
+
             <div class="row mb-3">
-                <div class="col-3 my-2">
-                    <span class="text-content">Quantity</span>
+                <div style="padding-top: 17px" class="col-3 my-2">
+                    <span class="text-content">Số lượng</span>
                 </div>
-                <div class="col-3">
-                    <div class="input-group mb-3">
-                        <a href="/product_detail/reduce/${productDetail.id}" class="btn btn-outline">-</a>
-                        <input disabled type="text" class="form-control" value="${productDetail.quantity}"/>
-                        <a href="/product_detail/increase/${productDetail.id}" class="btn btn-outline">+</a>
+                <div style="margin-top: 20px" class="col-3">
+                    <div class="containerT">
+                        <button  id="subtractButton" class="buttonTang">-</button>
+                        <input readonly type="number" id="inputField" class="inputTang" name="soLuong" value="1">
+                        <button  id="addButton" class="buttonTang">+</button>
                     </div>
-                </div>
-                <div class="col-6 my-2">
-                    <span class="text-content">${productDetail.availableQuantity} Products Available</span>
                 </div>
             </div>
             <div class="d-grid gap-2">
                 <div class="row">
                     <div class="col-10">
-                        <a class="btn btn-outline" href="/cart/add/${productDetail.id}">
-                            ADD TO CART
-                        </a>
-                    </div>
-                    <c:if test="${CustomerName != null}">
-                        <form class="col-2" action="/favor/like/${productDetail.id}" method="post">
-                            <button type="submit" class="fa fa-heart-o"></button>
+                        <form method="get" action="/hienthiAddHD/${SP1.id}">
+                            <input style="display: none" id="inputid" name="kichCo">
+                            <input style="display: none" value="${ms.id}" name="mauSac">
+                            <input style="display: none" readonly type="number" id="inputField2" class="inputTang" name="soLuong" value="1">
+                            <button class="btn btn-outline"  >THÊM VÀO GIỎ HÀNG</button>
                         </form>
-                    </c:if>
+
+
+                    </div>
                 </div>
-                <button class="btn" type="button">BUY IT NOW</button>
+                <form method="get" action="/hienthiAddHD/${SP1.id}">
+                    <input style="display: none" id="inputid1" name="kichCo">
+                    <input style="display: none" value="${ms.id}" name="mauSac">
+                    <input style="display: none" readonly type="number" id="inputField1" class="inputTang" name="soLuong" value="1">
+                    <button class="btn btn-outline"  >MUA NGAY</button>
+                </form>
+
             </div>
             <br>
-            <strong>LIPSTICK WORLD'S COMMITMENT</strong>
+            <strong>CAM KẾT CỦA SD40 SPORT</strong>
             <ul class="list-unstyled">
                 <li>
                     <i class="fa fa-check">
-                        GUARANTEED 100% GENUINE QUALITY PRODUCTS
+                        ĐẢM BẢO HÀNG CHÍNH HÃNG 100 % CHẤT LƯỢNG
                     </i>
                 </li>
                 <li>
                     <i class="fa fa-check">
-                        LATEST DATE
+                        GIAO HANG CẤP TỐC
                     </i>
                 </li>
                 <li>
                     <i class="fa fa-check">
-                        SERVE UNTIL CUSTOMERS ARE SATISFIED
+                        PHỤC VỤ ĐẾN KHI KHÁCH HÀNG HÀI LÒNG
                     </i>
                 </li>
             </ul>
-        </div>
-    </div>
-    <div class="recently">
-        <p>Recently viewed products</p>
-        <div class="row">
-            <c:forEach items="${listProduct}" var="sp">
-                <div class="col-md-3 col-6">
-                    <div class="thumnail">
-                        <a href="/product_detail/indexcus/${sp.productDetailId}">
-                            <img src="/assets/img/product/${sp.image}">
-                            <div class="caption">
-                                <p>${sp.name}</p>
-                                <span class="price">$${sp.price}</span>
-                                <span class="sold">${sp.sold} sold</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </c:forEach>
-        </div>
-    </div>
-    <br/>
-    <div class="recently">
-        <p>You may also like</p>
-        <div class="row">
-            <c:forEach items="${listProduct}" var="sp">
-                <div class="col-md-3 col-6">
-                    <div class="thumnail">
-                        <a href="/product_detail/indexcus/${sp.productDetailId}">
-                            <img src="/assets/img/product/${sp.image}">
-                            <div class="caption">
-                                <p>${sp.name}</p>
-                                <span class="price">$${sp.price}</span>
-                                <span class="sold">${sp.sold} sold</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </c:forEach>
         </div>
     </div>
     <br/>
@@ -142,4 +148,44 @@
 
 <script>
     <%@include file="logic.js" %>
+    document.addEventListener('DOMContentLoaded', function() {
+        var inputField = document.getElementById('inputField');
+        var inputField2 = document.getElementById('inputField2');
+        var inputField1 = document.getElementById('inputField1');
+        var addButton = document.getElementById('addButton');
+        var subtractButton = document.getElementById('subtractButton');
+        addButton.addEventListener('click', function() {
+            inputField.value = parseInt(inputField.value) + 1;
+            inputField2.value = parseInt(inputField2.value) + 1;
+            inputField1.value = parseInt(inputField1.value) + 1;
+        });
+
+        subtractButton.addEventListener('click', function() {
+            var currentValue = parseInt(inputField.value);
+            var currentValue2 = parseInt(inputField2.value);
+            var currentValue1 = parseInt(inputField1.value);
+            if (currentValue > 1) {
+                inputField.value = currentValue - 1;
+            }
+            if (currentValue2 > 1) {
+                inputField2.value = currentValue2 - 1;
+            }
+            if (currentValue1 > 1) {
+                inputField1.value = currentValue1 - 1;
+            }
+        });
+    });
+
+    function getData(sl,id) {
+        console.log(sl, id);
+        document.getElementById("hiensl").textContent  = sl;
+        var input = document.getElementById("inputid");
+        var input1 = document.getElementById("inputid1");
+        input.value = id;
+        input1.value = id;
+    }
+
+
+
 </script>
+

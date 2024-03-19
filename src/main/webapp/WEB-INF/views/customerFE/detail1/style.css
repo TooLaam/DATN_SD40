@@ -81,9 +81,9 @@
     text-align: left;
     color: #7A7A7A;
 }
-/*img{*/
-/*    width: 100%;*/
-/*}*/
+img{
+    width: 100%;
+}
 .options{
     margin-bottom: 5px;
 }
@@ -131,38 +131,4 @@
     justify-content: center;
     margin: 12px 0;
     border-radius: 50%;
-}
-
-
-/*--------------*/
-
-
-.containerT {
-    display: flex;
-    align-items: center;
-}
-
-.buttonTang {
-    padding: 10px 20px;
-    font-size: 20px;
-    border: none;
-    cursor: pointer;
-    background-color:gainsboro;
-    color: black;
-    border-radius: 5px;
-    margin: 0 10px;
-    transition: background-color 0.3s ease;
-}
-
-.buttonTang:hover {
-    background-color: #2980b9;
-}
-
-.inputTang {
-    padding: 10px;
-    font-size: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100px;
-    text-align: center;
 }

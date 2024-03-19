@@ -11,46 +11,39 @@
 <br/>
 <div class="container">
     <div class="content">
-        <span class="text-content">${TL.ten}</span>
-        <c:choose>
-            <c:when test="${tongSLSP == null}">
-                <span class="available">(0)</span>
-            </c:when>
-            <c:otherwise>
-                <span class="available">(${tongSLSP})</span>
-            </c:otherwise>
-        </c:choose>
+        <span class="text-content">Sản phẩm giảm giá</span>
+        <span class="available">(${tongSLSP})</span>
     </div>
     <div class="row">
-        <div class="col-3">
-            <h6 class="text-filter">Filter</h6>
-            <h6 class="filter">Thương hiệu</h6>
-            <c:forEach items="${listTH}" var="brand">
-                <div class="filter-brand">
-                    <a href="/sanphamcus/thuonghieucus/${brand.id}">${brand.ten}</a>
-                </div>
-            </c:forEach>
-            <h6 class="filter">Thể loại</h6>
-            <c:forEach items="${listTL}" var="brand">
-                <div class="filter-brand">
-                    <a href="/sanphamcus/theloaicus/${brand.id}">${brand.ten}</a>
-                </div>
-            </c:forEach>
-            <h6 class="filter">Giá</h6>
-            <div class="filter-brand">
-                <a href="/sanphamcus/mucGia/0/200000">Dưới 200.000</a>
-            </div>
-            <div class="filter-brand">
-                <a href="/sanphamcus/mucGia/200000/500000">200.000 - 500.000</a>
-            </div>
-            <div class="filter-brand">
-                <a href="/sanphamcus/mucGia/500000/1000000">500.000 - 1.000.000</a>
-            </div>
-            <div class="filter-brand">
-                <a href="/sanphamcus/mucGia/1000000/1000000000">Trên 1.000.000</a>
-            </div>
-        </div>
-        <div class="col-9">
+<%--        <div class="col-3">--%>
+<%--            <h6 class="text-filter">Filter</h6>--%>
+<%--            <h6 class="filter">Thương hiệu</h6>--%>
+<%--            <c:forEach items="${listTH}" var="brand">--%>
+<%--                <div class="filter-brand">--%>
+<%--                    <a href="/sanphamcus/thuonghieucus/${brand.id}">${brand.ten}</a>--%>
+<%--                </div>--%>
+<%--            </c:forEach>--%>
+<%--            <h6 class="filter">Thể loại</h6>--%>
+<%--            <c:forEach items="${listTL}" var="brand">--%>
+<%--                <div class="filter-brand">--%>
+<%--                    <a href="/sanphamcus/theloaicus/${brand.id}">${brand.ten}</a>--%>
+<%--                </div>--%>
+<%--            </c:forEach>--%>
+<%--            <h6 class="filter">Giá</h6>--%>
+<%--            <div class="filter-brand">--%>
+<%--                <a href="/sanphamcus/mucGia/0/200000">Dưới 200.000</a>--%>
+<%--            </div>--%>
+<%--            <div class="filter-brand">--%>
+<%--                <a href="/sanphamcus/mucGia/200000/500000">200.000 - 500.000</a>--%>
+<%--            </div>--%>
+<%--            <div class="filter-brand">--%>
+<%--                <a href="/sanphamcus/mucGia/500000/1000000">500.000 - 1.000.000</a>--%>
+<%--            </div>--%>
+<%--            <div class="filter-brand">--%>
+<%--                <a href="/sanphamcus/mucGia/1000000/1000000000">Trên 1.000.000</a>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+        <div class="col-12">
             <div class="row" id="product-list">
                 <c:forEach items="${listSP}" var="sp" varStatus="loop">
                     <div class="col-md-4 col-6 product-item" style="display: ${loop.index < 6 ? 'block' : 'none'}">
@@ -111,6 +104,7 @@
 
         </div>
     </div>
+
 </div>
 
 <script>
