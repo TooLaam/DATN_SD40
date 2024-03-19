@@ -34,6 +34,8 @@ public class SanPhamController {
         model.addAttribute("listTong",sanPhamService.getAllTongSL());
         model.addAttribute("listSPChuaSL",sanPhamService.getAllSPChuaSL());
         model.addAttribute("view","/SanPham/SanPham/index.jsp");
+        System.out.println("Tong SL :" +sanPhamService.getAllTongSL().size());
+        System.out.println("Tong chua SL :" +sanPhamService.getAllSPChuaSL().size());
 
 
         return "index";
