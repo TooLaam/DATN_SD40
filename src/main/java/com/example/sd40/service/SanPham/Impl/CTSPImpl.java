@@ -28,6 +28,16 @@ public class CTSPImpl implements CTSPService {
     }
 
     @Override
+    public List<ChiTietSanPham> findAll() {
+        return ctspRepository.findAll();
+    }
+
+    @Override
+    public ChiTietSanPham findById(Long id) {
+        return ctspRepository.findById(id).get();
+    }
+
+    @Override
     public ChiTietSanPham findCTSP(Long idCTSPHAMS, Long idkc) {
         return ctspRepository.findCTSP(idCTSPHAMS,idkc);
     }
