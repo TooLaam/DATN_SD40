@@ -4,7 +4,7 @@ import com.example.sd40.entity.Hoa_don.PhuongThucThanhToan;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * @author thangdt
+ * @author quynh
  */
 public interface PhuongThucThanhToanRepository extends JpaRepository<PhuongThucThanhToan, Long> {
 }

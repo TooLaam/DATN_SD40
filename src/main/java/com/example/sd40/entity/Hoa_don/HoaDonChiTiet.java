@@ -1,38 +1,40 @@
-package com.example.sd40.entity.Gio_hang;
+package com.example.sd40.entity.Hoa_don;
 
 import com.example.sd40.entity.San_pham.ChiTietSanPham;
-import com.example.sd40.entity.Tai_khoan.TaiKhoan;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.math.BigDecimal;
 
 /**
  * @author quynh
  */
 @Entity
-@Table(name = "gio_hang_detail")
+@Table(name = "hoa_don_detail")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class GioHangDetail {
+public class HoaDonChiTiet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
+    
     private int quantity;
-
-    private int price;
-
-    @ManyToOne
-    @JoinColumn(name = "id_gio_hang",referencedColumnName = "id")
-    private GioHang gioHang;
+    
+    private BigDecimal price;
 
     @ManyToOne
-    @JoinColumn(name = "id_product",referencedColumnName = "id")
+    @JoinColumn(name = "hoa_don",referencedColumnName = "id")
+    private HoaDon hoaDon;
+
+    @ManyToOne
+    @JoinColumn(name = "product_detail",referencedColumnName = "id")
     private ChiTietSanPham chiTietSanPham;
 }

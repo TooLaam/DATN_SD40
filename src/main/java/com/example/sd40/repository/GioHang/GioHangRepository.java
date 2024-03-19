@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 /**
- * @author thangdt
+ * @author quynh
  */
 public interface GioHangRepository extends JpaRepository<GioHang, Long> {
 

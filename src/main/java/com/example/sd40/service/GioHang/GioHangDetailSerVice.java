@@ -7,7 +7,7 @@ import com.example.sd40.repuest.GioHangDetailRequest;
 import java.util.List;
 
 /**
- * @author thangdt
+ * @author quynh
  */
 public interface GioHangDetailSerVice {
 

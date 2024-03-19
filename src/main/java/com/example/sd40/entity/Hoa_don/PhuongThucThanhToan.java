@@ -11,6 +11,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "phuong_thuc_thanh_toan")
 @NoArgsConstructor
@@ -25,6 +27,8 @@ public class PhuongThucThanhToan {
 
     @Column(name = "ma_phuong_thuc")
     private String maPhuongThuc;
+
+    private BigDecimal price;
 
     @Column(name = "ten")
     private String ten;
