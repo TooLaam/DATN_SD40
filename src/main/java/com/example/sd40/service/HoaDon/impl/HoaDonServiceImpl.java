@@ -25,6 +25,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -73,7 +76,15 @@ public class HoaDonServiceImpl implements HoaDonService {
         if(!resquest.getIdUser().isEmpty()){
             hoaDon.setTaiKhoan(khachHangRepository.findById(Long.parseLong(resquest.getIdUser())).get());
         }
-        
+        DateFormat dateFormat = new SimpleDateFormat("DD/MM/YYYY");
+
+        try {
+            // Chuyển chuỗi thành đối tượng Date
+            Date date = dateFormat.parse(resquest.getNgayNhan());
+            hoaDon.setNgayThanhToan(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         PhuongThucThanhToan phuongThucThanhToan = new PhuongThucThanhToan();
         phuongThucThanhToan.setMaPhuongThuc(resquest.getMaPhuongThuc());
         phuongThucThanhToan.setTrangThai(resquest.getTrangThai());

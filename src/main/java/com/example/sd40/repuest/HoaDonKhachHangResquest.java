@@ -38,7 +38,7 @@ public class HoaDonKhachHangResquest {
 
     private String emailNguoiNhan;
 
-    private Date ngayNhan;
+    private String ngayNhan;
 
     private String maPhuongThuc;
 

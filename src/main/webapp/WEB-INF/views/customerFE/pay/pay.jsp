@@ -72,14 +72,18 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="receiverName">Phí ship: ${totalMoney > 1000000 ? 0: 30}</label>
-                    <input type="hidden" class="form-control"  value="${totalMoney > 1000000 ? 0: 30}"
+                    <label for="receiverName" id="phiShip1">Phí ship:</label></br>
+                    <label for="receiverName" id="ngayNhan1">Ngày nhận:</label>
+                    <input type="hidden" class="form-control" id="phiShip"  value=""
                            name="phiShip">
+                    <input type="hidden" class="form-control"   id="ngayNhan" value=""
+                           name="ngayNhan">
                 </div>
                 <input type="hidden" class="form-control"  value="${totalMoney + (totalMoney > 1000000 ? 0: 30)}"
-                       name="tongTien">
-                <h4>Total: ${totalMoney}</h4>
-                <h4>Total bill: ${totalMoney + (totalMoney > 1000000 ? 0: 30)}</h4>
+                       name="tongTien"  id="totalBill1">
+                <h4>Tổng đơn hàng: ${totalMoney}</h4>
+                <h4 id="totalBill">Tổng hoá đơn: ${totalMoney }</h4>
+
                 <button type="submit" class="btn">Thanh toán</button>
             </form>
         </div>
@@ -124,6 +128,7 @@
 <br/>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script>
     getAllProvince()
 
@@ -238,6 +243,66 @@
     }
 
     document.getElementById("Wards").addEventListener("change", changWard);
+    function changWard() {
+        var wardCode = document.getElementById("Wards").value.split(",")[0];
+        var district = document.getElementById("District").value.split(",")[0];
+        var province = document.getElementById("Province").value.split(",")[0];
 
+
+        selectAddress(district,wardCode )
+    }
+    function selectAddress( to_district_id, to_ward_code) {
+        fetchAllDayShip(to_district_id, to_ward_code)
+        fetchAllMoneyShip(to_district_id, to_ward_code)
+    }
+
+    function fetchAllDayShip(to_district_id, to_ward_code) {
+        console.log(to_district_id + '    ' + to_ward_code)
+        $.ajax({
+            type: "GET",
+            contentType: "application/json",
+            url: 'https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/leadtime?from_district_id=1485&from_ward_code=1A0607&to_district_id=' + to_district_id + '&to_ward_code=' + to_ward_code + '&service_id=53320',
+            dataType: 'json',
+            headers: {
+                "token": "d73043b1-2777-11ee-b394-8ac29577e80e",
+                "shop_id": "4374133",
+            },
+            success: function (responseData) {
+                var input1 = document.getElementById("ngayNhan");
+                var lable = document.getElementById("ngayNhan1");
+                lable.textContent = "Ngày nhận: " + moment(responseData.data.leadtime * 1000).format('DD/MM/YYYY');;
+                input1.value = moment(responseData.data.leadtime * 1000).format('DD/MM/YYYY');
+            },
+            error: function (e) {
+                console.log(e)
+            }
+        });
+    }
+    var moneyShip = 0;
+    function fetchAllMoneyShip(to_district_id, to_ward_code) {
+        $.ajax({
+            type: "GET",
+            contentType: "application/json",
+            url: 'https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee?service_type_id=2&insurance_value=&coupon&from_district_id=3440&height=15&length=15&weight=1000&width=15&to_district_id='+to_district_id+'&to_ward_code='+to_ward_code,
+            dataType: 'json',
+            headers: {
+                "token": "d73043b1-2777-11ee-b394-8ac29577e80e",
+                "shop_id": "4374133",
+            },
+            success: function (responseData) {
+                var input1 = document.getElementById("phiShip");
+                var viewtotalBill = document.getElementById("totalBill");
+                var totalBill1 = document.getElementById("totalBill1");
+                var lable = document.getElementById("phiShip1");
+                lable.textContent = "Phí ship: "+ responseData.data.total;
+                input1.value =  responseData.data.total;
+                viewtotalBill.textContent = "Tổng hoá đơn: "+ (responseData.data.total + ${totalMoney});
+                totalBill1.value =  responseData.data.total + ${totalMoney};
+            },
+            error: function (e) {
+                console.log(e)
+            }
+        });
+    }
 
 </script>
