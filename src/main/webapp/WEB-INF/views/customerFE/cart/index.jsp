@@ -26,6 +26,7 @@
                     </thead>
                     <tbody>
                     <c:forEach items="${listCartDetail}" var="gh">
+
                         <tr>
                             <td>
                                 <img src="/assets/img/product/${gh.image}" alt="" height="65px"/>
