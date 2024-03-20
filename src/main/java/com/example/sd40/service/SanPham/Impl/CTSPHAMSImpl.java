@@ -40,7 +40,12 @@ public class CTSPHAMSImpl implements CTSPMSHAService {
     }
 
     @Override
-    public void updateHA(String hinhAnh, Long idsp, Long idms, Date ngaySua, BigDecimal giaHienHanh) {
-        ctspmshaRepository.updateHA(hinhAnh,idsp,idms,ngaySua,giaHienHanh);
+    public void updateHA(String hinhAnh, Long idsp, Long idms, Date ngaySua, BigDecimal giaHienHanh,Integer trangThai) {
+        ctspmshaRepository.updateHA(hinhAnh,idsp,idms,ngaySua,giaHienHanh,trangThai);
+    }
+
+    @Override
+    public List<Object[]> findMSTheoSPDangDung(Long id) {
+        return ctspmshaRepository.findMSTheoSPDangDung(id);
     }
 }

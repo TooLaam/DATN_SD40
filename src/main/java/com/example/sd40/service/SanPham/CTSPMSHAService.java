@@ -16,6 +16,7 @@ public interface CTSPMSHAService {
     ChiTietSanPhamMauSacHinhAnh getHAbySPandMS(Long idsp,Long idms);
     List<Mau_sac> getMSNotInCTSPMSByIdsp(Long id );
     void add(ChiTietSanPhamMauSacHinhAnh chiTietSanPhamMauSacHinhAnh);
-    void updateHA(String hinhAnh, Long idsp, Long idms, Date ngaySua, BigDecimal giaHienHanh);
+    void updateHA(String hinhAnh, Long idsp, Long idms, Date ngaySua, BigDecimal giaHienHanh,Integer trangThai);
+    List<Object[]> findMSTheoSPDangDung (Long id);
 
 }

@@ -51,7 +51,7 @@ public class CTSPController {
                           ){
         model.addAttribute("sp",sanPhamService.detail(id));
 //        model.addAttribute("listKC",ctspService.findKCTheoSP(id));
-        model.addAttribute("listMS",ctspmshaService.findMSTheoSP(id));
+        model.addAttribute("listMS",ctspmshaService.findMSTheoSPDangDung(id));
         model.addAttribute("listHA", ctspmshaService.getAllHinhAnhbyIDSP(id));
         model.addAttribute("view","/SanPham/SanPham/CTSP.jsp");
         return "index";
@@ -63,8 +63,8 @@ public class CTSPController {
                             @PathVariable("ms") Long ms
     ){
         model.addAttribute("sp",sanPhamService.detail(id));
-        model.addAttribute("listKC",ctspService.findKCTheoSP(id,ms));
-        model.addAttribute("listMS",ctspmshaService.findMSTheoSP(id));
+        model.addAttribute("listKC",ctspService.findKCTheoSPDangDung(id,ms));
+        model.addAttribute("listMS",ctspmshaService.findMSTheoSPDangDung(id));
         model.addAttribute("giaDaGiam",giamGiaService.hienThiTienDaGiam(id,ms));
         model.addAttribute("listHA",ctspmshaService.getHAbySPandMS(id,ms));
         model.addAttribute("ms",mauSacService.detail(ms));
@@ -214,7 +214,8 @@ public class CTSPController {
     public String updateSP(@PathVariable("idsp")Long idsp,
                            @RequestParam("idms")String idms,
                            @RequestParam("image")MultipartFile image,Model model,
-                           @RequestParam("giaHienHanh")BigDecimal giaHienHanh
+                           @RequestParam("giaHienHanh")BigDecimal giaHienHanh,
+                           @RequestParam("trangThai")Integer trangThai
                            ) throws IOException {
         Date currentDate = new Date(System.currentTimeMillis());
 
@@ -242,7 +243,7 @@ public class CTSPController {
 
             File img = new File(uploadPath, fileName);
             image.transferTo(img);
-            ctspmshaService.updateHA(fileName,idsp,Long.valueOf(idms),currentDate,giaHienHanh);
+            ctspmshaService.updateHA(fileName,idsp,Long.valueOf(idms),currentDate,giaHienHanh,trangThai);
         } else {
             // Xử lý khi không có ảnh mới được tải lên
 
@@ -252,19 +253,30 @@ public class CTSPController {
     }
 
 
-    @PostMapping("/updateKC/{idsp}/{idms}/{idkc}/{idctsp}")
+    @PostMapping("/updateKC/{idsp}/{idms}")
     public String updateKC(@PathVariable("idsp")Long idsp,
                            @PathVariable("idms")Long idms,
-                           @PathVariable("idkc")Long idkc,
+                           @RequestParam("idkc")String idkc,
                            @RequestParam("soLuong") int soLuong,
-
-                           @RequestParam("trangThai") int trangThai,
-                           @PathVariable("idctsp")Long idCTSP
+                            Model model,
+                           @RequestParam("trangThai") int trangThai
                            ){
         Date currentDate = new Date(System.currentTimeMillis());
 
+        if (idkc.isBlank()){
+            ChiTietSanPhamMauSacHinhAnh chiTietSanPhamMauSacHinhAnh = ctspmshaService.getHAbySPandMS(idsp,idms);
+            model.addAttribute("err","Vui lòng chọn kích cỡ muốn cập nhật ở danh sách !!!");
+
+            model.addAttribute("sp",sanPhamService.detail(idsp));
+            model.addAttribute("ms",mauSacService.detail(idms));
+            model.addAttribute("listKCChuaCo",ctspService.findKCNotInCTSP(chiTietSanPhamMauSacHinhAnh.getId()));
+            model.addAttribute("listKCDangCo",ctspService.findCTSP2(chiTietSanPhamMauSacHinhAnh.getId()));
+
+            model.addAttribute("view","/SanPham/SanPham/themKC.jsp");
+            return "index";
+        }
         ChiTietSanPhamMauSacHinhAnh chiTietSanPhamMauSacHinhAnh= ctspmshaService.getHAbySPandMS(idsp,idms);
-        ChiTietSanPham chiTietSanPham = ctspService.findCTSP(chiTietSanPhamMauSacHinhAnh.getId(),idkc);
+        ChiTietSanPham chiTietSanPham = ctspService.findCTSP(chiTietSanPhamMauSacHinhAnh.getId(),Long.valueOf(idkc) );
         chiTietSanPham.setNgaySua(currentDate);
         chiTietSanPham.setSoLuong(soLuong);
         chiTietSanPham.setTrangThai(trangThai);

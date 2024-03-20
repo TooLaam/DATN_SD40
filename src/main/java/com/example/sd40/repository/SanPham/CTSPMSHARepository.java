@@ -13,6 +13,9 @@ import java.util.List;
 
 public interface CTSPMSHARepository extends JpaRepository<ChiTietSanPhamMauSacHinhAnh,Long> {
     @Query("select ms.Id,ms.ten,ms.hinhAnh from SanPham sp join ChiTietSanPhamMauSacHinhAnh ctmsha on sp.id = ctmsha.sanPham.id" +
+            " join Mau_sac ms on ctmsha.mau_sac.Id = ms.Id where sp.id =?1 and ctmsha.trangThai = 0")
+    List<Object[]> findMSTheoSPDangDung (Long id);
+    @Query("select ms.Id,ms.ten,ms.hinhAnh from SanPham sp join ChiTietSanPhamMauSacHinhAnh ctmsha on sp.id = ctmsha.sanPham.id" +
             " join Mau_sac ms on ctmsha.mau_sac.Id = ms.Id where sp.id =?1")
     List<Object[]> findMSTheoSP (Long id);
 
@@ -27,6 +30,6 @@ public interface CTSPMSHARepository extends JpaRepository<ChiTietSanPhamMauSacHi
 
     @Transactional
     @Modifying
-    @Query("update ChiTietSanPhamMauSacHinhAnh set hinhAnh = ?1,ngaySua=?4,giaHienHanh=?5 where sanPham.id=?2 and mau_sac.Id =?3")
-    void updateHA(String hinhAnh, Long idsp, Long idms, Date ngaySua, BigDecimal giaHienHanh);
+    @Query("update ChiTietSanPhamMauSacHinhAnh set hinhAnh = ?1,ngaySua=?4,giaHienHanh=?5,trangThai=?6 where sanPham.id=?2 and mau_sac.Id =?3")
+    void updateHA(String hinhAnh, Long idsp, Long idms, Date ngaySua, BigDecimal giaHienHanh,Integer trangThai);
 }

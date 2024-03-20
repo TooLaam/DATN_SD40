@@ -273,7 +273,7 @@
 
 </aside><!-- End Sidebar-->
 
-<main id="main" class="main">End Profile Page Nav
+<main id="main" class="main">
     <jsp:include page="./${view}"/>
 </main><!-- End #main -->
 

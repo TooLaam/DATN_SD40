@@ -12,10 +12,10 @@ import java.util.Date;
 import java.util.List;
 @Repository
 public interface SanPhamRepository extends JpaRepository<SanPham,Long> {
-    @Query("select sp.id, sp.ma,sp.ten,sp.hinhAnhDaiDien,sum(ctsp.soLuong) from SanPham sp join ChiTietSanPhamMauSacHinhAnh ctsphams on sp.id=ctsphams.sanPham.id" +
-            " join ChiTietSanPham ctsp on ctsphams.Id = ctsp.chiTietSanPhamMauSacHinhAnh.Id group by sp.id, sp.ma,sp.ten,sp.hinhAnhDaiDien")
+    @Query("select sp.id, sp.ma,sp.ten,sp.hinhAnhDaiDien,sum(ctsp.soLuong),sp.thuongHieu.ten,sp.theLoai.ten from SanPham sp join ChiTietSanPhamMauSacHinhAnh ctsphams on sp.id=ctsphams.sanPham.id" +
+            " join ChiTietSanPham ctsp on ctsphams.Id = ctsp.chiTietSanPhamMauSacHinhAnh.Id group by sp.id, sp.ma,sp.ten,sp.hinhAnhDaiDien,sp.thuongHieu.ten,sp.theLoai.ten")
     List<Object[]> getAllTongSL();
-    @Query("select sp.id, sp.ma,sp.ten,sp.hinhAnhDaiDien from SanPham sp where sp.id not in (select ctsphams.sanPham.id from ChiTietSanPhamMauSacHinhAnh  ctsphams)")
+    @Query("select sp.id, sp.ma,sp.ten,sp.hinhAnhDaiDien,sp.thuongHieu.ten,sp.theLoai.ten from SanPham sp where sp.id not in (select ctsphams.sanPham.id from ChiTietSanPhamMauSacHinhAnh  ctsphams)")
     List<Object[]> getAllSPChuaSL();
 
     @Transactional

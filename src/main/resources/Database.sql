@@ -177,11 +177,11 @@ CREATE TABLE san_pham (
                           hinh_anh_dai_dien VARCHAR(Max),
 	nguoi_tao		NVARCHAR(100) NULL,
 	trang_thai		INT,
-	thuong_hieu_id	BIGINT	
+	thuong_hieu_id	BIGINT
 		REFERENCES thuong_hieu(id),
-    the_loai_id  	BIGINT	
+    the_loai_id  	BIGINT
 		REFERENCES the_loai(id),
-	 giam_gia_id  	BIGINT	
+	 giam_gia_id  	BIGINT
 		REFERENCES giam_gia(id),
 );
 alter table san_pham add so_luong_da_ban int
@@ -198,9 +198,9 @@ CREATE TABLE chi_tiet_san_pham_mau_sac (
 	gia_hien_hanh   MONEY NULL,
 	san_pham_id     BIGINT
 		REFERENCES san_pham(id),
-	mau_sac_id	    BIGINT	
+	mau_sac_id	    BIGINT
 		REFERENCES mau_sac(id)
-		
+
 );
 
 
@@ -238,14 +238,15 @@ CREATE TABLE gio_hang (
 
 --Bảng chi tiết giỏ hàng
 CREATE TABLE gio_hang_chi_tiet (
+                                   id			BIGINT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+
+                                   TrangThai	INT,
+                                   so_luong    INT,
                                    gio_hang_id	BIGINT
                                        REFERENCES gio_hang(id),
                                    chi_tiet_san_pham_id	BIGINT
                                        REFERENCES chi_tiet_san_pham(id),
-                                   TrangThai	INT,
-                                   so_luong    INT
 
-                                       PRIMARY KEY (gio_hang_id, chi_tiet_san_pham_id)
 
 );
 
@@ -274,16 +275,16 @@ alter table hoa_don add ghi_chu NVARCHAR(MAX)
 
 --Bảng hóa đơn chi tiết
 CREATE TABLE hoa_don_chi_tiet (
-                                  hoa_don_id	BIGINT
-                                      REFERENCES hoa_don(id),
-                                  chi_tiet_san_pham_id	BIGINT
-                                      REFERENCES chi_tiet_san_pham(id),
+                                  id			BIGINT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+
                                   TrangThai	INT,
                                   so_luong    INT,
                                   gia_hien_hanh MONEY,
                                   gia_da_giam MONEY,
-
-                                  PRIMARY KEY (hoa_don_id, chi_tiet_san_pham_id)
+                                  hoa_don_id	BIGINT
+                                      REFERENCES hoa_don(id),
+                                  chi_tiet_san_pham_id	BIGINT
+                                      REFERENCES chi_tiet_san_pham(id),
 
 );
 
@@ -379,13 +380,13 @@ select * from khach_hang
 -- địa chỉ chi tiết
     INSERT INTO dia_chi_chi_tiet (khach_hang_id, dia_chi_id, mac_dinh)
 VALUES
-    (11, 1, 1),
-    (11, 2, 1),
-    (12, 3, 1),
-    (12, 4, 1),
-    (13, 5, 1);
+    (1, 1, 1),
+    (2, 2, 1),
+    (3, 3, 1),
+    (4, 4, 1),
+    (5, 5, 1);
 
---Đợt khuyến mãi 
+--Đợt khuyến mãi
 
 INSERT INTO dot_khuyen_mai (ly_do, muc_giam, ngay_tao, ngay_bat_dau, ngay_ket_thuc, trang_thai)
 VALUES
@@ -441,12 +442,13 @@ VALUES
 
 INSERT INTO giam_gia (ten, ngay_tao, ngay_sua, trang_thai, muc_giam)
 VALUES
+('Không', GETDATE(), GETDATE(), 1, 0),
 ('Giảm giá 10%', GETDATE(), GETDATE(), 1, 10),
 ('Giảm giá 20%', GETDATE(), GETDATE(), 1, 20),
 ('Giảm giá 30%', GETDATE(), GETDATE(), 1, 30),
 ('Giảm giá 50%', GETDATE(), GETDATE(), 1, 50),
 ('Giảm giá 70%', GETDATE(), GETDATE(), 1, 70);
-('Không', GETDATE(), GETDATE(), 1, 0);
+
 
 
 --sản phẩm
@@ -486,42 +488,43 @@ VALUES
 --giỏ hàng
 INSERT INTO gio_hang (ghi_chu, trang_thai, ngay_tao, ngay_sua, khach_hang_id)
 VALUES
-('Giỏ hàng của Nguyễn Văn A', 1, GETDATE(), GETDATE(), 11),
-('Giỏ hàng của Trần Thị B', 1, GETDATE(), GETDATE(), 12),
-('Giỏ hàng của Lê Văn C', 1, GETDATE(), GETDATE(), 13),
-('Giỏ hàng của Phạm Thị D', 1, GETDATE(), GETDATE(), 14),
-('Giỏ hàng của Hoàng Văn E', 1, GETDATE(), GETDATE(), 15);
+('Giỏ hàng của Nguyễn Văn A', 1, GETDATE(), GETDATE(), 1),
+('Giỏ hàng của Trần Thị B', 1, GETDATE(), GETDATE(), 2),
+('Giỏ hàng của Lê Văn C', 1, GETDATE(), GETDATE(), 3),
+('Giỏ hàng của Phạm Thị D', 1, GETDATE(), GETDATE(), 4),
+('Giỏ hàng của Hoàng Văn E', 1, GETDATE(), GETDATE(), 5);
 
 
 --giỏ hàng chi tiết
 -- Đây là ví dụ, bạn cần thay đổi thông tin dựa trên thông tin giỏ hàng và sản phẩm cụ thể
 INSERT INTO gio_hang_chi_tiet (gio_hang_id, chi_tiet_san_pham_id, TrangThai, so_luong)
 VALUES
-(1, 1, 1, 2),
+(6, 1, 1, 2),
 (2, 2, 1, 1),
 (3, 3, 1, 3),
 (4, 4, 1, 1),
 (5, 5, 1, 2);
-
+select * from gio_hang
 
 --hóa đơn
 
-INSERT INTO hoa_don (ngay_tao, ngay_thanh_toan, tong_tien, phan_tram_khuyen_mai, nhan_vien_id, khach_hang_id, dot_khuyen_mai_id)
+    INSERT INTO hoa_don (ngay_tao, ngay_thanh_toan, tong_tien, phan_tram_khuyen_mai, nhan_vien_id, khach_hang_id, dot_khuyen_mai_id)
 VALUES
-(GETDATE(), GETDATE(), 1500000, 10, 1, 11, 1),
-(GETDATE(), GETDATE(), 2000000, 20, 2, 12, 2),
-(GETDATE(), GETDATE(), 2500000, 30, 3, 13, 3),
-(GETDATE(), GETDATE(), 3000000, 15, 4, 14, 1),
-(GETDATE(), GETDATE(), 3500000, 25, 5, 15, 2);
+    (GETDATE(), GETDATE(), 1500000, 10, 1, 1, 1),
+    (GETDATE(), GETDATE(), 2000000, 20, 2, 2, 2),
+    (GETDATE(), GETDATE(), 2500000, 30, 3, 3, 3),
+    (GETDATE(), GETDATE(), 3000000, 15, 4, 4, 1),
+    (GETDATE(), GETDATE(), 3500000, 25, 5, 5, 2);
 
 select * from hoa_don
 --hóa đơn chi tiết
 
     INSERT INTO hoa_don_chi_tiet (hoa_don_id, chi_tiet_san_pham_id, TrangThai, so_luong, gia_hien_hanh, gia_da_giam)
 VALUES
-    (6, 1, 1, 2, 200000, 180000),
-    (6, 2, 1, 1, 300000, 240000),
-    (6, 3, 1, 3, 400000, 280000),
-    (7, 4, 1, 1, 500000, 375000),
-    (7, 5, 1, 2, 600000, 450000);
-
+    (1, 1, 1, 2, 200000, 180000),
+    (1, 2, 1, 1, 300000, 240000),
+    (1, 3, 1, 3, 400000, 280000),
+    (2, 4, 1, 1, 500000, 375000),
+    (3, 5, 1, 2, 600000, 450000);
+select * from hoa_don
+select * from hoa_don_chi_tiet

@@ -28,6 +28,8 @@
 <%--                            <th>STT</th>--%>
                             <th>Mã</th>
                             <th>Tên</th>
+                            <th>Thương hiệu</th>
+                            <th>Thể loại</th>
                             <th>Hình ảnh đại diện</th>
                             <th>Số lượng tổng</th>
                             <th>Action</th>
@@ -40,6 +42,8 @@
 <%--                                <th scope="row">${tt.index+1}</th>--%>
                                 <td>${sp[1]}</td>
                                 <td><strong>${sp[2]}</strong> </td>
+                                <td>${sp[5]}</td>
+                                <td>${sp[6]}</td>
                                 <td><img src="/assets/img/product/${sp[3]}" width="100px" height="100px"></td>
                                 <td><div style="color: ${sp[4]==0?"red":"black"}">${sp[4]==0?"Hết hàng":sp[4]}</div> </td>
 
@@ -55,6 +59,8 @@
 <%--                                <th scope="row">${index+1}</th>--%>
                                 <td>${sp[1]}</td>
                                 <td><strong>${sp[2]}</strong> </td>
+                                <td>${sp[4]}</td>
+                                <td>${sp[5]}</td>
                                 <td><img src="/assets/img/product/${sp[3]}" width="100px" height="100px"></td>
                                 <td style="color: red" >Chưa có sản phẩm</td>
 
