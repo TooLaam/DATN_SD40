@@ -148,6 +148,7 @@ public class SanPhamFEController {
                                @RequestParam("soLuong") int soLuong,
                                @RequestParam("kichCo") Long kichCo
     ){
+
         model.addAttribute("sp",ctspService.detailSanPhamCus(idsp));
         model.addAttribute("listMS",ctspmshaService.findMSTheoSP(idsp));
         model.addAttribute("listHA",ctspmshaService.getAllHinhAnhbyIDSP(idsp));
