@@ -92,4 +92,9 @@ public class CTSPImpl implements CTSPService {
     public Object detailSanPhamCus(Long idsp) {
         return ctspRepository.detailSanPhamCus(idsp);
     }
+
+    @Override
+    public List<Object[]> findKCTheoSPDangDung(Long idsp, Long idms) {
+        return ctspRepository.findKCTheoSPDangDung(idsp,idms);
+    }
 }

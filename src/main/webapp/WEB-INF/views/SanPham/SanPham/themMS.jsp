@@ -118,6 +118,15 @@
                                 </c:if>
                                 <label  class="form-label">Giá hiện hành</label>
                                 <input type="number" class="form-control" required value="${listHA.giaHienHanh}" name="giaHienHanh">
+
+                                <div>
+                                    <label  class="form-label">Trạng thái</label><br>
+                                    <input type="radio" name="trangThai" value="0" ${ listHA.trangThai == "0" ? "checked" : "" }>
+                                    Còn sử dụng <br>
+                                    <input type="radio" name="trangThai" value="1"  ${listHA.trangThai == "1" ? "checked" : "" }>
+                                    Ngừng sử dụng
+                                </div>
+
                                 <img src="/assets/img/product/${listHA.hinhAnh}" style="padding-top: 60px" width="100px" height="150px">
                                 <input required type="file" name="image" accept="image/*" class="form-control"
                                        value="${listHA.hinhAnh}">

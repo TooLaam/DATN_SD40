@@ -88,15 +88,19 @@
                     <div class="tab-content pt-2" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel"
                              aria-labelledby="home-tab">
-                            <form action="/ctsp/updateKC/${sp.id}/${ms.id}/${ctsp.kichCo.id}/${ctsp.id}" method="post">
+                            <form action="/ctsp/updateKC/${sp.id}/${ms.id}" method="post">
+                                <input  type="text" class="form-control" style="display: none" readonly value="${ctsp.kichCo.id}" name="idkc">
 
                                 <div>
                                     Kích cỡ hiện tại :
-                                    <input type="text" class="form-control" readonly name="kichCo" value="${ctsp.kichCo.ten}">
+                                    <input type="text" class="form-control" required readonly name="kichCo" value="${ctsp.kichCo.ten}">
                                 </div>
+                                <c:if test="${err != null}" >
+                                    <p style="color: red">${err}</p>
+                                </c:if>
                                 <div>
                                     Số lượng :
-                                    <input type="number" class="form-control" name="soLuong" value="${ctsp.soLuong}">
+                                    <input type="number" class="form-control" required title="Vui lòng nhập số lượng !" name="soLuong" value="${ctsp.soLuong}">
 
                                 </div>
 
@@ -126,11 +130,12 @@
                                 </div>
                                 <div>
                                     Số lượng :
-                                    <input type="number" name="soLuong"  class="form-control"></div>
+                                    <input type="number" name="soLuong"  required class="form-control"></div>
 
 
 
                                         Trạng thái :<br>
+                                <div>
                                         <input type="radio" name="trangThai" checked value="0"> Còn bán<br>
                                         <input type="radio" name="trangThai" value="1"> Ngừng bán
                                     </div>

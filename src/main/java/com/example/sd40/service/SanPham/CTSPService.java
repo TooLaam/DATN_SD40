@@ -25,6 +25,7 @@ public interface CTSPService {
     List<Object> getAllSPCusByGia(BigDecimal giaMin, BigDecimal giaMax);
     List<Object> getAllSPCusByGiamGia();
     Object detailSanPhamCus(Long idsp);
+    List<Object[]> findKCTheoSPDangDung(Long idsp,Long idms);
 
 
 

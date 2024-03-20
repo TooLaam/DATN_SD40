@@ -125,7 +125,7 @@
 
                                 <div>
                                     Trạng thái :<br>
-                                    <input type="radio" name="status" checked value="0" ${ kc.trangThai == "0" ? "checked" : "" }>
+                                    <input type="radio" name="status" value="0" ${ kc.trangThai == "0" ? "checked" : "" }>
                                     Còn sử dụng <br>
                                     <input type="radio" name="status" value="1" ${kc.trangThai == "1" ? "checked" : "" }>
                                     Ngừng sử dụng

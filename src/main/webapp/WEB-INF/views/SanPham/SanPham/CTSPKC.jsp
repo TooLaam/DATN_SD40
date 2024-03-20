@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <section class="section dashboard">
     <div class="row">
@@ -58,12 +59,13 @@
                                     </c:forEach><br><br>
 
                                     <div >
-                                        <strong>Giá hiện hành:     </strong>  ${listHA.giaHienHanh} <br><br>
+                                        <strong>Giá hiện hành:     </strong><fmt:formatNumber value="${listHA.giaHienHanh}" pattern="###,###"/>đ   <br><br>
                                     </div>
+                                    <c:if test="${sp.giamGIa != null && sp.giamGIa.mucGiam >0}" >
                                     <strong style="display: inline;">Giá đã giảm:  </strong>
-                                    <span><c:if test="${sp.giamGIa != null && sp.giamGIa.mucGiam >0}" >
-                                        <p style="display: inline">${giaDaGiam[2]}</p>
-                                    </c:if></span>
+                                    <span>
+                                        <p style="display: inline"><fmt:formatNumber value="${giaDaGiam[2]}" pattern="###,###"/>đ  </p>
+                                    </span></c:if>
 
 
                                     <div>
@@ -73,7 +75,7 @@
                                         <a onclick="getData('${ms[2]}','${ms[3]==0?"Còn bán":"Ngừng bán"}','${ms[1]}')" class="btn btn-success" style="margin-left: 30px" >${ms[1]}</a>
                                     </c:forEach><br><br>
                                     <div >
-                                        <strong>Số lượng:     </strong>    <span id="hiensl">600 </span> <br><br>
+                                        <strong>Số lượng:     </strong>    <span id="hiensl"></span> <br><br>
                                     </div>
 
                                     <div>

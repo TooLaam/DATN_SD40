@@ -53,7 +53,7 @@ public class SanPhamFEController {
     @GetMapping("/sanphamcus/theloaicus/{idtl}")
     public String sanPhamCusByTL(Model model,
                                  @PathVariable("idtl")Long idTL
-                                 ){
+    ){
         if (ctspService.getAllSPCusByTL(idTL).isEmpty()){
             model.addAttribute("listTH",thuongHieuService.getAll());
             model.addAttribute("listTL",loaiGiayService.findAll());
@@ -93,8 +93,8 @@ public class SanPhamFEController {
 
     @GetMapping("/sanphamcus/mucGia/{giaMin}/{giaMax}")
     public String sanPhamCusByGia(Model model,
-                                 @PathVariable("giaMin") BigDecimal giaMin,
-                                 @PathVariable("giaMax")BigDecimal giaMax
+                                  @PathVariable("giaMin") BigDecimal giaMin,
+                                  @PathVariable("giaMax")BigDecimal giaMax
     ){
         if (ctspService.getAllSPCusByGia(giaMin,giaMax).isEmpty()){
             model.addAttribute("listTH",thuongHieuService.getAll());
@@ -129,7 +129,7 @@ public class SanPhamFEController {
     public String hienthiKCCus(Model model,
                                @PathVariable("idsp") Long idsp,
                                @PathVariable("idms") Long idms
-                               ){
+    ){
         model.addAttribute("sp",ctspService.detailSanPhamCus(idsp));
         model.addAttribute("listMS",ctspmshaService.findMSTheoSP(idsp));
         model.addAttribute("listHA",ctspmshaService.getAllHinhAnhbyIDSP(idsp));
@@ -149,18 +149,8 @@ public class SanPhamFEController {
                                @RequestParam("kichCo") Long kichCo
     ){
 
-        model.addAttribute("sp",ctspService.detailSanPhamCus(idsp));
-        model.addAttribute("listMS",ctspmshaService.findMSTheoSP(idsp));
-        model.addAttribute("listHA",ctspmshaService.getAllHinhAnhbyIDSP(idsp));
-        model.addAttribute("SP1", sanPhamService.detail(idsp));
-        model.addAttribute("listKC",ctspService.findKCTheoSP(idsp,idms));
-        model.addAttribute("ms",mauSacService.detail(idms));
-        model.addAttribute("idsp",idsp);
-        model.addAttribute("idms",idms);
-        model.addAttribute("soluong",soLuong);
-        model.addAttribute("kichco",kichCo);
 
-        model.addAttribute("view", "/detail/aa.jsp");
+        model.addAttribute("view", "/cart/index.jsp");
         return "/customerFE/index";
     }
 
