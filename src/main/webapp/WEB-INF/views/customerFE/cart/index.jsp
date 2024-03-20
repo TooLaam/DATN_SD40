@@ -12,9 +12,42 @@
     <div class="row">
         <div class="col-12">
             <div class="table-responsive">
+                <table class="table table-borderless datatable">
+                    <thead>
+                    <tr>
+                        <th>Hinh ảnh</th>
+                        <th>Tên</th>
+                        <th>Kích cỡ</th>
+                        <th>Màu sắc</th>
+                        <th>số lượng</th>
+                        <th>giá</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${listCartDetail}" var="cart" varStatus="tt">
+                        <tr>
+                            <td>
+                                <img src="/assets/img/product/${cart.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.hinhAnh}" style="padding-top: 60px" width="320px" height="450px">
+                                    </td>
+                            <td>${cart.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.ten}</td>
+                            <td>${cart.chiTietSanPham.kichCo.ten}</td>
+                            <td>${cart.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.mau_sac.ten}</td>
+                            <td>
+                                    ${cart.quantity}</td>
+                            <td>${cart.price}</td>
+                            <td>
+                                <a href="/cart/delete/${cart.id}" class="btn btn-success" style="text-decoration: none;color: white; margin-top: 5px" >Xoá</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
 
+                </table>
             </div>
         </div>
+
+
         <div class="col-12">
             <div class="table-responsive">
                 <div class="checkout">
@@ -26,7 +59,7 @@
                                 <span class="after" style="font-weight: bold;color: red">$0</span>
                             </c:when>
                             <c:otherwise>
-                                <span class="after" style="font-weight: bold;color: red">$${cart.totalMoney}</span>
+                                <span class="after" style="font-weight: bold;color: red">$${totalMoney}</span>
                             </c:otherwise>
                         </c:choose>
                     </div>
@@ -48,8 +81,7 @@
                                 <span class="after" style="font-weight: bold;color: red">$0</span>
                             </c:when>
                             <c:otherwise>
-                                <span>Total (${cart.quantity} items)</span>
-                                <span class="after" style="font-weight: bold;color: red">$${cart.totalMoney}</span>
+                                <span class="after" style="font-weight: bold;color: red">$${totalMoney}</span>
                             </c:otherwise>
                         </c:choose>
                     </div>
@@ -62,3 +94,4 @@
     </div>
     <br/>
 </div>
+

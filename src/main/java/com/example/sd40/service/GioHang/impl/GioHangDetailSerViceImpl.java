@@ -3,6 +3,7 @@ package com.example.sd40.service.GioHang.impl;
 import com.example.sd40.entity.Gio_hang.GioHang;
 import com.example.sd40.entity.Gio_hang.GioHangDetail;
 import com.example.sd40.entity.San_pham.ChiTietSanPham;
+import com.example.sd40.entity.San_pham.ChiTietSanPhamMauSacHinhAnh;
 import com.example.sd40.entity.Tai_khoan.TaiKhoan;
 import com.example.sd40.repository.GioHang.GioHangDetailRepository;
 import com.example.sd40.repository.GioHang.GioHangRepository;
@@ -49,7 +50,7 @@ public class GioHangDetailSerViceImpl implements GioHangDetailSerVice {
         gioHangDetail.setGioHang(gioHang);
         gioHangDetail.setChiTietSanPham(chiTietSanPham);
         gioHangDetail.setQuantity(request.getQuantity());
-        gioHangDetail.setPrice(request.getQuantity());
+        gioHangDetail.setPrice(request.getPrice());
         return gioHangDetailRepository.save(gioHangDetail);
     }
 
@@ -57,7 +58,7 @@ public class GioHangDetailSerViceImpl implements GioHangDetailSerVice {
     public GioHangDetail updateSanPham(Long id, GioHangDetailRequest request) {
         GioHangDetail gioHangDetail = gioHangDetailRepository.findById(id).get();
         gioHangDetail.setQuantity(request.getQuantity());
-        gioHangDetail.setPrice(request.getQuantity());
+        gioHangDetail.setPrice(request.getPrice());
         return gioHangDetailRepository.save(gioHangDetail);
     }
 

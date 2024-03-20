@@ -51,7 +51,5 @@ public class HoaDonKhachHangResquest {
     private BigDecimal price;
     
     private BigDecimal priceThanhToan;
-    
-    private List<ProductDetaiRequest> productDetaiRequestList;
-    
+
 }

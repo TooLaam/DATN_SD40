@@ -34,16 +34,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function getData(sl, id) {
-    console.log("Số lượng: " + sl + ", ID: " + id);
-    var input = document.getElementById("inputid");
-    var input1 = document.getElementById("inputid1");
-    var hiensl = document.getElementById("hiensl");
-
-    console.log("Input element: ", input);
-    console.log("Input1 element: ", input1);
-    console.log("Hiensl element: ", hiensl);
-    hiensl.innerHTML = sl;
-    input.value = id;
-    input1.value = id;
-}

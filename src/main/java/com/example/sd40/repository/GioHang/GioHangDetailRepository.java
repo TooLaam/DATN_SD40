@@ -12,4 +12,6 @@ import java.util.List;
 public interface GioHangDetailRepository extends JpaRepository<GioHangDetail, Long> {
 
     List<GioHangDetail> findAllByGioHang(GioHang gioHang);
+
+    void  deleteAllByGioHang(GioHang gioHang);
 }
