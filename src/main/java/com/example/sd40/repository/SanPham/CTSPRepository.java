@@ -84,4 +84,12 @@ public interface CTSPRepository extends JpaRepository<ChiTietSanPham,Long> {
             " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,ctsp.soLuong,sp.theLoai.id")
     Object detailSanPhamCus(Long idsp);
 
+    @Query("select sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,ctsp.soLuong," +
+            " max((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100),Min((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100)," +
+            " Max(ctsphams.giaHienHanh),Min(ctsphams.giaHienHanh)" +
+            " from ChiTietSanPham ctsp join ChiTietSanPhamMauSacHinhAnh ctsphams on ctsp.chiTietSanPhamMauSacHinhAnh.Id = ctsphams.Id" +
+            " join SanPham sp on ctsphams.sanPham.id = sp.id where ctsp.soLuong >0" +
+            " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,ctsp.soLuong")
+    List<Object> getAllGioHang();
+
 }

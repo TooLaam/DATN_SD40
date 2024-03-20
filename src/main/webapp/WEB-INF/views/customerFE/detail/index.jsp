@@ -27,7 +27,8 @@
                     <c:choose>
                         <c:when test="${sp[7]==sp[6]}">
                             <h5>${sp[1]} <span class="discounted-price" style="color: red">(-${sp[4]}%)</span></h5>
-                            <p><span class="text-content">${sp[3]} Đã bán | ${sp[5]} Sản phẩm có sẵn</span></p>
+                            <p><span class="text-content">${sp[3]} Đã bán</span>
+
                             <p><span class="text-content">Thương hiệu: ${SP1.thuongHieu.ten}  |  Thể loại: ${SP1.theLoai.ten}</span></p>
 
                             <span style="text-decoration: line-through" class="priceGiam">$ <fmt:formatNumber value="${sp[8]}" pattern="###,###"/>đ </span>
@@ -38,8 +39,6 @@
                         <c:otherwise>
                             <h5>${sp[1]} <span class="discounted-price" style="color: red">(-${sp[4]}%)</span></h5>
                             <p><span class="text-content">${sp[3]} Đã bán | </span>
-                            <span class="text-content" id="hiensl">${sp[5]}  </span>
-                                <span class="text-content">Sản phẩm có sẵn</span>
                             </p>
                             <p><span class="text-content">Thương hiệu: ${SP1.thuongHieu.ten}  |  Thể loại: ${SP1.theLoai.ten}</span></p>
 
@@ -54,14 +53,15 @@
                     <c:choose>
                         <c:when test="${sp[7]==sp[6]}">
                             <h5>${sp[1]}</h5>
-                            <p><span class="text-content">${sp[3]} Đã bán | ${sp[5]} Sản phẩm có sẵn</span></p>
+                            <p><span class="text-content">${sp[3]} Đã bán</span>
                             <p><span class="text-content">Thương hiệu: ${SP1.thuongHieu.ten}  |  Thể loại: ${SP1.theLoai.ten}</span></p>
 
                             <span class="price">$ <fmt:formatNumber value="${sp[8]}" pattern="###,###"/>đ </span>
                         </c:when>
                         <c:otherwise>
                             <h5>${sp[1]}</h5>
-                            <p><span class="text-content">${sp[3]} Đã bán | ${sp[5]} Sản phẩm có sẵn</span></p>
+                            <p><span class="text-content">${sp[3]} Đã bán</span>
+
                             <p><span class="text-content">Thương hiệu: ${SP1.thuongHieu.ten}  |  Thể loại: ${SP1.theLoai.ten}</span></p>
 
 
@@ -81,10 +81,10 @@
                     <span class="text">${ms[1]}</span>
                 </a>
             </c:forEach>
-<%--            <span id="hienid">aloooo</span>--%>
+            <%--            <span id="hienid">aloooo</span>--%>
             <p><span style="font-weight: bold;">Kích cỡ: </span></p>
 
-<%--            <input id="inputid" style="display: none" name="kichCo">--%>
+            <%--            <input id="inputid" style="display: none" name="kichCo">--%>
             <c:forEach items="${listKC}" var="ms">
                 <a onclick="getData('${ms[2]}','${ms[0]}')" class="btn btn-success" style="margin-left: 30px" >${ms[1]}</a>
             </c:forEach><br><br>
@@ -100,6 +100,10 @@
                         <button  id="addButton" class="buttonTang">+</button>
                     </div>
                 </div>
+            </div>
+            <div style="padding-bottom: 20px">
+                <span class="text-content" id="hiensl">${sp[5]}  </span>
+                <span class="text-content">Sản phẩm có sẵn</span>
             </div>
             <div class="d-grid gap-2">
                 <div class="row">
@@ -148,42 +152,7 @@
 
 <script>
     <%@include file="logic.js" %>
-    document.addEventListener('DOMContentLoaded', function() {
-        var inputField = document.getElementById('inputField');
-        var inputField2 = document.getElementById('inputField2');
-        var inputField1 = document.getElementById('inputField1');
-        var addButton = document.getElementById('addButton');
-        var subtractButton = document.getElementById('subtractButton');
-        addButton.addEventListener('click', function() {
-            inputField.value = parseInt(inputField.value) + 1;
-            inputField2.value = parseInt(inputField2.value) + 1;
-            inputField1.value = parseInt(inputField1.value) + 1;
-        });
 
-        subtractButton.addEventListener('click', function() {
-            var currentValue = parseInt(inputField.value);
-            var currentValue2 = parseInt(inputField2.value);
-            var currentValue1 = parseInt(inputField1.value);
-            if (currentValue > 1) {
-                inputField.value = currentValue - 1;
-            }
-            if (currentValue2 > 1) {
-                inputField2.value = currentValue2 - 1;
-            }
-            if (currentValue1 > 1) {
-                inputField1.value = currentValue1 - 1;
-            }
-        });
-    });
-
-    function getData(sl,id) {
-        console.log(sl, id);
-        document.getElementById("hiensl").textContent  = sl;
-        var input = document.getElementById("inputid");
-        var input1 = document.getElementById("inputid1");
-        input.value = id;
-        input1.value = id;
-    }
 
 
 

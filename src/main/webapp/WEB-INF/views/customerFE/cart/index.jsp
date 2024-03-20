@@ -10,50 +10,12 @@
 <div class="container">
     <br/>
     <div class="row">
-        <div class="col-8">
+        <div class="col-12">
             <div class="table-responsive">
-                <table class="table align-middle">
-                    <thead>
-                    <tr>
-                        <%--                  <th scope="col">--%>
-                        <%--                    <input class="form-check-input" type="checkbox" onchange="checkAll(this)" />--%>
-                        <%--                  </th>--%>
-                        <th scope="col" class="text-sp"colspan="2">Product</th>
-                        <th scope="col" class="text-sp">Color</th>
-                        <th scope="col" class="text-sp">Quantity</th>
-                        <th scope="col" class="text-sp">Total</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${listCartDetail}" var="gh">
-                        <tr>
-                            <td>
-                                <img src="/assets/img/product/${gh.image}" alt="" height="65px"/>
-                            </td>
-                            <td>
-                                <p>${gh.name}</p>
-                                <a href="/cart/delete/${gh.productDetailId}">
-                                    <span class="fa fa-trash"></span>
-                                </a>
-                            </td>
-                            <td>
-                                <p>${gh.colorName}</p>
-                            </td>
-                            <td>
-                                <div class="input-group mb-3">
-                                    <a href="/cart/reduce/${gh.productDetailId}" class="btn btn-outline">-</a>
-                                    <input disabled type="text" class="form-control" value="${gh.quantity}"/>
-                                    <a href="/cart/increase/${gh.productDetailId}" class="btn btn-outline">+</a>
-                                </div>
-                            </td>
-                            <td style="font-weight: bold;color: red">$${gh.productPrice}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-12">
             <div class="table-responsive">
                 <div class="checkout">
                     <p>Congratulations! You've got free shipping!</p>
