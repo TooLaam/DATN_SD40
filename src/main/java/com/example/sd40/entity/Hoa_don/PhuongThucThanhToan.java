@@ -34,7 +34,4 @@ public class PhuongThucThanhToan {
     @Column(name = "trang_thai")
     private Integer trangThai;
 
-    @ManyToOne
-    @JoinColumn(name = "voucher_id",referencedColumnName = "id")
-    private HoaDon hoaDon;
 }

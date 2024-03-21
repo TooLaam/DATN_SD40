@@ -10,6 +10,4 @@ import java.util.List;
  * @author quynh
  */
 public interface PhuongThucThanhToanRepository extends JpaRepository<PhuongThucThanhToan, Long> {
-
-    List<PhuongThucThanhToan> findAllByHoaDon(HoaDon hoaDon);
 }
