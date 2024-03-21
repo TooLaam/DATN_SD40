@@ -4,6 +4,7 @@ import com.example.sd40.entity.Gio_hang.GioHang;
 import com.example.sd40.entity.Gio_hang.GioHangDetail;
 import com.example.sd40.entity.Hoa_don.HoaDon;
 import com.example.sd40.entity.Hoa_don.HoaDonChiTiet;
+import com.example.sd40.entity.Hoa_don.LichSu;
 import com.example.sd40.entity.Hoa_don.PhuongThucThanhToan;
 import com.example.sd40.entity.San_pham.ChiTietSanPham;
 import com.example.sd40.entity.Tai_khoan.TaiKhoan;
@@ -111,6 +112,12 @@ public class HoaDonServiceImpl implements HoaDonService {
             hoaDonChiTiet.setHoaDon(hoaDon);
             hoaDonChiTietRepository.save(hoaDonChiTiet);
         });
+        LichSu lichSu = new LichSu();
+        lichSu.setHoaDon(hoaDon);
+        lichSu.setNgayTao(System.currentTimeMillis());
+        lichSu.setNote("Tạo hóa đơn");
+        lichSu.setStatus(0);
+        lichSuRepository.save(lichSu);
         gioHangDetailRepository.deleteAllByGioHang(gioHang);
          return "Thành công";
     }
