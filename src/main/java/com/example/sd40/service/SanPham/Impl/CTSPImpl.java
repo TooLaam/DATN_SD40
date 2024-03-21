@@ -90,7 +90,7 @@ public class CTSPImpl implements CTSPService {
 
     @Override
     public Object detailSanPhamCus(Long idsp) {
-        return ctspRepository.detailSanPhamCus(idsp);
+        return ctspRepository.detailSanPhamCus(idsp).get(0);
     }
 
     @Override

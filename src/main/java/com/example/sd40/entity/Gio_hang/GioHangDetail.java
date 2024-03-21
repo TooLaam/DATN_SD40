@@ -28,7 +28,7 @@ public class GioHangDetail {
 
     private int quantity;
 
-    private int price;
+    private BigDecimal price;
 
     @ManyToOne
     @JoinColumn(name = "id_gio_hang",referencedColumnName = "id")

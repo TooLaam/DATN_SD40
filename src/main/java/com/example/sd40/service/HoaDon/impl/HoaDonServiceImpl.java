@@ -87,8 +87,8 @@ public class HoaDonServiceImpl implements HoaDonService {
         }
         PhuongThucThanhToan phuongThucThanhToan = new PhuongThucThanhToan();
         phuongThucThanhToan.setMaPhuongThuc(resquest.getMaPhuongThuc());
-        phuongThucThanhToan.setTrangThai(resquest.getTrangThai());
-        phuongThucThanhToan.setPrice(resquest.getPriceThanhToan());
+        phuongThucThanhToan.setTrangThai(0);
+        phuongThucThanhToan.setPrice(resquest.getTongTien());
         hoaDon.setPhuongThucThanhToan(phuongThucThanhToanRepository.save(phuongThucThanhToan));
         hoaDonRepository.save(hoaDon);
         TaiKhoan taiKhoan = khachHangRepository.findById(Long.parseLong(resquest.getIdUser())).get();
@@ -104,7 +104,7 @@ public class HoaDonServiceImpl implements HoaDonService {
             HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
             hoaDonChiTiet.setChiTietSanPham(chiTietSanPham);
             hoaDonChiTiet.setQuantity(item.getQuantity());
-            hoaDonChiTiet.setPrice(new BigDecimal(item.getPrice()));
+            hoaDonChiTiet.setPrice(item.getPrice());
             hoaDonChiTiet.setHoaDon(hoaDon);
             hoaDonChiTietRepository.save(hoaDonChiTiet);
         });

@@ -155,11 +155,11 @@ public class SanPhamFEController {
                                @RequestParam("soLuong") int soLuong,
                                @RequestParam("kichCo") Long kichCo
     ){
-        GioHangDetailRequest gioHangDetailRequest = new GioHangDetailRequest(idsp,  Integer.parseInt(price), soLuong);
+        GioHangDetailRequest gioHangDetailRequest = new GioHangDetailRequest(idsp,  new BigDecimal(price), soLuong);
         gioHangDetailSerVice.addSanPham(Long.parseLong("1"), gioHangDetailRequest);
-        Double total = Double.parseDouble("0");
+        BigDecimal total = BigDecimal.ZERO;
         for (GioHangDetail product : gioHangDetailSerVice.gioHangDetails(Long.parseLong("1"))) {
-            total = total + product.getQuantity() * product.getPrice();
+            total = total.add(product.getPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
         }
         model.addAttribute("listCartDetail", gioHangDetailSerVice.gioHangDetails(Long.parseLong("1")));
         model.addAttribute("totalMoney",total);

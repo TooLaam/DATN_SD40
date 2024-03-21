@@ -17,7 +17,7 @@ public class GioHangDetailRequest {
 
     private Long idProduct;
 
-    private int price;
+    private BigDecimal price;
 
     private int quantity;
 

@@ -55,10 +55,9 @@ public class GioHangDetailSerViceImpl implements GioHangDetailSerVice {
     }
 
     @Override
-    public GioHangDetail updateSanPham(Long id, GioHangDetailRequest request) {
+    public GioHangDetail updateSanPham(Long id, int quantity) {
         GioHangDetail gioHangDetail = gioHangDetailRepository.findById(id).get();
-        gioHangDetail.setQuantity(request.getQuantity());
-        gioHangDetail.setPrice(request.getPrice());
+        gioHangDetail.setQuantity(quantity);
         return gioHangDetailRepository.save(gioHangDetail);
     }
 

@@ -5,9 +5,9 @@ import com.example.sd40.service.GioHang.GioHangDetailSerVice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
 
 @Controller
 @RequestMapping("/cart")
@@ -20,9 +20,10 @@ public class CartController {
 
     @GetMapping
     private String getAll(Model model){
-        Double total = Double.parseDouble("0");
+        BigDecimal total = BigDecimal.ZERO;
         for (GioHangDetail product : gioHangDetailSerVice.gioHangDetails(Long.parseLong("1"))) {
-            total = total + product.getQuantity() * product.getPrice();
+            total = total.add(product.getPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
+
         }
         model.addAttribute("listCartDetail", gioHangDetailSerVice.gioHangDetails(Long.parseLong("1")));
         model.addAttribute("totalMoney",total);
@@ -33,6 +34,12 @@ public class CartController {
     @GetMapping("/delete/{id}")
     private String delete(@PathVariable Long id, Model model){
        gioHangDetailSerVice.delete(id);
+        return "redirect:/cart";
+    }
+
+    @PostMapping("/update")
+    private String update(@RequestParam("id") Long id, @RequestParam("quantity") int quantity, Model model){
+        gioHangDetailSerVice.updateSanPham(id,quantity );
         return "redirect:/cart";
     }
 

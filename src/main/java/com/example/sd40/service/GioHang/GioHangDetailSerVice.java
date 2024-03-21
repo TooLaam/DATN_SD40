@@ -15,7 +15,7 @@ public interface GioHangDetailSerVice {
 
     GioHangDetail addSanPham(Long idUser, GioHangDetailRequest request);
 
-    GioHangDetail updateSanPham(Long id, GioHangDetailRequest request);
+    GioHangDetail updateSanPham(Long id, int quantity);
 
     boolean delete(Long id);
 }
