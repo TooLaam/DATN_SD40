@@ -26,6 +26,8 @@ public class LichSu {
 
     private String note;
 
+    private int status;
+
     @Column(name = "ngay_tao")
     private long ngayTao;
 
