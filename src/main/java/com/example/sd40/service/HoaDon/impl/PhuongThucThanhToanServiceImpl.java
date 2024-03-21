@@ -15,11 +15,4 @@ import java.util.List;
 @Service
 public class PhuongThucThanhToanServiceImpl implements PhuongThucThanhToanService {
 
-    @Autowired
-    private PhuongThucThanhToanRepository phuongThucThanhToanRepository;
-
-    @Override
-    public List<PhuongThucThanhToan> findAllByHoaDon(HoaDon hoaDon) {
-        return null;
-    }
 }

@@ -123,6 +123,40 @@ public class HoaDonServiceImpl implements HoaDonService {
     }
 
     @Override
+    public String changeStatus(long id, String note) {
+        HoaDon hoaDon = hoaDonRepository.findById(id).get();
+        hoaDon.setTrangThai(hoaDon.getTrangThai() + 1);
+        hoaDonRepository.save(hoaDon);
+        LichSu lichSu = new LichSu();
+        lichSu.setHoaDon(hoaDon);
+        lichSu.setNgayTao(System.currentTimeMillis());
+        lichSu.setNote(note);
+        lichSu.setStatus(hoaDon.getTrangThai());
+        lichSuRepository.save(lichSu);
+        return null;
+    }
+
+    @Override
+    public String huyHoaDon(long id, String note) {
+        HoaDon hoaDon = hoaDonRepository.findById(id).get();
+        hoaDon.setTrangThai(5);
+        hoaDonRepository.save(hoaDon);
+        LichSu lichSu = new LichSu();
+        lichSu.setHoaDon(hoaDon);
+        lichSu.setNgayTao(System.currentTimeMillis());
+        lichSu.setNote(note);
+        lichSu.setStatus(hoaDon.getTrangThai());
+        lichSuRepository.save(lichSu);
+        hoaDonChiTietRepository.findAllByHoaDon(hoaDon).stream().forEach(item ->{
+            ChiTietSanPham chiTietSanPham = item.getChiTietSanPham();
+            chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong() + item.getQuantity());
+            ctspRepository.save(chiTietSanPham);
+        });
+        return null;
+    }
+
+
+    @Override
     public HoaDon findByid(long id) {
         return hoaDonRepository.findById(id).get();
     }

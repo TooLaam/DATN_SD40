@@ -1,10 +1,13 @@
 package com.example.sd40.controller.HoaDonController;
 
+import com.example.sd40.service.HoaDon.HoaDonDetalService;
 import com.example.sd40.service.HoaDon.HoaDonService;
+import com.example.sd40.service.HoaDon.LichSuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -16,6 +19,14 @@ public class HoaDonAdminController {
 
     @Autowired
     private HoaDonService hoaDonService;
+
+    @Autowired
+    private LichSuService lichSuService;
+
+    @Autowired
+    private HoaDonDetalService hoaDonDetalService;
+
+
 
     @GetMapping("/index")
     private String findAllByStatus( Model model){
@@ -30,8 +41,10 @@ public class HoaDonAdminController {
     }
 
     @GetMapping("/detail/{id}")
-    private String detail( Model model){
-
+    private String detail(@PathVariable Long id, Model model){
+        model.addAttribute("hoaDon", hoaDonService.findByid(id));
+        model.addAttribute("sanPhams", hoaDonDetalService.findAllByHoaDon(id));
+        model.addAttribute("lichSus", lichSuService.findAllByHoaDon(id));
         model.addAttribute("view","/HoaDon/detail.jsp");
         return "index";
     }

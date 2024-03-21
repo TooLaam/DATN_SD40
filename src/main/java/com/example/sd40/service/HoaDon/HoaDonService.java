@@ -12,6 +12,7 @@ public interface HoaDonService {
 
     List<HoaDon> findAllByStatus(int status);
     String createHoaDonKhachHang(HoaDonKhachHangResquest resquest);
-
+    String changeStatus(long id, String note);
+    String huyHoaDon(long id, String note);
     HoaDon findByid(long id);
 }
