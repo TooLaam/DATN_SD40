@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author quynh
  */
-public interface LichSuRepositoryRepository extends JpaRepository<LichSu, Long> {
+public interface LichSuRepository extends JpaRepository<LichSu, Long> {
 
     List<LichSu> findAllByHoaDon(HoaDon hoaDon);
 }

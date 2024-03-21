@@ -9,22 +9,16 @@ import com.example.sd40.entity.San_pham.ChiTietSanPham;
 import com.example.sd40.entity.Tai_khoan.TaiKhoan;
 import com.example.sd40.repository.GioHang.GioHangDetailRepository;
 import com.example.sd40.repository.GioHang.GioHangRepository;
-import com.example.sd40.repository.HoaDon.HoaDonChiTietRepository;
-import com.example.sd40.repository.HoaDon.HoaDonRepository;
-import com.example.sd40.repository.HoaDon.PhuongThucThanhToanRepository;
-import com.example.sd40.repository.HoaDon.VoucherRepository;
-import com.example.sd40.repository.SanPham.CTSPMSHARepository;
+import com.example.sd40.repository.HoaDon.*;
 import com.example.sd40.repository.SanPham.CTSPRepository;
 import com.example.sd40.repository.TaiKhoan.KhachHangRepository;
 import com.example.sd40.repuest.HoaDonKhachHangResquest;
-import com.example.sd40.service.GioHang.GioHangDetailSerVice;
 import com.example.sd40.service.HoaDon.HoaDonService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -62,6 +56,9 @@ public class HoaDonServiceImpl implements HoaDonService {
 
     @Autowired
     private GioHangRepository gioHangRepository;
+
+    @Autowired
+    private LichSuRepository lichSuRepository;
 
 
     @Override
