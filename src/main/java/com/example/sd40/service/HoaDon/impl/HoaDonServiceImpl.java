@@ -62,7 +62,12 @@ public class HoaDonServiceImpl implements HoaDonService {
 
     @Autowired
     private GioHangRepository gioHangRepository;
-    
+
+
+    @Override
+    public List<HoaDon> findAllByStatus(int status) {
+        return hoaDonRepository.findAllByTrangThai(status);
+    }
 
     @Override
     public String createHoaDonKhachHang(HoaDonKhachHangResquest resquest) {
@@ -85,6 +90,7 @@ public class HoaDonServiceImpl implements HoaDonService {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        hoaDon.setNgayTao(new Date());
         PhuongThucThanhToan phuongThucThanhToan = new PhuongThucThanhToan();
         phuongThucThanhToan.setMaPhuongThuc(resquest.getMaPhuongThuc());
         phuongThucThanhToan.setTrangThai(0);
@@ -110,5 +116,10 @@ public class HoaDonServiceImpl implements HoaDonService {
         });
         gioHangDetailRepository.deleteAllByGioHang(gioHang);
          return "Thành công";
+    }
+
+    @Override
+    public HoaDon findByid(long id) {
+        return hoaDonRepository.findById(id).get();
     }
 }
