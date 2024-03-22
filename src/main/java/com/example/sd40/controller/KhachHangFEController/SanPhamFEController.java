@@ -1,6 +1,9 @@
 package com.example.sd40.controller.KhachHangFEController;
 
+import com.example.sd40.entity.Gio_hang.GioHangDetail;
 import com.example.sd40.entity.San_pham.ChiTietSanPhamMauSacHinhAnh;
+import com.example.sd40.repuest.GioHangDetailRequest;
+import com.example.sd40.service.GioHang.GioHangDetailSerVice;
 import com.example.sd40.service.SanPham.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +30,9 @@ public class SanPhamFEController {
     KichCoService kichCoService;
     @Autowired
     CTSPMSHAService ctspmshaService;
+
+    @Autowired
+    private GioHangDetailSerVice gioHangDetailSerVice;
 
     @GetMapping("/sanphamcus")
     public String sanPhamCus(Model model){
@@ -145,11 +151,18 @@ public class SanPhamFEController {
     public String hienthiAddHD(Model model,
                                @PathVariable("idsp") Long idsp,
                                @RequestParam("mauSac") Long idms,
+                               @RequestParam("prices") String price,
                                @RequestParam("soLuong") int soLuong,
                                @RequestParam("kichCo") Long kichCo
     ){
-
-
+        GioHangDetailRequest gioHangDetailRequest = new GioHangDetailRequest(idsp,  new BigDecimal(price), soLuong);
+        gioHangDetailSerVice.addSanPham(Long.parseLong("1"), gioHangDetailRequest);
+        BigDecimal total = BigDecimal.ZERO;
+        for (GioHangDetail product : gioHangDetailSerVice.gioHangDetails(Long.parseLong("1"))) {
+            total = total.add(product.getPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
+        }
+        model.addAttribute("listCartDetail", gioHangDetailSerVice.gioHangDetails(Long.parseLong("1")));
+        model.addAttribute("totalMoney",total);
         model.addAttribute("view", "/cart/index.jsp");
         return "/customerFE/index";
     }

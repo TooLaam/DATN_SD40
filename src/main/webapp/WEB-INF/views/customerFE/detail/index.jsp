@@ -43,7 +43,7 @@
                             <p><span class="text-content">Thương hiệu: ${SP1.thuongHieu.ten}  |  Thể loại: ${SP1.theLoai.ten}</span></p>
 
                             <span style="text-decoration: line-through" class="priceGiam">$ <fmt:formatNumber value="${sp[9]}" pattern="###,###"/>đ - <fmt:formatNumber value="${sp[8]}" pattern="###,###"/>đ</span>
-                            <p class="price">$ <fmt:formatNumber value="${sp[7]}" pattern="###,###"/>đ - <fmt:formatNumber value="${sp[6]}" pattern="###,###"/>đ </p>
+                            <p  id="priceHienTai" class="price" >$ <fmt:formatNumber value="${sp[7]}" pattern="###,###"/>đ - <fmt:formatNumber value="${sp[6]}" pattern="###,###"/>đ </p>
 
                         </c:otherwise>
                     </c:choose>
@@ -109,9 +109,10 @@
                 <div class="row">
                     <div class="col-10">
                         <form method="get" action="/hienthiAddHD/${SP1.id}">
-                            <input style="display: none" id="inputid" name="kichCo">
-                            <input style="display: none" value="${ms.id}" name="mauSac">
-                            <input style="display: none" readonly type="number" id="inputField2" class="inputTang" name="soLuong" value="1">
+                            <input style="display: none" id="inputid" name="kichCo" required>
+                            <input style="display: none" value="${ms.id}" name="mauSac" required>
+                            <input style="display: none" type="text" id="inputid2" name="prices" required>
+                            <input style="display: none" readonly type="number" id="inputField2" class="inputTang" name="soLuong" value="1" required>
                             <button class="btn btn-outline"  >THÊM VÀO GIỎ HÀNG</button>
                         </form>
 
@@ -119,9 +120,10 @@
                     </div>
                 </div>
                 <form method="get" action="/hienthiAddHD/${SP1.id}">
-                    <input style="display: none" id="inputid1" name="kichCo">
-                    <input style="display: none" value="${ms.id}" name="mauSac">
-                    <input style="display: none" readonly type="number" id="inputField1" class="inputTang" name="soLuong" value="1">
+                    <input style="display: none" id="inputid1" name="kichCo" required>
+                    <input style="display: none" type="text" id="inputid3" name="prices" required>
+                    <input style="display: none" value="${ms.id}" name="mauSac" required>
+                    <input style="display: none" readonly type="number" id="inputField1" class="inputTang" name="soLuong" value="1" required>
                     <button class="btn btn-outline"  >MUA NGAY</button>
                 </form>
 
@@ -154,7 +156,30 @@
     <%@include file="logic.js" %>
 
 
+    function getData(sl, id) {
+        console.log("Số lượng: " + sl + ", ID: " + id);
 
+        var priceHienTai = document.getElementsByClassName("price")[0].textContent;
+        let numberString = priceHienTai.toString()
+        var a = numberString.replace(".", "").replace("$","").replace("đ","").replace(" ","").trim()
+        console.log( a)
+        var input = document.getElementById("inputid");
+
+        var input1 = document.getElementById("inputid1");
+        var input2 = document.getElementById("inputid2");
+        var input3 = document.getElementById("inputid3");
+
+        var hiensl = document.getElementById("hiensl");
+
+        console.log("Input element: ", input);
+        console.log("Input1 element: ", input1);
+        console.log("Hiensl element: ", hiensl);
+        hiensl.innerHTML = sl;
+        input.value = id;
+        input1.value = id;
+        input2.value = a;
+        input3.value = a;
+    }
 
 </script>
 

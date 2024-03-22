@@ -12,6 +12,8 @@ public interface CTSPService {
     List<Object[]> findKCTheoSP(Long idsp, Long idms);
     List<KichCo> findKCNotInCTSP(Long idCTSPHAMMS);
     List<ChiTietSanPham> findCTSP2(Long idCTSPHAMS);
+    List<ChiTietSanPham> findAll();
+    ChiTietSanPham findById(Long id);
     ChiTietSanPham findCTSP(Long idCTSPHAMS,Long idkc);
     void updateCTSP(ChiTietSanPham chiTietSanPham);
     List<Object> getAllSPCus();
