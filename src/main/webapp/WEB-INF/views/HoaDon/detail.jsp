@@ -37,7 +37,7 @@
                                     <tr>
                                         <th scope="row">${tt.index + 1}</th>
                                         <td>${lichSu.status == 0 ? "Chờ xác nhận" : lichSu.status == 1 ? "Xác nhận" : lichSu.status == 2 ? "Chờ vận chuyển" : lichSu.status == 3 ? "Vận chuyển" : lichSu.status == 4 ? "Hoàn thành" : "Hủy"}</td>
-                                        <td>${moment(lichSu.ngayTao * 1000).format('DD/MM/YYYY')}</td>
+<%--                                        <td>${moment(lichSu.ngayTao * 1000).format('DD/MM/YYYY')}</td>--%>
                                         <td>${lichSu.note}</td>
                                     </tr>
                                 </c:forEach>
@@ -53,9 +53,9 @@
                             <div class="col-6">Số điện thoại: ${hoaDon.sdtNguoiNhan}</div>
                             <div class="col-6">Email: ${hoaDon.emailNguoiNhan}</div>
                             <div class="col-6">Địa chỉ: ${hoaDon.diaChiNguoiNhan}</div>
-                            <div class="col-6">Phương Thức thanh toán: ${hoaDon.phuongThucThanhToan.ten + " - " + hoaDon.phuongThucThanhToan.trangThai == 0 ? "trả sau": "Trả trước"}</div>
+<%--                            <div class="col-6">Phương Thức thanh toán: ${hoaDon.phuongThucThanhToan.ten + " - " + hoaDon.phuongThucThanhToan.trangThai == 0 ? "trả sau": "Trả trước"}</div>--%>
                             <div class="col-6">Nghi chú: ${hoaDon.ghiChu}</div>
-                            <div class="col-6">Ngày nhận dự kiến: ${moment(hoaDon.ngayThanhToan * 1000).format('DD/MM/YYYY')}</div>
+<%--                            <div class="col-6">Ngày nhận dự kiến: ${moment(hoaDon.ngayThanhToan * 1000).format('DD/MM/YYYY')}</div>--%>
                         </div>
                     </div>
                     <div class="row">

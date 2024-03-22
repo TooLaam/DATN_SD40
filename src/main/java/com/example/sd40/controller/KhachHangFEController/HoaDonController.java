@@ -27,10 +27,10 @@ public class HoaDonController {
     @GetMapping("/payment")
     private String viewthanhToan(Model model) {
         BigDecimal total = BigDecimal.ZERO;
-        for (GioHangDetail product : gioHangDetailSerVice.gioHangDetails(Long.parseLong("1"))) {
+        for (GioHangDetail product : gioHangDetailSerVice.gioHangDetails(Long.parseLong("3"))) {
             total = total.add(product.getPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
         }
-        model.addAttribute("listCartDetail", gioHangDetailSerVice.gioHangDetails(Long.parseLong("1")));
+        model.addAttribute("listCartDetail", gioHangDetailSerVice.gioHangDetails(Long.parseLong("3")));
         model.addAttribute("totalMoney", total);
         model.addAttribute("view", "/pay/pay.jsp");
         return "/customerFE/index";
@@ -40,7 +40,7 @@ public class HoaDonController {
     @PostMapping("/placeorder")
     private String thanhToan(HoaDonKhachHangResquest resquest, Model model) {
         try {
-            resquest.setIdUser("1");
+            resquest.setIdUser("3");
             System.out.println(hoaDonService.createHoaDonKhachHang(resquest));
             ;
 

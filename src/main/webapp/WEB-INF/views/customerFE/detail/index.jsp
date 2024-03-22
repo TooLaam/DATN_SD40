@@ -195,17 +195,16 @@
         var a = numberString.replace(".", "").replace("$","").replace("đ","").replace(" ","").trim()
         console.log( a)
         var input = document.getElementById("inputid");
-
         var input1 = document.getElementById("inputid1");
         var input2 = document.getElementById("inputid2");
         var input3 = document.getElementById("inputid3");
 
-        var hiensl = document.getElementById("hiensl");
+        // var hiensl = document.getElementById("hiensl");
 
         console.log("Input element: ", input);
         console.log("Input1 element: ", input1);
-        console.log("Hiensl element: ", hiensl);
-        hiensl.innerHTML = sl;
+        // console.log("Hiensl element: ", hiensl);
+        // hiensl.innerHTML = sl;
         input.value = id;
         input1.value = id;
         input2.value = a;
