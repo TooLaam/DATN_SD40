@@ -1,5 +1,6 @@
 package com.example.sd40.entity.Gio_hang;
 
+import com.example.sd40.entity.KhachHang.KhachHang;
 import com.example.sd40.entity.Tai_khoan.TaiKhoan;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -39,4 +40,8 @@ public class GioHang {
     @ManyToOne
     @JoinColumn(name = "nguoi_so_huu",referencedColumnName = "id")
     private TaiKhoan tkGioHang;
+
+    @ManyToOne
+    @JoinColumn(name = "khach_hang_id",referencedColumnName = "id")
+    private KhachHang khachHang;
 }

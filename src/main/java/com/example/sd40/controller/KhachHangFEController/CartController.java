@@ -21,11 +21,11 @@ public class CartController {
     @GetMapping
     private String getAll(Model model){
         BigDecimal total = BigDecimal.ZERO;
-        for (GioHangDetail product : gioHangDetailSerVice.gioHangDetails(Long.parseLong("1"))) {
+        for (GioHangDetail product : gioHangDetailSerVice.gioHangDetails(Long.parseLong("3"))) {
             total = total.add(product.getPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
 
         }
-        model.addAttribute("listCartDetail", gioHangDetailSerVice.gioHangDetails(Long.parseLong("1")));
+        model.addAttribute("listCartDetail", gioHangDetailSerVice.gioHangDetails(Long.parseLong("3")));
         model.addAttribute("totalMoney",total);
         model.addAttribute("view", "/cart/index.jsp");
         return "/customerFE/index";

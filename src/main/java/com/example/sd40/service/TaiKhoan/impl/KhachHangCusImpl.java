@@ -1,6 +1,6 @@
 package com.example.sd40.service.TaiKhoan.impl;
 
-import com.example.sd40.entity.Hoa_don.GioHangChiTiet;
+import com.example.sd40.entity.Gio_hang.GioHangDetail;
 import com.example.sd40.entity.KhachHang.KhachHang;
 import com.example.sd40.repository.TaiKhoan.KhachHangCusRepository;
 import com.example.sd40.service.TaiKhoan.KhachHangCusService;
@@ -24,7 +24,7 @@ public class KhachHangCusImpl implements KhachHangCusService {
     }
 
     @Override
-    public List<GioHangChiTiet> detailSPGioHang(Long idKH) {
+    public List<GioHangDetail> detailSPGioHang(Long idKH) {
         return khachHangCusRepository.detailSPGioHang(idKH);
     }
 }
