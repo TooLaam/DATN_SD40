@@ -1,14 +1,15 @@
 package com.example.sd40.controller.TaiKhoan;
 
+
 import com.example.sd40.repuest.KhachHangRequest;
-import com.example.sd40.repuest.NhanVienRequyest;
 import com.example.sd40.service.TaiKhoan.KhachHangService;
-import com.example.sd40.service.TaiKhoan.NhanVienService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author quynh

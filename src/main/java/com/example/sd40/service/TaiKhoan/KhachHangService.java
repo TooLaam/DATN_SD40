@@ -1,14 +1,18 @@
 package com.example.sd40.service.TaiKhoan;
 
+
+
+
 import com.example.sd40.entity.Tai_khoan.TaiKhoan;
 import com.example.sd40.repuest.KhachHangRequest;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * @author quynh
  */
+@Service
 public interface KhachHangService {
 
     List<TaiKhoan> findByKhachHang();

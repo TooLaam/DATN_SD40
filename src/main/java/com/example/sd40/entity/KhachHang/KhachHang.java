@@ -25,8 +25,6 @@ public class KhachHang {
     @Column(name = "ho_ten")
     private String hoTen;
 
-    @Column(name = "mo_ta")
-    private String moTa;
 
     @Column(name = "ngay_tao")
     private Date ngayTao;

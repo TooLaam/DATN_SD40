@@ -29,12 +29,12 @@ public interface CTSPRepository extends JpaRepository<ChiTietSanPham,Long> {
     @Query("select ctsp from ChiTietSanPham ctsp where ctsp.chiTietSanPhamMauSacHinhAnh.Id=?1 and ctsp.kichCo.Id=?2")
     ChiTietSanPham findCTSP(Long idCTSPHAMS,Long idkc);
 
-    @Query("select sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,ctsp.soLuong," +
+    @Query("select sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,sum(ctsp.soLuong)," +
             " max((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100),Min((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100)," +
             " Max(ctsphams.giaHienHanh),Min(ctsphams.giaHienHanh)" +
             " from ChiTietSanPham ctsp join ChiTietSanPhamMauSacHinhAnh ctsphams on ctsp.chiTietSanPhamMauSacHinhAnh.Id = ctsphams.Id" +
             " join SanPham sp on ctsphams.sanPham.id = sp.id where ctsp.soLuong >0" +
-            " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,ctsp.soLuong")
+            " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam")
     List<Object> getAllSPCus();
 
     @Query("select sum(ct.soLuong) from ChiTietSanPham ct ")
@@ -46,38 +46,38 @@ public interface CTSPRepository extends JpaRepository<ChiTietSanPham,Long> {
     @Query("select sum(ct.soLuong) from ChiTietSanPham ct where ct.chiTietSanPhamMauSacHinhAnh.sanPham.thuongHieu.id=?1")
     Object tongSLSPByTH(Long idTH);
 
-    @Query("select sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,ctsp.soLuong," +
+    @Query("select sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,sum(ctsp.soLuong)," +
             " max((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100),Min((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100)," +
             " Max(ctsphams.giaHienHanh),Min(ctsphams.giaHienHanh)" +
             " from ChiTietSanPham ctsp join ChiTietSanPhamMauSacHinhAnh ctsphams on ctsp.chiTietSanPhamMauSacHinhAnh.Id = ctsphams.Id" +
             " join SanPham sp on ctsphams.sanPham.id = sp.id where ctsp.soLuong >0 and sp.thuongHieu.id = ?1" +
-            " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,ctsp.soLuong,sp.thuongHieu.id")
+            " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,sp.thuongHieu.id")
     List<Object> getAllSPCusByTH(Long idTH);
 
-    @Query("select sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,ctsp.soLuong," +
+    @Query("select sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,sum(ctsp.soLuong)," +
             " max((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100),Min((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100)," +
             " Max(ctsphams.giaHienHanh),Min(ctsphams.giaHienHanh)" +
             " from ChiTietSanPham ctsp join ChiTietSanPhamMauSacHinhAnh ctsphams on ctsp.chiTietSanPhamMauSacHinhAnh.Id = ctsphams.Id" +
             " join SanPham sp on ctsphams.sanPham.id = sp.id where ctsp.soLuong >0 and sp.theLoai.id = ?1" +
-            " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,ctsp.soLuong,sp.theLoai.id")
+            " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,sp.theLoai.id")
     List<Object> getAllSPCusByTL(Long idTL);
 
-    @Query("select sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,ctsp.soLuong," +
+    @Query("select sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,sum(ctsp.soLuong)," +
             " max((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100),Min((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100)," +
             " Max(ctsphams.giaHienHanh),Min(ctsphams.giaHienHanh)" +
             " from ChiTietSanPham ctsp join ChiTietSanPhamMauSacHinhAnh ctsphams on ctsp.chiTietSanPhamMauSacHinhAnh.Id = ctsphams.Id" +
             " join SanPham sp on ctsphams.sanPham.id = sp.id where ctsp.soLuong >0  and " +
             " (ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100 >=?1 and (ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100 <?2 " +
-            " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,ctsp.soLuong,sp.theLoai.id")
+            " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,sp.theLoai.id")
     List<Object> getAllSPCusByGia(BigDecimal giaMin, BigDecimal giaMax);
 
 
-    @Query("select sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,ctsp.soLuong," +
+    @Query("select sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,sum(ctsp.soLuong)," +
             " max((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100),Min((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100)," +
             " Max(ctsphams.giaHienHanh),Min(ctsphams.giaHienHanh)" +
             " from ChiTietSanPham ctsp join ChiTietSanPhamMauSacHinhAnh ctsphams on ctsp.chiTietSanPhamMauSacHinhAnh.Id = ctsphams.Id" +
             " join SanPham sp on ctsphams.sanPham.id = sp.id where ctsp.soLuong >0  and sp.giamGIa.mucGiam >0 " +
-            " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,ctsp.soLuong,sp.theLoai.id")
+            " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,sp.theLoai.id")
     List<Object> getAllSPCusByGiamGia();
 
     @Query("select sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,sum(ctsp.soLuong)," +
@@ -85,15 +85,15 @@ public interface CTSPRepository extends JpaRepository<ChiTietSanPham,Long> {
             " Max(ctsphams.giaHienHanh),Min(ctsphams.giaHienHanh)" +
             " from ChiTietSanPham ctsp join ChiTietSanPhamMauSacHinhAnh ctsphams on ctsp.chiTietSanPhamMauSacHinhAnh.Id = ctsphams.Id" +
             " join SanPham sp on ctsphams.sanPham.id = sp.id where sp.id = ?1" +
-            " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,ctsp.soLuong,sp.theLoai.id ")
-    List<Object> detailSanPhamCus(Long idsp);
+            " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,sp.theLoai.id")
+    Object detailSanPhamCus(Long idsp);
 
-    @Query("select sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,ctsp.soLuong," +
+    @Query("select sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,sum(ctsp.soLuong)," +
             " max((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100),Min((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100)," +
             " Max(ctsphams.giaHienHanh),Min(ctsphams.giaHienHanh)" +
             " from ChiTietSanPham ctsp join ChiTietSanPhamMauSacHinhAnh ctsphams on ctsp.chiTietSanPhamMauSacHinhAnh.Id = ctsphams.Id" +
             " join SanPham sp on ctsphams.sanPham.id = sp.id where ctsp.soLuong >0" +
-            " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,ctsp.soLuong")
+            " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam")
     List<Object> getAllGioHang();
 
 }

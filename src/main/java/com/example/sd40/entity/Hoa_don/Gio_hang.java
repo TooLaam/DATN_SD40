@@ -1,5 +1,6 @@
-package com.example.sd40.entity.Tai_khoan;
+package com.example.sd40.entity.Hoa_don;
 
+import com.example.sd40.entity.KhachHang.KhachHang;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,28 +10,20 @@ import lombok.Setter;
 import java.sql.Date;
 
 @Entity
-@Table(name = "dia_chi")
+@Table(name = "gio_hang")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class DiaChi {
+public class Gio_hang {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "thanh_pho")
-    private String thanhPho;
 
-    @Column(name = "quan_huyen")
-    private String quanHuyen;
-
-    @Column(name = "phuong_xa")
-    private String phuongXa;
-
-    @Column(name = "dia_chi_cu_the")
-    private String diaChiCuThe;
+    @Column(name = "ghi_chu")
+    private String ghiChu;
 
     @Column(name = "ngay_tao")
     private Date ngayTao;
@@ -42,6 +35,6 @@ public class DiaChi {
     private Integer trangThai;
 
     @ManyToOne
-    @JoinColumn(name = "tai_khoan_id",referencedColumnName = "id")
-    private TaiKhoan tkDiaChi;
+    @JoinColumn(name = "khach_hang_id",referencedColumnName = "id")
+    private KhachHang khachHang;
 }

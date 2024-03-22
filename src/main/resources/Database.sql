@@ -97,16 +97,21 @@ CREATE TABLE dia_chi_chi_tiet (
 
 );
 
-/*Đợt khuyến mãi*/
---Bảng đợt khuyến mãi
-CREATE TABLE dot_khuyen_mai (
-                                id			  BIGINT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-                                ly_do		  NVARCHAR(MAX) DEFAULT NULL,
-                                muc_giam      INT,
-                                ngay_tao	  DATETIME NULL,
-                                ngay_bat_dau  DATETIME NULL,
-                                ngay_ket_thuc DATETIME NULL,
-                                trang_thai	  INT
+/*voucher*/
+--Bảng voucher
+CREATE TABLE voucher(
+                        id					BIGINT IDENTITY(1,1) PRIMARY KEY,
+                        ma_voucher			VARCHAR(50) NULL,
+                        ten_voucher			NVARCHAR(50) NULL,
+                        ngay_bat_dau		DATETIME NULL,
+                        ngay_ket_thuc		DATETIME NULL,
+                        ngay_tao			DATETIME NULL,
+                        ngay_sua			DATETIME NULL,
+                        so_luong	        INT NULL,
+                        phan_tram_giam		int NULL,
+                        giam_toi_da			MONEY NULL,
+                        gia_tri_don_toi_thieu	MONEY NULL,
+                        trang_thai			INT,
 );
 
 
@@ -251,6 +256,16 @@ CREATE TABLE gio_hang_chi_tiet (
 );
 
 /*HÓA ĐƠN*/
+CREATE TABLE phuong_thuc_thanh_toan (
+                                        id			BIGINT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+                                        ten		NVARCHAR(MAX) NULL,
+                                        ngay_tao	DATETIME NULL,
+                                        ngay_sua	DATETIME NULL,
+                                        trang_thai	INT,
+
+
+);
+
 --Bảng hóa đơn
 CREATE TABLE hoa_don (
                          id			BIGINT IDENTITY(1,1) PRIMARY KEY NOT NULL,
@@ -267,11 +282,13 @@ CREATE TABLE hoa_don (
                          khach_hang_id BIGINT
                              REFERENCES khach_hang(id),
 
-                         dot_khuyen_mai_id BIGINT
-                             REFERENCES dot_khuyen_mai(id),
+                         voucher_id BIGINT
+                             REFERENCES voucher(id),
 
 );
 alter table hoa_don add ghi_chu NVARCHAR(MAX)
+alter table hoa_don add tong_tien_giam NVARCHAR(MAX)
+alter table hoa_don add phuong_thuc_thanh_toan_id BIGINT REFERENCES phuong_thuc_thanh_toan(id)
 
 --Bảng hóa đơn chi tiết
 CREATE TABLE hoa_don_chi_tiet (
@@ -287,6 +304,9 @@ CREATE TABLE hoa_don_chi_tiet (
                                       REFERENCES chi_tiet_san_pham(id),
 
 );
+
+--Bảng hóa phương thức thanh toán
+
 
 
 /*Giao hàng*/
@@ -388,12 +408,6 @@ VALUES
 
 --Đợt khuyến mãi
 
-INSERT INTO dot_khuyen_mai (ly_do, muc_giam, ngay_tao, ngay_bat_dau, ngay_ket_thuc, trang_thai)
-VALUES
-('Giảm giá mùa hè', 20, GETDATE(), '2024-06-01', '2024-07-31', 1),
-('Khuyến mãi cuối năm', 30, GETDATE(), '2024-11-01', '2024-12-31', 1),
-('Khuyến mãi đặc biệt', 15, GETDATE(), '2024-03-01', '2024-03-31', 1);
-
 
 --Thương hiệu
 
@@ -484,6 +498,15 @@ VALUES
 (100, 1, GETDATE(), GETDATE(), 4, 4),
 (100, 1, GETDATE(), GETDATE(), 5, 5);
 
+--Voucher
+INSERT INTO voucher (ma_voucher, ten_voucher, ngay_bat_dau, ngay_ket_thuc, ngay_tao, ngay_sua, so_luong, phan_tram_giam, giam_toi_da, gia_tri_don_toi_thieu, trang_thai)
+VALUES
+('VOUCHER001', N'Voucher Giảm 10%', '2024-03-20', '2024-04-20', '2024-03-20', '2024-03-20', 100, 10, 100000, 500000, 1),
+('VOUCHER002', N'Voucher Giảm 20%', '2024-03-21', '2024-04-21', '2024-03-21', '2024-03-21', 150, 20, 150000, 750000, 1),
+('VOUCHER003', N'Voucher Giảm 30%', '2024-03-22', '2024-04-22', '2024-03-22', '2024-03-22', 200, 30, 200000, 1000000, 1),
+('VOUCHER004', N'Voucher Giảm 40%', '2024-03-23', '2024-04-23', '2024-03-23', '2024-03-23', 250, 40, 250000, 1250000, 1),
+('VOUCHER005', N'Voucher Giảm 50%', '2024-03-24', '2024-04-24', '2024-03-24', '2024-03-24', 300, 50, 300000, 1500000, 1);
+
 
 --giỏ hàng
 INSERT INTO gio_hang (ghi_chu, trang_thai, ngay_tao, ngay_sua, khach_hang_id)
@@ -508,7 +531,7 @@ select * from gio_hang
 
 --hóa đơn
 
-    INSERT INTO hoa_don (ngay_tao, ngay_thanh_toan, tong_tien, phan_tram_khuyen_mai, nhan_vien_id, khach_hang_id, dot_khuyen_mai_id)
+    INSERT INTO hoa_don (ngay_tao, ngay_thanh_toan, tong_tien, phan_tram_khuyen_mai, nhan_vien_id, khach_hang_id, voucher_id)
 VALUES
     (GETDATE(), GETDATE(), 1500000, 10, 1, 1, 1),
     (GETDATE(), GETDATE(), 2000000, 20, 2, 2, 2),
@@ -526,5 +549,6 @@ VALUES
     (1, 3, 1, 3, 400000, 280000),
     (2, 4, 1, 1, 500000, 375000),
     (3, 5, 1, 2, 600000, 450000);
-select * from hoa_don
-select * from hoa_don_chi_tiet
+
+
+

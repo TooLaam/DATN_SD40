@@ -16,6 +16,20 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <title>SD40 - Giày thể thao</title>
+    <style>
+
+        .cart-number {
+            position: relative; /* Đặt vị trí tương đối */
+            top: -15px; /* Di chuyển lên phía trên */
+            background-color: #ff0000; /* Màu nền */
+            color: #ffffff; /* Màu chữ */
+            font-size: 12px; /* Kích thước font */
+            padding: 2px 6px; /* Khoảng cách giữa số và viền */
+            border-radius: 50%; /* Định dạng số thành hình tròn */
+            text-decoration: none; /* Loại bỏ gạch chân */
+        }
+
+    </style>
 </head>
 
 <body>
@@ -24,21 +38,21 @@
 </div>
 <div class="container">
     <ul class="nav justify-content-end">
-<%--        <li class="nav-item">--%>
-<%--            <a class="nav-link" href="#">Help</a>--%>
-<%--        </li>--%>
+        <%--        <li class="nav-item">--%>
+        <%--            <a class="nav-link" href="#">Help</a>--%>
+        <%--        </li>--%>
         <c:choose>
-            <c:when test="${CustomerName == null}">
+            <c:when test="${khachHangCus == null}">
                 <li class="nav-item">
-                    <a class="nav-link" href="/customer/signup">Sign Up</a>
+                    <a class="nav-link" href="/signup">Sign Up</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/customer/login">Login</a>
+                    <a class="nav-link" href="/login">Login</a>
                 </li>
             </c:when>
             <c:otherwise>
                 <li class="nav-item">
-                    <a class="nav-link" href="/customer/logout">Sign Out</a>
+                    <a class="nav-link" href="/logout">Sign Out</a>
                 </li>
             </c:otherwise>
         </c:choose>
@@ -58,25 +72,22 @@
             </li>
             <li class="nav-item">
                 <ul class="list-unstyled" style="display: flex; margin-right: 1rem;">
-                    <c:if test="${CustomerName != null}">
+                    <c:if test="${khachHangCus != null}">
                         <li>
                             <a href="/customer/indexcus">
                                 <span class="fa fa-user"></span>
                             </a>
                         </li>
-                        <li>
-                            <a href="/favor/indexcus">
-                                <span class="fa fa-heart"></span>
-                            </a>
-                        </li>
+
                         <li>
                             <a href="/bill/indexcus">
                                 <span class="fa fa-sticky-note"></span>
                             </a>
                         </li>
                         <li>
-                            <a href="/viewOrderCart">
+                            <a style="text-decoration: none" href="/viewOrderCart">
                                 <span class="fa fa-shopping-cart"></span>
+                                <span class="cart-number">${slspgh}</span>
                             </a>
                         </li>
                     </c:if>

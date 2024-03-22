@@ -1,9 +1,7 @@
 package com.example.sd40.service.TaiKhoan.impl;
 
-import com.example.sd40.entity.Gio_hang.GioHang;
 import com.example.sd40.entity.Tai_khoan.TaiKhoan;
 import com.example.sd40.entity.Tai_khoan.VaiTro;
-import com.example.sd40.repository.GioHang.GioHangRepository;
 import com.example.sd40.repository.TaiKhoan.KhachHangRepository;
 import com.example.sd40.repository.TaiKhoan.VaiTroRepository;
 import com.example.sd40.repuest.KhachHangRequest;
@@ -34,9 +32,6 @@ public class KhachHangServiceImpl implements KhachHangService {
     @Autowired
     private VaiTroRepository vaiTroRepository;
 
-    @Autowired
-    private GioHangRepository gioHangRepository;
-
     @Override
     public List<TaiKhoan> findByKhachHang() {
         Optional<VaiTro> vaiTro = vaiTroRepository.findById(Long.parseLong("1"));
@@ -48,7 +43,6 @@ public class KhachHangServiceImpl implements KhachHangService {
 
     @Override
     public TaiKhoan create( KhachHangRequest requyest) {
-        vaiTroRepository.save(new VaiTro("Khach Hang"));
         TaiKhoan taiKhoan = new TaiKhoan();
         BeanUtils.copyProperties(requyest, taiKhoan);
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -64,11 +58,8 @@ public class KhachHangServiceImpl implements KhachHangService {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        khachHangRepository.save(taiKhoan);
-        GioHang gioHang = new GioHang();
-        gioHang.setTkGioHang(taiKhoan);
-        gioHangRepository.save(gioHang);
-        return taiKhoan;
+
+        return  khachHangRepository.save(taiKhoan);
     }
 
     @Override
