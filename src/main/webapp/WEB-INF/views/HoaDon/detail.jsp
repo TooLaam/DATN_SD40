@@ -3,6 +3,9 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <div class="pagetitle">
     <h1>Chi tiết sản phẩm</h1>
     <nav>
@@ -37,9 +40,19 @@
                                     <tr>
                                         <th scope="row">${tt.index + 1}</th>
                                         <td>${lichSu.status == 0 ? "Chờ xác nhận" : lichSu.status == 1 ? "Xác nhận" : lichSu.status == 2 ? "Chờ vận chuyển" : lichSu.status == 3 ? "Vận chuyển" : lichSu.status == 4 ? "Hoàn thành" : "Hủy"}</td>
-<%--                                        <td>${moment(lichSu.ngayTao * 1000).format('DD/MM/YYYY')}</td>--%>
+                                        <td id="formattedDate_${tt.index}"></td>
                                         <td>${lichSu.note}</td>
                                     </tr>
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                            var ngayTao = ${lichSu.ngayTao};
+                                            var formattedDate = "";
+                                            if (ngayTao) {
+                                                formattedDate = moment(ngayTao).format("DD/MM/YYYY");
+                                            }
+                                            document.getElementById('formattedDate_${tt.index}').textContent = formattedDate;
+                                        });
+                                    </script>
                                 </c:forEach>
                                 </tbody>
                             </table>
@@ -53,7 +66,8 @@
                             <div class="col-6">Số điện thoại: ${hoaDon.sdtNguoiNhan}</div>
                             <div class="col-6">Email: ${hoaDon.emailNguoiNhan}</div>
                             <div class="col-6">Địa chỉ: ${hoaDon.diaChiNguoiNhan}</div>
-<%--                            <div class="col-6">Phương Thức thanh toán: ${hoaDon.phuongThucThanhToan.ten + " - " + hoaDon.phuongThucThanhToan.trangThai == 0 ? "trả sau": "Trả trước"}</div>--%>
+                            <div class="col-6">Phương Thức thanh toán: ${hoaDon.phuongThucThanhToan.ten  }</div>
+                            <div class="col-6">Trạng thái thanh toán: ${hoaDon.phuongThucThanhToan.trangThai == 0 ? "trả sau": "Trả trước"  }</div>
                             <div class="col-6">Nghi chú: ${hoaDon.ghiChu}</div>
 <%--                            <div class="col-6">Ngày nhận dự kiến: ${moment(hoaDon.ngayThanhToan * 1000).format('DD/MM/YYYY')}</div>--%>
                         </div>
@@ -113,6 +127,3 @@
     </div>
 </section>
 
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
