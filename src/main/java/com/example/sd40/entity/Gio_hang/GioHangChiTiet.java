@@ -1,4 +1,4 @@
-package com.example.sd40.entity.Hoa_don;
+package com.example.sd40.entity.Gio_hang;
 
 import com.example.sd40.entity.San_pham.ChiTietSanPham;
 import jakarta.persistence.*;
@@ -28,7 +28,7 @@ public class GioHangChiTiet {
 
     @ManyToOne
     @JoinColumn(name = "gio_hang_id",referencedColumnName = "id")
-    private Gio_hang gioHang;
+    private GioHang gioHang;
 
     @ManyToOne
     @JoinColumn(name = "chi_tiet_san_pham_id",referencedColumnName = "id")

@@ -1,6 +1,6 @@
-package com.example.sd40.service.TaiKhoan;
+package com.example.sd40.service.KhachHang;
 
-import com.example.sd40.entity.Hoa_don.GioHangChiTiet;
+import com.example.sd40.entity.Gio_hang.GioHangChiTiet;
 import com.example.sd40.entity.KhachHang.KhachHang;
 
 import java.util.List;

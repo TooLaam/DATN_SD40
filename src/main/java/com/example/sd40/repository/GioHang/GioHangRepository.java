@@ -1,7 +1,7 @@
 package com.example.sd40.repository.GioHang;
 
 import com.example.sd40.entity.Gio_hang.GioHang;
-import com.example.sd40.entity.Tai_khoan.TaiKhoan;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
@@ -11,5 +11,5 @@ import java.util.Optional;
  */
 public interface GioHangRepository extends JpaRepository<GioHang, Long> {
 
-    Optional<GioHang> findByTkGioHang(TaiKhoan taiKhoan);
+//    Optional<GioHang> findByTkGioHang(TaiKhoan taiKhoan);
 }

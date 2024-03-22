@@ -1,8 +1,7 @@
 package com.example.sd40.controller.KhachHangFEController;
 
-import com.example.sd40.entity.San_pham.ChiTietSanPhamMauSacHinhAnh;
 import com.example.sd40.service.SanPham.*;
-import com.example.sd40.service.TaiKhoan.KhachHangCusService;
+import com.example.sd40.service.KhachHang.KhachHangCusService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

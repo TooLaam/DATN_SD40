@@ -1,6 +1,6 @@
 package com.example.sd40.entity.Gio_hang;
 
-import com.example.sd40.entity.Tai_khoan.TaiKhoan;
+import com.example.sd40.entity.KhachHang.KhachHang;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,8 +21,6 @@ public class GioHang {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "ma_gio_hang")
-    private String maGioHang;
 
     @Column(name = "ghi_chu")
     private String ghiChu;
@@ -37,6 +35,6 @@ public class GioHang {
     private Integer trangThai;
 
     @ManyToOne
-    @JoinColumn(name = "nguoi_so_huu",referencedColumnName = "id")
-    private TaiKhoan tkGioHang;
+    @JoinColumn(name = "khach_hang_id",referencedColumnName = "id")
+    private KhachHang khachHang;
 }
