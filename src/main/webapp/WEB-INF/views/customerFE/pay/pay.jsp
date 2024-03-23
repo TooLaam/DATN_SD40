@@ -65,7 +65,7 @@
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="maPhuongThuc"  value="  Trả sau" id="flexRadioDefault2" checked>
+                        <input class="form-check-input" type="radio" name="maPhuongThuc"  value="Trả sau" id="flexRadioDefault2" checked>
                         <label class="form-check-label" for="flexRadioDefault2">
                             Trả sau
                         </label>

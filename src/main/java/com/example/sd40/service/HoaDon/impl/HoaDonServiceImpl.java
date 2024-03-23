@@ -82,7 +82,6 @@ public class HoaDonServiceImpl implements HoaDonService {
         DateFormat dateFormat = new SimpleDateFormat("DD/MM/YYYY");
 
         try {
-            // Chuyển chuỗi thành đối tượng Date
             Date date = dateFormat.parse(resquest.getNgayNhan());
             hoaDon.setNgayThanhToan(date);
         } catch (ParseException e) {

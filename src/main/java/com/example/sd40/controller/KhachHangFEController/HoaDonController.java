@@ -34,7 +34,6 @@ public class HoaDonController {
         model.addAttribute("totalMoney", total);
         model.addAttribute("view", "/pay/pay.jsp");
         return "/customerFE/index";
-
     }
 
     @PostMapping("/placeorder")
@@ -42,8 +41,6 @@ public class HoaDonController {
         try {
             resquest.setIdUser("3");
             System.out.println(hoaDonService.createHoaDonKhachHang(resquest));
-            ;
-
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
