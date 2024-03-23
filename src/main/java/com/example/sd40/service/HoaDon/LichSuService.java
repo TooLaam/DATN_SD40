@@ -1,5 +1,7 @@
 package com.example.sd40.service.HoaDon;
 
+import com.example.sd40.entity.Hoa_don.LichSu;
+
 import java.util.List;
 
 /**
@@ -7,5 +9,5 @@ import java.util.List;
  */
 public interface LichSuService {
 
-//    List<LichSu> findAllByHoaDon(long id);
+    List<LichSu> findAllByHoaDon(long id);
 }

@@ -11,7 +11,7 @@ import java.util.List;
 public interface HoaDonService {
 
     List<HoaDon> findAllByStatus(int status);
-    String createHoaDonKhachHang(HoaDonKhachHangResquest resquest);
+    void create();
     String changeStatus(long id, String note);
     String huyHoaDon(long id, String note);
     HoaDon findByid(long id);

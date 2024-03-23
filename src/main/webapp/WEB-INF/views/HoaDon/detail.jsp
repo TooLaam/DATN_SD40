@@ -78,10 +78,10 @@
                         <h4 class="row">Hóa Đơn</h4>
                         <div class="row">
                             <div class="col-6">Mã hóa đơn: ${hoaDon.maHoaDon}</div>
-                            <div class="col-6">Tên Khách hàng: ${hoaDon.nguoiNhan}</div>
-                            <div class="col-6">Số điện thoại: ${hoaDon.sdtNguoiNhan}</div>
-                            <div class="col-6">Email: ${hoaDon.emailNguoiNhan}</div>
-                            <div class="col-6">Địa chỉ: ${hoaDon.diaChiNguoiNhan}</div>
+                            <div class="col-6">Tên Khách hàng: ${hoaDon.khachHang.hoTen}</div>
+                            <div class="col-6">Số điện thoại: ${hoaDon.khachHang.sdt}</div>
+                            <div class="col-6">Email: ${hoaDon.khachHang.email}</div>
+                            <div class="col-6">Địa chỉ: ${hoaDon.khachHang.diaChi}</div>
                             <div class="col-6">Phương Thức thanh toán: ${hoaDon.phuongThucThanhToan.ten  }</div>
                             <div class="col-6">Trạng thái thanh
                                 toán: ${hoaDon.phuongThucThanhToan.trangThai == 0 ? "trả sau": "Trả trước"  }</div>
@@ -128,10 +128,10 @@
                                         <td>${sanPham.chiTietSanPham.kichCo.ten}</td>
                                         <td>${sanPham.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.mau_sac.ten}</td>
                                         <td>
-                                                ${sanPham.quantity}</td>
-                                        <td>${sanPham.price}</td>
+                                                ${sanPham.soLuong}</td>
+                                        <td>${sanPham.giaDaGiam}</td>
                                         <td>
-                                            <button type="button" onclick="openUpdate(${cart.id}, ${cart.quantity})"
+                                            <button type="button" onclick="openUpdate(${cart.id}, ${cart.soLuong})"
                                                     class="btn btn-primary" data-toggle="modal"
                                                     data-target="#exampleModal">
                                                 update

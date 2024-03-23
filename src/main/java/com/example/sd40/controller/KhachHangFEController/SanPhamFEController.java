@@ -1,9 +1,5 @@
 package com.example.sd40.controller.KhachHangFEController;
 
-import com.example.sd40.entity.Gio_hang.GioHangDetail;
-import com.example.sd40.entity.San_pham.ChiTietSanPhamMauSacHinhAnh;
-import com.example.sd40.repuest.GioHangDetailRequest;
-import com.example.sd40.service.GioHang.GioHangDetailSerVice;
 import com.example.sd40.service.SanPham.*;
 import com.example.sd40.service.KhachHang.KhachHangCusService;
 import jakarta.servlet.http.HttpSession;
@@ -178,9 +174,6 @@ public class SanPhamFEController {
                                   @PathVariable("giaMin") BigDecimal giaMin,
                                   @PathVariable("giaMax")BigDecimal giaMax, HttpSession session
     ){
-
-
-
         Long idKH = (Long) session.getAttribute("idKhachHang");
         if (idKH == null) {
             if (ctspService.getAllSPCusByGia(giaMin,giaMax).isEmpty()){

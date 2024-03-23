@@ -23,7 +23,7 @@
                                         <input type="hidden" class="form-control" value="${nhanVien.id}" name="idNhanVien" >
                                         <div class="">
                                             <label  class="form-label">Tên nhân viên: </label>
-                                            <input type="text" class="form-control" value="${nhanVien.hoVaTen}" name="hoVaTen" readonly>
+                                            <input type="text" class="form-control" value="${nhanVien.hoTen}" name="hoTen" readonly>
                                         </div>
                                         <div class="">
                                             <label  class="form-label">Ngày Sinh: </label>
@@ -33,7 +33,7 @@
                                     <div class="row">
                                         <div class="">
                                             <label  class="form-label">Số điện thoại: </label>
-                                            <input type="text" class="form-control" value="${nhanVien.soDienThoai}"  name="soDienThoai" readonly>
+                                            <input type="text" class="form-control" value="${nhanVien.sdt}"  name="sdt" readonly>
                                         </div>
                                         <div class="">
                                             <label  class="form-label">email: </label>

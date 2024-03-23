@@ -1,8 +1,5 @@
 package com.example.sd40.service.KhachHang;
 
-
-
-
 import com.example.sd40.entity.KhachHang.KhachHang;
 import com.example.sd40.repuest.KhachHangRequest;
 import org.springframework.stereotype.Service;

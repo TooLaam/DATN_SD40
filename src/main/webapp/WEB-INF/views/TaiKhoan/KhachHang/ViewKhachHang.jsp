@@ -38,9 +38,9 @@
                     <c:forEach items="${khachHangs}" var="khachHang" varStatus="tt">
                         <tr>
                             <td>${khachHang.id}</td>
-                            <td>${khachHang.hoVaTen}</td>
+                            <td>${khachHang.hoTen}</td>
                             <td>${khachHang.gioiTinh ==0 ? "Nam" : "Nữ"}</td>
-                            <td>${khachHang.soDienThoai}</td>
+                            <td>${khachHang.sdt}</td>
                             <td>${khachHang.email}</td>
                             <td>${khachHang.ngaySinh}</td>
                             <td>

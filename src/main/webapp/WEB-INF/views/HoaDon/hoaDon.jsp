@@ -58,7 +58,6 @@
                                             <th>Mã</th>
                                             <th>Tên khách hàng</th>
                                             <th>Số điện thoại</th>
-                                            <th>Loại hóa đơn</th>
                                             <th>Tổng tiền</th>
                                             <th>ngày tạo</th>
                                             <th>Action</th>
@@ -70,10 +69,9 @@
                                             <tr>
                                                     <%--                                <th scope="row">${tt.index+1}</th>--%>
                                                 <td>${hoaDon.maHoaDon}</td>
-                                                <td>${hoaDon.nguoiNhan} </td>
-                                                <td>${hoaDon.sdtNguoiNhan}</td>
-                                                <td>${hoaDon.loaiHoaDon == 1 ? "online" : "tại quầy"}</td>
-                                                <td>${hoaDon.tongTien + hoaDon.phiShip }</td>
+                                                <td>${hoaDon.khachHang.hoTen} </td>
+                                                <td>${hoaDon.khachHang.sdt}</td>
+                                                <td>${hoaDon.tongTien}</td>
                                                 <td>${hoaDon.ngayTao}</td>
                                                 <td>
                                                     <a href="/bill/detail/${hoaDon.id}" class="btn btn-success" style="text-decoration: none;color: white; margin-top: 5px" >Chi tiết</a>
@@ -93,7 +91,6 @@
                                             <th>Mã</th>
                                             <th>Tên khách hàng</th>
                                             <th>Số điện thoại</th>
-                                            <th>Loại hóa đơn</th>
                                             <th>Tổng tiền</th>
                                             <th>ngày tạo</th>
                                             <th>Action</th>
@@ -105,10 +102,9 @@
                                             <tr>
                                                     <%--                                <th scope="row">${tt.index+1}</th>--%>
                                                 <td>${hoaDon.maHoaDon}</td>
-                                                <td>${hoaDon.nguoiNhan} </td>
-                                                <td>${hoaDon.sdtNguoiNhan}</td>
-                                                <td>${hoaDon.loaiHoaDon == 1 ? "online" : "tại quầy"}</td>
-                                                <td>${hoaDon.tongTien + hoaDon.phiShip }</td>
+                                                <td>${hoaDon.khachHang.hoTen} </td>
+                                                <td>${hoaDon.khachHang.sdt}</td>
+                                                <td>${hoaDon.tongTien }</td>
                                                 <td>${hoaDon.ngayTao}</td>
                                                 <td>
                                                     <a href="/bill/detail/${hoaDon.id}" class="btn btn-success" style="text-decoration: none;color: white; margin-top: 5px" >Chi tiết</a>
@@ -128,7 +124,6 @@
                                             <th>Mã</th>
                                             <th>Tên khách hàng</th>
                                             <th>Số điện thoại</th>
-                                            <th>Loại hóa đơn</th>
                                             <th>Tổng tiền</th>
                                             <th>ngày tạo</th>
                                             <th>Action</th>
@@ -140,10 +135,9 @@
                                             <tr>
                                                     <%--                                <th scope="row">${tt.index+1}</th>--%>
                                                 <td>${hoaDon.maHoaDon}</td>
-                                                <td>${hoaDon.nguoiNhan} </td>
-                                                <td>${hoaDon.sdtNguoiNhan}</td>
-                                                <td>${hoaDon.loaiHoaDon == 1 ? "online" : "tại quầy"}</td>
-                                                <td>${hoaDon.tongTien + hoaDon.phiShip }</td>
+                                                <td>${hoaDon.khachHang.hoTen} </td>
+                                                <td>${hoaDon.khachHang.sdt}</td>
+                                                <td>${hoaDon.tongTien  }</td>
                                                 <td>${hoaDon.ngayTao}</td>
                                                 <td>
                                                     <a href="/bill/detail/${hoaDon.id}" class="btn btn-success" style="text-decoration: none;color: white; margin-top: 5px" >Chi tiết</a>
@@ -163,7 +157,6 @@
                                             <th>Mã</th>
                                             <th>Tên khách hàng</th>
                                             <th>Số điện thoại</th>
-                                            <th>Loại hóa đơn</th>
                                             <th>Tổng tiền</th>
                                             <th>ngày tạo</th>
                                             <th>Action</th>
@@ -175,10 +168,9 @@
                                             <tr>
                                                     <%--                                <th scope="row">${tt.index+1}</th>--%>
                                                 <td>${hoaDon.maHoaDon}</td>
-                                                <td>${hoaDon.nguoiNhan} </td>
-                                                <td>${hoaDon.sdtNguoiNhan}</td>
-                                                <td>${hoaDon.loaiHoaDon == 1 ? "online" : "tại quầy"}</td>
-                                                <td>${hoaDon.tongTien + hoaDon.phiShip }</td>
+                                                <td>${hoaDon.khachHang.hoTen} </td>
+                                                <td>${hoaDon.khachHang.sdt}</td>
+                                                <td>${hoaDon.tongTien }</td>
                                                 <td>${hoaDon.ngayTao}</td>
                                                 <td>
                                                     <a href="/bill/detail/${hoaDon.id}" class="btn btn-success" style="text-decoration: none;color: white; margin-top: 5px" >Chi tiết</a>
@@ -198,7 +190,6 @@
                                             <th>Mã</th>
                                             <th>Tên khách hàng</th>
                                             <th>Số điện thoại</th>
-                                            <th>Loại hóa đơn</th>
                                             <th>Tổng tiền</th>
                                             <th>ngày tạo</th>
                                             <th>Action</th>
@@ -210,10 +201,9 @@
                                             <tr>
                                                     <%--                                <th scope="row">${tt.index+1}</th>--%>
                                                 <td>${hoaDon.maHoaDon}</td>
-                                                <td>${hoaDon.nguoiNhan} </td>
-                                                <td>${hoaDon.sdtNguoiNhan}</td>
-                                                <td>${hoaDon.loaiHoaDon == 1 ? "online" : "tại quầy"}</td>
-                                                <td>${hoaDon.tongTien + hoaDon.phiShip }</td>
+                                                <td>${hoaDon.khachHang.hoTen} </td>
+                                                <td>${hoaDon.khachHang.sdt}</td>
+                                                <td>${hoaDon.tongTien }</td>
                                                 <td>${hoaDon.ngayTao}</td>
                                                 <td>
                                                     <a href="/bill/detail/${hoaDon.id}" class="btn btn-success" style="text-decoration: none;color: white; margin-top: 5px" >Chi tiết</a>
@@ -233,7 +223,6 @@
                                             <th>Mã</th>
                                             <th>Tên khách hàng</th>
                                             <th>Số điện thoại</th>
-                                            <th>Loại hóa đơn</th>
                                             <th>Tổng tiền</th>
                                             <th>ngày tạo</th>
                                             <th>Action</th>
@@ -245,10 +234,9 @@
                                             <tr>
                                                     <%--                                <th scope="row">${tt.index+1}</th>--%>
                                                 <td>${hoaDon.maHoaDon}</td>
-                                                <td>${hoaDon.nguoiNhan} </td>
-                                                <td>${hoaDon.sdtNguoiNhan}</td>
-                                                <td>${hoaDon.loaiHoaDon == 1 ? "online" : "tại quầy"}</td>
-                                                <td>${hoaDon.tongTien + hoaDon.phiShip }</td>
+                                                <td>${hoaDon.khachHang.hoTen} </td>
+                                                <td>${hoaDon.khachHang.sdt}</td>
+                                                <td>${hoaDon.tongTien  }</td>
                                                 <td>${hoaDon.ngayTao}</td>
                                                 <td>
                                                     <a href="/bill/detail/${hoaDon.id}" class="btn btn-success" style="text-decoration: none;color: white; margin-top: 5px" >Chi tiết</a>
