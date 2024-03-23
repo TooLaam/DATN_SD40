@@ -1,40 +1,36 @@
 package com.example.sd40.entity.Gio_hang;
 
 import com.example.sd40.entity.San_pham.ChiTietSanPham;
-import com.example.sd40.entity.Tai_khoan.TaiKhoan;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-
-/**
- * @author quynh
- */
 @Entity
-@Table(name = "gio_hang_detail")
+@Table(name = "gio_hang_chi_tiet")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class GioHangDetail {
-
+public class GioHangChiTiet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    private int quantity;
 
-    private BigDecimal price;
+    @Column(name = "TrangThai")
+    private Integer trangThai;
+
+    @Column(name = "so_luong")
+    private Integer soLuong;
 
     @ManyToOne
-    @JoinColumn(name = "id_gio_hang",referencedColumnName = "id")
+    @JoinColumn(name = "gio_hang_id",referencedColumnName = "id")
     private GioHang gioHang;
 
     @ManyToOne
-    @JoinColumn(name = "id_product",referencedColumnName = "id")
+    @JoinColumn(name = "chi_tiet_san_pham_id",referencedColumnName = "id")
     private ChiTietSanPham chiTietSanPham;
 }

@@ -5,7 +5,7 @@ import com.example.sd40.entity.San_pham.ChiTietSanPhamMauSacHinhAnh;
 import com.example.sd40.repuest.GioHangDetailRequest;
 import com.example.sd40.service.GioHang.GioHangDetailSerVice;
 import com.example.sd40.service.SanPham.*;
-import com.example.sd40.service.TaiKhoan.KhachHangCusService;
+import com.example.sd40.service.KhachHang.KhachHangCusService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,9 +35,6 @@ public class SanPhamFEController {
 
     @Autowired
     KhachHangCusService khachHangCusService;
-
-    @Autowired
-    private GioHangDetailSerVice gioHangDetailSerVice;
 
     @GetMapping("/sanphamcus")
     public String sanPhamCus(Model model, HttpSession session){
@@ -287,19 +284,10 @@ public class SanPhamFEController {
                                @PathVariable("idsp") Long idsp,
                                @RequestParam("mauSac") Long idms,
                                @RequestParam("soLuong") int soLuong,
-                               @RequestParam("prices") String price,
                                @RequestParam("kichCo") Long kichCo
     ){
 
-        GioHangDetailRequest gioHangDetailRequest = new GioHangDetailRequest(idsp,  new BigDecimal(price), soLuong);
-        gioHangDetailSerVice.addSanPham(Long.parseLong("3"), gioHangDetailRequest);
-        BigDecimal total = BigDecimal.ZERO;
-        for (GioHangDetail product : gioHangDetailSerVice.gioHangDetails(Long.parseLong("3"))) {
-            total = total.add(product.getPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
-        }
-        model.addAttribute("listCartDetail", gioHangDetailSerVice.gioHangDetails(Long.parseLong("3")));
-        model.addAttribute("totalMoney",total);
-        model.addAttribute("view", "/cart/index.jsp");
+
         model.addAttribute("view", "/cart/index.jsp");
         return "/customerFE/index";
     }

@@ -1,27 +1,23 @@
-package com.example.sd40.entity.Hoa_don;
+package com.example.sd40.entity.GiaoHang;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.math.BigDecimal;
+import lombok.*;
 
 import java.util.Date;
 
-@Entity
-@Table(name = "phuong_thuc_thanh_toan")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class PhuongThucThanhToan {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Entity
+@Builder
+@Table(name = "trang_thai_giao_hang")
+public class TrangThaiGiaoHang {
+    @jakarta.persistence.Id
     @Column(name = "id")
-    private Long id;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
 
     @Column(name = "ten")
     private String ten;
@@ -34,5 +30,4 @@ public class PhuongThucThanhToan {
 
     @Column(name = "trang_thai")
     private Integer trangThai;
-
 }

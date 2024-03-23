@@ -1,4 +1,4 @@
-package com.example.sd40.entity.Hoa_don;
+package com.example.sd40.entity.Voucher;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
