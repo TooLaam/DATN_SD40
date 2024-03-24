@@ -1,15 +1,14 @@
 package com.example.sd40.controller.HoaDonController;
 
+import com.example.sd40.entity.Hoa_don.HoaDonChiTiet;
+import com.example.sd40.repuest.HoaDonDetailRequest;
 import com.example.sd40.service.HoaDon.HoaDonDetalService;
 import com.example.sd40.service.HoaDon.HoaDonService;
 import com.example.sd40.service.HoaDon.LichSuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author quynh
@@ -29,7 +28,7 @@ public class HoaDonAdminController {
 
     @GetMapping("/index")
     private String findAllByStatus( Model model){
-//        hoaDonService.create();
+        hoaDonService.create();
         model.addAttribute("choXacNhans", hoaDonService.findAllByStatus(0));
         model.addAttribute("xacNhans", hoaDonService.findAllByStatus(1));
         model.addAttribute("choVanChuyens", hoaDonService.findAllByStatus(2));
@@ -49,12 +48,59 @@ public class HoaDonAdminController {
         return "index";
     }
 
+
     @GetMapping("/delete/{id}")
+    private String viewHuyHoaDon(@PathVariable Long id, Model model){
+        model.addAttribute("id",id);
+        model.addAttribute("view","/HoaDon/HuyHoaDon.jsp");
+        return "index";
+    }
+
+    @GetMapping("/change/{id}")
+    private String viewChageStatus(@PathVariable Long id, Model model){
+        model.addAttribute("id",id);
+        model.addAttribute("view","/HoaDon/ChangeHoaDon.jsp");
+        return "index";
+    }
+
+    @PostMapping("/delete/{id}")
     private String huyHoaDon(@PathVariable Long id, @RequestParam("note") String note, Model model){
-        hoaDonDetalService.delete(id, note);
-        return "redirect:/bill/index";
+        hoaDonService.huyHoaDon(id,note);
+        return "redirect:/bill/detail/" + id;
+    }
+
+    @PostMapping("/change/{id}")
+    private String huyChageStatus(@PathVariable Long id, @RequestParam("note") String note, Model model){
+        hoaDonService.changeStatus(id,note);
+        return "redirect:/bill/detail/" + id;
+    }
+
+    @GetMapping("/update/{id}")
+    private String viewUpdateBilldetail(@PathVariable Long id,@RequestParam("quantity") String quantity, Model model){
+        model.addAttribute("id",id);
+        model.addAttribute("quantity",quantity);
+        model.addAttribute("view","/HoaDon/updateSanPham.jsp");
+        return "index";
     }
 
 
+    @GetMapping("/delete-bill-detail/{id}")
+    private String viewXoaBilldetail(@PathVariable Long id, Model model){
+        model.addAttribute("id",id);
+        model.addAttribute("view","/HoaDon/XoaSanPham.jsp");
+        return "index";
+    }
+
+    @PostMapping("/delete-bill-detail/{id}")
+    private String xoaBilldetail(@PathVariable Long id,@RequestParam("note") String note, Model model){
+        HoaDonChiTiet hoaDonChiTiet = hoaDonDetalService.delete(id,note);
+        return "redirect:/bill/detail/" + hoaDonChiTiet.getHoaDon().getId();
+    }
+
+    @PostMapping("/update/{id}")
+    private String updateBilldetail(@PathVariable Long id,@RequestParam("quantity") int quantity,@RequestParam("note") String note, Model model){
+        HoaDonChiTiet hoaDonChiTiet = hoaDonDetalService.update(id,quantity,note);
+        return "redirect:/bill/detail/" + hoaDonChiTiet.getHoaDon().getId();
+    }
 }
 

@@ -15,7 +15,7 @@ public interface HoaDonDetalService {
 
     HoaDonChiTiet save(HoaDonDetailRequest request);
 
-    boolean delete(long id, String note);
+    HoaDonChiTiet delete(long id, String note);
 
-    HoaDonChiTiet update(Long id, HoaDonDetailRequest request);
+    HoaDonChiTiet update(Long id, int quantity, String note);
 }

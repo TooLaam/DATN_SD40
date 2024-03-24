@@ -63,6 +63,9 @@ public class HoaDonServiceImpl implements HoaDonService {
     @Override
     public String changeStatus(long id, String note) {
         HoaDon hoaDon = hoaDonRepository.findById(id).get();
+        if(hoaDon.getTrangThai() == 4){
+            return null;
+        }
         hoaDon.setTrangThai(hoaDon.getTrangThai() + 1);
         hoaDonRepository.save(hoaDon);
         LichSu lichSu = new LichSu();

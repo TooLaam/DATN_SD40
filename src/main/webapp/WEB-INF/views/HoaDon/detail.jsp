@@ -29,7 +29,7 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th scope="col"></th>
+                                    <th scope="col">Stt</th>
                                     <th scope="col">Trạng thái</th>
                                     <th scope="col">Ngày</th>
                                     <th scope="col">Ghi chú</th>
@@ -59,10 +59,18 @@
                             <div class="row">
                                 <c:choose>
                                     <c:when test="${hoaDon.trangThai == 0}">
-                                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#exampleModal">
-                                            hủy
-                                        </button>
+                                        <a href="/bill/delete/${hoaDon.id}" class="btn btn-success col-3"
+                                           style="text-decoration: none;color: white; margin-top: 5px">Hủy</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <%-- Nếu trạng thái không phải là 1, hiển thị button --%>
+                                    </c:otherwise>
+                                </c:choose>
+
+                                <c:choose>
+                                    <c:when test="${hoaDon.trangThai < 4}">
+                                        <a href="/bill/change/${hoaDon.id}" class="btn btn-success col-3"
+                                           style="text-decoration: none;color: white; margin-top: 5px">Thay đổi</a>
                                     </c:when>
                                     <c:otherwise>
                                         <%-- Nếu trạng thái không phải là 1, hiển thị button --%>
@@ -131,12 +139,9 @@
                                                 ${sanPham.soLuong}</td>
                                         <td>${sanPham.giaDaGiam}</td>
                                         <td>
-                                            <button type="button" onclick="openUpdate(${cart.id}, ${cart.soLuong})"
-                                                    class="btn btn-primary" data-toggle="modal"
-                                                    data-target="#exampleModal">
-                                                update
-                                            </button>
-                                            <a href="/cart/delete/${cart.id}" class="btn btn-success"
+                                            <a href="/bill/update/${sanPham.id}?quantity=${sanPham.soLuong}" class="btn btn-success"
+                                               style="text-decoration: none;color: white; margin-top: 5px">Sửa số lượng</a>
+                                            <a href="/bill/delete-bill-detail/${sanPham.id}" class="btn btn-success"
                                                style="text-decoration: none;color: white; margin-top: 5px">Xoá</a>
                                         </td>
                                     </tr>
@@ -144,6 +149,17 @@
                                 </tbody>
 
                             </table>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-7"></div>
+                        <div class="col-5">
+                            <div class="row">
+                                <div class="row">Tổng tiền sản phẩm: ${hoaDon.tongTien + hoaDon.tongTienGiam}</div>
+                                <div class="row">Tiền giảm: ${hoaDon.tongTienGiam}</div>
+                                <div class="row">Tổng tiền: ${hoaDon.tongTien}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -155,28 +171,6 @@
 
 
 </section>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <form action="/bill/delete/${hoaDon.id}" method="get">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Hủy</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <textarea class="form-control" name="note" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
