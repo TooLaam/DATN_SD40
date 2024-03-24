@@ -5,6 +5,9 @@
 <head>
     <style>
         <%@include file="style.css" %>
+        .btn.selected {
+            background-color: #b5d199; /* Màu nền mới khi thẻ được chọn */
+        }
     </style>
 </head>
 
@@ -74,18 +77,19 @@
             <p><span style="font-weight: bold;">Color: </span></p>
 
             <c:forEach items="${listMS}" var="ms">
-                <a href="/hienthiKCCus/${sp[0]}/${ms[0]}" class="btn btn-light" style="margin-left: 30px;background-color: gainsboro">
+                <a id="mausac${ms[0]}" onclick="getDataForColor(${sp[0]},${ms[0]})" class="btn btn-light ${ms[0]}" style="margin-left: 30px">
                     <img width="100%" style="width: 20px;height: 20px" src="/assets/img/color/${ms[2]}" alt="Icon" class="icon">
                     <span class="text">${ms[1]}</span>
                 </a>
             </c:forEach>
 <%--            <span id="hienid">aloooo</span>--%>
             <p><span style="font-weight: bold;">Kích cỡ: </span></p>
+            <div id="productsContainer"></div>
 
 <%--            <input id="inputid" style="display: none" name="kichCo">--%>
-            <c:forEach items="${listKC}" var="ms">
-                <a onclick="getData('${ms[2]}','${ms[0]}')" class="btn btn-success" style="margin-left: 30px" >${ms[1]}</a>
-            </c:forEach><br><br>
+<%--            <c:forEach items="${listKC}" var="ms">--%>
+<%--                <a onclick="getData('${ms[2]}','${ms[0]}')" class="btn btn-success" style="margin-left: 30px" >${ms[1]}</a>--%>
+<%--            </c:forEach><br><br>--%>
 
             <div class="row mb-3">
                 <div style="padding-top: 17px" class="col-3 my-2">
@@ -105,24 +109,33 @@
             <div class="d-grid gap-2">
                 <div class="row">
                     <div class="col-10">
-                        <form method="get" action="/hienthiAddHD/${SP1.id}">
+                        <form id="addToCartForm">
                             <input style="display: none" id="inputid" name="kichCo" >
-                            <input style="display: none" value="${ms.id}" name="mauSac" >
+                            <input style="display: none"  id="mauSac" name="mauSac" >
                             <input style="display: none" readonly type="number" id="inputField2" class="inputTang" name="soLuong" value="1" required>
-                            <button class="btn btn-outline"  >THÊM VÀO GIỎ HÀNG</button>
+                            <c:choose>
+                                <c:when test="${idkh==null}">
+                                    <a class="btn btn-outline" href="/login?idsp=${SP1.id}&idms=${ms.id}">THÊM VÀO GIỎ HÀNG</a>
+                                </c:when>
+                                <c:otherwise>
+                                    <button type="button" class="btn btn-outline addToCartBtn">THÊM VÀO GIỎ HÀNG</button>
+                                </c:otherwise>
+                            </c:choose>
+
                         </form>
-
-
+<%--                        method="get" action="/hienthiAddHD/${SP1.id}"--%>
+<%--                        <button id="addToCartForm" class="btn btn-outline"  >THÊM VÀO GIỎ HÀNG</button>--%>
                     </div>
                 </div>
                 <form method="get" action="/hienthiAddHD/${SP1.id}">
                     <input style="display: none" id="inputid1" name="kichCo" >
                     <input style="display: none" value="${ms.id}" name="mauSac">
                     <input style="display: none" readonly type="number" id="inputField1" class="inputTang" name="soLuong" value="1" required>
-                    <button class="btn btn-outline"  >MUA NGAY</button>
+                    <button  class="btn btn-outline"  >MUA NGAY</button>
                 </form>
 
             </div>
+            <div style="display: none" id="idkh">${idkh}</div>
             <br>
             <strong>CAM KẾT CỦA SD40 SPORT</strong>
             <ul class="list-unstyled">
@@ -146,8 +159,51 @@
     </div>
     <br/>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
     <%@include file="logic.js" %>
+    $(document).ready(function() {
+        $(".addToCartBtn").click(function(e) {
+            e.preventDefault();
+            var kichC0 =$("#inputid").val();
+            var mauSac = $("#mauSac").val();
+            var soLuong = $("#inputField2").val();
+            if (!mauSac || !kichC0){
+                alert("Vui lòng chọn màu sắc và kích cỡ !!!")
+
+                return
+            }else{
+                var formData = {
+                    kichCo: kichC0,
+                    mauSac: mauSac,
+                    soLuong: soLuong
+                };
+
+                $.ajax({
+                    type: "GET",
+                    url: "/hienthiAddHD/${SP1.id}",
+                    data: formData,
+                    success: function (response) {
+                        console.log("Data sent successfully!");
+                        console.log(response);
+                        if (response === "update") {
+                            alert("Cập nhật vào giỏ hàng thành công !!!");
+                        } else if (response === "success") {
+                            var currentQuantity = parseInt($("#cartCount").text());
+                            var newQuantity = currentQuantity + 1;
+                            $("#cartCount").text(newQuantity);
+                            alert("Thêm vào giỏ hàng thành công!!!");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Thêm thất bại !!!");
+                        console.error("Error occurred while sending data: " + error);
+                    }
+                });
+            }});
+    });
+
+
 </script>
 

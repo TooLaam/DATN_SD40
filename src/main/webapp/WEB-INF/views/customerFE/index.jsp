@@ -29,6 +29,10 @@
             text-decoration: none; /* Loại bỏ gạch chân */
         }
 
+        .caption{
+            padding: 0.1rem;
+        }
+
     </style>
 </head>
 
@@ -44,15 +48,15 @@
         <c:choose>
             <c:when test="${khachHangCus == null}">
                 <li class="nav-item">
-                    <a class="nav-link" href="/signup">Sign Up</a>
+                    <a class="nav-link" href="/signup">Đăng ký</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link" href="/login">Đăng nhập</a>
                 </li>
             </c:when>
             <c:otherwise>
                 <li class="nav-item">
-                    <a class="nav-link" href="/logout">Sign Out</a>
+                    <a class="nav-link" href="/logout">Đăng xuất</a>
                 </li>
             </c:otherwise>
         </c:choose>
@@ -85,9 +89,9 @@
                             </a>
                         </li>
                         <li>
-                            <a style="text-decoration: none" href="/viewOrderCart">
+                            <a style="text-decoration: none" href="/hienthigiohangchitiet/${idkh}">
                                 <span class="fa fa-shopping-cart"></span>
-                                <span class="cart-number">${slspgh}</span>
+                                <span id="cartCount" class="cart-number">${slspgh}</span>
                             </a>
                         </li>
                     </c:if>

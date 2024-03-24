@@ -44,8 +44,8 @@
                 </div>
                 <div class="form-group">
                     <label for="receiverName">Địa chỉ cụ thể</label>
-                   <input type="text" class="form-control" placeholder="ngõ 54"
-                    name="diaChiNguoiNhan" required>
+                    <input type="text" class="form-control" placeholder="ngõ 54"
+                           name="diaChiNguoiNhan" required>
                 </div>
                 <div class="form-group">
                     <label for="receiverName">Email</label>
@@ -65,7 +65,7 @@
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="maPhuongThuc"  value="  Trả sau" id="flexRadioDefault2" checked>
+                        <input class="form-check-input" type="radio" name="maPhuongThuc"  value="Trả sau" id="flexRadioDefault2" checked>
                         <label class="form-check-label" for="flexRadioDefault2">
                             Trả sau
                         </label>

@@ -22,7 +22,7 @@
                                     <div class="row">
                                         <div class="">
                                             <label  class="form-label">Tên khách hàng: </label>
-                                            <input type="text" class="form-control" name="hoVaTen" required>
+                                            <input type="text" class="form-control" name="hoTen" required>
                                         </div>
                                         <div class="">
                                             <label  class="form-label">Ngày Sinh: </label>
@@ -32,7 +32,7 @@
                                     <div class="row">
                                         <div class="">
                                             <label  class="form-label">Số điện thoại: </label>
-                                            <input type="text" class="form-control"  name="soDienThoai" required>
+                                            <input type="text" class="form-control"  name="sdt" required>
                                         </div>
                                         <div class="">
                                             <label  class="form-label">email: </label>
@@ -55,7 +55,7 @@
                                                     <div class="form-check col-6">
                                                         <input class="form-check-input" type="radio"  value="1"  name="flexRadioDefault" id="flexRadioDefault2" checked>
                                                         <label class="form-check-label" for="flexRadioDefault2">
-                                                           Nữ
+                                                            Nữ
                                                         </label>
                                                     </div>
                                                 </div>
@@ -83,9 +83,3 @@
     </div>
 
 </section>
-
-
-
-
-
-

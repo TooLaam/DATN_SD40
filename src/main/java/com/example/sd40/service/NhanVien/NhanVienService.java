@@ -16,7 +16,7 @@ public interface NhanVienService {
 
     NhanVien update(NhanVienRequyest requyest);
 
-    
+
     boolean delete(Long id);
 
     NhanVien detail(Long id);

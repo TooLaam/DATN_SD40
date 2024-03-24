@@ -19,7 +19,7 @@ public interface CTSPMSHARepository extends JpaRepository<ChiTietSanPhamMauSacHi
             " join Mau_sac ms on ctmsha.mau_sac.Id = ms.Id where sp.id =?1")
     List<Object[]> findMSTheoSP (Long id);
 
-    @Query("select ha from SanPham sp join ChiTietSanPhamMauSacHinhAnh ha on sp.id = ha.sanPham.id where sp.id =?1")
+    @Query("select ha from SanPham sp join ChiTietSanPhamMauSacHinhAnh ha on sp.id = ha.sanPham.id where sp.id =?1 and ha.trangThai = 0")
     List<ChiTietSanPhamMauSacHinhAnh> getAllHinhAnhbyIDSP(Long id);
 
     @Query("select ct from ChiTietSanPhamMauSacHinhAnh ct where ct.sanPham.id =?1 and ct.mau_sac.Id=?2")

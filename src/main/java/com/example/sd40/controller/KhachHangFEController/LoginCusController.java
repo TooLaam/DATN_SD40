@@ -18,7 +18,9 @@ public class LoginCusController {
 
 
     @GetMapping("/login")
-    public String loginCus(Model model){
+    public String loginCus(Model model,@RequestParam(defaultValue = "0",value = "idsp")Long idsp,@RequestParam(defaultValue = "0",value = "idms")Long idms,HttpSession session){
+        session.setAttribute("idsp",idsp);
+        session.setAttribute("idms",idms);
         model.addAttribute("view", "/login/index.jsp");
         return "/customerFE/login/index";
     }
@@ -33,6 +35,9 @@ public class LoginCusController {
     public String logout(Model model, HttpSession session){
 //        model.addAttribute("view", "/signup/index.jsp");
         session.removeAttribute("khachHangCus");
+        session.removeAttribute("idKhachHang");
+        session.removeAttribute("idsp");
+        session.removeAttribute("idms");
         return "redirect:/login";
     }
 
@@ -45,6 +50,18 @@ public class LoginCusController {
 
             KhachHang checkLogin = khachHangCusService.login(username, password);
             if (checkLogin != null) {
+                Long idsp = (Long) session.getAttribute("idsp");
+                Long idms = (Long) session.getAttribute("idms");
+                if (idms !=0 && idsp !=0){
+                    session.setAttribute("khachHangCus", checkLogin);
+                    session.setAttribute("idKhachHang", checkLogin.getId());
+                    return "redirect:/hienthiKCCus/"+idsp+"/"+idms;
+                }
+                if (idsp != 0 && idms == 0) {
+                    session.setAttribute("khachHangCus", checkLogin);
+                    session.setAttribute("idKhachHang", checkLogin.getId());
+                    return "redirect:/detailsanphamcus/"+idsp;
+                }
                 session.setAttribute("khachHangCus", checkLogin);
                 session.setAttribute("idKhachHang", checkLogin.getId());
                 Long id = (Long) session.getAttribute("idKhachHang");
