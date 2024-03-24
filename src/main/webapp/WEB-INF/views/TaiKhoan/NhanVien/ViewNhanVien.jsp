@@ -39,9 +39,9 @@
                     <c:forEach items="${nhanViens}" var="nhanVien" varStatus="tt">
                         <tr>
                             <td>${nhanVien.id}</td>
-                            <td>${nhanVien.hoVaTen}</td>
+                            <td>${nhanVien.hoTen}</td>
                             <td>${nhanVien.gioiTinh ==0 ? "Nam" : "Nữ"}</td>
-                            <td>${nhanVien.soDienThoai}</td>
+                            <td>${nhanVien.sdt}</td>
                             <td>${nhanVien.email}</td>
                             <td>${nhanVien.ngaySinh}</td>
                             <td>${nhanVien.trangThai == 0 ? "Làm": "Nghỉ"}</td>

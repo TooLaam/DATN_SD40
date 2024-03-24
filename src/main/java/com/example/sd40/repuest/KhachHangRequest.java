@@ -12,13 +12,13 @@ public class KhachHangRequest {
 
     private Long idNhanVien;
 
-    private String hoVaTen;
+    private String hoTen;
 
     private String ngaySinh;
 
     private int gioiTinh;
 
-    private String soDienThoai;
+    private String sdt;
 
     private String email;
 

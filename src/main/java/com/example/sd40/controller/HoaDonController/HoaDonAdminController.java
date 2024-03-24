@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author quynh
@@ -26,10 +27,9 @@ public class HoaDonAdminController {
     @Autowired
     private HoaDonDetalService hoaDonDetalService;
 
-
-
     @GetMapping("/index")
     private String findAllByStatus( Model model){
+//        hoaDonService.create();
         model.addAttribute("choXacNhans", hoaDonService.findAllByStatus(0));
         model.addAttribute("xacNhans", hoaDonService.findAllByStatus(1));
         model.addAttribute("choVanChuyens", hoaDonService.findAllByStatus(2));
@@ -48,6 +48,13 @@ public class HoaDonAdminController {
         model.addAttribute("view","/HoaDon/detail.jsp");
         return "index";
     }
+
+    @GetMapping("/delete/{id}")
+    private String huyHoaDon(@PathVariable Long id, @RequestParam("note") String note, Model model){
+        hoaDonDetalService.delete(id, note);
+        return "redirect:/bill/index";
+    }
+
 
 }
 

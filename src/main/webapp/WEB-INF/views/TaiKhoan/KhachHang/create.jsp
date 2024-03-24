@@ -22,7 +22,7 @@
                                     <div class="row">
                                         <div class="">
                                             <label  class="form-label">Tên khách hàng: </label>
-                                            <input type="text" class="form-control" name="hoVaTen" required>
+                                            <input type="text" class="form-control" name="hoTen" required>
                                         </div>
                                         <div class="">
                                             <label  class="form-label">Ngày Sinh: </label>
@@ -32,7 +32,7 @@
                                     <div class="row">
                                         <div class="">
                                             <label  class="form-label">Số điện thoại: </label>
-                                            <input type="text" class="form-control"  name="soDienThoai" required>
+                                            <input type="text" class="form-control"  name="sdt" required>
                                         </div>
                                         <div class="">
                                             <label  class="form-label">email: </label>

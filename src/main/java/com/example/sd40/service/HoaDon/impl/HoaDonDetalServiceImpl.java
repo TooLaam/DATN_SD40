@@ -69,7 +69,6 @@ public class HoaDonDetalServiceImpl implements HoaDonDetalService {
         lichSu.setStatus(0);
         lichSuRepository.save(lichSu);
         hoaDonChiTietRepository.deleteById(id);
-
         return true;
     }
 

@@ -1,6 +1,6 @@
-package com.example.sd40.repository.HoaDon;
+package com.example.sd40.repository.Voucher;
 
-import com.example.sd40.entity.Hoa_don.Voucher;
+import com.example.sd40.entity.Voucher.Voucher;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

@@ -1,7 +1,7 @@
-package com.example.sd40.controller.TaiKhoan;
+package com.example.sd40.controller.NhanVienController;
 
 import com.example.sd40.repuest.NhanVienRequyest;
-import com.example.sd40.service.TaiKhoan.NhanVienService;
+import com.example.sd40.service.NhanVien.NhanVienService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

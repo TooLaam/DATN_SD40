@@ -1,8 +1,8 @@
-package com.example.sd40.controller.TaiKhoan;
+package com.example.sd40.controller.KhachHangController;
 
 
 import com.example.sd40.repuest.KhachHangRequest;
-import com.example.sd40.service.TaiKhoan.KhachHangService;
+import com.example.sd40.service.KhachHang.KhachHangService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
