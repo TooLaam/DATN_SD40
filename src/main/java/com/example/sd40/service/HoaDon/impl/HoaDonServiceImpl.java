@@ -140,19 +140,9 @@ public class HoaDonServiceImpl implements HoaDonService {
         hoaDon.setMaHoaDon("HD"+ new Random().nextInt(900) + 100);
         hoaDon.setNgayThanhToan(new Date());
         hoaDon.setTrangThai(0);
-//        hoaDon.setVoucher(voucherRepository.findById(resquest.getMaVoucher()).get());
-        if(!resquest.getIdUser().isEmpty()){
-            hoaDon.setKhachHang(khachHangRepository.findById(Long.parseLong(resquest.getIdUser())).get());
-        }
-        DateFormat dateFormat = new SimpleDateFormat("DD/MM/YYYY");
-
-        try {
-            // Chuyển chuỗi thành đối tượng Date
-            Date date = dateFormat.parse(resquest.getNgayNhan());
-            hoaDon.setNgayThanhToan(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+            hoaDon.setKhachHang(khachHangRepository.findById(Long.parseLong("1")).get());
+        DateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY");
+            hoaDon.setNgayThanhToan(new Date());
         hoaDon.setNgayTao(new Date());
         PhuongThucThanhToan phuongThucThanhToan = new PhuongThucThanhToan();
         phuongThucThanhToan.setTrangThai(0);

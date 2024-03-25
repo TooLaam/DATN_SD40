@@ -53,6 +53,9 @@ public class HoaDonDetalServiceImpl implements HoaDonDetalService {
     public HoaDonChiTiet save(HoaDonDetailRequest request) {
         HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
         BeanUtils.copyProperties(request, hoaDonChiTiet);
+        hoaDonChiTiet.setSoLuong(request.getQuantity());
+        hoaDonChiTiet.setGiaDaGiam(request.getPrice());
+        hoaDonChiTiet.setGiaHienHanh(request.getPrice());
         HoaDon hoaDon = hoaDonRepository.findById(request.getIdBill()).get();
         ChiTietSanPham chiTietSanPham = ctspRepository.findById(request.getIdChiTietSanPham()).get();
         chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong() - request.getQuantity());
@@ -60,6 +63,14 @@ public class HoaDonDetalServiceImpl implements HoaDonDetalService {
         hoaDonChiTiet.setHoaDon(hoaDon);
         hoaDonChiTiet.setChiTietSanPham(chiTietSanPham);
         hoaDonChiTietRepository.save(hoaDonChiTiet);
+        List<HoaDonChiTiet> hoaDonChiTiets = hoaDonChiTietRepository.findAllByHoaDon(hoaDonChiTiet.getHoaDon());
+        BigDecimal total = BigDecimal.ZERO;
+        for (HoaDonChiTiet item : hoaDonChiTiets) {
+            BigDecimal itemPrice = item.getGiaHienHanh().multiply(BigDecimal.valueOf(item.getSoLuong()));
+            total = total.add(itemPrice);
+        }
+        hoaDon.setTongTien(total.subtract(hoaDon.getTongTienGiam() == null ? new BigDecimal(0) : hoaDon.getTongTienGiam()));
+        hoaDonRepository.save(hoaDon);
         LichSu lichSu = new LichSu();
         lichSu.setHoaDon(hoaDon);
         lichSu.setNgayTao(System.currentTimeMillis());

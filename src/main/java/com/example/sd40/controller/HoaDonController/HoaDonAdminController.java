@@ -5,6 +5,7 @@ import com.example.sd40.repuest.HoaDonDetailRequest;
 import com.example.sd40.service.HoaDon.HoaDonDetalService;
 import com.example.sd40.service.HoaDon.HoaDonService;
 import com.example.sd40.service.HoaDon.LichSuService;
+import com.example.sd40.service.SanPham.CTSPService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,9 @@ public class HoaDonAdminController {
 
     @Autowired
     private HoaDonDetalService hoaDonDetalService;
+
+    @Autowired
+    private CTSPService ctspService;
 
     @GetMapping("/index")
     private String findAllByStatus( Model model){
@@ -91,6 +95,20 @@ public class HoaDonAdminController {
         return "index";
     }
 
+    @GetMapping("/create-bill-detail/{id}")
+    private String viewCreateBilldetail(@PathVariable Long id, Model model){
+        model.addAttribute("id",id);
+        model.addAttribute("sanPhams",ctspService.findAll());
+        model.addAttribute("view","/HoaDon/themSanPham.jsp");
+        return "index";
+    }
+
+
+    @PostMapping("/create-bill-detail/{id}")
+    private String createBilldetail(@PathVariable Long id,HoaDonDetailRequest request, Model model){
+        hoaDonDetalService.save(request);
+        return "redirect:/bill/detail/" + id;
+    }
     @PostMapping("/delete-bill-detail/{id}")
     private String xoaBilldetail(@PathVariable Long id,@RequestParam("note") String note, Model model){
         HoaDonChiTiet hoaDonChiTiet = hoaDonDetalService.delete(id,note);
