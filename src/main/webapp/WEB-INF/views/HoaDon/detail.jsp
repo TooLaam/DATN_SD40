@@ -7,7 +7,7 @@
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <div class="pagetitle">
-    <h1>Chi tiết sản phẩm</h1>
+    <h1>Chi tiết Hoá đơn</h1>
     <nav>
         <%--        <ol class="breadcrumb">--%>
         <%--            <li class="breadcrumb-item"><a href="/statisticsResult">Home</a></li>--%>
@@ -17,19 +17,18 @@
     </nav>
 </div>
 <!-- End Page Title -->
-
 <section class="section dashboard">
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <h4 class="row">Lịch sử</h4>
+                        <h4 class="row" style="margin: 20px 0; font-weight: 600 ; text-align: center">Lịch sử</h4>
                         <div class="row">
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th scope="col"></th>
+                                    <th scope="col">Stt</th>
                                     <th scope="col">Trạng thái</th>
                                     <th scope="col">Ngày</th>
                                     <th scope="col">Ghi chú</th>
@@ -58,16 +57,25 @@
                             </table>
                             <div class="row">
                                 <c:choose>
-                                    <c:when test="${hoaDon.trangThai == 0}">
-                                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#exampleModal">
-                                            hủy
-                                        </button>
+                                    <c:when test="${hoaDon.trangThai < 4}">
+                                        <a href="/bill/change/${hoaDon.id}" class="btn btn-success col-3"
+                                           style="text-decoration: none;color: white; margin-top: 5px">Thay đổi</a>
                                     </c:when>
                                     <c:otherwise>
                                         <%-- Nếu trạng thái không phải là 1, hiển thị button --%>
                                     </c:otherwise>
                                 </c:choose>
+                                <c:choose>
+                                    <c:when test="${hoaDon.trangThai == 0}">
+                                        <a href="/bill/delete/${hoaDon.id}" class="btn btn-danger col-3"
+                                           style="text-decoration: none;color: white; margin-top: 5px">Hủy</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <%-- Nếu trạng thái không phải là 1, hiển thị button --%>
+                                    </c:otherwise>
+                                </c:choose>
+
+
                             </div>
                         </div>
                     </div>
@@ -75,7 +83,7 @@
 
                     <!-- Modal -->
                     <div class="row">
-                        <h4 class="row">Hóa Đơn</h4>
+                        <h4 class="row" style="margin: 20px 0; font-weight: 600 ; text-align: center">Hóa Đơn</h4>
                         <div class="row">
                             <div class="col-6">Mã hóa đơn: ${hoaDon.maHoaDon}</div>
                             <div class="col-6">Tên Khách hàng: ${hoaDon.khachHang.hoTen}</div>
@@ -92,7 +100,7 @@
                                     var hoaDonNgayThanhToan = ${hoaDon.ngayThanhToan};
                                     var formattedDate = "";
                                     if (hoaDonNgayThanhToan) {
-                                        formattedDate = moment(hoaDonNgayThanhToan * 1000).format("DD/MM/YYYY");
+                                        formattedDate = moment(hoaDonNgayThanhToan * 1000).format("dd/MM/yyyy HH:mm:ss");
                                     }
                                     document.getElementById('formattedDate').textContent = "Ngày nhận dự kiến: " + formattedDate;
                                 });
@@ -100,9 +108,22 @@
                         </div>
                     </div>
                     <div class="row">
-                        <h4 class="row">Sản phẩm</h4>
-                        <div class="row">
+                        <div class="row" style="margin: 30px 0 ;">
+                            <h4 class="col-10" style=" font-weight: 600 ;">Sản phẩm</h4>
+                            <div class="col-2">
+                                <c:choose>
+                                    <c:when test="${hoaDon.trangThai == 0}">
+                                        <a href="/bill/create-bill-detail/${hoaDon.id}" class="btn btn-success"
+                                           style="text-decoration: none;color: white; margin-top: 5px">Thêm sản phẩm</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <%-- Nếu trạng thái không phải là 1, hiển thị button --%>
+                                    </c:otherwise>
+                                </c:choose>
 
+                            </div>
+                        </div>
+                        <div class="row">
                         </div>
                         <div class="row">
                             <table class="table table-borderless datatable">
@@ -131,19 +152,34 @@
                                                 ${sanPham.soLuong}</td>
                                         <td>${sanPham.giaDaGiam}</td>
                                         <td>
-                                            <button type="button" onclick="openUpdate(${cart.id}, ${cart.soLuong})"
-                                                    class="btn btn-primary" data-toggle="modal"
-                                                    data-target="#exampleModal">
-                                                update
-                                            </button>
-                                            <a href="/cart/delete/${cart.id}" class="btn btn-success"
-                                               style="text-decoration: none;color: white; margin-top: 5px">Xoá</a>
+                                            <c:choose>
+                                                <c:when test="${hoaDon.trangThai == 0}">
+                                                    <a href="/bill/update/${sanPham.id}?quantity=${sanPham.soLuong}" class="btn btn-success"
+                                                       style="text-decoration: none;color: white; margin-top: 5px">Sửa số lượng</a>
+                                                    <a href="/bill/delete-bill-detail/${sanPham.id}" class="btn btn-danger  "
+                                                       style="text-decoration: none;color: white; margin-top: 5px">Xoá</a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <%-- Nếu trạng thái không phải là 1, hiển thị button --%>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
 
                             </table>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin: 40px 0 ;">
+                        <div class="col-7"></div>
+                        <div class="col-5">
+                            <div class="row" style="font-size: 24px; font-weight: 600">
+                                <div class="row" >Tổng tiền sản phẩm: ${hoaDon.tongTien + hoaDon.tongTienGiam}</div>
+                                <div class="row">Tiền giảm: ${hoaDon.tongTienGiam}</div>
+                                <div class="row">Tổng tiền: ${hoaDon.tongTien}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -155,28 +191,6 @@
 
 
 </section>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <form action="/bill/delete/${hoaDon.id}" method="get">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Hủy</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <textarea class="form-control" name="note" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"

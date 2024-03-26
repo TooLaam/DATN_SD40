@@ -24,7 +24,7 @@
                     <h5 class="card-title">Hóa đơn <span>| </span></h5>
 
                     <div class="">
-                        <div class="container mt-5">
+                        <div class="container " style="    max-width: 100%;">
                             <!-- Tabs navigation -->
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
@@ -49,8 +49,7 @@
 
                             <!-- Tabs content -->
                             <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="chơ_xac_nhan" role="tabpanel" aria-labelledby="home-tab">
-                                    <h5>Chờ Xác nhận</h5>
+                                <div class="tab-pane fade show active" id="cho_xac_nhan" role="tabpanel" aria-labelledby="home-tab">
                                     <table class="table table-borderless datatable">
                                         <thead>
                                         <tr>
@@ -83,7 +82,6 @@
                                     </table>
                                 </div>
                                 <div class="tab-pane fade" id="xac_nhan" role="tabpanel" aria-labelledby="profile-tab">
-                                    <h5>Xác nhận</h5>
                                     <table class="table table-borderless datatable">
                                         <thead>
                                         <tr>
@@ -116,7 +114,6 @@
                                     </table>
                                 </div>
                                 <div class="tab-pane fade" id="cho_van_chuyen" role="tabpanel" aria-labelledby="contact-tab">
-                                    <h5>Chờ vận chuyển</h5>
                                     <table class="table table-borderless datatable">
                                         <thead>
                                         <tr>
@@ -149,7 +146,6 @@
                                     </table>
                                 </div>
                                 <div class="tab-pane fade" id="van_chuyen" role="tabpanel" aria-labelledby="contact-tab">
-                                    <h5>Vận chuyển</h5>
                                     <table class="table table-borderless datatable">
                                         <thead>
                                         <tr>
@@ -182,7 +178,6 @@
                                     </table>
                                 </div>
                                 <div class="tab-pane fade" id="hoan_thanh" role="tabpanel" aria-labelledby="contact-tab">
-                                    <h5>Hoàn thành</h5>
                                     <table class="table table-borderless datatable">
                                         <thead>
                                         <tr>
@@ -215,7 +210,6 @@
                                     </table>
                                 </div>
                                 <div class="tab-pane fade" id="huy" role="tabpanel" aria-labelledby="contact-tab">
-                                    <h5>Hủy</h5>
                                     <table class="table table-borderless datatable">
                                         <thead>
                                         <tr>

@@ -63,6 +63,9 @@ public class HoaDonServiceImpl implements HoaDonService {
     @Override
     public String changeStatus(long id, String note) {
         HoaDon hoaDon = hoaDonRepository.findById(id).get();
+        if(hoaDon.getTrangThai() == 4){
+            return null;
+        }
         hoaDon.setTrangThai(hoaDon.getTrangThai() + 1);
         hoaDonRepository.save(hoaDon);
         LichSu lichSu = new LichSu();
@@ -137,19 +140,9 @@ public class HoaDonServiceImpl implements HoaDonService {
         hoaDon.setMaHoaDon("HD"+ new Random().nextInt(900) + 100);
         hoaDon.setNgayThanhToan(new Date());
         hoaDon.setTrangThai(0);
-//        hoaDon.setVoucher(voucherRepository.findById(resquest.getMaVoucher()).get());
-        if(!resquest.getIdUser().isEmpty()){
-            hoaDon.setKhachHang(khachHangRepository.findById(Long.parseLong(resquest.getIdUser())).get());
-        }
-        DateFormat dateFormat = new SimpleDateFormat("DD/MM/YYYY");
-
-        try {
-            // Chuyển chuỗi thành đối tượng Date
-            Date date = dateFormat.parse(resquest.getNgayNhan());
-            hoaDon.setNgayThanhToan(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+            hoaDon.setKhachHang(khachHangRepository.findById(Long.parseLong("1")).get());
+        DateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY");
+            hoaDon.setNgayThanhToan(new Date());
         hoaDon.setNgayTao(new Date());
         PhuongThucThanhToan phuongThucThanhToan = new PhuongThucThanhToan();
         phuongThucThanhToan.setTrangThai(0);
