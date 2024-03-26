@@ -66,6 +66,11 @@ public class HoaDonServiceImpl implements HoaDonService {
         if(hoaDon.getTrangThai() == 4){
             return null;
         }
+        if(hoaDon.getTrangThai() == 3){
+            PhuongThucThanhToan phuongThucThanhToan = hoaDon.getPhuongThucThanhToan();
+            phuongThucThanhToan.setTrangThai(1);
+            phuongThucThanhToanRepository.save(phuongThucThanhToan);
+        }
         hoaDon.setTrangThai(hoaDon.getTrangThai() + 1);
         hoaDonRepository.save(hoaDon);
         LichSu lichSu = new LichSu();
