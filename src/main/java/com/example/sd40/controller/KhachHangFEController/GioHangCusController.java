@@ -1,9 +1,12 @@
 package com.example.sd40.controller.KhachHangFEController;
 
 import com.example.sd40.entity.Gio_hang.GioHangChiTiet;
+import com.example.sd40.entity.San_pham.ChiTietSanPham;
+import com.example.sd40.entity.San_pham.ChiTietSanPhamMauSacHinhAnh;
 import com.example.sd40.service.GioHang.GioHangChiTietService;
 import com.example.sd40.service.GioHang.GioHangService;
 import com.example.sd40.service.KhachHang.KhachHangCusService;
+import com.example.sd40.service.KhachHang.TinhThanhPhoService;
 import com.example.sd40.service.SanPham.CTSPMSHAService;
 import com.example.sd40.service.SanPham.CTSPService;
 import jakarta.servlet.http.HttpSession;
@@ -26,6 +29,8 @@ public class GioHangCusController {
     CTSPService ctspService;
     @Autowired
     CTSPMSHAService ctspmshaService;
+    @Autowired
+    TinhThanhPhoService tinhThanhPhoService;
 
     @Autowired
     KhachHangCusService khachHangCusService;
@@ -99,4 +104,6 @@ public class GioHangCusController {
         // Trả về phản hồi cho máy khách
         return ResponseEntity.ok("Product deleted successfully");
     }
+
+
 }

@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <head>
+    <meta charset="utf-8">
     <style>
         <%@include file="style.css" %>
         .btn.selected {
@@ -33,8 +34,16 @@
                             <p><span class="text-content">${sp[3]} Đã bán</span></p>
                             <p><span class="text-content">Thương hiệu: ${SP1.thuongHieu.ten}  |  Thể loại: ${SP1.theLoai.ten}</span></p>
 
-                            <span style="text-decoration: line-through" class="priceGiam">$ <fmt:formatNumber value="${sp[8]}" pattern="###,###"/>đ </span>
-                            <p class="price">$ <fmt:formatNumber value="${sp[6]}" pattern="###,###"/>đ </p>
+                            <div id="giaChung">
+                                <span style="text-decoration: line-through" class="priceGiam">$ <fmt:formatNumber value="${sp[8]}" pattern="###,###"/>đ </span>
+                                <p class="price">$ <fmt:formatNumber value="${sp[6]}" pattern="###,###"/>đ </p>
+                            </div>
+
+                            <div id="priceHienTaiGoc" style="text-decoration: line-through" class="priceGiam">
+                            </div>
+                            <div id="priceHienTaiGiam" class="price">
+                            </div>
+
 
 
                         </c:when>
@@ -44,9 +53,16 @@
 
                             <p><span class="text-content">Thương hiệu: ${SP1.thuongHieu.ten}  |  Thể loại: ${SP1.theLoai.ten}</span></p>
 
-                            <span style="text-decoration: line-through" class="priceGiam">$ <fmt:formatNumber value="${sp[9]}" pattern="###,###"/>đ - <fmt:formatNumber value="${sp[8]}" pattern="###,###"/>đ</span>
-                            <p  id="priceHienTai" class="price" >$ <fmt:formatNumber value="${sp[7]}" pattern="###,###"/>đ - <fmt:formatNumber value="${sp[6]}" pattern="###,###"/>đ </p>
+                            <div id="giaChung">
+                                <span style="text-decoration: line-through" class="priceGiam">$ <fmt:formatNumber value="${sp[9]}" pattern="###,###"/>đ - <fmt:formatNumber value="${sp[8]}" pattern="###,###"/>đ</span>
+                                <p class="price" >$ <fmt:formatNumber value="${sp[7]}" pattern="###,###"/>đ - <fmt:formatNumber value="${sp[6]}" pattern="###,###"/>đ </p>
+                            </div>
 
+                            <div id="priceHienTaiGoc" style="text-decoration: line-through" class="priceGiam">
+
+                            </div>
+                            <div id="priceHienTaiGiam" class="price">
+                            </div>
                         </c:otherwise>
                     </c:choose>
                 </c:when>
@@ -57,16 +73,25 @@
                             <h5>${sp[1]}</h5>
                             <p><span class="text-content">${sp[3]} Đã bán</span></p>
                             <p><span class="text-content">Thương hiệu: ${SP1.thuongHieu.ten}  |  Thể loại: ${SP1.theLoai.ten}</span></p>
+                            <div id="giaChung1">
+                                <span class="price">$ <fmt:formatNumber value="${sp[8]}" pattern="###,###"/>đ </span>
+                            </div>
 
-                            <span class="price">$ <fmt:formatNumber value="${sp[8]}" pattern="###,###"/>đ </span>
+                            <div id="priceHienTaiGiam" class="price">
+                            </div>
+
                         </c:when>
                         <c:otherwise>
                             <h5>${sp[1]}</h5>
                             <p><span class="text-content">${sp[3]} Đã bán | ${sp[5]} Sản phẩm có sẵn</span></p>
                             <p><span class="text-content">Thương hiệu: ${SP1.thuongHieu.ten}  |  Thể loại: ${SP1.theLoai.ten}</span></p>
+                            <div id="giaChung1">
+                                <span  class="price" >$ <fmt:formatNumber value="${sp[9]}" pattern="###,###"/>đ - <fmt:formatNumber value="${sp[8]}" pattern="###,###"/>đ</span>
+                            </div>
 
+                            <div id="priceHienTaiGiam" class="price">
 
-                            <span class="price" >$ <fmt:formatNumber value="${sp[9]}" pattern="###,###"/>đ - <fmt:formatNumber value="${sp[8]}" pattern="###,###"/>đ</span>
+                            </div>
                         </c:otherwise>
                     </c:choose>
 
@@ -77,7 +102,7 @@
             <p><span style="font-weight: bold;">Color: </span></p>
 
             <c:forEach items="${listMS}" var="ms">
-                <a id="mausac${ms[0]}" onclick="getDataForColor(${sp[0]},${ms[0]})" class="btn btn-light ${ms[0]}" style="margin-left: 30px">
+                <a id="mausac${ms[0]}" onclick="getDataForColor(${sp[0]},${ms[0]},${ms[3]},${ms[4]},${ms[5]})" class="btn btn-light ${ms[0]}" style="margin-left: 30px">
                     <img width="100%" style="width: 20px;height: 20px" src="/assets/img/color/${ms[2]}" alt="Icon" class="icon">
                     <span class="text">${ms[1]}</span>
                 </a>
@@ -86,10 +111,6 @@
             <p><span style="font-weight: bold;">Kích cỡ: </span></p>
             <div id="productsContainer"></div>
 
-<%--            <input id="inputid" style="display: none" name="kichCo">--%>
-<%--            <c:forEach items="${listKC}" var="ms">--%>
-<%--                <a onclick="getData('${ms[2]}','${ms[0]}')" class="btn btn-success" style="margin-left: 30px" >${ms[1]}</a>--%>
-<%--            </c:forEach><br><br>--%>
 
             <div class="row mb-3">
                 <div style="padding-top: 17px" class="col-3 my-2">
@@ -123,16 +144,17 @@
                             </c:choose>
 
                         </form>
-<%--                        method="get" action="/hienthiAddHD/${SP1.id}"--%>
-<%--                        <button id="addToCartForm" class="btn btn-outline"  >THÊM VÀO GIỎ HÀNG</button>--%>
+
                     </div>
                 </div>
-                <form method="get" action="/hienthiAddHD/${SP1.id}">
-                    <input style="display: none" id="inputid1" name="kichCo" >
-                    <input style="display: none" value="${ms.id}" name="mauSac">
-                    <input style="display: none" readonly type="number" id="inputField1" class="inputTang" name="soLuong" value="1" required>
-                    <button  class="btn btn-outline"  >MUA NGAY</button>
-                </form>
+                        <form id="buyForm"  action="/bill/hienthisanpham/${SP1.id}" method="get">
+                            <input style="display: none" id="inputid1" name="kichCo">
+                            <input style="display: none" id="mauSac1" name="mauSac">
+                            <input style="display: none" readonly type="number" id="inputField1" class="inputTang" name="soLuong" value="1">
+                            <button id="buyButton" class="btn btn-outline"  >MUA NGAY</button>
+
+                        </form>
+
 
             </div>
             <div style="display: none" id="idkh">${idkh}</div>
@@ -204,6 +226,96 @@
             }});
     });
 
+    document.getElementById('buyButton').addEventListener('click', function(event) {
+        event.preventDefault(); // Ngăn chặn chuyển hướng mặc định
 
+        var kichCo = document.getElementById('inputid1').value;
+        var mauSac = document.getElementById('mauSac1').value;
+
+
+        if (!kichCo || !mauSac) {
+            alert("Vui lòng chọn màu săc và kích cỡ!"); // Hiển thị cảnh báo nếu có trường input không được điền đầy đủ
+            return; // Dừng việc chuyển hướng nếu có lỗi
+        }
+
+        // Nếu mọi thông tin đã được điền đầy đủ, thực hiện chuyển hướng
+        document.getElementById('buyForm').submit();
+    });
+
+
+    var previousSelectedId = null;
+    function getDataForColor(idsp, idms,giaGoc,mucGiam,giaGiam) {
+
+        var element = document.getElementById('mausac' + idms);
+
+        if (previousSelectedId !== null) {
+            var previousSelected = document.getElementById('mausac' + previousSelectedId);
+            previousSelected.classList.remove('red-background'); // Xóa class red-background từ nút trước đó
+        }
+
+        element.classList.add('red-background'); // Thêm class red-background cho nút hiện tại
+        previousSelectedId = idms;
+
+
+        console.log(idsp);
+        console.log(idms);
+        console.log(giaGoc);
+        console.log(giaGiam);
+        console.log(mucGiam);
+        var giaChung = document.getElementById("giaChung");
+        var giaChung1 = document.getElementById("giaChung1");
+        var priceHienTaiGiam = document.getElementById("priceHienTaiGiam");
+        var priceHienTaiGoc = document.getElementById("priceHienTaiGoc");
+
+
+        if (mucGiam != null && mucGiam > 0) {
+            giaChung.style.display = "none";
+            if (giaGoc == giaGiam) {
+                priceHienTaiGoc.innerHTML = '$ ' + formatNumber(giaGoc) + 'đ';
+                priceHienTaiGiam.innerHTML = '$ ' + formatNumber(giaGiam) + 'đ';
+            } else {
+                priceHienTaiGoc.innerHTML = '$ ' + formatNumber(giaGoc) + 'đ';
+                priceHienTaiGiam.innerHTML = '$ ' + formatNumber(giaGiam) + 'đ';
+            }
+        } else {
+            if (giaGoc == giaGiam) {
+                giaChung1.style.display = "none";
+                priceHienTaiGiam.innerHTML = '$ ' + formatNumber(giaGoc) + 'đ';
+            } else {
+                giaChung1.style.display = "none";
+                priceHienTaiGiam.innerHTML = '$ ' + formatNumber(giaGoc) + 'đ';
+            }
+        }
+
+        $.ajax({
+            type: "GET",
+            url: "/hienthiKCCus/" + idsp + "/" + idms,
+            success: function (response) {
+                $('#productsContainer').empty();
+
+                // Lặp qua danh sách dữ liệu và tạo thẻ <a> cho mỗi mục
+                $.each(response, function (index, data) {
+                    var idkc = data[0]; // Giả sử thông tin thứ nhất ở vị trí đầu tiên
+                    var ten = data[1]; // Giả sử thông tin thứ hai ở vị trí thứ hai
+                    var soLuong = data[2]; // Giả sử thông tin thứ hai ở vị trí thứ hai
+
+                    // Tạo thẻ <a> với các thông tin và gán sự kiện onclick
+                    var linkHTML = '<a id="kichco' + idkc + '" data-info="' + idkc + ',' + ten + '" onclick="getData(' + soLuong + ',\'' + idkc + '\',\'' + idms + '\')" class="btn btn-success" style="margin-left: 30px">' + ten + '</a>';
+
+                    // Thêm thẻ <a> vào container
+                    $('#productsContainer').append(linkHTML);
+                    $('#productsContainer a').on('click', function () {
+                        $('#productsContainer a').removeClass('red-background'); // Xóa class red-background từ tất cả các phần tử khác
+                        $(this).addClass('red-background'); // Thêm class red-background cho phần tử được click
+                    });
+                });
+            },
+            error: function (xhr, status, error) {
+                // Xử lý lỗi
+                console.error("Error occurred while fetching data: " + error);
+            }
+        });
+
+    }
 </script>
 

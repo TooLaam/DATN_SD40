@@ -9,7 +9,7 @@ import com.example.sd40.entity.San_pham.ChiTietSanPham;
 import com.example.sd40.repository.GioHang.GioHangRepository;
 import com.example.sd40.repository.HoaDon.*;
 import com.example.sd40.repository.SanPham.CTSPRepository;
-import com.example.sd40.repository.TaiKhoan.KhachHangRepository;
+import com.example.sd40.repository.KhachHang.KhachHangRepository;
 import com.example.sd40.repuest.HoaDonKhachHangResquest;
 import com.example.sd40.service.HoaDon.HoaDonService;
 import jakarta.transaction.Transactional;

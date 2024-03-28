@@ -1,5 +1,6 @@
 package com.example.sd40.controller.KhachHangFEController;
 
+import com.example.sd40.entity.San_pham.ChiTietSanPhamMauSacHinhAnh;
 import com.example.sd40.service.GioHang.GioHangChiTietService;
 import com.example.sd40.service.SanPham.*;
 import com.example.sd40.service.KhachHang.KhachHangCusService;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class SanPhamFEController {
@@ -268,35 +271,6 @@ public class SanPhamFEController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
-//        Long idKH = (Long) session.getAttribute("idKhachHang");
-//        if (idKH == null) {
-//            model.addAttribute("sp",ctspService.detailSanPhamCus(idsp));
-//            model.addAttribute("listMS",ctspmshaService.findMSTheoSP(idsp));
-//            model.addAttribute("listHA",ctspmshaService.getAllHinhAnhbyIDSP(idsp));
-//            model.addAttribute("SP1", sanPhamService.detail(idsp));
-//            model.addAttribute("listKC",ctspService.findKCTheoSP(idsp,idms));
-//            model.addAttribute("ms",mauSacService.detail(idms));
-//            model.addAttribute("idkh", idKH);
-//
-//            model.addAttribute("view", "/detail/index.jsp");
-//            return "/customerFE/index";
-//        }
-//        else {
-//            model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
-//            model.addAttribute("idkh",idKH );
-//            model.addAttribute("sp",ctspService.detailSanPhamCus(idsp));
-//            model.addAttribute("listMS",ctspmshaService.findMSTheoSP(idsp));
-//            model.addAttribute("listHA",ctspmshaService.getAllHinhAnhbyIDSP(idsp));
-//            model.addAttribute("SP1", sanPhamService.detail(idsp));
-//            model.addAttribute("listKC",ctspService.findKCTheoSP(idsp,idms));
-//            model.addAttribute("ms",mauSacService.detail(idms));
-//            model.addAttribute("idkh", idKH);
-//
-//            model.addAttribute("view", "/detail/index.jsp");
-//            return "/customerFE/index";
-//        }
-
 
 
 }

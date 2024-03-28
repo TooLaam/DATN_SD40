@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface CTSPMSHARepository extends JpaRepository<ChiTietSanPhamMauSacHinhAnh,Long> {
-    @Query("select ms.Id,ms.ten,ms.hinhAnh from SanPham sp join ChiTietSanPhamMauSacHinhAnh ctmsha on sp.id = ctmsha.sanPham.id" +
+    @Query("select ms.Id,ms.ten,ms.hinhAnh, ctmsha.giaHienHanh,ctmsha.sanPham.giamGIa.mucGiam,(ctmsha.giaHienHanh*(100-ctmsha.sanPham.giamGIa.mucGiam))/100 from SanPham sp join ChiTietSanPhamMauSacHinhAnh ctmsha on sp.id = ctmsha.sanPham.id" +
             " join Mau_sac ms on ctmsha.mau_sac.Id = ms.Id where sp.id =?1 and ctmsha.trangThai = 0")
     List<Object[]> findMSTheoSPDangDung (Long id);
     @Query("select ms.Id,ms.ten,ms.hinhAnh from SanPham sp join ChiTietSanPhamMauSacHinhAnh ctmsha on sp.id = ctmsha.sanPham.id" +
@@ -24,6 +24,7 @@ public interface CTSPMSHARepository extends JpaRepository<ChiTietSanPhamMauSacHi
 
     @Query("select ct from ChiTietSanPhamMauSacHinhAnh ct where ct.sanPham.id =?1 and ct.mau_sac.Id=?2")
     ChiTietSanPhamMauSacHinhAnh getHAbySPandMS(Long idsp, Long idms);
+
 
     @Query("select ms from Mau_sac ms where ms.trangThai = 0 and ms.Id not in (select ct.mau_sac.Id from ChiTietSanPhamMauSacHinhAnh ct where ct.sanPham.id =?1)")
     List<Mau_sac> getMSNotInCTSPMSByIdsp(Long id );
