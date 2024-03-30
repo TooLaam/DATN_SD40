@@ -26,6 +26,8 @@ public interface CTSPService {
     List<Object> getAllSPCusByGiamGia();
     Object detailSanPhamCus(Long idsp);
     List<Object[]> findKCTheoSPDangDung(Long idsp,Long idms);
+    ChiTietSanPham detail(Long idctsp);
+    void truSanPhamSauKhiMua(Integer soLuongMua,Long idctsp);
 
 
 

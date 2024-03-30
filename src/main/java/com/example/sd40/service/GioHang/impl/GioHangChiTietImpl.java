@@ -1,5 +1,6 @@
 package com.example.sd40.service.GioHang.impl;
 
+import com.example.sd40.entity.Gio_hang.GioHang;
 import com.example.sd40.entity.Gio_hang.GioHangChiTiet;
 import com.example.sd40.repository.GioHang.GioHangChiTietRepository;
 import com.example.sd40.service.GioHang.GioHangChiTietService;
@@ -45,5 +46,10 @@ public class GioHangChiTietImpl implements GioHangChiTietService {
     @Override
     public List<GioHangChiTiet> kiemTraAddGHCT(Long idctsp) {
         return gioHangChiTietRepository.kiemTraAddGHCT(idctsp);
+    }
+
+    @Override
+    public GioHangChiTiet kiemTraSoLuongTruocKhiUpdate(Long idGHCT) {
+        return gioHangChiTietRepository.kiemTraSoLuongTruocKhiUpdate(idGHCT);
     }
 }

@@ -89,8 +89,13 @@ public class GioHangCusController {
                                                    @RequestParam("soluong")Integer soluong) {
         try {
             // Gọi phương thức trong service để cập nhật số lượng sản phẩm
-            gioHangChiTietService.updateSoLuong(soluong,idghct);
-            return ResponseEntity.ok("Quantity updated successfully");
+            GioHangChiTiet gioHangChiTiet = gioHangChiTietService.kiemTraSoLuongTruocKhiUpdate(idghct);
+            if (gioHangChiTiet.getSoLuong() == gioHangChiTiet.getChiTietSanPham().getSoLuong()){
+                return ResponseEntity.ok("ko");
+            }else {
+                gioHangChiTietService.updateSoLuong(soluong, idghct);
+                return ResponseEntity.ok("ok");
+            }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating quantity");
         }

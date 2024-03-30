@@ -24,6 +24,9 @@ public interface GioHangChiTietRepository extends JpaRepository<GioHangChiTiet, 
     @Query("select ghct from GioHangChiTiet ghct where ghct.chiTietSanPham.Id =?1 ")
     List<GioHangChiTiet> kiemTraAddGHCT(Long idctsp);
 
+    @Query("select gh from GioHangChiTiet gh where gh.id =?1")
+    GioHangChiTiet kiemTraSoLuongTruocKhiUpdate(Long idGHCT);
+
     @Transactional
     @Modifying
     @Query("update GioHangChiTiet ghct set ghct.soLuong =ghct.soLuong +?1 where ghct.chiTietSanPham.Id =?2")

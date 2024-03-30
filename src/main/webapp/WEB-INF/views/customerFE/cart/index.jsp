@@ -151,6 +151,7 @@ function giamSoLuong(ghctId) {
             soluong: currentValue -1 // Số lượng mới
         },
         success: function(response) {
+
             // Xử lý phản hồi từ server (nếu cần)
             console.log('Quantity updated successfully!');
         },
@@ -178,6 +179,10 @@ function tangSoLuong(ghctId) {
             soluong: currentValue +1 // Số lượng mới
         },
         success: function(response) {
+            if (response === "ko"){
+                alert("Số lượng không đủ")
+                    return;
+            }else if (response ==="ok")
             // Xử lý phản hồi từ server (nếu cần)
             console.log('Quantity updated successfully!');
         },

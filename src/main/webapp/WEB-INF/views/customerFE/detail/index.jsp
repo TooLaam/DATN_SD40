@@ -191,6 +191,11 @@
             var kichC0 =$("#inputid").val();
             var mauSac = $("#mauSac").val();
             var soLuong = $("#inputField2").val();
+            var hiensl = $("#hiensl").val();
+            if (soLuong>hiensl){
+                alert("Số lượng sản phẩm không đủ")
+                return;
+            }
             if (!mauSac || !kichC0){
                 alert("Vui lòng chọn màu sắc và kích cỡ !!!")
 
@@ -231,20 +236,28 @@
 
         var kichCo = document.getElementById('inputid1').value;
         var mauSac = document.getElementById('mauSac1').value;
+        var soLuong = $("#inputField1").val();
+        var hiensl = $("#hiensl").val();
 
-
+        if (soLuong>hiensl){
+            alert("Số lượng sản phẩm không đủ")
+            return;
+        }
         if (!kichCo || !mauSac) {
             alert("Vui lòng chọn màu săc và kích cỡ!"); // Hiển thị cảnh báo nếu có trường input không được điền đầy đủ
             return; // Dừng việc chuyển hướng nếu có lỗi
         }
-
-        // Nếu mọi thông tin đã được điền đầy đủ, thực hiện chuyển hướng
-        document.getElementById('buyForm').submit();
+        else {
+            // Nếu mọi thông tin đã được điền đầy đủ, thực hiện chuyển hướng
+            document.getElementById('buyForm').submit();
+        }
     });
 
 
     var previousSelectedId = null;
     function getDataForColor(idsp, idms,giaGoc,mucGiam,giaGiam) {
+        document.getElementById('inputid').value = null;
+        document.getElementById('inputid1').value = null;
 
         var element = document.getElementById('mausac' + idms);
 

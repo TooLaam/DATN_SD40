@@ -17,17 +17,32 @@
         <div style="margin-top: 20px" class="row">
             <div class="col-md-6">
                 <label  class="form-label">Tên người nhận: </label>
-                <input required type="text" class="form-control" name="ten">
+                <div class="input-wrapper">
+                    <span> <input style="width: 300px"  required type="text" class="form-control" oninput="layThongTinThanhToan2()" id="ten" name="ten"></span>
+                    <span id="tenErr" style="color: red;padding-left: 20px"></span>
+                </div>
 
-                <label  class="form-label">Số điện thoại: </label>
-                <input required type="text" class="form-control" name="sdt">
+
+
+                    <label  class="form-label">Số điện thoại: </label>
+                <div class="input-wrapper">
+                    <span><input style="width: 300px" oninput="validatePhoneNumber()"  id="sdtNhan" required type="text" class="form-control" name="sdt"></span>
+                    <span id="phoneError" style="color: red;padding-left: 20px"></span>
+                </div>
+
+                <label  class="form-label">Email: </label>
+                <div class="input-wrapper">
+                    <span> <input style="width: 300px" oninput="validateEmail()" required type="text" class="form-control" id="email" name="email"></span>
+                    <span id="EmailErr" style="color: red;padding-left: 20px"></span>
+                </div>
             </div>
             <div style="margin-top: 33px" class="col-md-6">
 
                 <div class="input-wrapper">
                     <label class="form-label">Tỉnh/Thành phố: </label>
-                    <input style="width: 300px" type="text" class="search-input" list="provinces" id="provinceInput" name="province" data-selected-id="" placeholder="Tìm kiếm tỉnh/thành phố">
+                    <input style="width: 300px" type="text" class="search-input" oninput="layThongTinThanhToan2()" list="provinces" id="provinceInput" name="province" data-selected-id="" placeholder="Tìm kiếm tỉnh/thành phố">
                     <span id="errorText" class="error-message">Tỉnh không hợp lệ !</span>
+                    <span id="tinhErr" class="error-message"></span>
                 </div>
 
                 <datalist id="provinces">
@@ -40,7 +55,11 @@
 
 
                 <label style="margin-top: 2px"  class="form-label">Địa chỉ chi tiết: </label>
-                <input required type="text" class="form-control" name="diachi">
+                <div class="input-wrapper">
+                    <span><input required type="text" class="form-control" id="diaChiChiTietCho" oninput="layThongTinThanhToan2()" name="diachi"></span>
+                    <span id="dcctError" style="color: red;padding-left: 20px"></span>
+                </div>
+
             </div>
         </div>
     </div>
@@ -95,17 +114,54 @@
                 <div class="total-item">
                     <table class="total-table">
                         <tr>
-                            <td>Total :<span id="totalSoLuongDisplay">1</span> items</td>
+                            <td rowspan="14" style="width: 450px">Total :<span id="totalSoLuongDisplay">1</span> items
+                                <div><h4>Phương thức thanh toán</h4></div>
+                                <div class="tab">
+                                    <button class="tablinks" id="defaultOpen" onclick="openTab(event, 'Tab1')">Thanh toán khi nhận hàng</button>
+                                    <button class="tablinks" onclick="openTab(event, 'Tab2')">VNPAY</button>
+                                </div>
+
+                                <div id="Tab1" class="tabcontent">
+                                    <form id="addForm" action="/bill/addHoaDon/${ctsp.id}" method="post">
+                                        <input type="text" name="tongTien" id="tongTien">
+                                        <input type="text" value="0" name="phanTramKhuyenMai" id="phamTramKhuyenMai">
+                                        <input type="text" value="${voucher0}" name="idVoucher" id="idVoucher">
+                                        <input type="text" name="tongTienGiam" id="tongTienGiam">
+                                        <input type="text" name="tenNguoiNhan" id="tenNguoiNhan">
+                                        <input type="text" name="sdt" id="sdt">
+                                        <input type="text" name="diaChiNguoiNhan" id="diaChiNguoiNhan">
+                                        <input type="text" name="diaCHiChiTiet" id="diaCHiChiTiet">
+                                        <input type="text" name="tongTienSanPhamChuaGiam" id="tongTienSanPhamChuaGiam">
+                                        <input type="text" name="phiShip" id="phiShip">
+                                        <input type="text" name="email" id="emailNhan">
+                                        <input type="text" name="giaHienHanh" value="${ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" >
+                                        <input type="text" name="giaDaGiam" value="${(ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ctsp.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}" >
+                                        <input readonly type="number" id="inputField1" class="inputTang" name="soLuong" value="1">
+                                        <button class="btn btn-primary" id="btnAddHD"  style="color: white;background-color: #00575C;margin-top: 30px;margin-left: 160px">Đặt hàng</button>
+                                    </form>
+                                </div>
+
+                                <div id="Tab2" class="tabcontent">
+                                    <button class="btn btn-primary" style="color: white;background-color: #00575C;margin-top: 30px;margin-left: 160px">Thanh toán</button>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                        <tr>
+                            <td></td>
                             <td>Tổng tiền sản phẩm : </td>
                             <td><span id="totalPriceDisplay" class="after" style="font-weight: bold;color: red"><fmt:formatNumber value="0" pattern="###,###"/>đ</span></td>
                         </tr>
                         <tr>
-                            <td></td>
+                            <td><hr></td>
                             <td>Tổng tiền giảm giá sản phẩm : </td>
                             <td><span id="tongtiengiamSP" class="after" style="font-weight: bold;color: red"><fmt:formatNumber value="0" pattern="###,###"/>đ</span></td>
                         </tr>
                         <tr>
-                            <td></td>
+                            <td>
+                            </td>
                             <td>Tổng tiền sản phẩm đã giảm giá :</td>
                             <td><span id="tongtienSPDaGiam" class="after" style="font-weight: bold;color: red"><fmt:formatNumber value="0" pattern="###,###"/>đ</span></td>
                         </tr>
@@ -215,6 +271,154 @@
 
 </script>
 <script>
+    document.getElementById('btnAddHD').addEventListener('click', function(event) {
+        event.preventDefault();
+
+        var tenNguoiNhan = document.getElementById('tenNguoiNhan').value;
+        var inputField1 = document.getElementById('inputField1').value;
+        var diaCHiChiTiet = document.getElementById('diaCHiChiTiet').value;
+        var sdt = document.getElementById('sdt').value;
+        var email = document.getElementById('email').value;
+        var selectedOption = document.getElementById('provinceInput').value;
+        var dataList = document.getElementById('provinces');
+        var errorText = document.getElementById('errorText');
+        var isValid = false;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var phoneRegex = /^(032|033|034|035|036|037|038|039|096|097|098|086|083|084|085|081|082|088|091|094|070|079|077|076|078|090|093|089|056|058|092|059|099)[0-9]{7}$/; // Định dạng số điện thoại ở Việt Nam
+
+        if (inputField1 > ${ctsp.soLuong}){
+            alert('Số lượng sản phẩm hiện tại không đủ') ;
+            return;
+        }
+        if (tenNguoiNhan === '') {
+            alert('Vui lòng nhập tên người nhận') ;
+            return;
+        }
+        if (diaCHiChiTiet === '') {
+            alert('Vui lòng nhập địa chỉ chi tiết') ;
+            return;
+        }
+        if (sdt === '' || phoneRegex.test(sdt) == false) {
+           alert('Vui lòng nhập lại số điện thoại') ;
+           return;
+        }
+        if (email === '' || emailRegex.test(email) == false) {
+            alert('Vui lòng nhập lại email') ;
+            return;
+        }
+
+        if (selectedOption.trim() === '') {
+           alert('Vui lòng nhập tỉnh/thành phố!') ;
+            return; // Kết thúc hàm nếu giá trị rỗng
+        }
+
+        // Lặp qua từng option trong datalist
+        for (var i = 0; i < dataList.options.length; i++) {
+            // Kiểm tra nếu value của option trùng với giá trị đã chọn
+            if (dataList.options[i].value === selectedOption) {
+                isValid = true;
+                break;
+            }
+        }
+
+        // Hiển thị hoặc ẩn thông báo lỗi
+        if (!isValid) {
+          alert('Tỉnh không hợp lệ!') ;
+          return;
+        }
+             else {
+                errorText.style.display = 'none';
+                document.getElementById('addForm').submit(); // Submit form
+            }
+
+    });
+
+    function layThongTinThanhToan2(){
+       var ten = document.getElementById('ten').value;
+       var provinceInput = document.getElementById('provinceInput').value;
+       var diaChiChiTietCho = document.getElementById('diaChiChiTietCho').value;
+
+       var tongTienThanhToan = parseFloat(document.getElementById('tongTienThanhToan').textContent.replace(/[^\d]/g, ''));
+       var phiGiaoHang = parseFloat(document.getElementById('phiGiaoHang').textContent.replace(/[^\d]/g, ''));
+       var totalPriceDisplay = parseFloat(document.getElementById('totalPriceDisplay').textContent.replace(/[^\d]/g, ''));
+       var tongtiengiamSP = parseFloat(document.getElementById('tongtiengiamSP').textContent.replace(/[^\d]/g, ''));
+        var soTienGiam = parseFloat(document.getElementById('soTienGiam').textContent.replace(/[^\d]/g, ''));
+
+
+        var tenNguoiNhan = document.getElementById('tenNguoiNhan');
+        var diaChiNguoiNhan = document.getElementById('diaChiNguoiNhan');
+        var diaCHiChiTiet = document.getElementById('diaCHiChiTiet');
+        var tongTien = document.getElementById('tongTien');
+        var tongTienGiam = document.getElementById('tongTienGiam');
+        var tongTienSanPhamChuaGiam = document.getElementById('tongTienSanPhamChuaGiam');
+        var phiShip = document.getElementById('phiShip');
+
+
+
+        tenNguoiNhan.value = ten;
+
+        diaChiNguoiNhan.value= provinceInput;
+        diaCHiChiTiet.value = diaChiChiTietCho;
+        tongTien.value = tongTienThanhToan;
+        tongTienGiam.value = soTienGiam+tongtiengiamSP;
+        tongTienSanPhamChuaGiam.value = totalPriceDisplay;
+        phiShip.value = phiGiaoHang;
+
+
+    }
+
+
+    // Open Tab 1 by default
+    document.getElementById("defaultOpen").click();
+
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    //------------------------------------------------
+
+    function validatePhoneNumber(input) {
+        var phoneNumber = document.getElementById('sdtNhan').value;
+        var phoneRegex = /^(032|033|034|035|036|037|038|039|096|097|098|086|083|084|085|081|082|088|091|094|070|079|077|076|078|090|093|089|056|058|092|059|099)[0-9]{7}$/; // Định dạng số điện thoại ở Việt Nam
+
+        if (phoneNumber.trim() === '') {
+            document.getElementById('phoneError').textContent = ''; // Ẩn thông báo lỗi nếu ô input trống
+            document.getElementById("sdt").value = phoneNumber;
+        } else if (phoneRegex.test(phoneNumber)) {
+            document.getElementById('phoneError').textContent = ''; // Số điện thoại hợp lệ
+            document.getElementById("sdt").value = phoneNumber;
+        } else {
+            document.getElementById('phoneError').textContent = 'Số điện thoại không hợp lệ'; // Số điện thoại không hợp lệ
+            document.getElementById("sdt").value = phoneNumber;
+        }
+    }
+
+    function validateEmail() {
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var email = document.getElementById('email').value;
+        if (email.trim() ===''){
+            document.getElementById('EmailErr').textContent = '';
+            document.getElementById('emailNhan').value = email;
+        }else if (emailRegex.test(email)){
+            document.getElementById('EmailErr').textContent = '';
+            document.getElementById('emailNhan').value = email;
+        }else {
+            document.getElementById('EmailErr').textContent = 'Email không hợp lệ';
+            document.getElementById('emailNhan').value = email;
+        }
+    }
+
     var selectedVoucher = null;
     document.getElementById('changeLink').addEventListener('click', function(event) {
         event.preventDefault(); // Ngăn chặn hành động mặc định của thẻ a
@@ -253,6 +457,8 @@
         var voucherDetail = document.getElementById('voucherDetail');
         var tenVoucher = document.getElementById('tenVoucher');
         var hiddenForm = document.getElementById('hiddenForm');
+        var phamTramKhuyenMai = document.getElementById('phamTramKhuyenMai');
+        var idVoucher = document.getElementById('idVoucher');
         // Kiểm tra xem đã chọn sản phẩm nào chưa
         if (selectedVoucher !== null) {
             // Thực hiện các hành động với sản phẩm được chọn ở đây
@@ -262,6 +468,8 @@
             voucherDetail.innerHTML = htmlvoucherDetail;
             tenVoucher.innerHTML = selectedVoucher.ten;
             hiddenForm.style.display = 'none';
+            phamTramKhuyenMai.value = selectedVoucher.phamTramGiam;
+            idVoucher.value = selectedVoucher.id
             console.log("Sản phẩm được chọn:", selectedVoucher);
         } else {
             console.log("Chưa chọn sản phẩm nào.");
@@ -319,6 +527,7 @@
 
         // Gọi hàm calculateTotalPrice sau khi đã có giá trị cho selectedOptionId
         calculateTotalPrice();
+        layThongTinThanhToan2()
     });
 
 
@@ -328,19 +537,30 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         var inputField = document.getElementById('inputField');
+        var inputField1 = document.getElementById('inputField1');
         var addButton = document.getElementById('addButton');
         var subtractButton = document.getElementById('subtractButton');
         addButton.addEventListener('click', function() {
             inputField.value = parseInt(inputField.value) + 1;
+            inputField1.value = parseInt(inputField1.value) + 1;
             calculateTotalPrice();
+            layThongTinThanhToan2()
 
         });
 
         subtractButton.addEventListener('click', function() {
             var currentValue = parseInt(inputField.value);
+            var currentValue1 = parseInt(inputField1.value);
             if (currentValue > 1) {
                 inputField.value = currentValue - 1;
                 calculateTotalPrice();
+                layThongTinThanhToan2()
+
+            }
+            if (currentValue1 > 1) {
+                inputField1.value = currentValue1 - 1;
+                calculateTotalPrice();
+                layThongTinThanhToan2()
 
             }
         });
@@ -438,10 +658,12 @@
         totalSoLuongDisplay.textContent =quantity;
         tongtiengiamSP.textContent = '-'+formatNumber(tongTienGiamSPp);
         tongtienSPDaGiam.textContent = formatNumber(tienSPdaGiam);
+        layThongTinThanhToan2()
     }
 
     // Gọi hàm tính tổng tiền ban đầu
     calculateTotalPrice();
+    layThongTinThanhToan2()
 
 
 

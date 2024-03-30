@@ -6,9 +6,13 @@ import com.example.sd40.entity.KhachHang.tinhThanhPho;
 import com.example.sd40.entity.KhachHang.KhachHang;
 import com.example.sd40.entity.Voucher.Voucher;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -28,4 +32,22 @@ public interface KhachHangCusRepository extends JpaRepository<KhachHang,Long> {
 
     @Query(value = "select id, ten_voucher,phan_tram_giam,giam_toi_da,gia_tri_don_toi_thieu from voucher where ngay_bat_dau<=GETDATE() and ngay_ket_thuc>= getdate() and trang_thai=1 order by phan_tram_giam  desc",nativeQuery = true)
     List<Object> getVoucherHoaDon();
+
+    @Transactional
+    @Modifying
+    @Query(value = "INSERT INTO hoa_don (trang_thai, ngay_tao, tong_tien, phan_tram_khuyen_mai, voucher_id,ghi_chu,tong_tien_giam,phuong_thuc_thanh_toan_id,ten_nguoi_nhan,sdt_nguoi_nhan,dia_chi_nguoi_nhan,tong_tien_san_pham_chua_giam,phi_ship) \n" +
+            "VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12,?13)",nativeQuery = true)
+    void saveHD(Integer trangThai, Date ngayTao, BigDecimal tongTien, Integer phanTramKhuyenMai, Long idVoucher, String ghiChu,BigDecimal tongTienGiam,Long phuongThucThanhToanID,String tenNguoiNhan,String sdtNguoiNhan,String diaChiNguoiNhan,BigDecimal tongTienSanPhamChuaGiam,BigDecimal phiShip);
+
+    @Transactional
+    @Modifying
+    @Query(value = "INSERT INTO hoa_don (trang_thai, ngay_tao, tong_tien,ghi_chu,tong_tien_giam,phuong_thuc_thanh_toan_id,ten_nguoi_nhan,sdt_nguoi_nhan,dia_chi_nguoi_nhan,tong_tien_san_pham_chua_giam,phi_ship) \n" +
+            "VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11)",nativeQuery = true)
+    void saveHDKhongCoVoucher(Integer trangThai, Date ngayTao, BigDecimal tongTien, String ghiChu,BigDecimal tongTienGiam,Long phuongThucThanhToanID,String tenNguoiNhan,String sdtNguoiNhan,String diaChiNguoiNhan,BigDecimal tongTienSanPhamChuaGiam,BigDecimal phiShip);
+
+    @Query(value = "select top(1) id from hoa_don order by id desc",nativeQuery = true)
+    Long idHoaDonMoiTao();
+    @Query("select v.id from Voucher v where v.phanTramGiam=0")
+    Long idVoucherOk();
+
 }
