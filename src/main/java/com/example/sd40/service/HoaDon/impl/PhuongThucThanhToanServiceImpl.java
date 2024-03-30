@@ -90,7 +90,7 @@ public class PhuongThucThanhToanServiceImpl implements PhuongThucThanhToanServic
     @Override
     public boolean paymentSuccess( PayMentVnpayRequest request) {
         if(request.getVnp_ResponseCode().equals("00")){
-
+            // update trạng thái thanh toán
             return true;
         }
         return false;
