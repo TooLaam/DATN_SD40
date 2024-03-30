@@ -2,7 +2,7 @@ package com.example.sd40.service.KhachHang.impl;
 
 
 import com.example.sd40.entity.KhachHang.KhachHang;
-import com.example.sd40.repository.TaiKhoan.KhachHangRepository;
+import com.example.sd40.repository.KhachHang.KhachHangRepository;
 import com.example.sd40.repuest.KhachHangRequest;
 import com.example.sd40.service.KhachHang.KhachHangService;
 import org.springframework.beans.BeanUtils;

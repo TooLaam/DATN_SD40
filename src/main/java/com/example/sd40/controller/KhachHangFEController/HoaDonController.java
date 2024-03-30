@@ -3,9 +3,14 @@ package com.example.sd40.controller.KhachHangFEController;
 import com.example.sd40.entity.San_pham.ChiTietSanPham;
 import com.example.sd40.entity.San_pham.ChiTietSanPhamMauSacHinhAnh;
 
+import com.example.sd40.service.HoaDon.HoaDonService;
+import com.example.sd40.service.HoaDon.PhuongThucThanhToanService;
 import com.example.sd40.service.KhachHang.KhachHangCusService;
 import com.example.sd40.service.KhachHang.TinhThanhPhoService;
 import com.example.sd40.service.SanPham.*;
+import com.example.sd40.vnpay.CreatePayMentMethodTransferRequest;
+import com.example.sd40.vnpay.PayMentVnpayRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +35,12 @@ public class HoaDonController {
     CTSPMSHAService ctspmshaService;
     @Autowired
     KhachHangCusService khachHangCusService;
+
+    @Autowired
+    private HoaDonService hoaDonService;
+
+    @Autowired
+    private PhuongThucThanhToanService phuongThucThanhToanService;
 
 
     @GetMapping("/hienthisanpham/{idsp}")
@@ -66,6 +77,29 @@ public class HoaDonController {
         }
     }
 
+    @GetMapping("/save")
+    public String createHoaDon(HttpServletRequest request){
+//      HoaDon hoaDon =   hoaDonService.createHoaDon();
+//        if (thanhtoan!= vnpay){
+//            return "redirect:/home";
+//        }else {
+        CreatePayMentMethodTransferRequest request1 = new CreatePayMentMethodTransferRequest();
+        request1.setVnp_Ammount("1000000");   // tổng tiền hoaDon.getTongTien
+        request1.setVnp_TxnRef("HD001"); // mã hóa đơn hoaDon.getMa
+            return "redirect:" + phuongThucThanhToanService.createVnpay(request1, request);
+//        }
+    }
+    @GetMapping("/payment-success")
+    public String updateHoaDonWhenPaymentVnpay(PayMentVnpayRequest request){
+       boolean check =   phuongThucThanhToanService.paymentSuccess(request);
+        if(check){
+            return "redirect:/home";
+        }else{
+//            return "redirect:/"; trả về màn thanh toán
+            return "redirect:/home";
+        }
+
+    }
 
 
 }
