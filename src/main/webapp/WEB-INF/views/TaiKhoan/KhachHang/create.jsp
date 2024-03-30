@@ -55,7 +55,7 @@
                                                     <div class="form-check col-6">
                                                         <input class="form-check-input" type="radio"  value="1"  name="flexRadioDefault" id="flexRadioDefault2" checked>
                                                         <label class="form-check-label" for="flexRadioDefault2">
-                                                           Nữ
+                                                            Nữ
                                                         </label>
                                                     </div>
                                                 </div>
@@ -83,9 +83,3 @@
     </div>
 
 </section>
-
-
-
-
-
-

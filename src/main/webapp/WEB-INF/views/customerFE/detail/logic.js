@@ -1,3 +1,7 @@
+function formatNumber(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
 const bigImg = document.querySelector(".product-content-big-img img")
 const smallImg = document.querySelectorAll(".product-content-small-img img")
 smallImg.forEach(function(imgItem, X){
@@ -34,16 +38,33 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function getData(sl, id) {
+function getData(sl, id,idms) {
+
+
     console.log("Số lượng: " + sl + ", ID: " + id);
     var input = document.getElementById("inputid");
     var input1 = document.getElementById("inputid1");
     var hiensl = document.getElementById("hiensl");
+    var mausac = document.getElementById("mauSac");
+    var mausac1 = document.getElementById("mauSac1");
+
 
     console.log("Input element: ", input);
     console.log("Input1 element: ", input1);
     console.log("Hiensl element: ", hiensl);
+    console.log("MauSac element: ", idms);
     hiensl.innerHTML = sl;
     input.value = id;
     input1.value = id;
+    mausac.value = idms;
+    mausac1.value = idms;
+
 }
+
+
+
+
+
+
+
+

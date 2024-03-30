@@ -1,9 +1,13 @@
 package com.example.sd40.controller.KhachHangFEController;
 
+import com.example.sd40.entity.San_pham.ChiTietSanPhamMauSacHinhAnh;
+import com.example.sd40.service.GioHang.GioHangChiTietService;
 import com.example.sd40.service.SanPham.*;
 import com.example.sd40.service.KhachHang.KhachHangCusService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class SanPhamFEController {
@@ -32,6 +39,8 @@ public class SanPhamFEController {
     @Autowired
     KhachHangCusService khachHangCusService;
 
+
+
     @GetMapping("/sanphamcus")
     public String sanPhamCus(Model model, HttpSession session){
         Long idKH = (Long) session.getAttribute("idKhachHang");
@@ -46,6 +55,7 @@ public class SanPhamFEController {
         }
         else {
             model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
+            model.addAttribute("idkh",idKH );
             model.addAttribute("listTH",thuongHieuService.getAll());
             model.addAttribute("listTL",loaiGiayService.findAll());
             model.addAttribute("listSP",ctspService.getAllSPCus());
@@ -71,6 +81,7 @@ public class SanPhamFEController {
         }
         else {
             model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
+            model.addAttribute("idkh",idKH );
             model.addAttribute("listTH",thuongHieuService.getAll());
             model.addAttribute("listTL",loaiGiayService.findAll());
             model.addAttribute("listSP",ctspService.getAllSPCusByGiamGia());
@@ -106,6 +117,7 @@ public class SanPhamFEController {
         }
         else {
             model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
+            model.addAttribute("idkh",idKH );
             if (ctspService.getAllSPCusByTL(idTL).isEmpty()){
                 model.addAttribute("listTH",thuongHieuService.getAll());
                 model.addAttribute("listTL",loaiGiayService.findAll());
@@ -151,6 +163,7 @@ public class SanPhamFEController {
         }
         else {
             model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
+            model.addAttribute("idkh",idKH );
             if (ctspService.getAllSPCusByTH(idTh).isEmpty()){
                 model.addAttribute("listTH",thuongHieuService.getAll());
                 model.addAttribute("listTL",loaiGiayService.findAll());
@@ -195,6 +208,7 @@ public class SanPhamFEController {
         }
         else {
             model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
+            model.addAttribute("idkh",idKH );
             if (ctspService.getAllSPCusByGia(giaMin,giaMax).isEmpty()){
                 model.addAttribute("listTH",thuongHieuService.getAll());
                 model.addAttribute("listTL",loaiGiayService.findAll());
@@ -221,7 +235,7 @@ public class SanPhamFEController {
         Long idKH = (Long) session.getAttribute("idKhachHang");
         if (idKH == null) {
             model.addAttribute("sp",ctspService.detailSanPhamCus(idsp));
-            model.addAttribute("listMS",ctspmshaService.findMSTheoSP(idsp));
+            model.addAttribute("listMS",ctspmshaService.findMSTheoSPDangDung(idsp));
             model.addAttribute("listHA",ctspmshaService.getAllHinhAnhbyIDSP(idsp));
             model.addAttribute("SP1", sanPhamService.detail(idsp));
 
@@ -230,8 +244,9 @@ public class SanPhamFEController {
         }
         else {
             model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
+            model.addAttribute("idkh",idKH );
             model.addAttribute("sp",ctspService.detailSanPhamCus(idsp));
-            model.addAttribute("listMS",ctspmshaService.findMSTheoSP(idsp));
+            model.addAttribute("listMS",ctspmshaService.findMSTheoSPDangDung(idsp));
             model.addAttribute("listHA",ctspmshaService.getAllHinhAnhbyIDSP(idsp));
             model.addAttribute("SP1", sanPhamService.detail(idsp));
 
@@ -241,48 +256,18 @@ public class SanPhamFEController {
     }
 
     @GetMapping("/hienthiKCCus/{idsp}/{idms}")
-    public String hienthiKCCus(Model model,
-                               @PathVariable("idsp") Long idsp,
-                               @PathVariable("idms") Long idms, HttpSession session
+    public ResponseEntity<List<Object[]>> hienthiKCCus(Model model,
+                                                       @PathVariable("idsp") Long idsp,
+                                                       @PathVariable("idms") Long idms, HttpSession session
     ){
 
-        Long idKH = (Long) session.getAttribute("idKhachHang");
-        if (idKH == null) {
-            model.addAttribute("sp",ctspService.detailSanPhamCus(idsp));
-            model.addAttribute("listMS",ctspmshaService.findMSTheoSP(idsp));
-            model.addAttribute("listHA",ctspmshaService.getAllHinhAnhbyIDSP(idsp));
-            model.addAttribute("SP1", sanPhamService.detail(idsp));
-            model.addAttribute("listKC",ctspService.findKCTheoSP(idsp,idms));
-            model.addAttribute("ms",mauSacService.detail(idms));
-
-            model.addAttribute("view", "/detail/index.jsp");
-            return "/customerFE/index";
-        }
-        else {
-            model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
-            model.addAttribute("sp",ctspService.detailSanPhamCus(idsp));
-            model.addAttribute("listMS",ctspmshaService.findMSTheoSP(idsp));
-            model.addAttribute("listHA",ctspmshaService.getAllHinhAnhbyIDSP(idsp));
-            model.addAttribute("SP1", sanPhamService.detail(idsp));
-            model.addAttribute("listKC",ctspService.findKCTheoSP(idsp,idms));
-            model.addAttribute("ms",mauSacService.detail(idms));
-
-            model.addAttribute("view", "/detail/index.jsp");
-            return "/customerFE/index";
+        List<Object[]> kichCos = ctspService.findKCTheoSP(idsp, idms);
+        if (kichCos != null && !kichCos.isEmpty()) {
+            return new ResponseEntity<>(kichCos, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @GetMapping("/hienthiAddHD/{idsp}")
-    public String hienthiAddHD(Model model,
-                               @PathVariable("idsp") Long idsp,
-                               @RequestParam("mauSac") Long idms,
-                               @RequestParam("soLuong") int soLuong,
-                               @RequestParam("kichCo") Long kichCo
-    ){
-
-
-        model.addAttribute("view", "/cart/index.jsp");
-        return "/customerFE/index";
-    }
 
 }

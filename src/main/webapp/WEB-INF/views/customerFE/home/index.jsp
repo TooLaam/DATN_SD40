@@ -23,7 +23,7 @@
         <div class="row">
             <c:forEach items="${listSPNew}" var="sp">
                 <div class="col-md-3 col-6">
-                    <div class="thumnail">
+                    <div class="thumnail" style="display: flex; flex-direction: column; align-items: center;">
                         <a href="/detailsanphamcus/${sp[0]}">
                             <img src="/assets/img/product/${sp[2]}">
                             <div class="caption">

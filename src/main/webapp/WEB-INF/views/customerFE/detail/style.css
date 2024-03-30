@@ -1,3 +1,5 @@
+
+
 .main>.container>.row{
     padding: 2rem;
     background-color: white;
@@ -166,3 +168,9 @@
     width: 100px;
     text-align: center;
 }
+
+.red-background {
+    background-color: #ccc !important;
+}
+
+

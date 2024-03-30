@@ -48,4 +48,5 @@ public class CTSPHAMSImpl implements CTSPMSHAService {
     public List<Object[]> findMSTheoSPDangDung(Long id) {
         return ctspmshaRepository.findMSTheoSPDangDung(id);
     }
+
 }
