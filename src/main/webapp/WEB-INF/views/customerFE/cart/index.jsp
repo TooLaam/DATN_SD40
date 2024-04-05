@@ -50,28 +50,22 @@
 
 
         </div>
-        <!-- Modal -->
-
         <div class="col-12">
             <div class="table-responsive">
                 <div class="checkout">
                     <p>Tạm tính tổng tiền</p>
-
                     <hr/>
                     <div class="total-item">
-
                                 <span>
                                     <span>Total : </span> <span id="totalSoLuongDisplay">0</span><span> items</span>
                                       </span>
                                 <span id="totalPriceDisplay" class="after" style="font-weight: bold;color: red"><fmt:formatNumber value="0" pattern="###,###"/>đ</span>
-
                     </div>
-<%--                    <div class="d-grid">--%>
-<%--                        <a href="/bill/payment" class="btn">Check out</a>--%>
-<%--                    </div>--%>
                 </div>
             </div>
+            <button class="btn btn-primary" id="muaHang"  style="color: white;background-color: #00575C;margin-top: 30px;width: 100%">Đặt hàng</button>
         </div>
+
     </div>
     <br/>
     </div>
@@ -151,9 +145,14 @@ function giamSoLuong(ghctId) {
             soluong: currentValue -1 // Số lượng mới
         },
         success: function(response) {
-
-            // Xử lý phản hồi từ server (nếu cần)
-            console.log('Quantity updated successfully!');
+            if (response === "ko"){
+                alert("Số lượng không đủ")
+                return;
+            }
+            else if (response ==="ok") {
+                // Xử lý phản hồi từ server (nếu cần)
+                console.log('Quantity updated successfully!');
+            }
         },
         error: function(xhr, status, error) {
             // Xử lý lỗi (nếu có)
@@ -182,9 +181,10 @@ function tangSoLuong(ghctId) {
             if (response === "ko"){
                 alert("Số lượng không đủ")
                     return;
-            }else if (response ==="ok")
-            // Xử lý phản hồi từ server (nếu cần)
-            console.log('Quantity updated successfully!');
+            }else if (response ==="ok") {
+                // Xử lý phản hồi từ server (nếu cần)
+                console.log('Quantity updated successfully!');
+            }
         },
         error: function(xhr, status, error) {
             // Xử lý lỗi (nếu có)

@@ -56,7 +56,7 @@
 
                 <label style="margin-top: 2px"  class="form-label">Địa chỉ chi tiết: </label>
                 <div class="input-wrapper">
-                    <span><input required type="text" class="form-control" id="diaChiChiTietCho" oninput="layThongTinThanhToan2()" name="diachi"></span>
+                    <span><input style="width: 420px" required type="text" class="form-control" id="diaChiChiTietCho" oninput="layThongTinThanhToan2()" name="diachi"></span>
                     <span id="dcctError" style="color: red;padding-left: 20px"></span>
                 </div>
 
@@ -123,20 +123,20 @@
 
                                 <div id="Tab1" class="tabcontent">
                                     <form id="addForm" action="/bill/addHoaDon/${ctsp.id}" method="post">
-                                        <input type="text" name="tongTien" id="tongTien">
-                                        <input type="text" value="0" name="phanTramKhuyenMai" id="phamTramKhuyenMai">
-                                        <input type="text" value="${voucher0}" name="idVoucher" id="idVoucher">
-                                        <input type="text" name="tongTienGiam" id="tongTienGiam">
-                                        <input type="text" name="tenNguoiNhan" id="tenNguoiNhan">
-                                        <input type="text" name="sdt" id="sdt">
-                                        <input type="text" name="diaChiNguoiNhan" id="diaChiNguoiNhan">
-                                        <input type="text" name="diaCHiChiTiet" id="diaCHiChiTiet">
-                                        <input type="text" name="tongTienSanPhamChuaGiam" id="tongTienSanPhamChuaGiam">
-                                        <input type="text" name="phiShip" id="phiShip">
-                                        <input type="text" name="email" id="emailNhan">
-                                        <input type="text" name="giaHienHanh" value="${ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" >
-                                        <input type="text" name="giaDaGiam" value="${(ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ctsp.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}" >
-                                        <input readonly type="number" id="inputField1" class="inputTang" name="soLuong" value="1">
+                                        <input type="text" style="display: none" name="tongTien" id="tongTien">
+                                        <input type="text" style="display: none" value="0" name="phanTramKhuyenMai" id="phamTramKhuyenMai">
+                                        <input type="text" style="display: none" value="${voucher0}" name="idVoucher" id="idVoucher">
+                                        <input type="text" style="display: none" name="tongTienGiam" id="tongTienGiam">
+                                        <input type="text" style="display: none" name="tenNguoiNhan" id="tenNguoiNhan">
+                                        <input type="text" style="display: none" name="sdt" id="sdt">
+                                        <input type="text" style="display: none" name="diaChiNguoiNhan" id="diaChiNguoiNhan">
+                                        <input type="text" style="display: none" name="diaCHiChiTiet" id="diaCHiChiTiet">
+                                        <input type="text" style="display: none" name="tongTienSanPhamChuaGiam" id="tongTienSanPhamChuaGiam">
+                                        <input type="text" style="display: none" name="phiShip" id="phiShip">
+                                        <input type="text" style="display: none" name="email" id="emailNhan">
+                                        <input type="text" style="display: none" name="giaHienHanh" value="${ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" >
+                                        <input type="text"style="display: none" name="giaDaGiam" value="${(ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ctsp.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}" >
+                                        <input readonly type="number" id="inputField1" style="display: none" class="inputTang" name="soLuong" value="1">
                                         <button class="btn btn-primary" id="btnAddHD"  style="color: white;background-color: #00575C;margin-top: 30px;margin-left: 160px">Đặt hàng</button>
                                     </form>
                                 </div>
@@ -254,6 +254,10 @@
     </div>
     <button class="btn btn-light" id="submitButton">Chọn</button>
 </div>
+
+<div id="loader-overlay" class="loader-overlay" style="display: none;">
+    <div class="loader"></div>
+</div>
 <br/>
 
 <!-- Vendor JS Files -->
@@ -327,6 +331,7 @@
           return;
         }
              else {
+                document.getElementById('loader-overlay').style.display = 'flex';
                 errorText.style.display = 'none';
                 document.getElementById('addForm').submit(); // Submit form
             }
@@ -635,7 +640,7 @@
             if (parseInt(idDiaChi) === idHN){
                 phiGiaoHang.textContent = formatNumber(30000)
                 freetienship.style.display="block"
-                freetienship.textContent ='*(Bạn cần mua thêm )'+ formatNumber(1000000-tienspsaukhigiamtatca)+' để được freeship'
+                freetienship.textContent ='*(Bạn cần mua thêm '+ formatNumber(1000000-tienspsaukhigiamtatca)+' để được freeship)'
                 phiship = 30000;
             }else {
             phiGiaoHang.textContent = formatNumber(40000);

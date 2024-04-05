@@ -1,6 +1,8 @@
 package com.example.sd40.controller.KhachHangFEController;
 
 import com.example.sd40.entity.Gio_hang.GioHangChiTiet;
+import com.example.sd40.entity.KhachHang.DiaChiChiTiet;
+import com.example.sd40.entity.KhachHang.Dia_Chi;
 import com.example.sd40.entity.San_pham.ChiTietSanPham;
 import com.example.sd40.entity.San_pham.ChiTietSanPhamMauSacHinhAnh;
 import com.example.sd40.service.GioHang.GioHangChiTietService;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -72,17 +75,6 @@ public class GioHangCusController {
 
     }
 
-//    @PostMapping("/updatesoluong")
-//    public String updatesoluong(Model model, HttpSession session,
-//                                @RequestParam("idghct")Long idghct,
-//                                @RequestParam("soluong")Integer soluong
-//
-//    ) {
-//        Long idKH = (Long) session.getAttribute("idKhachHang");
-//        gioHangChiTietService.updateSoLuong(soluong,idghct);
-//        return "forward:/hienthigiohangchitiet/" + idKH;
-//
-//    }
 
     @PostMapping("/updatesoluong")
     public ResponseEntity<?> updateProductQuantity(@RequestParam("idghct")Long idghct,
@@ -90,7 +82,7 @@ public class GioHangCusController {
         try {
             // Gọi phương thức trong service để cập nhật số lượng sản phẩm
             GioHangChiTiet gioHangChiTiet = gioHangChiTietService.kiemTraSoLuongTruocKhiUpdate(idghct);
-            if (gioHangChiTiet.getSoLuong() == gioHangChiTiet.getChiTietSanPham().getSoLuong()){
+            if (soluong > gioHangChiTiet.getChiTietSanPham().getSoLuong()){
                 return ResponseEntity.ok("ko");
             }else {
                 gioHangChiTietService.updateSoLuong(soluong, idghct);
@@ -109,6 +101,9 @@ public class GioHangCusController {
         // Trả về phản hồi cho máy khách
         return ResponseEntity.ok("Product deleted successfully");
     }
+    Date currentDate = new Date(System.currentTimeMillis());
+
+
 
 
 }

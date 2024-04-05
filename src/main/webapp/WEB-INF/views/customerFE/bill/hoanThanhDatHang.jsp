@@ -6,65 +6,50 @@
 <head>
     <link href="/assets/vendor/simple-datatables/style.css" rel="stylesheet">
     <style>
-        <%@include file="style.css" %>
+        <%@include file="style2.css" %>
     </style>
 </head>
 
 <br>
-<div class="container">
-    <div class="frame">
-        <p style=" padding-top: 5px;background-color: #00575C;border: 1px solid black;border-radius: 7px;color: white">Xác nhận đơn hàng</p>
-        <div style="margin-top: 20px" class="row">
-           <h3>Bạn đã đặt đơn hàng có mã hóa đơn ${hoaDon.maHoaDon} thành công</h3>
-            <br>
-
-
-            <div style="margin-top: 20px" class="productContainer" >
-
-                <img src="/assets/img/product/${ctsp.chiTietSanPhamMauSacHinhAnh.hinhAnh}"  width="320px" height="450px" class="productImage">
-                <div class="productInfo">
+<div class="container1">
+    <div class="frame1">
+        <div class="header">
+            <p>Xác nhận đơn hàng</p>
+        </div>
+        <div class="row">
+            <h3>Bạn đã đặt đơn hàng có mã hóa đơn ${hoaDon.maHoaDon} thành công</h3>
+            <div class="productContainer1">
+                <img src="/assets/img/product/${ctsp.chiTietSanPhamMauSacHinhAnh.hinhAnh}" width="520px" height="450px" class="productImage1">
+                <div class="productInfo1">
                     <h4>Sản phẩm</h4>
-                    <span class="productName">Tên sản phẩm: ${ctsp.chiTietSanPhamMauSacHinhAnh.sanPham.ten}</span>
-                    <c:choose>
-                        <c:when test="${ctsp.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam == 0 || ctsp.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam == null}">
-                            <span class="productPrice">Giá:  <fmt:formatNumber value=" ${ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" pattern="###,###"/>đ    </span>
-                        </c:when>
-                        <c:otherwise>
-                            <span class="productPrice">Giá:  <span style="text-decoration: line-through;color: darkgrey"> <fmt:formatNumber value=" ${ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" pattern="###,###"/>đ    </span>  <span> <fmt:formatNumber value=" ${(ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ctsp.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}" pattern="###,###"/>đ   </span></span>
-                        </c:otherwise>
-                    </c:choose>
-
-                    <span id="productPriceT" style="display: none" class="productPriceT"> ${(ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ctsp.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}  </span>
-                    <span id="giaChuaGiamT" style="display: none" class="giaChuaGiamT"> ${(ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh)}  </span>
-                    <span class="productKichCo">Kích cỡ: ${ctsp.kichCo.ten}</span>
-                    <span class="productMauSac">Màu sắc: ${ctsp.chiTietSanPhamMauSacHinhAnh.mau_sac.ten}</span>
-                    <span class="productMauSac">Số lượng: ${soLuong}</span>
-                    <br>
-                    <br>
-                    <br>
+                    <span class="productName1">Tên sản phẩm: ${ctsp.chiTietSanPhamMauSacHinhAnh.sanPham.ten}</span>
+                    <span class="productPrice1">
+                            Giá hiện hành:
+                            <fmt:formatNumber value="${ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" pattern="###,###"/>đ
+                        </span>
+                    <span class="productPrice1">
+                            Giá đã giảm:
+                            <fmt:formatNumber value="${(ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ctsp.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}" pattern="###,###"/>đ
+                        </span>
+                    <span class="productKichCo1">Kích cỡ: ${ctsp.kichCo.ten}</span>
+                    <span class="productMauSac1">Màu sắc: ${ctsp.chiTietSanPhamMauSacHinhAnh.mau_sac.ten}</span>
+                    <span class="productMauSac1">Số lượng: ${soLuong}</span>
                     <h4>Thông tin người nhận</h4>
                     <div>
-                        <span style="margin-left: 20px"><strong>Tên người nhận: </strong></span><span>${hoaDon.tenNguoiNhan}</span>
-                        <span style="margin-left: 20px"><strong>Số điện thoại người nhận: </strong></span><span>${hoaDon.sdtNguoiNhan}</span>
-                        <span style="margin-left: 20px"><strong>Địa chỉ người nhận: </strong></span><span>${hoaDon.diaChiNguoiNhan}</span>
+                        <span class="infoLabel1">Tên người nhận:</span><span class="infoValue1">${hoaDon.tenNguoiNhan}</span><br>
+                        <span class="infoLabel1">Số điện thoại người nhận:</span><span class="infoValue1">${hoaDon.sdtNguoiNhan}</span><br>
+                        <span class="infoLabel1">Địa chỉ người nhận:</span><span class="infoValue1">${hoaDon.diaChiNguoiNhan}</span><br>
                     </div>
-                    <br>
-                    <br>
-                    <br>
                     <h4>Thanh toán khi nhận hàng</h4>
                     <div>
-                        <span style="margin-left: 20px"><strong>Tổng tiền sản phẩm: </strong></span><span><fmt:formatNumber value="${hoaDon.tongTienSanPhamChuaGiam}" pattern="###,###"/>đ  </span>
-                        <span style="margin-left: 20px"><strong>Tổng giảm giá: </strong></span><span><fmt:formatNumber value="${hoaDon.tongTienGiam}" pattern="###,###"/>đ   </span>
-                        <span style="margin-left: 20px"><strong>Số tiền thanh toán: </strong></span><span><fmt:formatNumber value="${hoaDon.tongTien}" pattern="###,###"/>đ   </span>
-                        <span style="margin-left: 20px"><strong>Phí ship: </strong></span><span><fmt:formatNumber value="${hoaDon.phiShip}" pattern="###,###"/>đ   </span>
+                        <span class="infoLabel1">Tổng tiền sản phẩm:</span><span class="infoValue1"><fmt:formatNumber value="${hoaDon.tongTienSanPhamChuaGiam}" pattern="###,###"/>đ</span><br>
+                        <span class="infoLabel1">Tổng giảm giá:</span><span class="infoValue1"><fmt:formatNumber value="${hoaDon.tongTienGiam}" pattern="###,###"/>đ</span><br>
+                        <span class="infoLabel1">Số tiền thanh toán:</span><span class="infoValue1"><fmt:formatNumber value="${hoaDon.tongTien}" pattern="###,###"/>đ</span><br>
+                        <span class="infoLabel1">Phí ship:</span><span class="infoValue1"><fmt:formatNumber value="${hoaDon.phiShip}" pattern="###,###"/>đ</span><br>
                     </div>
-
-
                 </div>
-
-
             </div>
-            <div style="margin-top: 30px;text-align: center">Bạn vui lòng chờ để shop xác nhận đơn nhé. Cảm ơn quý khách đã ủng hộ SD40 sport</div>
+            <div class="confirmationMessage1">Bạn vui lòng chờ để shop xác nhận đơn nhé. Cảm ơn quý khách đã ủng hộ SD40 sport</div>
         </div>
     </div>
 </div>

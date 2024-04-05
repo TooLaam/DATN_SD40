@@ -1,0 +1,98 @@
+
+.container1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.frame1 {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.header1 {
+    background-color: #00575C;
+    padding: 15px 0;
+    border-radius: 8px 8px 0 0;
+    text-align: center;
+}
+
+.header1 p {
+    margin: 0;
+    color: #fff;
+    font-size: 24px;
+}
+
+.productContainer1 {
+    display: flex;
+    align-items: center;
+}
+
+.productImage1 {
+    margin-right: 20px;
+    border-radius: 8px;
+}
+
+.productInfo1 {
+    flex: 1;
+}
+
+.productInfo1 h4 {
+    margin-top: 0;
+    font-size: 20px;
+}
+
+.productInfo1 span {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.productInfo1 span.productName {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.productInfo1 span.productPrice {
+    color: #c00;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.productInfo1 span.productKichCo,
+.productInfo1 span.productMauSac {
+    font-style: italic;
+}
+
+.productInfo1 span.productMauSac {
+    margin-top: 5px;
+}
+
+.productInfo1 span.productMauSac:last-child {
+    margin-bottom: 0;
+}
+
+.confirmationMessage1 {
+    text-align: center;
+    margin-top: 30px;
+    font-style: italic;
+    color: #888;
+    font-size: 16px;
+}
+
+.infoLabel1 {
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.infoValue1 {
+    margin-left: 20px;
+}

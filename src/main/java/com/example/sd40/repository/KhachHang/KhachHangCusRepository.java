@@ -24,8 +24,11 @@ public interface KhachHangCusRepository extends JpaRepository<KhachHang,Long> {
     @Query("select ghct from GioHang gh join GioHangChiTiet ghct on gh.id = ghct.gioHang.id join ChiTietSanPham ctsp on ctsp.Id = ghct.chiTietSanPham.Id where gh.khachHang.id = ?1")
     List<GioHangChiTiet> detailSPGioHang(Long idKH);
 
-    @Query("select dc from DiaChiChiTiet dc where dc.khachHang.id = ?1 and dc.macDinh = 1")
-    List<DiaChiChiTiet> layDiaChi(Long idKH);
+    @Query("select dc from DiaChiChiTiet dc where dc.khachHang.id = ?1 and dc.macDinh = 0")
+    DiaChiChiTiet layDiaChi(Long idKH);
+
+    @Query("select dc from DiaChiChiTiet dc where dc.khachHang.id = ?1")
+    List <DiaChiChiTiet> danhSachDiaChi(Long idKH);
 
     @Query(value = "select id from tinh_thanh_pho where ten like N'Hà Nội'",nativeQuery = true )
     Object layIDTinh();
@@ -41,13 +44,31 @@ public interface KhachHangCusRepository extends JpaRepository<KhachHang,Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO hoa_don (trang_thai, ngay_tao, tong_tien,ghi_chu,tong_tien_giam,phuong_thuc_thanh_toan_id,ten_nguoi_nhan,sdt_nguoi_nhan,dia_chi_nguoi_nhan,tong_tien_san_pham_chua_giam,phi_ship) \n" +
-            "VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11)",nativeQuery = true)
-    void saveHDKhongCoVoucher(Integer trangThai, Date ngayTao, BigDecimal tongTien, String ghiChu,BigDecimal tongTienGiam,Long phuongThucThanhToanID,String tenNguoiNhan,String sdtNguoiNhan,String diaChiNguoiNhan,BigDecimal tongTienSanPhamChuaGiam,BigDecimal phiShip);
+    @Query(value = "INSERT INTO hoa_don (trang_thai, ngay_tao, tong_tien, phan_tram_khuyen_mai, voucher_id,ghi_chu,tong_tien_giam,phuong_thuc_thanh_toan_id,ten_nguoi_nhan,sdt_nguoi_nhan,dia_chi_nguoi_nhan,tong_tien_san_pham_chua_giam,phi_ship,khach_hang_id) \n" +
+            "VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12,?13,?14)",nativeQuery = true)
+    void saveHDKhachHang(Integer trangThai, Date ngayTao, BigDecimal tongTien, Integer phanTramKhuyenMai, Long idVoucher, String ghiChu,BigDecimal tongTienGiam,Long phuongThucThanhToanID,String tenNguoiNhan,String sdtNguoiNhan,String diaChiNguoiNhan,BigDecimal tongTienSanPhamChuaGiam,BigDecimal phiShip,Long idKhachHang);
+
 
     @Query(value = "select top(1) id from hoa_don order by id desc",nativeQuery = true)
     Long idHoaDonMoiTao();
     @Query("select v.id from Voucher v where v.phanTramGiam=0")
     Long idVoucherOk();
+
+    @Query(value = "select top(1) id from dia_chi order by id desc",nativeQuery = true)
+    Long idDiaChiMoiNhat();
+
+
+    @Query("select dc.id, dc.diaChi.moTa,dc.diaChi.tinhThanhPho.ten,dc.diaChi.tinhThanhPho.id,dc.macDinh from DiaChiChiTiet dc where dc.khachHang.id = ?1")
+    List<Object[]> listDiaCHiMoiNhat(Long idKH);
+
+    @Transactional
+    @Modifying
+    @Query("update DiaChiChiTiet dc set dc.macDinh=0 where dc.id=?1")
+    void updateMacDinh(Long idDCCT);
+
+    @Transactional
+    @Modifying
+    @Query("update DiaChiChiTiet dc set dc.macDinh=1 where dc.id not in (?1) and dc.khachHang.id = ?2")
+    void updateMacDinhKhac(Long idDCCT,Long idKH);
 
 }

@@ -1,5 +1,7 @@
 package com.example.sd40.entity.KhachHang;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,6 +30,7 @@ public class DiaChiChiTiet {
             referencedColumnName = "id",
             nullable = true
     )
+    @JsonBackReference
     private KhachHang khachHang;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -36,5 +39,6 @@ public class DiaChiChiTiet {
             referencedColumnName = "id",
             nullable = true
     )
+    @JsonBackReference
     private Dia_Chi diaChi;
 }
