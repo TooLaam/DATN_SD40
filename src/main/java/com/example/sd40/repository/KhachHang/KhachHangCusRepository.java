@@ -1,6 +1,7 @@
 package com.example.sd40.repository.KhachHang;
 
 import com.example.sd40.entity.Gio_hang.GioHangChiTiet;
+import com.example.sd40.entity.Hoa_don.HoaDonChiTiet;
 import com.example.sd40.entity.KhachHang.DiaChiChiTiet;
 import com.example.sd40.entity.KhachHang.tinhThanhPho;
 import com.example.sd40.entity.KhachHang.KhachHang;
@@ -70,5 +71,10 @@ public interface KhachHangCusRepository extends JpaRepository<KhachHang,Long> {
     @Modifying
     @Query("update DiaChiChiTiet dc set dc.macDinh=1 where dc.id not in (?1) and dc.khachHang.id = ?2")
     void updateMacDinhKhac(Long idDCCT,Long idKH);
+
+    @Query("select hdct from HoaDonChiTiet hdct where hdct.hoaDon.id=?1")
+    List<HoaDonChiTiet> listHDCT(Long idHD);
+
+
 
 }

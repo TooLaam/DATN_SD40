@@ -49,4 +49,9 @@ public class CTSPHAMSImpl implements CTSPMSHAService {
         return ctspmshaRepository.findMSTheoSPDangDung(id);
     }
 
+    @Override
+    public Object addHoaDon(Long id) {
+        return ctspmshaRepository.addHoaDon(id);
+    }
+
 }

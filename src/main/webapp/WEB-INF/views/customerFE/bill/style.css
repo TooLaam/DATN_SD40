@@ -104,6 +104,7 @@
 .productDelete {
     cursor: pointer; /* Biến con trỏ thành hình bàn tay khi di chuột qua */
     align-self: flex-start; /* Đặt phần tử ở trên cùng của productContainer */
+    margin-left: 10px;
 
 }
 .productName {
@@ -328,9 +329,6 @@
     flex: 1;
 }
 
-.productDelete {
-    margin-left: 10px;
-}
 
 .voucher:hover {
     background-color: #f0f0f0; /* Đổi màu nền khi hover */

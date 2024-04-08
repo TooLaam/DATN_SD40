@@ -91,7 +91,7 @@
                         <div class="containerT">
                      <div class="containerT">
                         <button  id="subtractButton" class="buttonTang">-</button>
-                        <input readonly type="number" id="inputField" class="inputTang" name="soLuong" value="1">
+                        <input readonly type="number" id="inputField" class="inputTang" name="soLuong" value="${soLuong}">
                         <button  id="addButton" class="buttonTang">+</button>
                     </div>
                     </div>

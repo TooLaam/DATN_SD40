@@ -79,7 +79,16 @@ public class KhachHangCusImpl implements KhachHangCusService {
 
     @Override
     public void addHDCT(HoaDonChiTiet hoaDonChiTiet) {
-        hoaDonChiTietRepository.save(hoaDonChiTiet);
+        BigDecimal giaDaGiam = hoaDonChiTiet.getChiTietSanPham().getChiTietSanPhamMauSacHinhAnh().getGiaHienHanh().multiply(BigDecimal.valueOf(100-hoaDonChiTiet.getChiTietSanPham().getChiTietSanPhamMauSacHinhAnh().getSanPham().getGiamGIa().getMucGiam()));
+        BigDecimal giaGiam = giaDaGiam.divide(BigDecimal.valueOf(100));
+        HoaDonChiTiet hoaDonChiTiet1 = new HoaDonChiTiet();
+        hoaDonChiTiet1.setHoaDon(hoaDonChiTiet.getHoaDon());
+        hoaDonChiTiet1.setSoLuong(hoaDonChiTiet.getSoLuong());
+        hoaDonChiTiet1.setChiTietSanPham(hoaDonChiTiet.getChiTietSanPham());
+        hoaDonChiTiet1.setTrangThai(hoaDonChiTiet.getTrangThai());
+        hoaDonChiTiet1.setGiaHienHanh(hoaDonChiTiet.getChiTietSanPham().getChiTietSanPhamMauSacHinhAnh().getGiaHienHanh());
+        hoaDonChiTiet1.setGiaDaGiam(giaGiam);
+        hoaDonChiTietRepository.save(hoaDonChiTiet1);
     }
 
     @Override
@@ -161,6 +170,11 @@ public class KhachHangCusImpl implements KhachHangCusService {
     public void saveHDKhachHang(Integer trangThai, Date ngayTao, BigDecimal tongTien, Integer phanTramKhuyenMai, Long idVoucher, String ghiChu, BigDecimal tongTienGiam, Long phuongThucThanhToanID, String tenNguoiNhan, String sdtNguoiNhan, String diaChiNguoiNhan, BigDecimal tongTienSanPhamChuaGiam, BigDecimal phiShip, Long idKhachHang) {
         khachHangCusRepository.saveHDKhachHang(trangThai,ngayTao,tongTien,phanTramKhuyenMai,idVoucher,ghiChu,tongTienGiam,phuongThucThanhToanID,tenNguoiNhan,sdtNguoiNhan,diaChiNguoiNhan,tongTienSanPhamChuaGiam,phiShip,idKhachHang);
 
+    }
+
+    @Override
+    public List<HoaDonChiTiet> listHDCT(Long idHD) {
+        return khachHangCusRepository.listHDCT(idHD);
     }
 
 

@@ -13,11 +13,14 @@
 <br>
 <div class="container1">
     <div class="frame1">
-        <div class="header">
+        <div class="header1">
             <p>Xác nhận đơn hàng</p>
         </div>
+        <br>
+        <br>
         <div class="row">
             <h3>Bạn đã đặt đơn hàng có mã hóa đơn ${hoaDon.maHoaDon} thành công</h3>
+            <br>
             <div class="productContainer1">
                 <img src="/assets/img/product/${ctsp.chiTietSanPhamMauSacHinhAnh.hinhAnh}" width="520px" height="450px" class="productImage1">
                 <div class="productInfo1">

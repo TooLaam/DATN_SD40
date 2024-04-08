@@ -63,42 +63,30 @@
     <div class="frame">
         <p style=" padding-top: 5px;background-color: #00575C;border: 1px solid black;border-radius: 7px;color: white">Sản phẩm</p>
         <div class="row">
+        <c:forEach items="${listGHCT}" var="ghct">
+            <div style="margin-top: 20px" class="productContainer" data-product-id="${ghct.id}">
 
-            <div style="margin-top: 20px" class="productContainer" data-product-id="${ctsp.id}">
-
-                <img src="/assets/img/product/${ctsp.chiTietSanPhamMauSacHinhAnh.hinhAnh}"  width="320px" height="450px" class="productImage">
+                <img src="/assets/img/product/${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.hinhAnh}"  width="320px" height="450px" class="productImage">
                 <div class="productInfo">
-                    <span class="productName">Tên sản phẩm: ${ctsp.chiTietSanPhamMauSacHinhAnh.sanPham.ten}</span>
-                    <span style="display: none" class="productID">Tên sản phẩm: ${ctsp.id}</span>
+                    <div class="productName">Tên sản phẩm: ${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.ten}</div>
+                    <span style="display: none" id="productID${ghct.id}" class="productID">${ghct.chiTietSanPham.id}</span>
                     <c:choose>
-                        <c:when test="${ctsp.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam == 0 || ctsp.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam == null}">
-                            <span class="productPrice">Giá:  <fmt:formatNumber value=" ${ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" pattern="###,###"/>đ    </span>
+                        <c:when test="${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam == 0 || ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam == null}">
+                            <span class="productPrice">Giá:  <fmt:formatNumber value=" ${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" pattern="###,###"/>đ    </span>
                         </c:when>
                         <c:otherwise>
-                            <span class="productPrice">Giá:  <span style="text-decoration: line-through;color: darkgrey"> <fmt:formatNumber value=" ${ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" pattern="###,###"/>đ    </span>  <span> <fmt:formatNumber value=" ${(ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ctsp.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}" pattern="###,###"/>đ   </span></span>
+                            <span class="productPrice">Giá:  <span style="text-decoration: line-through;color: darkgrey"> <fmt:formatNumber value=" ${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" pattern="###,###"/>đ    </span>  <span> <fmt:formatNumber value=" ${(ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}" pattern="###,###"/>đ   </span></span>
                         </c:otherwise>
                     </c:choose>
 
-                    <span id="productPriceT" style="display: none" class="productPriceT"> ${(ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ctsp.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}  </span>
-                    <span id="giaChuaGiamT" style="display: none" class="giaChuaGiamT"> ${(ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh)}  </span>
-                    <span class="productKichCo">Kích cỡ: ${ctsp.kichCo.ten}</span>
-                    <span class="productMauSac">Màu sắc: ${ctsp.chiTietSanPhamMauSacHinhAnh.mau_sac.ten}</span>
-                    <span class="productSoLuong">
-                        <div class="containerT">
-                     <div class="containerT">
-                        <button  id="subtractButton" class="buttonTang">-</button>
-                        <input readonly type="number" id="inputField" class="inputTang" name="soLuong" value="${soLuong}">
-                        <button  id="addButton" class="buttonTang">+</button>
-                    </div>
-                    </div>
-                       </span>
-
-
+                    <span style="display: none"  class="productPriceT"> ${(ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}  </span>
+                    <span style="display: none" class="giaChuaGiamT"> ${(ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh)}  </span>
+                    <span class="productKichCo">Kích cỡ: ${ghct.chiTietSanPham.kichCo.ten}</span>
+                    <span class="productMauSac">Màu sắc: ${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.mau_sac.ten}</span>
+                    <span >Số lượng: </span> <span id="soLuong${ghct.id}" class="productSoLuong">${ghct.soLuong}</span>
                 </div>
-
             </div>
-
-
+        </c:forEach>
         </div>
     </div>
     <div class="frame">
@@ -118,19 +106,17 @@
                                 </div>
 
                                 <div id="Tab1" class="tabcontent">
-                                    <form id="addForm" action="/bill/addHoaDonKhachHang/${ctsp.id}" method="post">
-                                        <input type="text" style="display: none"  name="tongTien" id="tongTien">
-                                        <input type="text" style="display: none" value="0" name="phanTramKhuyenMai" id="phamTramKhuyenMai">
-                                        <input type="text" style="display: none"  value="${voucher0}" name="idVoucher" id="idVoucher">
-                                        <input type="text" style="display: none"  name="tongTienGiam" id="tongTienGiam">
-                                        <input type="text" style="display: none"  name="tenNguoiNhan" id="tenNguoiNhan">
-                                        <input type="text" style="display: none"  name="sdt" id="sdt">
-                                        <input type="text" style="display: none"  name="diaChiNguoiNhan" id="diaChiNguoiNhan">
-                                        <input type="text" style="display: none" name="tongTienSanPhamChuaGiam" id="tongTienSanPhamChuaGiam">
-                                        <input type="text" style="display: none" name="phiShip" id="phiShip">
-                                        <input type="text" style="display: none" name="giaHienHanh" value="${ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" >
-                                        <input type="text" style="display: none"name="giaDaGiam" value="${(ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ctsp.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}" >
-                                        <input readonly style="display: none" type="number" id="inputField1"  class="inputTang" name="soLuong" value="1">
+                                    <form id="addForm" action="/bill/HienThiHoaDonKhachHangCoNhieuSanPham" method="post">
+                                        <input type="text"  style="display: none" name="tongTien" id="tongTien"> tổng tiền
+                                        <input type="text" style="display: none" value="0" name="phanTramKhuyenMai" id="phamTramKhuyenMai"> %khuyen mai
+                                        <input type="text" style="display: none"  value="${voucher0}" name="idVoucher" id="idVoucher"> id vouvjer
+                                        <input type="text" style="display: none" name="tongTienGiam" id="tongTienGiam"> tong tien giam
+                                        <input type="text"  style="display: none" name="tenNguoiNhan" id="tenNguoiNhan"> ten
+                                        <input type="text" style="display: none"  name="sdt" id="sdt"> sdt
+                                        <input type="text" style="display: none" name="diaChiNguoiNhan" id="diaChiNguoiNhan"> diachi
+                                        <input type="text" style="display: none" name="tongTienSanPhamChuaGiam" id="tongTienSanPhamChuaGiam"> tiénpchiuagiam
+                                        <input type="text" style="display: none" name="phiShip" id="phiShip"> ship
+
                                         <button class="btn btn-primary" id="btnAddHD"  style="color: white;background-color: #00575C;margin-top: 30px;margin-left: 160px">Đặt hàng</button>
                                     </form>
                                 </div>
@@ -258,35 +244,35 @@
     <!-- Ví dụ: -->
     <div class="scrollable">
         <div  id="listDanhSach">
-        <c:forEach items="${listDiaChi}" var="v">
+            <c:forEach items="${listDiaChi}" var="v">
 
-                    <div class="voucher" id="${v.id}" onclick="selectDiaChi('${v.id}','${v.diaChi.moTa}','${v.diaChi.tinhThanhPho.id}','${v.diaChi.tinhThanhPho.ten}','${v.macDinh}')">
+                <div class="voucher" id="${v.id}" onclick="selectDiaChi('${v.id}','${v.diaChi.moTa}','${v.diaChi.tinhThanhPho.id}','${v.diaChi.tinhThanhPho.ten}','${v.macDinh}')">
 
-                        <div class="content">
-                            <span  class="name">Địa chỉ: ${v.diaChi.moTa}  </span>
-                            <span class="price">  Tỉnh/Thành phố ${v.diaChi.tinhThanhPho.ten}  </span>
-                            <c:choose>
-                                <c:when test="${v.macDinh == 0}">
-                                    <span style="color:red;">[Mặc định]</span>
-                                </c:when>
-                                <c:otherwise>
+                    <div class="content">
+                        <span  class="name">Địa chỉ: ${v.diaChi.moTa}  </span>
+                        <span class="price">  Tỉnh/Thành phố ${v.diaChi.tinhThanhPho.ten}  </span>
+                        <c:choose>
+                            <c:when test="${v.macDinh == 0}">
+                                <span style="color:red;">[Mặc định]</span>
+                            </c:when>
+                            <c:otherwise>
                             <span>
                                 <a onclick="updateMacDinh(${v.id},event)" style="color:#00ff80;cursor: pointer;">[Cài đặt mặc định]</a>
                             </span>
-                                </c:otherwise>
-                            </c:choose>
+                            </c:otherwise>
+                        </c:choose>
 
-                        </div>
-                        <div class="productDelete"  onclick="deleteDiaChi(${v.id},event)">
-                                <svg width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
-                        </div>
                     </div>
+                    <div class="productDelete"  onclick="deleteDiaChi(${v.id},event)">
+                        <svg width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+                    </div>
+                </div>
 
-        </c:forEach>
+            </c:forEach>
         </div>
     </div>
     <div class="button-container">
-        <span><button class="btn btn-light" id="submitButton1" onclick="layThongTinThanhToan2()">Chọn</button></span>
+        <span><button class="btn btn-light" id="submitButton1" onclick="layThongTinThanhToan2()" >Chọn</button></span>
         <span> <button class="btn btn-light" id="themDiaChi">Thêm</button></span>
     </div>
 </div>
@@ -297,22 +283,22 @@
     <span id="closeButton2" class="closeButton">&times;</span>
     <br>
     <br>
-        <div>
-            <label class="form-label">Tỉnh/Thành phố: </label><span id="errorText" class="error-message">Tỉnh không hợp lệ !</span>
-            <input style="width: 100%" type="text" class="search-input" list="provinces" id="provinceInput" name="province" data-selected-id="" placeholder="Tìm kiếm tỉnh/thành phố">
-            <datalist id="provinces">
-                <!-- Các option được tạo bằng cách lặp qua danh sách `listTinh` từ controller -->
-                <c:forEach items="${listTinh}" var="tinh">
-                    <option value="${tinh.ten}" data-id="${tinh.id}">${tinh.ten}</option>
-                </c:forEach>
-            </datalist>
-        </div>
-        <div style="display:none;"  id="selectedOptionIdDisplay"></div>
-        <br>
-        <label class="form-label">Địa chỉ chi tiết</label><br>
-        <input id="detailDiaChi" type="text" style="width: 100%" class="form-control">
-        <br>
-        <br>
+    <div>
+        <label class="form-label">Tỉnh/Thành phố: </label><span id="errorText" class="error-message">Tỉnh không hợp lệ !</span>
+        <input style="width: 100%" type="text" class="search-input" list="provinces" id="provinceInput" name="province" data-selected-id="" placeholder="Tìm kiếm tỉnh/thành phố">
+        <datalist id="provinces">
+            <!-- Các option được tạo bằng cách lặp qua danh sách `listTinh` từ controller -->
+            <c:forEach items="${listTinh}" var="tinh">
+                <option value="${tinh.ten}" data-id="${tinh.id}">${tinh.ten}</option>
+            </c:forEach>
+        </datalist>
+    </div>
+    <div style="display: none" id="selectedOptionIdDisplay"></div>
+    <br>
+    <label class="form-label">Địa chỉ chi tiết</label><br>
+    <input id="detailDiaChi" type="text" style="width: 100%" class="form-control">
+    <br>
+    <br>
     <button class="btn btn-light" onclick="addDiaChi()">Thêm mới</button>
 </div>
 <div id="loader-overlay" class="loader-overlay" style="display: none;">
@@ -345,15 +331,10 @@
 
         var tenNguoiNhan = document.getElementById('tenNguoiNhan').value;
         var diaChi = document.getElementById('diaChiChiTietCho').textContent;
-        var inputField1 = document.getElementById('inputField1').value;
         var sdt = document.getElementById('sdt').value;
         var errorText = document.getElementById('errorText');
         var phoneRegex = /^(032|033|034|035|036|037|038|039|096|097|098|086|083|084|085|081|082|088|091|094|070|079|077|076|078|090|093|089|056|058|092|059|099)[0-9]{7}$/; // Định dạng số điện thoại ở Việt Nam
 
-        if (inputField1 > ${ctsp.soLuong}){
-            alert('Số lượng sản phẩm hiện tại không đủ') ;
-            return;
-        }
         if (diaChi == null){
             alert("Vui lòng chọn địa chỉ")
             return;
@@ -370,7 +351,29 @@
         else {
             document.getElementById('loader-overlay').style.display = 'flex';
             errorText.style.display = 'none';
-            document.getElementById('addForm').submit(); // Submit form
+            var productIds = [];
+            var productElements = document.querySelectorAll('.productContainer');
+            productElements.forEach(function(element) {
+                var productId = element.getAttribute('data-product-id');
+                productIds.push(productId);
+            });
+            $.ajax({
+                type: "POST",
+                url: "/bill/addHoaDonKhachHangCoNhieuSanPham",
+                data: JSON.stringify(productIds),
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function(response) {
+                    // Xử lý phản hồi từ controller nếu cần
+                    console.log("Danh sách ID sản phẩm đã được gửi thành công!");
+                    // window.location.href = "/bill/HienThiHoaDonKhachHangCoNhieuSanPham";
+                    document.getElementById("addForm").submit();
+                },
+                error: function(xhr, status, error) {
+                    console.error("Đã xảy ra lỗi khi gửi dữ liệu: " + error);
+                }
+            });
+
         }
 
     });
@@ -443,7 +446,7 @@
         }
     }
 
-//=====================================================================================================
+    //=====================================================================================================
 
     //Update mặc định
     function updateMacDinh(idDiaChi,event){
@@ -507,95 +510,95 @@
         document.getElementById('diaChiMoi').style.display = 'none';
     });
 
-  function addDiaChi() {
-      var selectedOption = document.getElementById('provinceInput').value;
-      var diaCHiChiTiet= document.getElementById('detailDiaChi').value;
-      var isValid = false;
-      if (diaCHiChiTiet.trim() ===''){
-          alert("Vui lòng nhập địa chỉ chi tiết")
-          return;
-      }
-      if (selectedOption.trim() === '') {
-              alert('Vui lòng nhập tỉnh/thành phố!') ;
-              return; // Kết thúc hàm nếu giá trị rỗng
-          }
+    function addDiaChi() {
+        var selectedOption = document.getElementById('provinceInput').value;
+        var diaCHiChiTiet= document.getElementById('detailDiaChi').value;
+        var isValid = false;
+        if (diaCHiChiTiet.trim() ===''){
+            alert("Vui lòng nhập địa chỉ chi tiết")
+            return;
+        }
+        if (selectedOption.trim() === '') {
+            alert('Vui lòng nhập tỉnh/thành phố!') ;
+            return; // Kết thúc hàm nếu giá trị rỗng
+        }
 
-          // Lặp qua từng option trong datalist
-          for (var i = 0; i < dataList.options.length; i++) {
-              // Kiểm tra nếu value của option trùng với giá trị đã chọn
-              if (dataList.options[i].value === selectedOption) {
-                  isValid = true;
-                  break;
-              }
-          }
+        // Lặp qua từng option trong datalist
+        for (var i = 0; i < dataList.options.length; i++) {
+            // Kiểm tra nếu value của option trùng với giá trị đã chọn
+            if (dataList.options[i].value === selectedOption) {
+                isValid = true;
+                break;
+            }
+        }
 
-          // Hiển thị hoặc ẩn thông báo lỗi
-          if (!isValid) {
-              alert('Tỉnh không hợp lệ!') ;
-              return;
-          }
-      $.ajax({
-          type: 'POST',
-          url: '/bill/addDiaChiChiTiet',
-          data: {
-              province:parseInt(document.getElementById('selectedOptionIdDisplay').textContent) , // ID của sản phẩm cần cập nhật
-              detailAddress:document.getElementById('detailDiaChi').value
-          },
-          success: function(response) {
-              if (response === "ok"){
-                  $.ajax({
-                      type: "GET",
-                      url: "/bill/layDiaChiMoiNhat",
-                      success: function(response) {
-                          document.getElementById('listDanhSach').innerText = '';
+        // Hiển thị hoặc ẩn thông báo lỗi
+        if (!isValid) {
+            alert('Tỉnh không hợp lệ!') ;
+            return;
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/bill/addDiaChiChiTiet',
+            data: {
+                province:parseInt(document.getElementById('selectedOptionIdDisplay').textContent) , // ID của sản phẩm cần cập nhật
+                detailAddress:document.getElementById('detailDiaChi').value
+            },
+            success: function(response) {
+                if (response === "ok"){
+                    $.ajax({
+                        type: "GET",
+                        url: "/bill/layDiaChiMoiNhat",
+                        success: function(response) {
+                            document.getElementById('listDanhSach').innerText = '';
 
-                          // Lặp qua danh sách dữ liệu và tạo thẻ <a> cho mỗi mục
-                          $.each(response, function(index, data) {
-                              var iddcct = data[0];
-                              var moTa = data[1];
-                              var tinh = data[2];
-                              var idTinh = data[3];
-                              var macDinh = data[4];
+                            // Lặp qua danh sách dữ liệu và tạo thẻ <a> cho mỗi mục
+                            $.each(response, function(index, data) {
+                                var iddcct = data[0];
+                                var moTa = data[1];
+                                var tinh = data[2];
+                                var idTinh = data[3];
+                                var macDinh = data[4];
 
-                              // Tạo thẻ <a> với các thông tin và gán sự kiện onclick
-                              var linkHTML = '<div class="voucher" id="' + iddcct + '' +
-                                  '" onclick="selectDiaChi(' + iddcct + ',\'' + moTa + '\',' + idTinh + ',\'' + tinh + '\',' + macDinh +
-                                  ')"> <div> <span class="name">Địa chỉ: ' + moTa + ' </span> <span class="price"> Tỉnh/Thành phố ' + tinh +
-                                  ' </span>' + (macDinh == 0 ? '<span style="color:red;">[Mặc định]</span>' : '<span> <a onclick="updateMacDinh('+iddcct+',event)" style="color:#00ff80;cursor: pointer;">[Cài đặt mặc định]</a> </span>') +
-                                  ' </div>  <div class="productDelete" onclick="deleteDiaChi('+iddcct+
-                                  ',event)"> <svg width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg> </div> </div>';
+                                // Tạo thẻ <a> với các thông tin và gán sự kiện onclick
+                                var linkHTML = '<div class="voucher" id="' + iddcct + '' +
+                                    '" onclick="selectDiaChi(' + iddcct + ',\'' + moTa + '\',' + idTinh + ',\'' + tinh + '\',' + macDinh +
+                                    ')"> <div> <span class="name">Địa chỉ: ' + moTa + ' </span> <span class="price"> Tỉnh/Thành phố ' + tinh +
+                                    ' </span>' + (macDinh == 0 ? '<span style="color:red;">[Mặc định]</span>' : '<span> <a onclick="updateMacDinh('+iddcct+',event)" style="color:#00ff80;cursor: pointer;">[Cài đặt mặc định]</a> </span>') +
+                                    ' </div>  <div class="productDelete" onclick="deleteDiaChi('+iddcct+
+                                    ',event)"> <svg width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg> </div> </div>';
 
 
-                              var linkHTML2='<button class="btn btn-primary" onclick="btnThayDoiDiaChi()"  style="color: white;background-color: #00575C;margin-top: 15px;">Thay đổi địa chỉ</button>'
-                              // Thêm thẻ <a> vào container
-                              $('#listDanhSach').append(linkHTML);
-                              document.getElementById('btnDiaChi').innerHTML='';
-                              $('#btnDiaChi').append(linkHTML2);
-                              document.getElementById('diaChiMoi').style.display = 'none';
-                              document.getElementById('hiddenForm1').style.display = 'block';
-                              document.getElementById('loader-overlay').style.display='flex'
-                              setTimeout(function() {
-                                  document.getElementById('loader-overlay').style.display = 'none';
-                              }, 300);
-                          });
-                      },
-                      error: function(xhr, status, error) {
-                          // Xử lý lỗi
-                          console.error("Error occurred while fetching data: " + error);
-                      }
-                  });
+                                var linkHTML2='<button class="btn btn-primary" onclick="btnThayDoiDiaChi()"  style="color: white;background-color: #00575C;margin-top: 15px;">Thay đổi địa chỉ</button>'
+                                // Thêm thẻ <a> vào container
+                                $('#listDanhSach').append(linkHTML);
+                                document.getElementById('btnDiaChi').innerHTML='';
+                                $('#btnDiaChi').append(linkHTML2);
+                                document.getElementById('diaChiMoi').style.display = 'none';
+                                document.getElementById('hiddenForm1').style.display = 'block';
+                                document.getElementById('loader-overlay').style.display='flex'
+                                setTimeout(function() {
+                                    document.getElementById('loader-overlay').style.display = 'none';
+                                }, 300);
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            // Xử lý lỗi
+                            console.error("Error occurred while fetching data: " + error);
+                        }
+                    });
 
-              }
+                }
 
-          },
-          error: function(xhr, status, error) {
-              // Xử lý lỗi (nếu có)
-              console.error('Error updating quantity:', error);
-          }
-      });
-        };
+            },
+            error: function(xhr, status, error) {
+                // Xử lý lỗi (nếu có)
+                console.error('Error updating quantity:', error);
+            }
+        });
+    };
 
-  function deleteDiaChi(addressId,event) {
+    function deleteDiaChi(addressId,event) {
         // Xóa phần tử HTML trên giao diện
 
         event.stopPropagation();
@@ -628,7 +631,7 @@
 
     //Thay đổi địa chỉ
     var selectedDiaChi= null;
-  function btnThayDoiDiaChi() {
+    function btnThayDoiDiaChi() {
 
 
         var hiddenForm = document.getElementById('hiddenForm1');
@@ -639,11 +642,11 @@
         }
     };
 
-  document.getElementById('closeButton1').addEventListener('click', function() {
+    document.getElementById('closeButton1').addEventListener('click', function() {
         document.getElementById('hiddenForm1').style.display = 'none';
     });
 
-  function selectDiaChi(iddcct,moTa,idTinh,tenTinh,macDinh) {
+    function selectDiaChi(iddcct,moTa,idTinh,tenTinh,macDinh) {
         // Loại bỏ lớp clicked từ tất cả các sản phẩm
         var vouchers = document.querySelectorAll('.voucher');
         vouchers.forEach(function (voucher) {
@@ -752,7 +755,7 @@
             alert("Vui lòng chọn voucher !!")
         }
         calculateTotalPrice()
-
+        layThongTinThanhToan2()
     });
 
 
@@ -767,57 +770,24 @@
     }
 
 
-    document.addEventListener('DOMContentLoaded', function() {
-        var inputField = document.getElementById('inputField');
-        var inputField1 = document.getElementById('inputField1');
-        var addButton = document.getElementById('addButton');
-        var subtractButton = document.getElementById('subtractButton');
-        addButton.addEventListener('click', function() {
-            inputField.value = parseInt(inputField.value) + 1;
-            inputField1.value = parseInt(inputField1.value) + 1;
-            calculateTotalPrice();
-            // layThongTinThanhToan2()
-
-        });
-
-        subtractButton.addEventListener('click', function() {
-            var currentValue = parseInt(inputField.value);
-            var currentValue1 = parseInt(inputField1.value);
-            if (currentValue > 1) {
-                inputField.value = currentValue - 1;
-                calculateTotalPrice();
-                // layThongTinThanhToan2()
-
-            }
-            if (currentValue1 > 1) {
-                inputField1.value = currentValue1 - 1;
-                calculateTotalPrice();
-                // layThongTinThanhToan2()
-
-            }
-        });
-    });
 
     function calculateTotalPrice() {
-        // Lấy giá trị của giá sản phẩm
-        var idDiaChi =document.getElementById('tinh').innerText ;
-        console.log(idDiaChi)
-        var productPriceElement = document.getElementById('productPriceT');
-        var productPrice = parseFloat(productPriceElement.textContent.replace(/[^\d.-]/g, ''));
+        var totalPrice = 0;
+        var totalSoLuong = 0;
+        var tongGiaChuaGiam = 0 ;
+        var tongTienGiam = 0 ;
+        var productContainers = document.getElementsByClassName('productContainer');
+        for (var i = 0; i < productContainers.length; i++) {
+            var productPrice = parseFloat(productContainers[i].querySelector('.productPriceT').textContent.replace(/[^\d.-]/g, ''));
+            var giaChuaGiam = parseFloat(productContainers[i].querySelector('.giaChuaGiamT').textContent.replace(/[^\d.-]/g, ''));
+            var productQuantity = parseInt(productContainers[i].querySelector('.productSoLuong').textContent);
 
-        var giaChuaGiammmm = document.getElementById('giaChuaGiamT');
-        var giaChuaGiam = parseFloat(giaChuaGiammmm.textContent.replace(/[^\d.-]/g, ''));
+                totalPrice += productPrice * productQuantity;
+                tongGiaChuaGiam += giaChuaGiam * productQuantity;
+                tongTienGiam += (giaChuaGiam-productPrice) * productQuantity;
+                totalSoLuong ++;
 
-
-
-        var inputFieldElement = document.getElementById('inputField');
-        var quantity = parseInt(inputFieldElement.value);
-
-        var totalPrice = giaChuaGiam * quantity;
-        var tienSPdaGiam = productPrice * quantity;
-        var tongTienGiamSPp = (giaChuaGiam-productPrice)*quantity;
-
-
+        }
         var phanTramVoucher;
         var dontoithieu;
         var giamtoida;
@@ -830,14 +800,15 @@
             dontoithieu=parseInt(selectedVoucher.donToiThieu);
             giamtoida=parseInt(selectedVoucher.giamToiDa);
         }
-        var tiengiam = (tienSPdaGiam*phanTramVoucher)/100;
+        console.log(selectedVoucher)
+        var tiengiam = (totalPrice*phanTramVoucher)/100;
         var soTienGiam = document.getElementById('soTienGiam');
         var soTienGiamSo = parseFloat(soTienGiam.textContent.replace(/[^\d.-]/g, ''));
         var muaThem = document.getElementById('muaThem');
         var giamVoucher;
-        if (tienSPdaGiam<dontoithieu){
+        if (totalPrice<dontoithieu){
             soTienGiam.textContent = '-'+0+'đ';
-            muaThem.textContent='*(Bạn cần mua thêm '+ formatNumber(dontoithieu-tienSPdaGiam)+' để được hưởng ưu đãi.)'
+            muaThem.textContent='*(Bạn cần mua thêm '+ formatNumber(dontoithieu-totalPrice)+' để được hưởng ưu đãi.)'
             muaThem.style.display="block"
             giamVoucher = 0;
         }else {
@@ -850,16 +821,17 @@
                 giamVoucher = tiengiam;
             }
         }
-        var tienspsaukhigiamtatca= (productPrice * quantity) - giamVoucher;
+        var tienspsaukhigiamtatca=totalPrice - giamVoucher;
+        document.getElementById('tongTienSanPham').textContent = formatNumber(tienspsaukhigiamtatca);
 
         var phiGiaoHang = document.getElementById('phiGiaoHang');
         var phiship;
         var freetienship = document.getElementById('0tienship');
-
+        var idDiaChi =document.getElementById('tinh').innerText ;
         if(tienspsaukhigiamtatca >=1000000 || idDiaChi == null){
             phiGiaoHang.textContent = formatNumber(0)
             freetienship.style.display="none"
-            phiship = 0;
+                phiship = 0;
         }else {
             if (parseInt(idDiaChi) === ${idHaNoi}){
                 phiGiaoHang.textContent = formatNumber(30000)
@@ -872,23 +844,19 @@
                 freetienship.textContent ='*(Bạn cần mua thêm '+ formatNumber(1000000-tienspsaukhigiamtatca)+' để được freeship)'
                 phiship = 40000;
             }}
-        var tongtiensanpham = (productPrice*quantity) - giamVoucher;
-        var tongtienphaitra = (productPrice*quantity) - giamVoucher+phiship;
-        var totalPriceElement = document.getElementById('totalPriceDisplay');
-        var tongtienSPDaGiam = document.getElementById('tongtienSPDaGiam');
-        var totalSoLuongDisplay = document.getElementById('totalSoLuongDisplay');
-        var tongtiengiamSP = document.getElementById('tongtiengiamSP');
-        var tongTienSanPham = document.getElementById('tongTienSanPham');
-        tongTienSanPham.textContent = formatNumber(tongtiensanpham);
-        var tongTienThanhToan = document.getElementById('tongTienThanhToan');
-        tongTienThanhToan.textContent = formatNumber(tongtienphaitra);
-        // Hiển thị tổng tiền trên trang
-        totalPriceElement.textContent =formatNumber(totalPrice);
-        totalSoLuongDisplay.textContent =quantity;
-        tongtiengiamSP.textContent = '-'+formatNumber(tongTienGiamSPp);
-        tongtienSPDaGiam.textContent = formatNumber(tienSPdaGiam);
+        var tongTienThanhToan = tienspsaukhigiamtatca+phiship;
+        document.getElementById('tongTienThanhToan').textContent = formatNumber(tongTienThanhToan);
+
+
+        document.getElementById('totalPriceDisplay').textContent = formatNumber(tongGiaChuaGiam);
+        document.getElementById('tongtiengiamSP').textContent = formatNumber(tongTienGiam);
+        document.getElementById('tongtienSPDaGiam').textContent = formatNumber(totalPrice);
+
+
+        document.getElementById('totalSoLuongDisplay').textContent = totalSoLuong;
         layThongTinThanhToan2()
     }
+
     calculateTotalPrice();
     layThongTinThanhToan2()
 
@@ -896,15 +864,18 @@
     var dataList = document.getElementById('provinces');
     var selectedOptionId;
     var idDisplay = document.getElementById('selectedOptionIdDisplay');
-
-
     document.getElementById('provinceInput').addEventListener('input', function(event) {
         var selectedOption = event.target.value;
         var valid = false;
+
+        // Kiểm tra nếu giá trị nhập vào không rỗng
         if (selectedOption.trim() !== '') {
+            // Lặp qua từng option trong datalist
             for (var i = 0; i < dataList.options.length; i++) {
+                // Kiểm tra nếu value của option trùng với giá trị đã chọn
                 if (dataList.options[i].value === selectedOption) {
                     valid = true;
+                    // Gán giá trị id của option tương ứng cho biến selectedOptionId
                     selectedOptionId = dataList.options[i].getAttribute('data-id');
                     break;
                 }

@@ -52,4 +52,15 @@ public class GioHangChiTietImpl implements GioHangChiTietService {
     public GioHangChiTiet kiemTraSoLuongTruocKhiUpdate(Long idGHCT) {
         return gioHangChiTietRepository.kiemTraSoLuongTruocKhiUpdate(idGHCT);
     }
+
+    @Override
+    public List<GioHangChiTiet> findAllById(List<Long> ids) {
+        return gioHangChiTietRepository.findAllById(ids);
+    }
+
+    @Override
+    public void deleteGHCTByCTSP(Long idGHCT) {
+        gioHangChiTietRepository.deleteGHCTByCTSP(idGHCT);
+    }
+
 }

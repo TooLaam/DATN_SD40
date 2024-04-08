@@ -195,7 +195,7 @@
             var hiensl = $("#hiensl").val();
             console.log(soLuong+"--------------")
             console.log(hiensl+"================")
-            if (soLuong>hiensl){
+            if (parseInt(soLuong)>parseInt(hiensl)){
                 alert("Số lượng sản phẩm không đủ")
                 return;
             }
@@ -250,7 +250,7 @@
             alert("Vui lòng chọn màu săc và kích cỡ!"); // Hiển thị cảnh báo nếu có trường input không được điền đầy đủ
             return; // Dừng việc chuyển hướng nếu có lỗi
         }
-        if (soLuong>hiensl){
+        if (parseInt(soLuong)>parseInt(hiensl)){
             alert("Số lượng sản phẩm không đủ")
             return;
         }

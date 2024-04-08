@@ -39,6 +39,7 @@ public interface KhachHangCusService {
     void updateMacDinh(Long idDCCT);
     void deleteDiaChi(Long id);
     void saveHDKhachHang(Integer trangThai, Date ngayTao, BigDecimal tongTien, Integer phanTramKhuyenMai, Long idVoucher, String ghiChu,BigDecimal tongTienGiam,Long phuongThucThanhToanID,String tenNguoiNhan,String sdtNguoiNhan,String diaChiNguoiNhan,BigDecimal tongTienSanPhamChuaGiam,BigDecimal phiShip,Long idKhachHang);
+    List<HoaDonChiTiet> listHDCT(Long idHD);
 
 
 

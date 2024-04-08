@@ -35,4 +35,6 @@ public interface CTSPMSHARepository extends JpaRepository<ChiTietSanPhamMauSacHi
     void updateHA(String hinhAnh, Long idsp, Long idms, Date ngaySua, BigDecimal giaHienHanh,Integer trangThai);
 
 
+    @Query("select ctmsha.giaHienHanh,(ctmsha.giaHienHanh*(100-ctmsha.sanPham.giamGIa.mucGiam))/100 from ChiTietSanPhamMauSacHinhAnh ctmsha where ctmsha.Id=?1")
+    Object addHoaDon (Long id);
 }

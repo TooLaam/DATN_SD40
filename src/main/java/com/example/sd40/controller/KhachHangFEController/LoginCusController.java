@@ -38,6 +38,8 @@ public class LoginCusController {
         session.removeAttribute("idKhachHang");
         session.removeAttribute("idsp");
         session.removeAttribute("idms");
+        session.removeAttribute("gioHangChiTiets");
+        session.removeAttribute("listLong");
         return "redirect:/login";
     }
 

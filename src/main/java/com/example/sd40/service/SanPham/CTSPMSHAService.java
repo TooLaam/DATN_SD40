@@ -18,6 +18,7 @@ public interface CTSPMSHAService {
     void add(ChiTietSanPhamMauSacHinhAnh chiTietSanPhamMauSacHinhAnh);
     void updateHA(String hinhAnh, Long idsp, Long idms, Date ngaySua, BigDecimal giaHienHanh,Integer trangThai);
     List<Object[]> findMSTheoSPDangDung (Long id);
+    Object addHoaDon (Long id);
 
 
 }
