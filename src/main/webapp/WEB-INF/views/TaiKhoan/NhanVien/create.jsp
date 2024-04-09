@@ -55,16 +55,16 @@
                                                     <div class="form-check col-6">
                                                         <input class="form-check-input" type="radio"  value="1"  name="flexRadioDefault" id="flexRadioDefault2" checked>
                                                         <label class="form-check-label" for="flexRadioDefault2">
-                                                           Nữ
+                                                            Nữ
                                                         </label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-<%--                                        <div class="col-6">--%>
-<%--                                            <label  class="form-label">Địa chỉ: </label>--%>
-<%--                                            <textarea type="text" class="form-control"  rows="3"  name="diaChi" required></textarea>--%>
-<%--                                        </div>--%>
+                                        <%--                                        <div class="col-6">--%>
+                                        <%--                                            <label  class="form-label">Địa chỉ: </label>--%>
+                                        <%--                                            <textarea type="text" class="form-control"  rows="3"  name="diaChi" required></textarea>--%>
+                                        <%--                                        </div>--%>
                                     </div>
                                     <button type="submit" class="btn btn-primary">
                                         <span>Tiếp theo</span>
@@ -87,9 +87,3 @@
     </div>
 
 </section>
-
-
-
-
-
-

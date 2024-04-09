@@ -27,6 +27,7 @@ public class HomeController {
             model.addAttribute("listTH",thuongHieuService.listTLHome());
             model.addAttribute("listSPNew",sanPhamService.findAllByOrderByNgayTaoDesc());
             model.addAttribute("listSPBest",sanPhamService.findAllByOrderSLDaBanDesc());
+            model.addAttribute("idkh",idKH );
             model.addAttribute("view", "/home/index.jsp");
             return "/customerFE/index";
         }
@@ -34,6 +35,7 @@ public class HomeController {
         model.addAttribute("listSPNew",sanPhamService.findAllByOrderByNgayTaoDesc());
         model.addAttribute("listSPBest",sanPhamService.findAllByOrderSLDaBanDesc());
         model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
+        model.addAttribute("idkh",idKH );
         model.addAttribute("view", "/home/index.jsp");
         return "/customerFE/index";
     }
@@ -42,11 +44,13 @@ public class HomeController {
         Long idKH = (Long) session.getAttribute("idKhachHang");
         if (idKH == null) {
             model.addAttribute("view", "/blog/index.jsp");
+            model.addAttribute("idkh",idKH );
             return "/customerFE/index";
         }
         else {
             model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
             model.addAttribute("view", "/blog/index.jsp");
+            model.addAttribute("idkh",idKH );
             return "/customerFE/index";
         }
 
@@ -62,6 +66,7 @@ public class HomeController {
         else {
             model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
             model.addAttribute("view", "/blogPage1/index.jsp");
+            model.addAttribute("idkh",idKH );
             return "/customerFE/index";
         }
     }
@@ -75,6 +80,7 @@ public class HomeController {
         }
         else {
             model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
+            model.addAttribute("idkh",idKH );
             model.addAttribute("view", "/blogPage2/index.jsp");
             return "/customerFE/index";
         }
@@ -89,6 +95,7 @@ public class HomeController {
         }
         else {
             model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
+            model.addAttribute("idkh",idKH );
             model.addAttribute("view", "/blogPage3/index.jsp");
             return "/customerFE/index";
         }
@@ -103,6 +110,7 @@ public class HomeController {
         }
         else {
             model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
+            model.addAttribute("idkh",idKH );
             model.addAttribute("view", "/blogPage4/index.jsp");
             return "/customerFE/index";
         }
@@ -113,10 +121,12 @@ public class HomeController {
         Long idKH = (Long) session.getAttribute("idKhachHang");
         if (idKH == null) {
             model.addAttribute("view", "/blogPage5/index.jsp");
+            model.addAttribute("idkh",idKH );
             return "/customerFE/index";
         }
         else {
             model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
+            model.addAttribute("idkh",idKH );
             model.addAttribute("view", "/blogPage5/index.jsp");
             return "/customerFE/index";
         }
@@ -131,6 +141,7 @@ public class HomeController {
         }
         else {
             model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
+            model.addAttribute("idkh",idKH );
             model.addAttribute("view", "/aboutus/index.jsp");
             return "/customerFE/index";
         }

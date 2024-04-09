@@ -160,10 +160,9 @@ footer .fa{
     left: 0;
     margin: 0 auto;
 }
-.caption{
-    margin: 1rem;
-    padding-top: 1000px;
-}
+/*.caption{*/
+/*    margin: 10px;*/
+/*}*/
 .caption>p{
     color: black;
     word-wrap: break-word;
@@ -221,18 +220,5 @@ footer .fa{
 }
 .logoFE{ width: 70%}
 
-.cart-number {
-    background-color: #ff0000; /* Màu nền */
-    color: #ffffff; /* Màu chữ */
-    font-size: 12px; /* Kích thước font */
-    padding: 2px 6px; /* Khoảng cách giữa số và viền */
-    border-radius: 50%; /* Định dạng số thành hình tròn */
-}
 
-.cart-number {
-    background-color: #ff0000; /* Màu nền */
-    color: #ffffff; /* Màu chữ */
-    font-size: 12px; /* Kích thước font */
-    padding: 2px 6px; /* Khoảng cách giữa số và viền */
-    border-radius: 50%; /* Định dạng số thành hình tròn */
-}
+

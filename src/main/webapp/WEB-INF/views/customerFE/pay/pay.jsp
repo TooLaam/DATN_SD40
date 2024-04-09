@@ -44,8 +44,8 @@
                 </div>
                 <div class="form-group">
                     <label for="receiverName">Địa chỉ cụ thể</label>
-                   <input type="text" class="form-control" placeholder="ngõ 54"
-                    name="diaChiNguoiNhan" required>
+                    <input type="text" class="form-control" placeholder="ngõ 54"
+                           name="diaChiNguoiNhan" required>
                 </div>
                 <div class="form-group">
                     <label for="receiverName">Email</label>

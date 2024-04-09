@@ -1,4 +1,4 @@
-package com.example.sd40.repository.TaiKhoan;
+package com.example.sd40.repository.KhachHang;
 
 import com.example.sd40.entity.KhachHang.Dia_Chi;
 import org.springframework.data.jpa.repository.JpaRepository;

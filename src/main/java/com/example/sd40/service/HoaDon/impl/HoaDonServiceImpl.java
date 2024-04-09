@@ -8,8 +8,8 @@ import com.example.sd40.entity.Hoa_don.PhuongThucThanhToan;
 import com.example.sd40.entity.San_pham.ChiTietSanPham;
 import com.example.sd40.repository.GioHang.GioHangRepository;
 import com.example.sd40.repository.HoaDon.*;
+import com.example.sd40.repository.KhachHang.KhachHangRepository;
 import com.example.sd40.repository.SanPham.CTSPRepository;
-import com.example.sd40.repository.TaiKhoan.KhachHangRepository;
 import com.example.sd40.repuest.HoaDonKhachHangResquest;
 import com.example.sd40.service.HoaDon.HoaDonService;
 import jakarta.transaction.Transactional;
@@ -36,7 +36,7 @@ public class HoaDonServiceImpl implements HoaDonService {
     private  HoaDonRepository hoaDonRepository;
 
     @Autowired
-    private  KhachHangRepository khachHangRepository;
+    private KhachHangRepository khachHangRepository;
 
     @Autowired
     private  PhuongThucThanhToanRepository phuongThucThanhToanRepository;
@@ -65,6 +65,11 @@ public class HoaDonServiceImpl implements HoaDonService {
         HoaDon hoaDon = hoaDonRepository.findById(id).get();
         if(hoaDon.getTrangThai() == 4){
             return null;
+        }
+        if(hoaDon.getTrangThai() == 3){
+            PhuongThucThanhToan phuongThucThanhToan = hoaDon.getPhuongThucThanhToan();
+            phuongThucThanhToan.setTrangThai(1);
+            phuongThucThanhToanRepository.save(phuongThucThanhToan);
         }
         hoaDon.setTrangThai(hoaDon.getTrangThai() + 1);
         hoaDonRepository.save(hoaDon);
@@ -100,6 +105,12 @@ public class HoaDonServiceImpl implements HoaDonService {
     @Override
     public HoaDon findByid(long id) {
         return hoaDonRepository.findById(id).get();
+    }
+
+    @Override
+    public HoaDon createHoaDon() {
+//        xuử lý hóa đơn
+        return null;
     }
 
     private  final Random random = new Random();

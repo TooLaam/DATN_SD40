@@ -15,4 +15,7 @@ public interface HoaDonService {
     String changeStatus(long id, String note);
     String huyHoaDon(long id, String note);
     HoaDon findByid(long id);
+
+    HoaDon createHoaDon();
+
 }

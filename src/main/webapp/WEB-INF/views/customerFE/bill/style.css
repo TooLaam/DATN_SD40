@@ -43,3 +43,235 @@
     background-color: #00575C4D;
     transition: all 0.3s ease-in-out;
 }
+
+.frame{
+    border: 1px solid #00575C;
+    border-radius: 15px;
+    margin-top: 60px;
+    padding: 30px 30px 10px 30px;
+    position: relative;
+    margin-bottom: 50px;
+}
+.frame>p{
+    width: 251px;
+    height: 48px;
+    padding: 10px 19px 10px 19px;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 28px;
+    letter-spacing: 0em;
+    text-align: center;
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-230%);
+    background-color: gainsboro;
+    padding: 0 10px;
+
+}
+
+.productContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #0a0a0a;
+    border-radius: 3px;
+    cursor: pointer; /* Đổi con trỏ chuột khi hover */
+    position: relative;
+    justify-content: space-between; /* Canh chỉnh các phần tử theo chiều ngang của container */
+    align-items: center;
+}
+/* Style cho hình ảnh sản phẩm */
+.productImage {
+    width: 150px;
+    height: 150px;
+    margin-right: 20px;
+}
+
+.productContainer:hover {
+    box-shadow: 0 0 150px rgba(0, 0, 0, 0.3); /* Màu đổ bóng */
+}
+
+/* Style cho thông tin sản phẩm */
+.productInfo {
+    flex-grow: 1;
+
+}
+.productDelete {
+    cursor: pointer; /* Biến con trỏ thành hình bàn tay khi di chuột qua */
+    align-self: flex-start; /* Đặt phần tử ở trên cùng của productContainer */
+
+}
+.productName {
+    font-weight: bold;
+    padding-right: 50px;
+}
+.productPrice {
+    color: green;
+    padding-right: 50px;
+}
+.productKichCo {
+    color: #666;
+    padding-right: 50px;
+}
+
+.productMauSac {
+    color: #666;
+    padding-right: 50px;
+}
+
+.productSoLuong {
+    color: #666;
+    padding-right: 50px;
+}
+/* Style cho checkbox */
+.productCheckbox {
+    display: none; /* Ẩn ô checkbox mặc định */
+}
+.customCheckbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #0b0b0b;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.productCheckbox:checked + .customCheckbox {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+.productCheckbox:checked + .customCheckbox::after {
+    content: "\2713"; /* Ký tự '✓' */
+    font-size: 16px;
+    color: white; /* Màu chữ '✓' */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/*----------------------*/
+.containerT {
+    display: flex;
+    align-items: center;
+}
+
+.buttonTang {
+    padding: 10px 20px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    background-color:gainsboro;
+    color: black;
+    border-radius: 5px;
+    margin: 0 10px;
+    transition: background-color 0.3s ease;
+}
+
+.buttonTang:hover {
+    background-color: #2980b9;
+}
+
+.inputTang {
+    padding: 10px;
+    font-size: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100px;
+    text-align: center;
+}
+
+
+.checkout{
+    padding: 20px;
+}
+.checkout>p{
+    color: #00575C;
+}
+.total{
+    margin: 1rem 0;
+}
+.total-item{
+    margin: 1rem 0;
+}
+.after{
+    float: right;
+}
+
+.total-table {
+    width: 100%; /* Đảm bảo bảng chiếm hết không gian của phần tử cha */
+    border-collapse: collapse; /* Loại bỏ khoảng trắng giữa các ô */
+}
+
+.total-table td {
+    border: none; /* Loại bỏ viền cho các ô */
+    padding: 5px; /* Tạo khoảng cách giữa nội dung và biên của ô */
+}
+/* Thiết lập kiểu hiển thị cho wrapper của input và thông báo lỗi */
+/* Thiết lập kiểu hiển thị flex cho container */
+.input-wrapper {
+    display: flex;
+    align-items: center; /* Căn các phần tử theo chiều dọc */
+}
+
+/* Ẩn hiện thông báo lỗi */
+.error-message {
+    color: red;
+    display: none;
+    margin-left: 5px; /* Khoảng cách giữa input và thông báo lỗi */
+}
+#hiddenForm {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: darkgray;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
+}
+.voucher {
+    border: 1px solid #ccc;
+    width: 400px;
+    padding: 10px;
+    margin: 10px;
+    vertical-align: top;
+    cursor: pointer; /* Biến con trỏ thành dấu nhấp chuột khi hover */
+}
+
+/* CSS cho hiệu ứng bóng khi di chuột vào */
+.voucher:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* CSS cho hiệu ứng khi click */
+.voucher.clicked {
+    background-color: lightblue;
+}
+.scrollable {
+    max-height: 400px; /* Đặt chiều cao tối đa của khu vực cuộn */
+    overflow-y: auto; /* Kích hoạt cuộn dọc khi nội dung vượt quá kích thước */
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: white;
+}
+
