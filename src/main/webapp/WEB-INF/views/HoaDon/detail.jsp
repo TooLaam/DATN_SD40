@@ -143,7 +143,7 @@
                                     <tr>
                                         <td>
                                             <img src="/assets/img/product/${sanPham.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.hinhAnh}"
-                                                 style="padding-top: 60px" width="320px" height="450px">
+                                                 style="padding-top: 60px" width="120px" height="120px">
                                         </td>
                                         <td>${sanPham.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.ten}</td>
                                         <td>${sanPham.chiTietSanPham.kichCo.ten}</td>
