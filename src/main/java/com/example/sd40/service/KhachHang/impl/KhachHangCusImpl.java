@@ -7,6 +7,7 @@ import com.example.sd40.entity.KhachHang.DiaChiChiTiet;
 import com.example.sd40.entity.KhachHang.Dia_Chi;
 import com.example.sd40.entity.KhachHang.KhachHang;
 import com.example.sd40.entity.KhachHang.tinhThanhPho;
+import com.example.sd40.entity.San_pham.ChiTietSanPham;
 import com.example.sd40.entity.Voucher.Voucher;
 import com.example.sd40.repository.HoaDon.HoaDonChiTietRepository;
 import com.example.sd40.repository.HoaDon.HoaDonRepository;
@@ -175,6 +176,32 @@ public class KhachHangCusImpl implements KhachHangCusService {
     @Override
     public List<HoaDonChiTiet> listHDCT(Long idHD) {
         return khachHangCusRepository.listHDCT(idHD);
+    }
+
+    @Override
+    public List<HoaDon> listHoaDon(Long idKH, Integer trangThai) {
+        return khachHangCusRepository.listHoaDon(idKH,trangThai);
+    }
+
+    @Override
+    public List<Object[]> listHDCTByHoaDon(Long idHD) {
+        return khachHangCusRepository.listHDCTByHoaDon(idHD);
+    }
+
+
+    @Override
+    public List<HoaDon> getAllHDByIdKhachHang(Long idkh) {
+        return khachHangCusRepository.getAllHDByIdKhachHang(idkh);
+    }
+
+    @Override
+    public List<HoaDonChiTiet> fidHDCTByHD(Long idhd) {
+        return khachHangCusRepository.fidHDCTByHD(idhd);
+    }
+
+    @Override
+    public List<ChiTietSanPham> fidCTSPByHD(Long idhd) {
+        return khachHangCusRepository.fidCTSPByHD(idhd);
     }
 
 

@@ -1,10 +1,12 @@
 package com.example.sd40.repository.KhachHang;
 
 import com.example.sd40.entity.Gio_hang.GioHangChiTiet;
+import com.example.sd40.entity.Hoa_don.HoaDon;
 import com.example.sd40.entity.Hoa_don.HoaDonChiTiet;
 import com.example.sd40.entity.KhachHang.DiaChiChiTiet;
 import com.example.sd40.entity.KhachHang.tinhThanhPho;
 import com.example.sd40.entity.KhachHang.KhachHang;
+import com.example.sd40.entity.San_pham.ChiTietSanPham;
 import com.example.sd40.entity.Voucher.Voucher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -74,6 +76,26 @@ public interface KhachHangCusRepository extends JpaRepository<KhachHang,Long> {
 
     @Query("select hdct from HoaDonChiTiet hdct where hdct.hoaDon.id=?1")
     List<HoaDonChiTiet> listHDCT(Long idHD);
+
+    @Query("select hd from HoaDon hd where hd.khachHang.id = ?1 and hd.trangThai = ?2")
+    List<HoaDon> listHoaDon(Long idKH, Integer trangThai);
+
+    @Query("select hd from HoaDon hd where hd.khachHang.id = ?1")
+    List<HoaDon> getAllHDByIdKhachHang(Long idkh);
+
+    @Query("select sp.ten, ms.ten, kc.ten, hdct.soLuong , hdct.giaHienHanh, hdct.giaDaGiam,ctspms.hinhAnh from HoaDonChiTiet hdct join ChiTietSanPham ctsp on ctsp.Id = hdct.chiTietSanPham.Id " +
+            " join ChiTietSanPhamMauSacHinhAnh ctspms on ctsp.chiTietSanPhamMauSacHinhAnh.Id = ctspms.Id" +
+            " join SanPham sp on ctspms.sanPham.id = sp.id" +
+            " join Mau_sac ms on ctspms.mau_sac.Id = ms.Id" +
+            " join KichCo kc on kc.Id = ctsp.kichCo.Id" +
+            " where hdct.hoaDon.id = ?1")
+    List<Object[]> listHDCTByHoaDon(Long idHD);
+
+    @Query("select ctsp from HoaDonChiTiet hdct join ChiTietSanPham ctsp on hdct.chiTietSanPham.Id = ctsp.Id where hdct.hoaDon.id = ?1")
+    List<ChiTietSanPham> fidCTSPByHD(Long idhd);
+
+    @Query("select hdct from HoaDonChiTiet hdct where hdct.hoaDon.id = ?1")
+    List<HoaDonChiTiet> fidHDCTByHD(Long idhd);
 
 
 

@@ -107,15 +107,15 @@
 
                                 <div id="Tab1" class="tabcontent">
                                     <form id="addForm" action="/bill/HienThiHoaDonKhachHangCoNhieuSanPham" method="post">
-                                        <input type="text"  style="display: none" name="tongTien" id="tongTien"> tổng tiền
-                                        <input type="text" style="display: none" value="0" name="phanTramKhuyenMai" id="phamTramKhuyenMai"> %khuyen mai
-                                        <input type="text" style="display: none"  value="${voucher0}" name="idVoucher" id="idVoucher"> id vouvjer
-                                        <input type="text" style="display: none" name="tongTienGiam" id="tongTienGiam"> tong tien giam
-                                        <input type="text"  style="display: none" name="tenNguoiNhan" id="tenNguoiNhan"> ten
-                                        <input type="text" style="display: none"  name="sdt" id="sdt"> sdt
-                                        <input type="text" style="display: none" name="diaChiNguoiNhan" id="diaChiNguoiNhan"> diachi
-                                        <input type="text" style="display: none" name="tongTienSanPhamChuaGiam" id="tongTienSanPhamChuaGiam"> tiénpchiuagiam
-                                        <input type="text" style="display: none" name="phiShip" id="phiShip"> ship
+                                        <input type="text"  style="display: none" name="tongTien" id="tongTien">
+                                        <input type="text" style="display: none" value="0" name="phanTramKhuyenMai" id="phamTramKhuyenMai">
+                                        <input type="text" style="display: none"  value="${voucher0}" name="idVoucher" id="idVoucher">
+                                        <input type="text" style="display: none" name="tongTienGiam" id="tongTienGiam">
+                                        <input type="text"  style="display: none" name="tenNguoiNhan" id="tenNguoiNhan">
+                                        <input type="text" style="display: none"  name="sdt" id="sdt">
+                                        <input type="text" style="display: none" name="diaChiNguoiNhan" id="diaChiNguoiNhan">
+                                        <input type="text" style="display: none" name="tongTienSanPhamChuaGiam" id="tongTienSanPhamChuaGiam">
+                                        <input type="text" style="display: none" name="phiShip" id="phiShip">
 
                                         <button class="btn btn-primary" id="btnAddHD"  style="color: white;background-color: #00575C;margin-top: 30px;margin-left: 160px">Đặt hàng</button>
                                     </form>

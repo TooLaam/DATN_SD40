@@ -414,4 +414,49 @@ public class HoaDonController {
         return "/customerFE/index";
     }
 
+
+    @GetMapping("/hienThiHoaDon")
+    public String hienThiHoaDon(Model model,HttpSession session){
+        Long idKH = (Long) session.getAttribute("idKhachHang");
+        model.addAttribute("hoaDonChoXacNhan",khachHangCusService.listHoaDon(idKH,0));
+        model.addAttribute("hoaDonDaXacNhan",khachHangCusService.listHoaDon(idKH,1));
+        model.addAttribute("hoaDonChoGiao",khachHangCusService.listHoaDon(idKH,2));
+        model.addAttribute("hoaDonDangGiao",khachHangCusService.listHoaDon(idKH,3));
+        model.addAttribute("hoaDonThanhCong",khachHangCusService.listHoaDon(idKH,4));
+        model.addAttribute("hoaDonHuy",khachHangCusService.listHoaDon(idKH,5));
+        model.addAttribute("allHoaDon",khachHangCusService.getAllHDByIdKhachHang(idKH));
+        model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(idKH).size());
+        model.addAttribute("idkh",idKH );
+
+        model.addAttribute("view", "/bill/HoaDon.jsp");
+        return "/customerFE/index";
+    }
+
+    @GetMapping("/hienthiHoaDonChiTiet/{idhd}")
+    public ResponseEntity<List<Object[]>> hienthiKCCus(Model model,
+                                                       @PathVariable("idhd") Long idsp
+    ){
+
+        List<Object[]> objects = khachHangCusService.listHDCTByHoaDon(idsp);
+
+        if (objects != null && !objects.isEmpty()) {
+            return new ResponseEntity<>(objects, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/detailHoaDon/{idhd}")
+    public String detailHoaDon(@PathVariable("idhd")Long idhd,Model model,HttpSession session){
+        HoaDon hoaDon = khachHangCusService.detailHoaDon(idhd);
+        List<HoaDonChiTiet> hoaDonChiTiets = khachHangCusService.fidHDCTByHD(idhd);
+        List<ChiTietSanPham> chiTietSanPhams = khachHangCusService.fidCTSPByHD(idhd);
+        Long idKH = (Long) session.getAttribute("idKhachHang");
+        model.addAttribute("HD",hoaDon);
+        model.addAttribute("HDCT",hoaDonChiTiets);
+        model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(idKH).size());
+        model.addAttribute("idkh",idKH );
+        model.addAttribute("view", "/bill/hoanThanhDatHangCoNhieuSanPham.jsp");
+        return "/customerFE/index";
+    }
 }

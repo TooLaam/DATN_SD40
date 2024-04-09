@@ -13,15 +13,18 @@
 <br>
 <div class="container3">
     <div class="frame3">
-        <div class="header3">
-            <p>Xác nhận đơn hàng</p>
-        </div>
+        <c:choose>
+            <c:when test="${HD.trangThai==0}"><div class="header3"><p>Đơn hàng đang chờ xác nhận</p></div></c:when>
+            <c:when test="${HD.trangThai==1}"><div class="header3"><p>Đơn hàng đã được xác nhận</p></div></c:when>
+            <c:when test="${HD.trangThai==2}"><div class="header3"><p>Đơn hàng đang chờ giao</p></div></c:when>
+            <c:when test="${HD.trangThai==3}"><div class="header3"><p>Đơn hàng đang giao</p></div></c:when>
+            <c:when test="${HD.trangThai==4}"><div class="header3"><p>Đơn hàng hoàn thành</p></div></c:when>
+            <c:otherwise><div class="header3"><p>Đơn hàng đã hủy</p></div></c:otherwise>
+        </c:choose>
         <br>
+        <h3>Đơn hàng ${HD.maHoaDon}</h3>
         <br>
         <div class="conten3">
-            <h3>Bạn đã đặt đơn hàng có mã hóa đơn ${HD.maHoaDon} thành công</h3>
-            <br>
-            <br>
             <c:forEach var="sp" items="${HDCT}">
                 <div class="product-container3">
                     <div class="product-image3">
@@ -52,9 +55,17 @@
                 <p><strong>Số tiền thanh toán:</strong> <fmt:formatNumber value="${HD.tongTien}" pattern="###,###"/>đ</p>
             </div>
         </div>
-        <div class="confirmation-message3">
-            <p>Bạn vui lòng chờ để shop xác nhận đơn nhé. Cảm ơn quý khách đã ủng hộ SD40 sport</p>
-        </div>
+        <c:choose>
+            <c:when test="${HD.trangThai==0}">
+                <div class="confirmation-message3">Bạn vui lòng chờ để shop xác nhận đơn nhé. Cảm ơn quý khách đã ủng hộ SD40 sport</div>
+            </c:when>
+            <c:when test="${HD.trangThai==5}">
+                <div class="confirmation-message3">Cảm ơn quý khách đã theo dõi SD40 sport</div>
+            </c:when>
+            <c:otherwise>
+                <div class="confirmation-message3">Cảm ơn quý khách đã ủng hộ SD40 sport</div>
+            </c:otherwise>
+        </c:choose>
     </div>
 </div>
 </body>

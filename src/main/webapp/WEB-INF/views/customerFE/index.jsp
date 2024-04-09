@@ -78,13 +78,13 @@
                 <ul class="list-unstyled" style="display: flex; margin-right: 1rem;">
                     <c:if test="${khachHangCus != null}">
                         <li>
-                            <a href="/customer/indexcus">
+                            <a href="/customer/hienThiHoaDon">
                                 <span class="fa fa-user"></span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="/bill/indexcus">
+                            <a href="/bill/hienThiHoaDon">
                                 <span class="fa fa-sticky-note"></span>
                             </a>
                         </li>

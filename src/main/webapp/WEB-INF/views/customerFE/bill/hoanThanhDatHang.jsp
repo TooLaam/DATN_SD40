@@ -13,13 +13,20 @@
 <br>
 <div class="container1">
     <div class="frame1">
-        <div class="header1">
-            <p>Xác nhận đơn hàng</p>
-        </div>
+            <c:choose>
+                <c:when test="${hoaDon.trangThai==0}"><div class="header1"><p>Đơn hàng đang chờ xác nhận</p></div></c:when>
+                <c:when test="${hoaDon.trangThai==1}"><div class="header1"><p>Đơn hàng đã được xác nhận</p></div></c:when>
+                <c:when test="${hoaDon.trangThai==2}"><div class="header1"><p>Đơn hàng đang chờ giao</p></div></c:when>
+                <c:when test="${hoaDon.trangThai==3}"><div class="header1"><p>Đơn hàng đang giao</p></div></c:when>
+                <c:when test="${hoaDon.trangThai==4}"><div class="header1"><p>Đơn hàng hoàn thành</p></div></c:when>
+                <c:otherwise><div class="header1"><p>Đơn hàng đã hủy</p></div></c:otherwise>
+            </c:choose>
         <br>
         <br>
         <div class="row">
-            <h3>Bạn đã đặt đơn hàng có mã hóa đơn ${hoaDon.maHoaDon} thành công</h3>
+            <c:if test="${hoaDon.trangThai==0}">
+                <h3>Bạn đã đặt đơn hàng có mã hóa đơn ${HD.maHoaDon} thành công</h3>
+            </c:if>
             <br>
             <div class="productContainer1">
                 <img src="/assets/img/product/${ctsp.chiTietSanPhamMauSacHinhAnh.hinhAnh}" width="520px" height="450px" class="productImage1">
@@ -52,7 +59,19 @@
                     </div>
                 </div>
             </div>
-            <div class="confirmationMessage1">Bạn vui lòng chờ để shop xác nhận đơn nhé. Cảm ơn quý khách đã ủng hộ SD40 sport</div>
+            <c:choose>
+                <c:when test="${hoaDon.trangThai==0}">
+                    <div class="confirmationMessage1">Bạn vui lòng chờ để shop xác nhận đơn nhé. Cảm ơn quý khách đã ủng hộ SD40 sport</div>
+                </c:when>
+                <c:when test="${hoaDon.trangThai==5}">
+                    <div class="confirmationMessage1">Cảm ơn quý khách đã theo dõi SD40 sport</div>
+                </c:when>
+                <c:otherwise>
+                    <div class="confirmationMessage1">Cảm ơn quý khách đã ủng hộ SD40 sport</div>
+                </c:otherwise>
+            </c:choose>
+
+
         </div>
     </div>
 </div>
