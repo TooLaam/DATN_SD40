@@ -204,5 +204,15 @@ public class KhachHangCusImpl implements KhachHangCusService {
         return khachHangCusRepository.fidCTSPByHD(idhd);
     }
 
+    @Override
+    public void doiMatKhau(String taiKhoan, String matKhau, Long idKH) {
+        khachHangCusRepository.doiMatKhau(taiKhoan,matKhau,idKH);
+    }
+
+    @Override
+    public List<KhachHang> checkTaiKhoan(Long idkh, String taiKhoan) {
+        return khachHangCusRepository.checkTaiKhoan(idkh,taiKhoan);
+    }
+
 
 }

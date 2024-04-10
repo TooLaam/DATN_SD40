@@ -16,10 +16,10 @@
                 <a href="/logout" class="link-text-logout">(Đăng xuất)</a>
             </div>
             <div class="link">
-                <a href="/infoKhachHang" style="color:black;" class="link-text">Thông tin tài khoản</a>
+                <a href="/infoKhachHang" style="color:black;" class="link-text-active">Thông tin tài khoản</a>
             </div>
             <div class="link">
-                <a href="/bill/hienThiHoaDon" class="link-text-active">Đơn hàng</a>
+                <a href="/bill/hienThiHoaDon" class="link-text">Đơn hàng</a>
             </div>
             <div class="link">
                 <a href="/customer/indexcus/changeAccountInfo" class="link-text-active">Chỉnh sửa tài khoản</a>
@@ -33,82 +33,41 @@
                 <p>Thông tin tài khoản</p>
 
                 <div class="mb-3 row">
-                    <label class="col-sm-2 col-form-label form-label">Mã</label>
+                    <label class="col-sm-2 col-form-label form-label">Họ tên</label>
                     <div class="col-sm-10">
-                        ${kh.ma}
+                        <input type="text" class="form-control" name="ten" value="${kh.ten}">
                     </div>
                 </div>
-
-                    <div class="mb-3 row">
-                        <label class="col-sm-2 col-form-label form-label">Họ tên</label>
-                        <div class="col-sm-10">
-                            ${kh.hoTen}
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label class="col-sm-2 col-form-label form-label">Ngày sinh</label>
-                        <div class="col-sm-10" id="birthday">
-                             ${kh.ngaySinh}
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label class="col-sm-2 col-form-label form-label">Số điện thoại</label>
-                        <div class="col-sm-10">
-                            ${kh.sdt}
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label class="col-sm-2 col-form-label form-label">Giới tính</label>
-                        <div class="col-sm-10">
-                            ${kh.gioiTinh == 1 ?'Nam':'Nữ'}
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label class="col-sm-2 col-form-label form-label">Email</label>
-                        <div class="col-sm-10">
-                            ${kh.email}
-                        </div>
-                    </div>
                 <div class="mb-3 row">
-                    <label class="col-sm-2 col-form-label form-label">Điểm tích lũy</label>
-                    <div class="col-sm-10">
-                        ${kh.diemTichLuy}
+                    <label class="col-sm-2 col-form-label form-label">Ngày sinh</label>
+                    <div class="col-sm-10" id="birthday">
+                        <input type="date" class="form-control" name="ngaySinh" value="formatDate(${kh.ngaySinh})">
                     </div>
                 </div>
-
                 <div class="mb-3 row">
-                    <label class="col-sm-2 col-form-label form-label">Hạng thành viên</label>
+                    <label class="col-sm-2 col-form-label form-label">Số điện thoại</label>
                     <div class="col-sm-10">
-                        <c:choose>
-                            <c:when test="${kh.hangThanhVien.id == null}">
-                                Thành viên mới
-                            </c:when>
-                            <c:otherwise>
-                                ${kh.hangThanhVien.ten}
-                            </c:otherwise>
-                        </c:choose>
-
-                    </div>
-                    <div style="color: gray">
-                        <c:choose>
-                            <c:when test="${kh.hangThanhVien.id == 1}">
-                                *(Bạn cần tích thêm ${hangBac.dieuKien-kh.diemTichLuy} điểm để lên hạng Bạc)
-                            </c:when>
-                            <c:when test="${kh.hangThanhVien.id == 2}">
-                                *(Bạn cần tích thêm ${hangVang.dieuKien-kh.diemTichLuy} điểm để lên hạng Vàng)
-                            </c:when>
-                            <c:when test="${kh.hangThanhVien.id == 3}">
-                                *(Bạn cần tích thêm ${hangKimCuong.dieuKien-kh.diemTichLuy} điểm để lên hạng Kim Cương)
-                            </c:when>
-                            <c:when test="${kh.hangThanhVien.id == 4}">
-
-                            </c:when>
-                            <c:otherwise>
-                                *(Bạn cần tích thêm ${hangDong.dieuKien-kh.diemTichLuy} điểm để lên hạng Đồng)
-                            </c:otherwise>
-                        </c:choose>
+                        <input type="text" class="form-control" name="sdt" value="${kh.sdt}">
                     </div>
                 </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label form-label">Giới tính</label>
+                    <div class="col-sm-10">
+                        <input type="radio" class="btn-check" name="gioiTinh" value="1" id="male" autocomplete="off"
+                               checked>
+                        <label class="btn" for="male">Nam</label>
+
+                        <input type="radio" class="btn-check" value="0" name="gioiTinh" id="female" autocomplete="off">
+                        <label class="btn" for="female">Nữ</label>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label form-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="email">
+                    </div>
+                </div>
+
 
             </div>
         </div>
@@ -117,30 +76,30 @@
     <div id="hiddenForm">
         <h3 style="color: black">Đổi tài khoản mật khẩu</h3>
         <span id="closeButton" class="closeButton">&times;</span>
-            <div style="display: flex">
-                <span><label for="taiKhoanHienTai">Tài khoản hiện tại</label></span>
-                <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errTaiKhoan">Tài khoản không đúng</span>
-            </div>
-                <input type="text" oninput="kiemTraThongTinDoiMatKhau()" id="taiKhoanHienTai" class="form-control">
-            <div>
-                <label for="taiKhoanMoi">Tài khoản mới</label>
-                <input type="text" oninput="kiemTraThongTinDoiMatKhau()" id="taiKhoanMoi" class="form-control" name="taiKhoan">
-            </div>
-            <div style="display: flex">
-                <span><label for="matKhauHienTai">Mật khẩu hiện tại</label></span>
-                <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errMatKhau">Mật khẩu không đúng</span>
-            </div>
-                <input type="password" oninput="kiemTraThongTinDoiMatKhau()" id="matKhauHienTai" class="form-control">
-            <div>
-                <label for="matKhauMoi">Mật khẩu mới</label>
-                <input type="password" oninput="kiemTraThongTinDoiMatKhau()" id="matKhauMoi" class="form-control" name="matKhau">
-            </div>
-            <div style="display: flex">
-                <span><label for="matKhauNhapLai">Nhập lại mật khẩu</label></span>
-                <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errMatKhauLai">Mật khẩu không trùng khớp</span>
-            </div>
-                <input type="password" oninput="kiemTraThongTinDoiMatKhau()" id="matKhauNhapLai" class="form-control">
-            <button class="btn btn-light" id="submitButton">Đổi mật khẩu</button>
+        <div style="display: flex">
+            <span><label for="taiKhoanHienTai">Tài khoản hiện tại</label></span>
+            <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errTaiKhoan">Tài khoản không đúng</span>
+        </div>
+        <input type="text" oninput="kiemTraThongTinDoiMatKhau()" id="taiKhoanHienTai" class="form-control">
+        <div>
+            <label for="taiKhoanMoi">Tài khoản mới</label>
+            <input type="text" oninput="kiemTraThongTinDoiMatKhau()" id="taiKhoanMoi" class="form-control" name="taiKhoan">
+        </div>
+        <div style="display: flex">
+            <span><label for="matKhauHienTai">Mật khẩu hiện tại</label></span>
+            <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errMatKhau">Mật khẩu không đúng</span>
+        </div>
+        <input type="password" oninput="kiemTraThongTinDoiMatKhau()" id="matKhauHienTai" class="form-control">
+        <div>
+            <label for="matKhauMoi">Mật khẩu mới</label>
+            <input type="password" oninput="kiemTraThongTinDoiMatKhau()" id="matKhauMoi" class="form-control" name="matKhau">
+        </div>
+        <div style="display: flex">
+            <span><label for="matKhauNhapLai">Nhập lại mật khẩu</label></span>
+            <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errMatKhauLai">Mật khẩu không trùng khớp</span>
+        </div>
+        <input type="password" oninput="kiemTraThongTinDoiMatKhau()" id="matKhauNhapLai" class="form-control">
+        <button class="btn btn-light" id="submitButton">Đổi mật khẩu</button>
     </div>
 
 </div>
@@ -205,7 +164,7 @@
 
 
     $("#submitButton").click(function(e) {
-            e.preventDefault();
+        e.preventDefault();
         var taiKhoanHienTai = document.getElementById('taiKhoanHienTai').value;
         var taiKhoanMoi = document.getElementById('taiKhoanMoi').value;
         var matKhauHienTai = document.getElementById('matKhauHienTai').value;
@@ -252,5 +211,5 @@
                 });
             }
         }
-            });
+    });
 </script>

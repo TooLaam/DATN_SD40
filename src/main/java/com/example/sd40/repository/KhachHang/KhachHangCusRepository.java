@@ -97,6 +97,14 @@ public interface KhachHangCusRepository extends JpaRepository<KhachHang,Long> {
     @Query("select hdct from HoaDonChiTiet hdct where hdct.hoaDon.id = ?1")
     List<HoaDonChiTiet> fidHDCTByHD(Long idhd);
 
+    @Transactional
+    @Modifying
+    @Query("update KhachHang dc set dc.taiKhoan=?1, dc.matKhau = ?2 where dc.id = ?3 ")
+    void doiMatKhau(String taiKhoan, String matKhau,Long idKH);
+
+    @Query("select kh from KhachHang kh where kh.id not in (?1) and kh.taiKhoan = ?2")
+    List<KhachHang> checkTaiKhoan(Long idkh, String taiKhoan);
+
 
 
 }

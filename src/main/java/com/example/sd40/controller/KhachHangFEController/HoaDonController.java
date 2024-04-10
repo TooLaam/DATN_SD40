@@ -186,7 +186,6 @@ public class HoaDonController {
                             @RequestParam("giaDaGiam")BigDecimal giaDaGiam,Model model,HttpSession session
     ) throws MessagingException {
         Long idKH = (Long) session.getAttribute("idKhachHang");
-//        int idKH = 1;
         KhachHang khachHang = khachHangCusService.detailKhachHang(Long.valueOf(idKH));
         khachHangCusService.saveHDKhachHang(0, currentDate, tongTien, phamTramKhuyenMai, idVoucher, "Hóa đơn thanh toán khi nhận hàng", tongTienGiam, Long.valueOf(1), tenNguoiNhan, sdt, diaChiNguoiNhan, tongTienSanPhamChuaGiam, phiShip,idKH);
         Long idHoaDonMoiNhat = khachHangCusService.idHoaDonMoiTao();

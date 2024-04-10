@@ -46,6 +46,8 @@ public interface KhachHangCusService {
     List<HoaDon> getAllHDByIdKhachHang(Long idkh);
     List<HoaDonChiTiet> fidHDCTByHD(Long idhd);
     List<ChiTietSanPham> fidCTSPByHD(Long idhd);
+    void doiMatKhau(String taiKhoan, String matKhau,Long idKH);
+    List<KhachHang> checkTaiKhoan(Long idkh, String taiKhoan);
 
 
 

@@ -78,7 +78,7 @@
                 <ul class="list-unstyled" style="display: flex; margin-right: 1rem;">
                     <c:if test="${khachHangCus != null}">
                         <li>
-                            <a href="/customer/hienThiHoaDon">
+                            <a href="/infoKhachHang">
                                 <span class="fa fa-user"></span>
                             </a>
                         </li>
