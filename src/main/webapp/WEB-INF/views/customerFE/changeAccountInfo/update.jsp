@@ -22,7 +22,7 @@
                 <a href="/bill/hienThiHoaDon" class="link-text">Đơn hàng</a>
             </div>
             <div class="link">
-                <a href="/customer/indexcus/changeAccountInfo" class="link-text-active">Chỉnh sửa tài khoản</a>
+                <a href="/hienThiUpdateKhachHang" class="link-text-active">Chỉnh sửa tài khoản</a>
             </div>
             <div class="link">
                 <a style="cursor: pointer;" id="doiMatKhau" class="link-text-active">Đổi mật khẩu</a>
@@ -31,43 +31,47 @@
         <div class="col-9">
             <div class="information">
                 <p>Thông tin tài khoản</p>
-
+                <form id="updateForm" method="post" action="/updateKhachHang">
                 <div class="mb-3 row">
                     <label class="col-sm-2 col-form-label form-label">Họ tên</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="ten" value="${kh.ten}">
+                        <input type="text" class="form-control" id="ten" name="ten" value="${kh.hoTen}">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label class="col-sm-2 col-form-label form-label">Ngày sinh</label>
-                    <div class="col-sm-10" id="birthday">
-                        <input type="date" class="form-control" name="ngaySinh" value="formatDate(${kh.ngaySinh})">
+                    <div class="col-sm-10" >
+                        <input type="date" class="form-control" id="ngaySinh" name="ngaySinh">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label class="col-sm-2 col-form-label form-label">Số điện thoại</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="sdt" value="${kh.sdt}">
+                        <input type="text" class="form-control" oninput="layThongTinUpdate()" id="sdt" name="sdt" value="${kh.sdt}">
+                        <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errSdt">Số điện thoại không hợp lệ</span>
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label class="col-sm-2 col-form-label form-label">Giới tính</label>
                     <div class="col-sm-10">
-                        <input type="radio" class="btn-check" name="gioiTinh" value="1" id="male" autocomplete="off"
-                               checked>
-                        <label class="btn" for="male">Nam</label>
+                        <input type="radio" class="radio-input" name="gioiTinh" value="1" ${kh.gioiTinh==1?"checked":""}  id="male" autocomplete="off">
+                        <label class="radio-label" for="male">Nam</label>
 
-                        <input type="radio" class="btn-check" value="0" name="gioiTinh" id="female" autocomplete="off">
-                        <label class="btn" for="female">Nữ</label>
+                        <input type="radio" class="radio-input" value="0" name="gioiTinh" ${kh.gioiTinh==0?"checked":""} id="female" autocomplete="off">
+                        <label class="radio-label" for="female">Nữ</label>
+
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label class="col-sm-2 col-form-label form-label">Email</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="email">
+                        <input type="text" oninput="layThongTinUpdate()" class="form-control" id="email" value="${kh.email}" name="email">
+                        <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errEmail">Email không hợp lệ</span>
                     </div>
                 </div>
 
+                    <button type="button" id="capNhat" style="background-color: #00575C" class="btn btn-success">Cập nhật</button>
+                </form>
 
             </div>
         </div>
@@ -105,12 +109,53 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    function formatDate(inputDate) {
-        // Chỉ lấy phần ngày tháng từ chuỗi
-        var parts = inputDate.split(' ')[0].split('-');
-        return parts[2] + '/' + parts[1] + '/' + parts[0];
+    $("#capNhat").click(function(e) {
+        e.preventDefault();
+        var ten = document.getElementById('ten').value;
+        var ngaySinh = document.getElementById('ngaySinh').value;
+        var email = document.getElementById('email').value;
+        var sdt = document.getElementById('sdt').value;
+        var phoneRegex = /^(032|033|034|035|036|037|038|039|096|097|098|086|083|084|085|081|082|088|091|094|070|079|077|076|078|090|093|089|056|058|092|059|099)[0-9]{7}$/; // Định dạng số điện thoại ở Việt Nam
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (ten ==''|| ngaySinh == ''||email==''||sdt==''){
+            alert("Vui lòng nhập đầu đủ thông tin !!")
+            return;
+        }else {
+            if (!phoneRegex.test(sdt)){
+            alert("Số điện thoại không hợp lệ !!!")
+            return;
+            }else if (!emailRegex.test(email)){
+            alert("Email không hợp lệ !!!")
+            return;
+            }else {
+                alert("Cập nhật thành công !!!")
+                document.getElementById('updateForm').submit();
+            }
+        }
+    });
+    function layThongTinUpdate (){
+
+        var email = document.getElementById('email').value;
+        var sdt = document.getElementById('sdt').value;
+        var phoneRegex = /^(032|033|034|035|036|037|038|039|096|097|098|086|083|084|085|081|082|088|091|094|070|079|077|076|078|090|093|089|056|058|092|059|099)[0-9]{7}$/; // Định dạng số điện thoại ở Việt Nam
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (phoneRegex.test(sdt)||sdt == ''){
+            document.getElementById('errSdt').style.display='none';
+            return;
+        }else {
+            document.getElementById('errSdt').style.display='block';
+        }
+
+        if (emailRegex.test(email) || email == '') {
+            document.getElementById('errEmail').style.display='none';
+                return;
+        }
+        else {
+            document.getElementById('errEmail').style.display='block';
+            }
+
     }
-    document.getElementById("birthday").textContent = formatDate("${kh.ngaySinh}");
 
     document.getElementById('doiMatKhau').addEventListener('click', function(event) {
         event.preventDefault(); // Ngăn chặn hành động mặc định của thẻ a

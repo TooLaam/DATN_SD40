@@ -105,6 +105,9 @@ public interface KhachHangCusRepository extends JpaRepository<KhachHang,Long> {
     @Query("select kh from KhachHang kh where kh.id not in (?1) and kh.taiKhoan = ?2")
     List<KhachHang> checkTaiKhoan(Long idkh, String taiKhoan);
 
+    @Query("select kh from KhachHang kh where kh.taiKhoan = ?1")
+    List<KhachHang> checlTaiKhoanAdd(String taiKhoan);
+
 
 
 }

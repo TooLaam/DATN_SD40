@@ -113,3 +113,40 @@
     align-items: center;
 
 }
+
+.radio-container {
+    display: flex;
+    align-items: center;
+
+}
+
+/* Ẩn radio input */
+.radio-input {
+    display: none;
+
+}
+
+/* Thiết lập kiểu cho nhãn */
+.radio-label {
+    display: inline-block;
+    cursor: pointer;
+    padding: 10px 20px;
+    border: 1px solid #00575C;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    background-color: #00575C;
+    color: white;
+    width: 80px; /* Đặt chiều rộng cố định cho cả hai nhãn */
+    text-align: center;
+}
+
+/* Kiểu khi radio được chọn */
+.radio-input:checked + .radio-label {
+    background-color: #bc8a09;
+    color: white;
+}
+
+/* Kiểu khi di chuột qua */
+.radio-label:hover {
+    background-color: #bc8a09;
+}

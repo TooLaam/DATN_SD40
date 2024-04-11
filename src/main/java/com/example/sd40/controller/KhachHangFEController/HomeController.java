@@ -14,6 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -189,5 +192,32 @@ public class HomeController {
         }
     }
 
+    @GetMapping("/hienThiUpdateKhachHang")
+    public String hienThiUpdateKhachHang(Model model,HttpSession session){
+        Long idKH = Long.valueOf(1);
+        model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
+        model.addAttribute("idkh",idKH );
+        model.addAttribute("kh",khachHangCusService.detailKhachHang(idKH) );
 
+        model.addAttribute("view", "/changeAccountInfo/update.jsp");
+        return "/customerFE/index";
+    }
+    @PostMapping("/updateKhachHang")
+    public String updateKhacHang(HttpSession session,
+                                 @RequestParam("ten")String ten,
+                                 @RequestParam("ngaySinh") String ngaySinh,
+                                 @RequestParam("sdt")String sdt,
+                                 @RequestParam("gioiTinh")Integer gioiTinhn,
+                                 @RequestParam("email")String email
+                                 ) throws ParseException {
+        Long idKH = Long.valueOf(1);
+        KhachHang khachHang = khachHangCusService.detailKhachHang(idKH);
+        khachHang.setNgaySinh(new SimpleDateFormat("yyyy-MM-dd").parse(ngaySinh));
+        khachHang.setHoTen(ten);
+        khachHang.setEmail(email);
+        khachHang.setSdt(sdt);
+        khachHang.setGioiTinh(gioiTinhn);
+        khachHangCusService.updateKhachHang(khachHang);
+        return "redirect:/infoKhachHang";
+    }
 }

@@ -214,5 +214,20 @@ public class KhachHangCusImpl implements KhachHangCusService {
         return khachHangCusRepository.checkTaiKhoan(idkh,taiKhoan);
     }
 
+    @Override
+    public void updateKhachHang(KhachHang khachHang) {
+        khachHangRepository.save(khachHang);
+    }
+
+    @Override
+    public List<KhachHang> getAllKhachHang() {
+        return khachHangRepository.findAll();
+    }
+
+    @Override
+    public List<KhachHang> checlTaiKhoanAdd(String taiKhoan) {
+        return khachHangCusRepository.checlTaiKhoanAdd(taiKhoan);
+    }
+
 
 }

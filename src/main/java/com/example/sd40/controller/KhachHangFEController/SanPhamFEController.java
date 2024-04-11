@@ -1,6 +1,8 @@
 package com.example.sd40.controller.KhachHangFEController;
 
+import com.example.sd40.entity.KhachHang.KhachHang;
 import com.example.sd40.entity.San_pham.ChiTietSanPhamMauSacHinhAnh;
+import com.example.sd40.entity.San_pham.SanPham;
 import com.example.sd40.service.GioHang.GioHangChiTietService;
 import com.example.sd40.service.SanPham.*;
 import com.example.sd40.service.KhachHang.KhachHangCusService;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
@@ -49,7 +52,6 @@ public class SanPhamFEController {
             model.addAttribute("listTL",loaiGiayService.findAll());
             model.addAttribute("listSP",ctspService.getAllSPCus());
             model.addAttribute("tongSLSP",ctspService.getAllSPCus().size());
-
             model.addAttribute("view", "/product/index.jsp");
             return "/customerFE/index";
         }
@@ -60,7 +62,6 @@ public class SanPhamFEController {
             model.addAttribute("listTL",loaiGiayService.findAll());
             model.addAttribute("listSP",ctspService.getAllSPCus());
             model.addAttribute("tongSLSP",ctspService.getAllSPCus().size());
-
             model.addAttribute("view", "/product/index.jsp");
             return "/customerFE/index";
         }
@@ -75,7 +76,6 @@ public class SanPhamFEController {
             model.addAttribute("listTL",loaiGiayService.findAll());
             model.addAttribute("listSP",ctspService.getAllSPCusByGiamGia());
             model.addAttribute("tongSLSP",ctspService.getAllSPCusByGiamGia().size());
-
             model.addAttribute("view", "/product/giamGia.jsp");
             return "/customerFE/index";
         }
@@ -86,7 +86,6 @@ public class SanPhamFEController {
             model.addAttribute("listTL",loaiGiayService.findAll());
             model.addAttribute("listSP",ctspService.getAllSPCusByGiamGia());
             model.addAttribute("tongSLSP",ctspService.getAllSPCusByGiamGia().size());
-
             model.addAttribute("view", "/product/giamGia.jsp");
             return "/customerFE/index";
         }
@@ -98,19 +97,11 @@ public class SanPhamFEController {
     ){
         Long idKH = (Long) session.getAttribute("idKhachHang");
         if (idKH == null) {
-            if (ctspService.getAllSPCusByTL(idTL).isEmpty()){
-                model.addAttribute("listTH",thuongHieuService.getAll());
-                model.addAttribute("listTL",loaiGiayService.findAll());
-                model.addAttribute("err","Hiện không có sản phẩm nào thỏa mãn điều kiện của bạn. Vui lòng chọn filter khác !");
-                model.addAttribute("view", "/product/theloai.jsp");
-                return "/customerFE/index";
-            }
             model.addAttribute("listTH",thuongHieuService.getAll());
             model.addAttribute("listTL",loaiGiayService.findAll());
             model.addAttribute("listSP",ctspService.getAllSPCusByTL(idTL));
             model.addAttribute("tongSLSP",ctspService.getAllSPCusByTL(idTL).size());
             model.addAttribute("TL",loaiGiayService.detail(idTL));
-
             model.addAttribute("view", "/product/theloai.jsp");
             return "/customerFE/index";
 
@@ -118,19 +109,11 @@ public class SanPhamFEController {
         else {
             model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
             model.addAttribute("idkh",idKH );
-            if (ctspService.getAllSPCusByTL(idTL).isEmpty()){
-                model.addAttribute("listTH",thuongHieuService.getAll());
-                model.addAttribute("listTL",loaiGiayService.findAll());
-                model.addAttribute("err","Hiện không có sản phẩm nào thỏa mãn điều kiện của bạn. Vui lòng chọn filter khác !");
-                model.addAttribute("view", "/product/theloai.jsp");
-                return "/customerFE/index";
-            }
             model.addAttribute("listTH",thuongHieuService.getAll());
             model.addAttribute("listTL",loaiGiayService.findAll());
             model.addAttribute("listSP",ctspService.getAllSPCusByTL(idTL));
             model.addAttribute("tongSLSP",ctspService.getAllSPCusByTL(idTL).size());
             model.addAttribute("TL",loaiGiayService.detail(idTL));
-
             model.addAttribute("view", "/product/theloai.jsp");
             return "/customerFE/index";
 
@@ -145,38 +128,22 @@ public class SanPhamFEController {
 
         Long idKH = (Long) session.getAttribute("idKhachHang");
         if (idKH == null) {
-            if (ctspService.getAllSPCusByTH(idTh).isEmpty()){
-                model.addAttribute("listTH",thuongHieuService.getAll());
-                model.addAttribute("listTL",loaiGiayService.findAll());
-                model.addAttribute("err","Hiện không có sản phẩm nào thỏa mãn điều kiện của bạn. Vui lòng chọn filter khác !");
-                model.addAttribute("view", "/product/thuonghieu.jsp");
-                return "/customerFE/index";
-            }
             model.addAttribute("listTH",thuongHieuService.getAll());
             model.addAttribute("listTL",loaiGiayService.findAll());
             model.addAttribute("listSP",ctspService.getAllSPCusByTH(idTh));
             model.addAttribute("tongSLSP",ctspService.getAllSPCusByTH(idTh).size());
             model.addAttribute("TH",thuongHieuService.detail(idTh));
-
             model.addAttribute("view", "/product/thuonghieu.jsp");
             return "/customerFE/index";
         }
         else {
             model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
             model.addAttribute("idkh",idKH );
-            if (ctspService.getAllSPCusByTH(idTh).isEmpty()){
-                model.addAttribute("listTH",thuongHieuService.getAll());
-                model.addAttribute("listTL",loaiGiayService.findAll());
-                model.addAttribute("err","Hiện không có sản phẩm nào thỏa mãn điều kiện của bạn. Vui lòng chọn filter khác !");
-                model.addAttribute("view", "/product/thuonghieu.jsp");
-                return "/customerFE/index";
-            }
             model.addAttribute("listTH",thuongHieuService.getAll());
             model.addAttribute("listTL",loaiGiayService.findAll());
             model.addAttribute("listSP",ctspService.getAllSPCusByTH(idTh));
             model.addAttribute("tongSLSP",ctspService.getAllSPCusByTH(idTh).size());
             model.addAttribute("TH",thuongHieuService.detail(idTh));
-
             model.addAttribute("view", "/product/thuonghieu.jsp");
             return "/customerFE/index";
         }
@@ -192,33 +159,18 @@ public class SanPhamFEController {
 
         Long idKH = (Long) session.getAttribute("idKhachHang");
         if (idKH == null) {
-            if (ctspService.getAllSPCusByGia(giaMin,giaMax).isEmpty()){
-                model.addAttribute("listTH",thuongHieuService.getAll());
-                model.addAttribute("listTL",loaiGiayService.findAll());
-                model.addAttribute("err","Hiện không có sản phẩm nào thỏa mãn điều kiện của bạn. Vui lòng chọn filter khác !");
-                model.addAttribute("view", "/product/filterByGia.jsp");
-                return "/customerFE/index";
-            }
             model.addAttribute("listTH",thuongHieuService.getAll());
             model.addAttribute("listTL",loaiGiayService.findAll());
             model.addAttribute("listSP",ctspService.getAllSPCusByGia(giaMin,giaMax));
             model.addAttribute("tongSLSP",ctspService.getAllSPCusByGia(giaMin,giaMax).size());
             model.addAttribute("giaMin",giaMin);
             model.addAttribute("giaMax",giaMax);
-
             model.addAttribute("view", "/product/filterByGia.jsp");
             return "/customerFE/index";
         }
         else {
             model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
             model.addAttribute("idkh",idKH );
-            if (ctspService.getAllSPCusByGia(giaMin,giaMax).isEmpty()){
-                model.addAttribute("listTH",thuongHieuService.getAll());
-                model.addAttribute("listTL",loaiGiayService.findAll());
-                model.addAttribute("err","Hiện không có sản phẩm nào thỏa mãn điều kiện của bạn. Vui lòng chọn filter khác !");
-                model.addAttribute("view", "/product/filterByGia.jsp");
-                return "/customerFE/index";
-            }
             model.addAttribute("listTH",thuongHieuService.getAll());
             model.addAttribute("listTL",loaiGiayService.findAll());
             model.addAttribute("listSP",ctspService.getAllSPCusByGia(giaMin,giaMax));
@@ -241,7 +193,6 @@ public class SanPhamFEController {
             model.addAttribute("listMS",ctspmshaService.findMSTheoSPDangDung(idsp));
             model.addAttribute("listHA",ctspmshaService.getAllHinhAnhbyIDSP(idsp));
             model.addAttribute("SP1", sanPhamService.detail(idsp));
-
             model.addAttribute("view", "/detail/index.jsp");
             return "/customerFE/index";
         }
@@ -252,7 +203,6 @@ public class SanPhamFEController {
             model.addAttribute("listMS",ctspmshaService.findMSTheoSPDangDung(idsp));
             model.addAttribute("listHA",ctspmshaService.getAllHinhAnhbyIDSP(idsp));
             model.addAttribute("SP1", sanPhamService.detail(idsp));
-
             model.addAttribute("view", "/detail/index.jsp");
             return "/customerFE/index";
         }
@@ -269,6 +219,39 @@ public class SanPhamFEController {
             return new ResponseEntity<>(kichCos, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/timKiemSanPham/{key}")
+    public ResponseEntity<?> timKiemSanPham(@PathVariable("key") String key) {
+        try {
+            List<Object[]> sanPhams = sanPhamService.searchByTenOrThuongHieuOrTheLoai(key);
+            return new ResponseEntity<>(sanPhams, HttpStatus.OK);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Lỗi");
+        }
+    }
+
+    @GetMapping("/timKiemSanPhamAll")
+    public String timKiemSanPhamAll(Model model,HttpSession session,@RequestParam("key")String key){
+        Long idKH = (Long) session.getAttribute("idKhachHang");
+        if (idKH == null) {
+            model.addAttribute("listTH",thuongHieuService.getAll());
+            model.addAttribute("listTL",loaiGiayService.findAll());
+            model.addAttribute("listSP",sanPhamService.getAllSPBySearch(key));
+            model.addAttribute("tongSLSP",ctspService.getAllSPCus().size());
+            model.addAttribute("view", "/product/timKiem.jsp");
+            return "/customerFE/index";
+        }
+        else {
+            model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
+            model.addAttribute("idkh",idKH );
+            model.addAttribute("listTH",thuongHieuService.getAll());
+            model.addAttribute("listTL",loaiGiayService.findAll());
+            model.addAttribute("listSP",sanPhamService.getAllSPBySearch(key));
+            model.addAttribute("tongSLSP",sanPhamService.getAllSPBySearch(key).size());
+            model.addAttribute("view", "/product/timKiem.jsp");
+            return "/customerFE/index";
         }
     }
 

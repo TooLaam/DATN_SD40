@@ -11,7 +11,7 @@
 <br/>
 <div class="container">
     <div class="content">
-        <span class="text-content">${TH.ten}</span>
+        <span class="text-content">Kết quả </span>
         <c:choose>
             <c:when test="${tongSLSP == null}">
                 <span class="available">(0)</span>
@@ -20,6 +20,7 @@
                 <span class="available">(${tongSLSP})</span>
             </c:otherwise>
         </c:choose>
+
     </div>
     <div class="row">
         <div class="col-3">
@@ -27,7 +28,7 @@
             <h6 class="filter">Thương hiệu</h6>
             <c:forEach items="${listTH}" var="brand">
                 <div class="filter-brand">
-                    <a href="/sanphamcus/thuonghieucus/${brand.id}" onclick="filterItems('${brand.id}')">${brand.ten}</a>
+                    <a href="/sanphamcus/thuonghieucus/${brand.id}">${brand.ten}</a>
                 </div>
             </c:forEach>
             <h6 class="filter">Thể loại</h6>
@@ -149,23 +150,5 @@
         document.getElementById('load-more').style.display = 'block'; // Hiển thị nút Xem Thêm
         document.getElementById('collapse').style.display = 'none'; // Ẩn nút Thu Gọn
         productCount = 6; // Reset số sản phẩm đã hiển thị
-    }
-
-    function filterItems(id) {
-        // Thực hiện logic để lọc sản phẩm dựa trên id
-        // Sau khi lọc xong, cập nhật nội dung của các sản phẩm tương ứng
-        setActiveLink(id); // Đặt nút đang được click là active
-    }
-
-    function setActiveLink(id) {
-        // Xóa lớp active của tất cả các liên kết
-        const allLinks = document.querySelectorAll('.filter-brand a');
-        allLinks.forEach(link => {
-            link.classList.remove('active');
-        });
-
-        // Đặt lớp active cho liên kết được click
-        const activeLink = document.querySelector(`.filter-brand a[href="#"][onclick="filterItems('${id}')"]`);
-        activeLink.classList.add('active');
     }
 </script>

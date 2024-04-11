@@ -1,6 +1,7 @@
 package com.example.sd40.service.SanPham;
 
 import com.example.sd40.entity.San_pham.SanPham;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -18,7 +19,8 @@ public interface SanPhamService {
     void save(String ten,String moTa,String hinhAnh,Long thuongHieu,Long theLoai,Long giamGia);
     List<Object> findAllByOrderByNgayTaoDesc();
     List<Object> findAllByOrderSLDaBanDesc();
-
+    List<Object[]> searchByTenOrThuongHieuOrTheLoai(@Param("keyword") String keyword);
     List<SanPham> getList();
     SanPham findTheoId(Long id);
+    List<Object> getAllSPBySearch(@Param("keyword") String keyword);
 }

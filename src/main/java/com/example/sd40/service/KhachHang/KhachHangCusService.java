@@ -48,6 +48,9 @@ public interface KhachHangCusService {
     List<ChiTietSanPham> fidCTSPByHD(Long idhd);
     void doiMatKhau(String taiKhoan, String matKhau,Long idKH);
     List<KhachHang> checkTaiKhoan(Long idkh, String taiKhoan);
+    void updateKhachHang(KhachHang khachHang);
+    List<KhachHang> getAllKhachHang();
+    List<KhachHang> checlTaiKhoanAdd(String taiKhoan);
 
 
 

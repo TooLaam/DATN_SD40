@@ -22,7 +22,7 @@
                 <a href="/bill/hienThiHoaDon" class="link-text-active">Đơn hàng</a>
             </div>
             <div class="link">
-                <a href="/customer/indexcus/changeAccountInfo" class="link-text-active">Chỉnh sửa tài khoản</a>
+                <a href="/hienThiUpdateKhachHang" class="link-text-active">Chỉnh sửa tài khoản</a>
             </div>
             <div class="link">
                 <a style="cursor: pointer;" id="doiMatKhau" class="link-text-active">Đổi mật khẩu</a>
