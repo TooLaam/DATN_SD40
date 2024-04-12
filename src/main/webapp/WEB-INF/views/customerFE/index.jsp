@@ -32,6 +32,68 @@
         .caption{
             padding: 0.1rem;
         }
+        .product {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            margin-bottom: 10px;
+            text-decoration: none; /* Bỏ gạch chân khi hover */
+            color: inherit; /* Kế thừa màu từ phần tử cha */
+        }
+
+        .product:hover {
+            background-color: #f5f5f5; /* Thay đổi màu nền khi hover */
+        }
+
+        .product-image {
+            flex: 0 0 auto;
+            margin-right: 10px;
+        }
+
+        .product-image img {
+            max-width: 100px;
+            height: auto;
+        }
+
+        .product-details {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-name {
+            margin: 0;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .product-brand,
+        .product-category {
+            margin: 0;
+            font-size: 14px;
+            color: #888;
+        }
+        #searchResults {
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            top: 100%;
+            left: 35%;
+            z-index: 1000;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            max-height: 700px; /* Đảm bảo đủ lớn để chứa tất cả các sản phẩm */
+            overflow-y: visible; /* Hiển thị toàn bộ nội dung mà không có thanh cuộn */
+        }
+
+        #noResultsMessage {
+            font-size: 20px; /* Định dạng kích thước chữ */
+            padding: 20px; /* Tạo khoảng trống xung quanh */
+            text-align: center; /* Căn giữa văn bản */
+        }
 
     </style>
 </head>
@@ -68,23 +130,25 @@
                 </a>
             </li>
             <li class="nav-item">
-                <form action="/product/search" method="get" class="input-group" id="nav-search" style="width: 600px;">
-                    <input type="text" name="name" class="form-control" placeholder="What can we help you find?"
+                <form action="/timKiemSanPhamAll" method="get" class="input-group" id="nav-search" style="width: 600px;">
+                    <input type="text" name="key" oninput="seahc()" class="form-control" id="tim" placeholder="Tìm kiếm sản phẩm theo tên, thương hiệu, thể loại"
                            aria-label="Recipient's username"/>
-                    <button type="submit" class="btn">SEARCH</button>
+
+                    <button type="submit" id="btnSearch" class="btn">SEARCH</button>
                 </form>
+                <ul id="searchResults" class="search-results"></ul>
             </li>
             <li class="nav-item">
                 <ul class="list-unstyled" style="display: flex; margin-right: 1rem;">
                     <c:if test="${khachHangCus != null}">
                         <li>
-                            <a href="/customer/indexcus">
+                            <a href="/infoKhachHang">
                                 <span class="fa fa-user"></span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="/bill/indexcus">
+                            <a href="/bill/hienThiHoaDon">
                                 <span class="fa fa-sticky-note"></span>
                             </a>
                         </li>
@@ -260,6 +324,63 @@
 
 <!-- Template Main JS File -->
 <script src="/assets/js/main.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function seahc(){
+        var key = document.getElementById('tim').value;
+        if (key ==''){
+            $('#searchResults').textContent='';
+            $('#searchResults').empty();;
+            return;
+        }
+        $.ajax({
+            type: "GET",
+            url: "/timKiemSanPham/"+key,
+            success: function (data) {
+                var resultsList = $('#searchResults');
+                resultsList.empty();
+                if (data.length === 0) {
+                    var linkHTML = '<div id="noResultsMessage">Không tìm thấy sản phẩm...</div>';
+                    $('#searchResults').append(linkHTML);
+                }else {
+                    var slicedData = data.slice(0, 4);
+                    slicedData.forEach(function (item) {
+                        var ha = item[1];
+                        var ten = item[2];
+                        var thuongHien = item[3];
+                        var theLoai = item[4];
+                        var id = item[0];
+                        var linkHTML = '<a href="/detailsanphamcus/' + id + '" class="product">' +
+                            ' <div class="product-image"> <img src="/assets/img/product/' + ha + '" alt="Product Image"> </div>' +
+                            ' <div class="product-details">' +
+                            ' <h3 class="product-name">' + ten + '</h3>' +
+                            ' <p class="product-brand">' + thuongHien + '</p> ' +
+                            '<p class="product-category">' + theLoai + '</p>' +
+                            ' </div>' +
+                            ' </a>';
+
+                        $('#searchResults').append(linkHTML);
+                    });
+                }}
+            ,
+                error: function (xhr, status, error) {
+                    console.error("Error occurred while sending data: " + error);
+                }
+            });
+    }
+
+    document.getElementById('btnSearch').addEventListener('click', function(event) {
+        event.preventDefault();
+        var kay = document.getElementById('tim').value;
+        if (kay ==''){
+            window.location.href = "/sanphamcus";
+            return;
+        }else {
+            document.getElementById('nav-search').submit();
+        }
+    });
+
+</script>
 
 </body>
 

@@ -65,4 +65,21 @@ public class HoaDon {
     @ManyToOne
     @JoinColumn(name = "phuong_thuc_thanh_toan_id",referencedColumnName = "id")
     private PhuongThucThanhToan phuongThucThanhToan;
+
+    @Column(name = "ten_nguoi_nhan")
+    private String tenNguoiNhan;
+
+    @Column(name = "sdt_nguoi_nhan")
+    private String sdtNguoiNhan;
+
+    @Column(name = "dia_chi_nguoi_nhan")
+    private String diaChiNguoiNhan;
+
+    @Column(name = "tong_tien_san_pham_chua_giam")
+    private BigDecimal tongTienSanPhamChuaGiam;
+
+    @Column(name = "phi_ship")
+    private BigDecimal phiShip;
+
+
 }

@@ -83,7 +83,7 @@
                         </c:when>
                         <c:otherwise>
                             <h5>${sp[1]}</h5>
-                            <p><span class="text-content">${sp[3]} Đã bán | ${sp[5]} Sản phẩm có sẵn</span></p>
+                            <p><span class="text-content">${sp[3]} Đã bán</span></p>
                             <p><span class="text-content">Thương hiệu: ${SP1.thuongHieu.ten}  |  Thể loại: ${SP1.theLoai.ten}</span></p>
                             <div id="giaChung1">
                                 <span  class="price" >$ <fmt:formatNumber value="${sp[9]}" pattern="###,###"/>đ - <fmt:formatNumber value="${sp[8]}" pattern="###,###"/>đ</span>
@@ -150,6 +150,7 @@
                         <form id="buyForm"  action="/bill/hienthisanpham/${SP1.id}" method="get">
                             <input style="display: none" id="inputid1" name="kichCo">
                             <input style="display: none" id="mauSac1" name="mauSac">
+                            <input style="display: none" id="hiengoc1" name="sl">
                             <input style="display: none" readonly type="number" id="inputField1" class="inputTang" name="soLuong" value="1">
                             <button id="buyButton" class="btn btn-outline"  >MUA NGAY</button>
 
@@ -191,6 +192,13 @@
             var kichC0 =$("#inputid").val();
             var mauSac = $("#mauSac").val();
             var soLuong = $("#inputField2").val();
+            var hiensl = $("#hiensl").val();
+            console.log(soLuong+"--------------")
+            console.log(hiensl+"================")
+            if (parseInt(soLuong)>parseInt(hiensl)){
+                alert("Số lượng sản phẩm không đủ")
+                return;
+            }
             if (!mauSac || !kichC0){
                 alert("Vui lòng chọn màu sắc và kích cỡ !!!")
 
@@ -227,24 +235,36 @@
     });
 
     document.getElementById('buyButton').addEventListener('click', function(event) {
-        event.preventDefault(); // Ngăn chặn chuyển hướng mặc định
+        event.preventDefault(); // Ngăn chặn chuyển hướng mặc định\
+
 
         var kichCo = document.getElementById('inputid1').value;
         var mauSac = document.getElementById('mauSac1').value;
+        var soLuong = $("#inputField1").val();
+        var hiensl = $("#hiengoc1").val();
+        console.log(soLuong+"--------------")
+        console.log(hiensl+"================")
 
 
         if (!kichCo || !mauSac) {
             alert("Vui lòng chọn màu săc và kích cỡ!"); // Hiển thị cảnh báo nếu có trường input không được điền đầy đủ
             return; // Dừng việc chuyển hướng nếu có lỗi
         }
-
-        // Nếu mọi thông tin đã được điền đầy đủ, thực hiện chuyển hướng
-        document.getElementById('buyForm').submit();
+        if (parseInt(soLuong)>parseInt(hiensl)){
+            alert("Số lượng sản phẩm không đủ")
+            return;
+        }
+        else {
+            // Nếu mọi thông tin đã được điền đầy đủ, thực hiện chuyển hướng
+            document.getElementById('buyForm').submit();
+        }
     });
 
 
     var previousSelectedId = null;
     function getDataForColor(idsp, idms,giaGoc,mucGiam,giaGiam) {
+        document.getElementById('inputid').value = null;
+        document.getElementById('inputid1').value = null;
 
         var element = document.getElementById('mausac' + idms);
 
@@ -257,11 +277,6 @@
         previousSelectedId = idms;
 
 
-        console.log(idsp);
-        console.log(idms);
-        console.log(giaGoc);
-        console.log(giaGiam);
-        console.log(mucGiam);
         var giaChung = document.getElementById("giaChung");
         var giaChung1 = document.getElementById("giaChung1");
         var priceHienTaiGiam = document.getElementById("priceHienTaiGiam");

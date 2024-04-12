@@ -43,6 +43,6 @@ public class HoaDonChiTiet {
     private HoaDon hoaDon;
 
     @ManyToOne
-    @JoinColumn(name = "chi_tiet_san_pham",referencedColumnName = "id")
+    @JoinColumn(name = "chi_tiet_san_pham_id",referencedColumnName = "id")
     private ChiTietSanPham chiTietSanPham;
 }

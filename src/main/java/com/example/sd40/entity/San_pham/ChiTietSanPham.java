@@ -1,5 +1,6 @@
 package com.example.sd40.entity.San_pham;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -41,6 +42,7 @@ public class ChiTietSanPham {
             referencedColumnName = "id",
             nullable = true
     )
+    @JsonBackReference
     private ChiTietSanPhamMauSacHinhAnh chiTietSanPhamMauSacHinhAnh;
 
 
