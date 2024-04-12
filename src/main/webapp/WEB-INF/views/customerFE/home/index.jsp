@@ -126,7 +126,7 @@
 <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
 <df-messenger
         intent="WELCOME"
-        chat-title="ChatBot"
-        agent-id="c9aa1141-ab88-427a-9131-9140328e202b"
+        chat-title="SD40"
+        agent-id="96c8e619-f1d8-425a-a536-0cb7cecdb3b7"
         language-code="vi"
 ></df-messenger>

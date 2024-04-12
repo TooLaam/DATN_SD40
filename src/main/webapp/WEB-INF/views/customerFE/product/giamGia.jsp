@@ -117,3 +117,10 @@
         productCount = 6; // Reset số sản phẩm đã hiển thị
     }
 </script>
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+        intent="WELCOME"
+        chat-title="SD40"
+        agent-id="96c8e619-f1d8-425a-a536-0cb7cecdb3b7"
+        language-code="vi"
+></df-messenger>
