@@ -191,8 +191,8 @@
             e.preventDefault();
             var kichC0 =$("#inputid").val();
             var mauSac = $("#mauSac").val();
-            var soLuong = $("#inputField2").val();
-            var hiensl = $("#hiensl").val();
+            var soLuong = $("#inputField1").val();
+            var hiensl = $("#hiengoc1").val();
             console.log(soLuong+"--------------")
             console.log(hiensl+"================")
             if (parseInt(soLuong)>parseInt(hiensl)){
@@ -215,8 +215,6 @@
                     url: "/hienthiAddHD/${SP1.id}",
                     data: formData,
                     success: function (response) {
-                        console.log("Data sent successfully!");
-                        console.log(response);
                         if (response === "update") {
                             alert("Cập nhật vào giỏ hàng thành công !!!");
                         } else if (response === "success") {

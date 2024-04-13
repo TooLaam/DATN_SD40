@@ -1,6 +1,8 @@
 package com.example.sd40.controller.KhachHangFEController;
 
+import com.example.sd40.entity.Gio_hang.GioHang;
 import com.example.sd40.entity.KhachHang.KhachHang;
+import com.example.sd40.service.GioHang.GioHangService;
 import com.example.sd40.service.KhachHang.KhachHangCusService;
 import jakarta.servlet.http.HttpSession;
 //import org.hibernate.Session;
@@ -22,6 +24,8 @@ import java.util.List;
 public class LoginCusController {
     @Autowired
     KhachHangCusService khachHangCusService;
+    @Autowired
+    GioHangService gioHangService;
 
 
 
@@ -106,6 +110,15 @@ public class LoginCusController {
         khachHang.setTrangThai(0);
         khachHang.setMa("KH"+(khachHangCusService.getAllKhachHang().size()+1));
         khachHangCusService.updateKhachHang(khachHang);
+
+
+        Long idkh = khachHangCusService.idKhachHangMoiTao();
+        GioHang gioHang = new GioHang();
+        gioHang.setKhachHang(khachHangCusService.detailKhachHang(idkh));
+        gioHang.setGhiChu("Giỏ hàng của "+khachHangCusService.detailKhachHang(idkh).getHoTen());
+        gioHang.setNgayTao(currentDate);
+        gioHang.setTrangThai(0);
+        gioHangService.AddGioHang(gioHang);
         return "redirect:/login";
     }
 

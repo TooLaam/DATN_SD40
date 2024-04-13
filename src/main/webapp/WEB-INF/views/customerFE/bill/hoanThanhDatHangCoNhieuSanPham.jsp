@@ -19,7 +19,7 @@
             <c:when test="${HD.trangThai==2}"><div class="header3"><p>Đơn hàng đang chờ giao</p></div></c:when>
             <c:when test="${HD.trangThai==3}"><div class="header3"><p>Đơn hàng đang giao</p></div></c:when>
             <c:when test="${HD.trangThai==4}"><div class="header3"><p>Đơn hàng hoàn thành</p></div></c:when>
-            <c:otherwise><div class="header3"><p>Đơn hàng đã hủy</p></div></c:otherwise>
+            <c:otherwise><div class="header3" style="background-color: red"><p>Đơn hàng đã hủy</p></div></c:otherwise>
         </c:choose>
         <br>
         <h3>Đơn hàng ${HD.maHoaDon}</h3>
@@ -55,6 +55,21 @@
                 <p><strong>Số tiền thanh toán:</strong> <fmt:formatNumber value="${HD.tongTien}" pattern="###,###"/>đ</p>
             </div>
         </div>
+        <div>
+            <c:choose>
+                <c:when test="${HD.trangThai == 0 || HD.trangThai == 1}">
+                    <div class="btnTrangThai">
+                        <a  id="btnHuy">Hủy hóa đơn</a>
+                    </div>
+
+                </c:when>
+                <c:when test="${HD.trangThai==3}">
+                    <div class="btnTrangThai">
+                        <a onclick="hoanThanhHoaDon()" id="btnThanhCong">Đã nhận được hàng</a>
+                    </div>
+                </c:when>
+            </c:choose>
+        </div>
         <c:choose>
             <c:when test="${HD.trangThai==0}">
                 <div class="confirmation-message3">Bạn vui lòng chờ để shop xác nhận đơn nhé. Cảm ơn quý khách đã ủng hộ SD40 sport</div>
@@ -68,6 +83,15 @@
         </c:choose>
     </div>
 </div>
+<div id="hiddenForm" >
+    <h5 style="color: black">Lý do hủy đơn hàng</h5>
+    <span id="closeButton" class="closeButton">&times;</span>
+    <div class="voucher">
+
+        <textarea class="long-input" id="lyDo" placeholder="Nhập lý do hủy đơn hàng của bạn ở đây..."></textarea>
+    </div>
+    <button style="background-color: red" onclick="huyHoaDon()" id="submitButton">Xác nhận hủy đơn hàng</button>
+</div>
 <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
 <df-messenger
         intent="WELCOME"
@@ -75,5 +99,59 @@
         agent-id="96c8e619-f1d8-425a-a536-0cb7cecdb3b7"
         language-code="vi"
 ></df-messenger>
+<script>
+    document.getElementById('btnHuy').addEventListener('click', function(event) {
+        event.preventDefault(); // Ngăn chặn hành động mặc định của thẻ a
+
+        var hiddenForm = document.getElementById('hiddenForm');
+        if (hiddenForm.style.display === 'none') {
+            hiddenForm.style.display = 'block';
+        } else {
+            hiddenForm.style.display = 'none';
+        }
+    });
+
+    document.getElementById('closeButton').addEventListener('click', function() {
+        document.getElementById('hiddenForm').style.display = 'none';
+    });
+     function huyHoaDon() {
+        var lyDo = document.getElementById('lyDo').value;
+        if (lyDo == '') {
+            alert("Vui lòng nhập lý do")
+            return;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/bill/huyHoaDon/"+${HD.id},
+            data:{
+                lyDo: lyDo
+            },
+            success: function(response) {
+                // Xử lý phản hồi từ controller nếu cần
+               alert("Hủy đơn hàng thành công !!!")
+                window.location.href = "/bill/detailHoaDon/"+${HD.id};
+            },
+            error: function(xhr, status, error) {
+                console.error("Đã xảy ra lỗi khi gửi dữ liệu: " + error);
+            }
+        });
+    };
+
+     function hoanThanhHoaDon() {
+        var cf = confirm("Bạn chắc chắn đã nhận được hàng ???")
+        if (cf == true){
+            $.ajax({
+                type: "POST",
+                url: "/bill/hoanThanhHoaDonCus/"+${HD.id},
+                success: function(response) {
+                    window.location.href = "/bill/detailHoaDon/"+${HD.id};
+                },
+                error: function(xhr, status, error) {
+                    console.error("Đã xảy ra lỗi khi gửi dữ liệu: " + error);
+                }
+            });
+        }
+    };
+</script>
 </body>
 </html>

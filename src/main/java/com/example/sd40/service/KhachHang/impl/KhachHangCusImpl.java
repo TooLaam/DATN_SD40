@@ -229,5 +229,35 @@ public class KhachHangCusImpl implements KhachHangCusService {
         return khachHangCusRepository.checlTaiKhoanAdd(taiKhoan);
     }
 
+    @Override
+    public void capNhatSoLuongSPSauKhiXoa(Integer soLuong, Long idctsp) {
+        khachHangCusRepository.capNhatSoLuongSPSauKhiXoa(soLuong,idctsp);
+    }
+
+    @Override
+    public void HuyHoaDon(Long idhd, String lyDo) {
+        khachHangCusRepository.HuyHoaDon(idhd,lyDo);
+    }
+
+    @Override
+    public void hoanThanhHoaDon(Long idhd) {
+        khachHangCusRepository.hoanThanhHoaDon(idhd);
+    }
+
+    @Override
+    public void capNhatSoLuongSPDaBan(Integer soLuong, Long idSP) {
+        khachHangCusRepository.capNhatSoLuongSPDaBan(soLuong,idSP);
+    }
+
+    @Override
+    public List<Object[]> soLuongDaBan(Long idHD) {
+        return khachHangCusRepository.soLuongDaBan(idHD);
+    }
+
+    @Override
+    public Long idKhachHangMoiTao() {
+        return khachHangCusRepository.idKhachHangMoiTao();
+    }
+
 
 }

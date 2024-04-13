@@ -125,12 +125,13 @@
                                         <input type="text" style="display: none"  name="tongTienGiam" id="tongTienGiam">
                                         <input type="text" style="display: none"  name="tenNguoiNhan" id="tenNguoiNhan">
                                         <input type="text" style="display: none"  name="sdt" id="sdt">
-                                        <input type="text" style="display: none"  name="diaChiNguoiNhan" id="diaChiNguoiNhan">
+                                        <input type="text" style="display: none" name="diaChiNguoiNhan" id="diaChiNguoiNhan">
+                                        <input type="text" style="display: none" name="tinh" id="tinhNhan">
                                         <input type="text" style="display: none" name="tongTienSanPhamChuaGiam" id="tongTienSanPhamChuaGiam">
                                         <input type="text" style="display: none" name="phiShip" id="phiShip">
                                         <input type="text" style="display: none" name="giaHienHanh" value="${ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" >
                                         <input type="text" style="display: none"name="giaDaGiam" value="${(ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ctsp.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}" >
-                                        <input readonly style="display: none" type="number" id="inputField1"  class="inputTang" name="soLuong" value="1">
+                                        <input readonly  type="number" style="display: none" id="inputField1"  class="inputTang" name="soLuong" value="1">
                                         <button class="btn btn-primary" id="btnAddHD"  style="color: white;background-color: #00575C;margin-top: 30px;margin-left: 160px">Đặt hàng</button>
                                     </form>
                                 </div>
@@ -344,7 +345,8 @@
         event.preventDefault();
 
         var tenNguoiNhan = document.getElementById('tenNguoiNhan').value;
-        var diaChi = document.getElementById('diaChiChiTietCho').textContent;
+        var diaChiChiTietCho = document.getElementById('diaChiNguoiNhan').value;
+        var tinh = document.getElementById('tinhNhan').value;
         var inputField1 = document.getElementById('inputField1').value;
         var sdt = document.getElementById('sdt').value;
         var errorText = document.getElementById('errorText');
@@ -354,7 +356,7 @@
             alert('Số lượng sản phẩm hiện tại không đủ') ;
             return;
         }
-        if (diaChi == null){
+        if (diaChiChiTietCho ==='' || tinh ===''){
             alert("Vui lòng chọn địa chỉ")
             return;
         }
@@ -393,12 +395,14 @@
         var tongTienGiam = document.getElementById('tongTienGiam');
         var tongTienSanPhamChuaGiam = document.getElementById('tongTienSanPhamChuaGiam');
         var phiShip = document.getElementById('phiShip');
+        var tinhnhan = document.getElementById('tinhNhan');
 
 
 
         tenNguoiNhan.value = ten;
 
-        diaChiNguoiNhan.value = diaChiChiTietCho+ ', Tỉnh/Thành phố '+tinh;
+        diaChiNguoiNhan.value = diaChiChiTietCho;
+        tinhnhan.value = tinh
         tongTien.value = tongTienThanhToan;
         tongTienGiam.value = soTienGiam+tongtiengiamSP;
         tongTienSanPhamChuaGiam.value = totalPriceDisplay;
@@ -772,11 +776,12 @@
         var inputField1 = document.getElementById('inputField1');
         var addButton = document.getElementById('addButton');
         var subtractButton = document.getElementById('subtractButton');
+        inputField1.value = inputField.value;
         addButton.addEventListener('click', function() {
             inputField.value = parseInt(inputField.value) + 1;
-            inputField1.value = parseInt(inputField1.value) + 1;
+            inputField1.value = inputField.value;
             calculateTotalPrice();
-            // layThongTinThanhToan2()
+            layThongTinThanhToan2();
 
         });
 
@@ -785,14 +790,9 @@
             var currentValue1 = parseInt(inputField1.value);
             if (currentValue > 1) {
                 inputField.value = currentValue - 1;
+                inputField1.value = inputField.value
                 calculateTotalPrice();
-                // layThongTinThanhToan2()
-
-            }
-            if (currentValue1 > 1) {
-                inputField1.value = currentValue1 - 1;
-                calculateTotalPrice();
-                // layThongTinThanhToan2()
+                layThongTinThanhToan2()
 
             }
         });

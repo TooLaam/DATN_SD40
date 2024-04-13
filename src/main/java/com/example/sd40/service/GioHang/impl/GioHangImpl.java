@@ -19,4 +19,9 @@ public class GioHangImpl implements GioHangService {
     public GioHang findGioHangByKhachHang(Long idkh) {
         return gioHangRepository.findGioHangByKhachHang(idkh);
     }
+
+    @Override
+    public void AddGioHang(GioHang gioHang) {
+        gioHangRepository.save(gioHang);
+    }
 }
