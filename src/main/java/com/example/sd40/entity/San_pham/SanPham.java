@@ -1,6 +1,7 @@
 package com.example.sd40.entity.San_pham;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -42,7 +43,7 @@ public class SanPham {
     private String hinhAnhDaiDien;
 
     @Column(name = "so_luong_da_ban")
-    private String soLuongDaBan;
+    private Integer soLuongDaBan;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
@@ -67,5 +68,6 @@ public class SanPham {
             referencedColumnName = "id",
             nullable = true
     )
+    @JsonBackReference
     private GiamGIa giamGIa;
 }

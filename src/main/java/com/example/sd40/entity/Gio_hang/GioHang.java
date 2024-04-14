@@ -1,6 +1,7 @@
 package com.example.sd40.entity.Gio_hang;
 
 import com.example.sd40.entity.KhachHang.KhachHang;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,5 +37,6 @@ public class GioHang {
 
     @ManyToOne
     @JoinColumn(name = "khach_hang_id",referencedColumnName = "id")
+    @JsonBackReference
     private KhachHang khachHang;
 }

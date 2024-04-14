@@ -65,6 +65,11 @@ public class SanPhamImpl implements SanPhamService {
     }
 
     @Override
+    public List<Object[]> searchByTenOrThuongHieuOrTheLoai(String keyword) {
+        return sanPhamRepository.searchByTenOrThuongHieuOrTheLoai(keyword);
+    }
+
+    @Override
     public List<SanPham> getList() {
         return sanPhamRepository.findAll();
     }
@@ -72,5 +77,10 @@ public class SanPhamImpl implements SanPhamService {
     @Override
     public SanPham findTheoId(Long id) {
         return sanPhamRepository.findById(id).get();
+    }
+
+    @Override
+    public List<Object> getAllSPBySearch(String keyword) {
+        return sanPhamRepository.getAllSPBySearch(keyword);
     }
 }

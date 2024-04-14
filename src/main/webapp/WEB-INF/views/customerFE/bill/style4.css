@@ -1,0 +1,143 @@
+
+.containerHD {
+    font-family: Arial, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.containerHD h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-between;
+    background-color: #00575C;
+    color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.tab {
+    flex: 1;
+    text-align: center;
+    padding: 15px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.tab:hover {
+    background-color: #002d30;
+}
+
+.tab.active {
+    background-color: #75d563;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.tab-content.active {
+    display: block;
+}
+.tabcontent {
+    display: none;
+    padding: 20px;
+    border-top: 2px solid #333;
+    border-radius: 0 0 10px 10px;
+}
+
+.tabcontent.show {
+    display: block;
+}
+
+/* Style cho mỗi đơn hàng */
+.order-item {
+    border: 1px solid #ddd; /* Đường viền với màu xám nhạt */
+    border-radius: 10px; /* Bo viền */
+    padding: 20px;
+    margin-bottom: 20px; /* Khoảng cách giữa các đơn hàng */
+}
+
+/* Loại bỏ dấu chấm trước đơn hàng */
+.order-item h3:before {
+    content: none;
+}
+
+/* Style cho tiêu đề của đ
+/* Style cho nội dung của tab */
+.tabcontent {
+    display: none;
+    padding: 20px;
+    border-top: 2px solid #333;
+    border-radius: 0 0 10px 10px;
+}
+
+.tabcontent.show {
+    display: block;
+}
+
+/* Style cho mỗi đơn hàng */
+.order-item {
+    display: flex;
+    flex-direction: column; /* Sản phẩm sẽ nằm dọc trong mỗi đơn hàng */
+    border: 1px solid #8b8b8b; /* Đường viền với màu xám nhạt */
+    border-radius: 10px; /* Bo viền */
+    padding: 20px;
+    margin-bottom: 20px; /* Khoảng cách giữa các đơn hàng */
+}
+
+/* Loại bỏ dấu chấm trước đơn hàng */
+.order-item h3:before {
+    content: none;
+}
+
+/* Style cho tiêu đề của đơn hàng */
+.order-item h3 {
+    margin: 0;
+    color: #333; /* Màu sắc cho tiêu đề */
+}
+
+/* Style cho phần thông tin sản phẩm */
+.productHD {
+    display: flex;
+    align-items: center;
+}
+
+.productHD img {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
+.product-infoHD span {
+    margin-right: 20px;
+    color: #666; /* Màu sắc cho thông tin sản phẩm */
+}
+
+/* Style cho phần giá */
+.priceHD {
+    margin-left: auto;
+    color: #888; /* Màu sắc cho phần giá */
+    text-align: right; /* Căn phải */
+}
+
+/* Style cho phần giá, tổng tiền và trạng thái */
+.order-item .totalHD,
+.order-item .statusHD {
+    margin-top: 10px;
+    color: #888; /* Màu sắc cho phần giá, tổng tiền và trạng thái */
+    text-align: right; /* Căn phải */
+}
+
+

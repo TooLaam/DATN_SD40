@@ -1,5 +1,7 @@
 package com.example.sd40.entity.San_pham;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -50,6 +52,7 @@ public class ChiTietSanPhamMauSacHinhAnh {
             referencedColumnName = "id",
             nullable = true
     )
+
     private Mau_sac mau_sac;
 
 }

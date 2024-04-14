@@ -1,13 +1,23 @@
 package com.example.sd40.controller.KhachHangFEController;
 
+import com.example.sd40.entity.Gio_hang.GioHangChiTiet;
+import com.example.sd40.entity.KhachHang.KhachHang;
+import com.example.sd40.service.KhachHang.HangThanhVienService;
 import com.example.sd40.service.SanPham.SanPhamService;
 import com.example.sd40.service.SanPham.ThuongHieuService;
 import com.example.sd40.service.KhachHang.KhachHangCusService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -19,6 +29,10 @@ public class HomeController {
 
     @Autowired
     KhachHangCusService khachHangCusService;
+
+    @Autowired
+    HangThanhVienService hangThanhVienService;
+
 
     @GetMapping("/home" )
     public String home(Model model, HttpSession session){
@@ -146,5 +160,64 @@ public class HomeController {
             return "/customerFE/index";
         }
     }
+    @GetMapping("/infoKhachHang")
+    public String infoKhachHang(Model model,HttpSession session){
+        Long idKH = Long.valueOf(1);
+        model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
+        model.addAttribute("idkh",idKH );
+        model.addAttribute("kh",khachHangCusService.detailKhachHang(idKH) );
+        model.addAttribute("hangDong",hangThanhVienService.detail(Long.valueOf(1)) );
+        model.addAttribute("hangBac",hangThanhVienService.detail(Long.valueOf(2)) );
+        model.addAttribute("hangVang",hangThanhVienService.detail(Long.valueOf(3)) );
+        model.addAttribute("hangKimCuong",hangThanhVienService.detail(Long.valueOf(4)) );
 
+        model.addAttribute("view", "/changeAccountInfo/index.jsp");
+        return "/customerFE/index";
+    }
+    @PostMapping("/doiMatKhau")
+    public ResponseEntity<?> updateMacDinh(@RequestParam("taiKhoan") String taiKhoan,@RequestParam("matKhau") String matKhau, HttpSession session) {
+        try {
+//            Long idKH = (Long) session.getAttribute("idKhachHang");
+            Long idKH = Long.valueOf(1);
+            List<KhachHang> khachHangs = khachHangCusService.checkTaiKhoan(idKH,taiKhoan);
+            if (khachHangs.isEmpty()){
+                khachHangCusService.doiMatKhau(taiKhoan,matKhau,idKH);
+                return ResponseEntity.ok("ok");
+            }else {
+                return ResponseEntity.ok("ko");
+            }
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Lỗi");
+        }
+    }
+
+    @GetMapping("/hienThiUpdateKhachHang")
+    public String hienThiUpdateKhachHang(Model model,HttpSession session){
+        Long idKH = Long.valueOf(1);
+        model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
+        model.addAttribute("idkh",idKH );
+        model.addAttribute("kh",khachHangCusService.detailKhachHang(idKH) );
+
+        model.addAttribute("view", "/changeAccountInfo/update.jsp");
+        return "/customerFE/index";
+    }
+    @PostMapping("/updateKhachHang")
+    public String updateKhacHang(HttpSession session,
+                                 @RequestParam("ten")String ten,
+                                 @RequestParam("ngaySinh") String ngaySinh,
+                                 @RequestParam("sdt")String sdt,
+                                 @RequestParam("gioiTinh")Integer gioiTinhn,
+                                 @RequestParam("email")String email
+                                 ) throws ParseException {
+        Long idKH = Long.valueOf(1);
+        KhachHang khachHang = khachHangCusService.detailKhachHang(idKH);
+        khachHang.setNgaySinh(new SimpleDateFormat("yyyy-MM-dd").parse(ngaySinh));
+        khachHang.setHoTen(ten);
+        khachHang.setEmail(email);
+        khachHang.setSdt(sdt);
+        khachHang.setGioiTinh(gioiTinhn);
+        khachHangCusService.updateKhachHang(khachHang);
+        return "redirect:/infoKhachHang";
+    }
 }

@@ -4,6 +4,7 @@ import com.example.sd40.entity.San_pham.SanPham;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,25 +30,31 @@ public interface SanPhamRepository extends JpaRepository<SanPham,Long> {
     @Query("select sp from SanPham sp where sp.ten=?1 and sp.id not in (?2)")
     List<SanPham> findByName(String ten, Long idSP);
 
-    SanPham findLastByOrderById();
-
-//    @Query("select sp from SanPham sp order by sp.id desc ")
-//    SanPham finSPCuoi();
-
     SanPham findFirstByOrderByIdDesc();
 
-//    @Query("select ct.sanPham.id, ct.sanPham.ten, ct.sanPham.hinhAnhDaiDien , ct.sanPham.soLuongDaBan,ct.sanPham.giamGIa.mucGiam ,MAX ((ct.giaHienHanh*(100-ct.sanPham.giamGIa.mucGiam))/100),MIN ((ct.giaHienHanh*(100-ct.sanPham.giamGIa.mucGiam))/100),MAX (ct.giaHienHanh),MIN (ct.giaHienHanh) from ChiTietSanPhamMauSacHinhAnh ct group by ct.sanPham.id, ct.sanPham.ten, ct.sanPham.hinhAnhDaiDien , ct.sanPham.soLuongDaBan,ct.giaHienHanh,ct.sanPham.giamGIa.mucGiam,ct.sanPham.ngayTao order by ct.sanPham.ngayTao desc")
-@Query(value = "select top(4) san_pham.id,san_pham.ten,san_pham.hinh_anh_dai_dien,san_pham.so_luong_da_ban,giam_gia.muc_giam,cast( MAX((chi_tiet_san_pham_mau_sac.gia_hien_hanh*(100-giam_gia.muc_giam))/100) as INT),CAST(MIN((chi_tiet_san_pham_mau_sac.gia_hien_hanh*(100-giam_gia.muc_giam))/100) as INT) ,CAST( MAX(chi_tiet_san_pham_mau_sac.gia_hien_hanh) as INT),CAST(MIN(chi_tiet_san_pham_mau_sac.gia_hien_hanh) as INT)  from san_pham join chi_tiet_san_pham_mau_sac on san_pham.id = chi_tiet_san_pham_mau_sac.san_pham_id join giam_gia on giam_gia.id = san_pham.giam_gia_id group by san_pham.hinh_anh_dai_dien,giam_gia.muc_giam, san_pham.id,san_pham.ten,san_pham.so_luong_da_ban,san_pham.ngay_tao  order by san_pham.ngay_tao desc" ,nativeQuery = true)
+    @Query(value = "select top(4) san_pham.id,san_pham.ten,san_pham.hinh_anh_dai_dien,san_pham.so_luong_da_ban,giam_gia.muc_giam,cast( MAX((chi_tiet_san_pham_mau_sac.gia_hien_hanh*(100-giam_gia.muc_giam))/100) as INT),CAST(MIN((chi_tiet_san_pham_mau_sac.gia_hien_hanh*(100-giam_gia.muc_giam))/100) as INT) ,CAST( MAX(chi_tiet_san_pham_mau_sac.gia_hien_hanh) as INT),CAST(MIN(chi_tiet_san_pham_mau_sac.gia_hien_hanh) as INT)  from san_pham join chi_tiet_san_pham_mau_sac on san_pham.id = chi_tiet_san_pham_mau_sac.san_pham_id join giam_gia on giam_gia.id = san_pham.giam_gia_id group by san_pham.hinh_anh_dai_dien,giam_gia.muc_giam, san_pham.id,san_pham.ten,san_pham.so_luong_da_ban,san_pham.ngay_tao  order by san_pham.ngay_tao desc" ,nativeQuery = true)
     List<Object> findAllByOrderNgayTaoDesc();
 
-//    @Query("select ct.sanPham.id, ct.sanPham.ten, ct.sanPham.hinhAnhDaiDien , ct.sanPham.soLuongDaBan,ct.sanPham.giamGIa.mucGiam ,MAX ((ct.giaHienHanh*(100-ct.sanPham.giamGIa.mucGiam))/100),MIN ((ct.giaHienHanh*(100-ct.sanPham.giamGIa.mucGiam))/100),MAX (ct.giaHienHanh),MIN (ct.giaHienHanh) from ChiTietSanPhamMauSacHinhAnh ct group by ct.sanPham.id, ct.sanPham.ten, ct.sanPham.hinhAnhDaiDien , ct.sanPham.soLuongDaBan,ct.giaHienHanh,ct.sanPham.giamGIa.mucGiam order by ct.sanPham.soLuongDaBan desc")
-@Query(value = "select top(4) san_pham.id,san_pham.ten,san_pham.hinh_anh_dai_dien,san_pham.so_luong_da_ban,giam_gia.muc_giam,cast( MAX((chi_tiet_san_pham_mau_sac.gia_hien_hanh*(100-giam_gia.muc_giam))/100) as INT),CAST(MIN((chi_tiet_san_pham_mau_sac.gia_hien_hanh*(100-giam_gia.muc_giam))/100) as INT) ,CAST( MAX(chi_tiet_san_pham_mau_sac.gia_hien_hanh) as INT),CAST(MIN(chi_tiet_san_pham_mau_sac.gia_hien_hanh) as INT)  from san_pham join chi_tiet_san_pham_mau_sac on san_pham.id = chi_tiet_san_pham_mau_sac.san_pham_id join giam_gia on giam_gia.id = san_pham.giam_gia_id group by san_pham.hinh_anh_dai_dien,giam_gia.muc_giam, san_pham.id,san_pham.ten,san_pham.so_luong_da_ban,san_pham.ngay_tao  order by san_pham.so_luong_da_ban desc" ,nativeQuery = true)
+    @Query(value = "select top(4) san_pham.id,san_pham.ten,san_pham.hinh_anh_dai_dien,san_pham.so_luong_da_ban,giam_gia.muc_giam,cast( MAX((chi_tiet_san_pham_mau_sac.gia_hien_hanh*(100-giam_gia.muc_giam))/100) as INT),CAST(MIN((chi_tiet_san_pham_mau_sac.gia_hien_hanh*(100-giam_gia.muc_giam))/100) as INT) ,CAST( MAX(chi_tiet_san_pham_mau_sac.gia_hien_hanh) as INT),CAST(MIN(chi_tiet_san_pham_mau_sac.gia_hien_hanh) as INT)  from san_pham join chi_tiet_san_pham_mau_sac on san_pham.id = chi_tiet_san_pham_mau_sac.san_pham_id join giam_gia on giam_gia.id = san_pham.giam_gia_id group by san_pham.hinh_anh_dai_dien,giam_gia.muc_giam, san_pham.id,san_pham.ten,san_pham.so_luong_da_ban,san_pham.ngay_tao  order by san_pham.so_luong_da_ban desc" ,nativeQuery = true)
     List<Object> findAllByOrderSLDaBanDesc();
 
     @Transactional
     @Modifying
     @Query(value = "insert into san_pham(ten,mo_ta,ngay_tao,ngay_sua,hinh_anh_dai_dien,trang_thai,thuong_hieu_id,the_loai_id,giam_gia_id) values(?1,?2,getdate(),getdate(),?3,0,?4,?5,?6)",nativeQuery = true)
     void save(String ten,String moTa,String hinhAnh,Long thuongHieu,Long theLoai,Long giamGia);
+
+    @Query("SELECT s.id,s.hinhAnhDaiDien, s.ten,th.ten,tl.ten FROM SanPham s join ThuongHieu th on th.id = s.thuongHieu.id " +
+            " join TheLoai tl on s.theLoai.id = tl.id WHERE s.ten LIKE %:keyword% OR th.ten LIKE %:keyword% OR tl.ten LIKE %:keyword%")
+    List<Object[]> searchByTenOrThuongHieuOrTheLoai(@Param("keyword") String keyword);
+
+    @Query("select sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,sum(ctsp.soLuong)," +
+            " max((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100),Min((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100)," +
+            " Max(ctsphams.giaHienHanh),Min(ctsphams.giaHienHanh)" +
+            " from ChiTietSanPham ctsp join ChiTietSanPhamMauSacHinhAnh ctsphams on ctsp.chiTietSanPhamMauSacHinhAnh.Id = ctsphams.Id" +
+            " join SanPham sp on ctsphams.sanPham.id = sp.id where sp.ten LIKE %:keyword% OR sp.thuongHieu.ten LIKE %:keyword% OR sp.theLoai.ten LIKE %:keyword%" +
+            " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam")
+    List<Object> getAllSPBySearch(@Param("keyword") String keyword);
+
 
 
 }

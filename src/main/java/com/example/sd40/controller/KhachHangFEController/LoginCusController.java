@@ -1,20 +1,32 @@
 package com.example.sd40.controller.KhachHangFEController;
 
+import com.example.sd40.entity.Gio_hang.GioHang;
 import com.example.sd40.entity.KhachHang.KhachHang;
+import com.example.sd40.service.GioHang.GioHangService;
 import com.example.sd40.service.KhachHang.KhachHangCusService;
 import jakarta.servlet.http.HttpSession;
 //import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
 @Controller
 public class LoginCusController {
     @Autowired
     KhachHangCusService khachHangCusService;
+    @Autowired
+    GioHangService gioHangService;
+
 
 
     @GetMapping("/login")
@@ -38,6 +50,8 @@ public class LoginCusController {
         session.removeAttribute("idKhachHang");
         session.removeAttribute("idsp");
         session.removeAttribute("idms");
+        session.removeAttribute("gioHangChiTiets");
+        session.removeAttribute("listLong");
         return "redirect:/login";
     }
 
@@ -73,7 +87,55 @@ public class LoginCusController {
                 return "/customerFE/login/index";
             }
         }
+    Date currentDate = new Date(System.currentTimeMillis());
+    @PostMapping("/addKhachHangCus")
+    public String addKhacHangCus(@RequestParam("ten")String ten,
+                                 @RequestParam("taiKhoan")String taiKhoan,
+                                 @RequestParam("matKhau")String matKhau,
+                                 @RequestParam("ngaySinh")String ngaySinh,
+                                 @RequestParam("gioiTinh")Integer gioiTinh,
+                                 @RequestParam("email")String email,
+                                 @RequestParam("sdt")String sdt
+                                 ) throws ParseException {
+        KhachHang khachHang = new KhachHang();
+        khachHang.setNgaySinh(new SimpleDateFormat("yyyy-MM-dd").parse(ngaySinh));
+        khachHang.setSdt(sdt);
+        khachHang.setGioiTinh(gioiTinh);
+        khachHang.setEmail(email);
+        khachHang.setHoTen(ten);
+        khachHang.setDiemTichLuy(0);
+        khachHang.setTaiKhoan(taiKhoan);
+        khachHang.setMatKhau(matKhau);
+        khachHang.setNgayTao(currentDate);
+        khachHang.setTrangThai(0);
+        khachHang.setMa("KH"+(khachHangCusService.getAllKhachHang().size()+1));
+        khachHangCusService.updateKhachHang(khachHang);
 
 
+        Long idkh = khachHangCusService.idKhachHangMoiTao();
+        GioHang gioHang = new GioHang();
+        gioHang.setKhachHang(khachHangCusService.detailKhachHang(idkh));
+        gioHang.setGhiChu("Giỏ hàng của "+khachHangCusService.detailKhachHang(idkh).getHoTen());
+        gioHang.setNgayTao(currentDate);
+        gioHang.setTrangThai(0);
+        gioHangService.AddGioHang(gioHang);
+        return "redirect:/login";
+    }
+
+    @PostMapping("/checkTaiKhoanAdd")
+    public ResponseEntity<?> checkTaiKhoanAdd(
+                                           @RequestParam("taiKhoan")String taiKhoan
+                                              ) {
+        try {
+            List<KhachHang> khachHangs = khachHangCusService.checlTaiKhoanAdd(taiKhoan);
+            if (khachHangs.isEmpty()){
+                return ResponseEntity.ok("ok");
+            }else {
+                return ResponseEntity.ok("ko");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Lỗi");
+        }
+    }
 
 }

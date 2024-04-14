@@ -41,67 +41,41 @@
                             <span>Bạn đã có tài khoản ?</span>
                             <a href="/login" class="link-text">Đăng nhập</a>
                         </div>
-                        <form action="/customer/addLogin" method="post">
+                        <form id="AddKhachHang" action="/addKhachHangCus" method="post">
                             <div class="mb-3">
-                                <input class="form-control" id="exampleInputFullName" placeholder="Họ tên" value="${fullnameAdd}" name="fullname" />
-                                <c:if test="${errName != null}" >
-                                    <p style="color: red">${errName}</p>
-                                </c:if>
+                                <input class="form-control" id="exampleInputFullName" placeholder="Họ tên" name="ten" />
                             </div>
                             <div class="mb-3">
-                                <input class="form-control" id="exampleInputUsername" value="${usernameAdd}" placeholder="Tài khoản" name="username" />
-                                <c:if test="${errUser != null}" >
-                                    <p style="color: red">${errUser}</p>
-                                </c:if>
-                                <c:if test="${errUserTrung != null}" >
-                                    <p style="color: red">${errUserTrung}</p>
-                                </c:if>
+                                <input class="form-control" id="exampleInputUsername" placeholder="Tài khoản" name="taiKhoan" />
                             </div>
                             <div class="mb-3">
-                                <input type="password" class="form-control" value="${passwordAdd}" id="exampleInputPassword"
-                                    placeholder="Mật khẩu" name="password" />
-                                <c:if test="${errPass != null}" >
-                                    <p style="color: red">${errPass}</p>
-                                </c:if>
+                                <input type="password" class="form-control"  id="exampleInputPassword"
+                                    placeholder="Mật khẩu" name="matKhau" />
                             </div>
                             <div class="mb-3">
-                                <input type="number" class="form-control" id="exampleInputPhoneNumber"
-                                    placeholder="Số điện thoại" value="${phoneNumberAdd}" name="phone" />
-                                <c:if test="${errPhone != null}" >
-                                    <p style="color: red">${errPhone}</p>
-                                </c:if>
-                                <c:if test="${errPhoneErrr != null}" >
-                                    <p style="color: red">${errPhoneErrr}</p>
-                                </c:if>
+                                <input type="text" oninput="layThongTinUpdate()" class="form-control" id="exampleInputPhoneNumber"
+                                    placeholder="Số điện thoại" name="sdt" />
+                                <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errSdt">Số điện thoại không hợp lệ</span>
                             </div>
                             <div class="mb-3">
-                                <input type="email" class="form-control" value="${emailAdd}" id="exampleInputEmail" placeholder="Email" name="email" />
-                                <c:if test="${errEmail != null}" >
-                                    <p style="color: red">${errEmail}</p>
-                                </c:if>
+                                <input type="email" oninput="layThongTinUpdate()" class="form-control" id="exampleInputEmail" placeholder="Email" name="email" />
+                                <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errEmail">Email không hợp lệ</span>
                             </div>
                             <div class="mb-3">
                                 <input type="date" class="form-control" id="exampleInputBirthday"
-                                    placeholder="Ngày sinh" value="${dateOfBirthAdd}" name="dateofbirth">
-                                <c:if test="${errDate != null}" >
-                                    <p style="color: red">${errDate}</p>
-                                </c:if>
-                                <c:if test="${errDateAfter != null}" >
-                                    <p style="color: red">${errDateAfter}</p>
-                                </c:if>
+                                    placeholder="Ngày sinh" name="ngaySinh">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Giới tính: </label>
-                                <input type="radio" class="btn-check" name="gender" value="1" id="male" autocomplete="off"
-                                    checked>
-                                <label class="btn" for="male">Nam</label>
+                                <input type="radio" class="radio-input" name="gioiTinh" value="1"  checked id="male" autocomplete="off">
+                                <label class="radio-label" for="male">Nam</label>
 
-                                <input type="radio" class="btn-check" value="2" name="gender" id="female" autocomplete="off">
-                                <label class="btn" for="female">Nữ</label>
+                                <input type="radio" class="radio-input" value="0" name="gioiTinh" id="female" autocomplete="off">
+                                <label class="radio-label" for="female">Nữ</label>
                             </div>
 
                             <div class="d-grid">
-                                <button type="submit" class="btn signup">Đăng ký</button>
+                                <button id="capNhat" type="submit" class="btn signup">Đăng ký</button>
                             </div>
                         </form>
                     </div>
@@ -111,6 +85,82 @@
         </div>
         <br />
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function layThongTinUpdate (){
+
+        var email = document.getElementById('exampleInputEmail').value;
+        var sdt = document.getElementById('exampleInputPhoneNumber').value;
+        var phoneRegex = /^(032|033|034|035|036|037|038|039|096|097|098|086|083|084|085|081|082|088|091|094|070|079|077|076|078|090|093|089|056|058|092|059|099)[0-9]{7}$/; // Định dạng số điện thoại ở Việt Nam
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (phoneRegex.test(sdt)||sdt == ''){
+            document.getElementById('errSdt').style.display='none';
+            return;
+        }else {
+            document.getElementById('errSdt').style.display='block';
+        }
+
+        if (emailRegex.test(email) || email == '') {
+            document.getElementById('errEmail').style.display='none';
+            return;
+        }
+        else {
+            document.getElementById('errEmail').style.display='block';
+        }
+
+    }
+
+    $("#capNhat").click(function(e) {
+        e.preventDefault();
+        var ten = document.getElementById('exampleInputFullName').value;
+        var ngaySinh = document.getElementById('exampleInputBirthday').value;
+        var email = document.getElementById('exampleInputEmail').value;
+        var sdt = document.getElementById('exampleInputPhoneNumber').value;
+        var taiKhoan = document.getElementById('exampleInputUsername').value;
+        var matKhau = document.getElementById('exampleInputPassword').value;
+        var phoneRegex = /^(032|033|034|035|036|037|038|039|096|097|098|086|083|084|085|081|082|088|091|094|070|079|077|076|078|090|093|089|056|058|092|059|099)[0-9]{7}$/; // Định dạng số điện thoại ở Việt Nam
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var currentDate = new Date();
+        var birthdayDate = new Date(ngaySinh);
+        if (ten ==''|| ngaySinh == ''||email==''||sdt==''||taiKhoan==''||matKhau==''){
+            alert("Vui lòng nhập đầu đủ thông tin !!")
+            return;
+        }else {
+            if (!phoneRegex.test(sdt)){
+                alert("Số điện thoại không hợp lệ !!!")
+                return;
+            }else if (!emailRegex.test(email)){
+                alert("Email không hợp lệ !!!")
+                return;
+            }else if (birthdayDate>currentDate){
+                alert("Ngày sinh không được lớn hơn ngày hiện tại !!!")
+                return;
+            }
+            else {
+                var formData = {
+                    taiKhoan: taiKhoan
+                };
+            $.ajax({
+                type: "POST",
+                url: "/checkTaiKhoanAdd",
+                data: formData,
+                success: function (response) {
+                    if (response ==='ok'){
+                        alert("Thêm thành công !!!")
+                       document.getElementById('AddKhachHang').submit();
+                    }else {
+                        alert("Tài khoản đã trùng, Vui lòng chọn tài khoản khác !!!")
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert("thất bại !!!");
+                    console.error("Error occurred while sending data: " + error);
+                }
+            });
+        }
+    }});
+</script>
 </body>
 
 </html>

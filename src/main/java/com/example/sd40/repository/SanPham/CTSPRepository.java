@@ -4,8 +4,10 @@ import com.example.sd40.entity.San_pham.ChiTietSanPham;
 import com.example.sd40.entity.San_pham.ChiTietSanPhamMauSacHinhAnh;
 import com.example.sd40.entity.San_pham.KichCo;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -88,12 +90,9 @@ public interface CTSPRepository extends JpaRepository<ChiTietSanPham,Long> {
             " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,sp.theLoai.id")
     List<Object> detailSanPhamCus(Long idsp);
 
-    @Query("select sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,sum(ctsp.soLuong)," +
-            " max((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100),Min((ctsphams.giaHienHanh*(100-sp.giamGIa.mucGiam))/100)," +
-            " Max(ctsphams.giaHienHanh),Min(ctsphams.giaHienHanh)" +
-            " from ChiTietSanPham ctsp join ChiTietSanPhamMauSacHinhAnh ctsphams on ctsp.chiTietSanPhamMauSacHinhAnh.Id = ctsphams.Id" +
-            " join SanPham sp on ctsphams.sanPham.id = sp.id where ctsp.soLuong >0" +
-            " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam")
-    List<Object> getAllGioHang();
+    @Transactional
+    @Modifying
+    @Query("update ChiTietSanPham ct set ct.soLuong = ct.soLuong-?1 where ct.Id = ?2")
+    void truSanPhamSauKhiMua(Integer soLuongMua,Long idctsp);
 
 }

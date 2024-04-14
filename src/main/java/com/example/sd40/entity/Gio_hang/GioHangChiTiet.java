@@ -1,6 +1,7 @@
 package com.example.sd40.entity.Gio_hang;
 
 import com.example.sd40.entity.San_pham.ChiTietSanPham;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,9 +29,11 @@ public class GioHangChiTiet {
 
     @ManyToOne
     @JoinColumn(name = "gio_hang_id",referencedColumnName = "id")
+    @JsonBackReference
     private GioHang gioHang;
 
     @ManyToOne
     @JoinColumn(name = "chi_tiet_san_pham_id",referencedColumnName = "id")
+    @JsonBackReference
     private ChiTietSanPham chiTietSanPham;
 }

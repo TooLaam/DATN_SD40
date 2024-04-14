@@ -97,4 +97,16 @@ public class CTSPImpl implements CTSPService {
     public List<Object[]> findKCTheoSPDangDung(Long idsp, Long idms) {
         return ctspRepository.findKCTheoSPDangDung(idsp,idms);
     }
+
+    @Override
+    public ChiTietSanPham detail(Long idctsp) {
+        return ctspRepository.getById(idctsp);
+    }
+
+    @Override
+    public void truSanPhamSauKhiMua(Integer soLuongMua, Long idctsp) {
+        ctspRepository.truSanPhamSauKhiMua(soLuongMua,idctsp);
+    }
+
+
 }

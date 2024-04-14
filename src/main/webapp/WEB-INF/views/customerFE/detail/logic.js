@@ -42,11 +42,13 @@ function getData(sl, id,idms) {
 
 
     console.log("Số lượng: " + sl + ", ID: " + id);
+    var hienslgoc1 = document.getElementById('hiengoc1');
     var input = document.getElementById("inputid");
     var input1 = document.getElementById("inputid1");
     var hiensl = document.getElementById("hiensl");
     var mausac = document.getElementById("mauSac");
     var mausac1 = document.getElementById("mauSac1");
+
 
 
     console.log("Input element: ", input);
@@ -58,6 +60,7 @@ function getData(sl, id,idms) {
     input1.value = id;
     mausac.value = idms;
     mausac1.value = idms;
+    hienslgoc1.value = sl;
 
 }
 
