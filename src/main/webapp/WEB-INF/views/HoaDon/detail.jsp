@@ -173,8 +173,8 @@
                     </div>
 
                     <div class="row" style="margin: 40px 0 ;">
-                        <div class="col-7"></div>
-                        <div class="col-5">
+                        <div class="col-6"></div>
+                        <div class="col-6">
                             <div class="row" style="font-size: 24px; font-weight: 600">
                                 <div class="row" >Tổng tiền sản phẩm: ${hoaDon.tongTien + hoaDon.tongTienGiam}</div>
                                 <div class="row">Tiền giảm: ${hoaDon.tongTienGiam}</div>
