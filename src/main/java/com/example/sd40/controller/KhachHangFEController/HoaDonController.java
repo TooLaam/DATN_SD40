@@ -1,5 +1,12 @@
 package com.example.sd40.controller.KhachHangFEController;
 
+import com.example.sd40.entity.Gio_hang.GioHangChiTiet;
+import com.example.sd40.entity.Hoa_don.HoaDon;
+import com.example.sd40.entity.Hoa_don.HoaDonChiTiet;
+import com.example.sd40.entity.KhachHang.DiaChiChiTiet;
+import com.example.sd40.entity.KhachHang.Dia_Chi;
+import com.example.sd40.entity.KhachHang.KhachHang;
+import com.example.sd40.entity.Mail.MailStructure;
 import com.example.sd40.entity.San_pham.ChiTietSanPham;
 import com.example.sd40.entity.San_pham.ChiTietSanPhamMauSacHinhAnh;
 
