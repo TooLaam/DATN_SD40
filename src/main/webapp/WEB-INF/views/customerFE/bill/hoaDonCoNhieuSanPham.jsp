@@ -63,30 +63,30 @@
     <div class="frame">
         <p style=" padding-top: 5px;background-color: #00575C;border: 1px solid black;border-radius: 7px;color: white">Sản phẩm</p>
         <div class="row">
-        <c:forEach items="${listGHCT}" var="ghct">
-            <div style="margin-top: 20px" class="productContainer" data-product-id="${ghct.id}">
+            <c:forEach items="${listGHCT}" var="ghct">
+                <div style="margin-top: 20px" class="productContainer" data-product-id="${ghct.id}">
 
-                <img src="/assets/img/product/${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.hinhAnh}"  width="320px" height="450px" class="productImage">
-                <div class="productInfo">
-                    <div class="productName">Tên sản phẩm: ${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.ten}</div>
-                    <span style="display: none" id="productID${ghct.id}" class="productID">${ghct.chiTietSanPham.id}</span>
-                    <c:choose>
-                        <c:when test="${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam == 0 || ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam == null}">
-                            <span class="productPrice">Giá:  <fmt:formatNumber value=" ${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" pattern="###,###"/>đ    </span>
-                        </c:when>
-                        <c:otherwise>
-                            <span class="productPrice">Giá:  <span style="text-decoration: line-through;color: darkgrey"> <fmt:formatNumber value=" ${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" pattern="###,###"/>đ    </span>  <span> <fmt:formatNumber value=" ${(ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}" pattern="###,###"/>đ   </span></span>
-                        </c:otherwise>
-                    </c:choose>
+                    <img src="/assets/img/product/${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.hinhAnh}"  width="320px" height="450px" class="productImage">
+                    <div class="productInfo">
+                        <div class="productName">Tên sản phẩm: ${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.ten}</div>
+                        <span style="display: none" id="productID${ghct.id}" class="productID">${ghct.chiTietSanPham.id}</span>
+                        <c:choose>
+                            <c:when test="${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam == 0 || ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam == null}">
+                                <span class="productPrice">Giá:  <fmt:formatNumber value=" ${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" pattern="###,###"/>đ    </span>
+                            </c:when>
+                            <c:otherwise>
+                                <span class="productPrice">Giá:  <span style="text-decoration: line-through;color: darkgrey"> <fmt:formatNumber value=" ${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" pattern="###,###"/>đ    </span>  <span> <fmt:formatNumber value=" ${(ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}" pattern="###,###"/>đ   </span></span>
+                            </c:otherwise>
+                        </c:choose>
 
-                    <span style="display: none"  class="productPriceT"> ${(ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}  </span>
-                    <span style="display: none" class="giaChuaGiamT"> ${(ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh)}  </span>
-                    <span class="productKichCo">Kích cỡ: ${ghct.chiTietSanPham.kichCo.ten}</span>
-                    <span class="productMauSac">Màu sắc: ${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.mau_sac.ten}</span>
-                    <span >Số lượng: </span> <span id="soLuong${ghct.id}" class="productSoLuong">${ghct.soLuong}</span>
+                        <span style="display: none"  class="productPriceT"> ${(ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}  </span>
+                        <span style="display: none" class="giaChuaGiamT"> ${(ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh)}  </span>
+                        <span class="productKichCo">Kích cỡ: ${ghct.chiTietSanPham.kichCo.ten}</span>
+                        <span class="productMauSac">Màu sắc: ${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.mau_sac.ten}</span>
+                        <span >Số lượng: </span> <span id="soLuong${ghct.id}" class="productSoLuong">${ghct.soLuong}</span>
+                    </div>
                 </div>
-            </div>
-        </c:forEach>
+            </c:forEach>
         </div>
     </div>
     <div class="frame">
@@ -785,10 +785,10 @@
             var giaChuaGiam = parseFloat(productContainers[i].querySelector('.giaChuaGiamT').textContent.replace(/[^\d.-]/g, ''));
             var productQuantity = parseInt(productContainers[i].querySelector('.productSoLuong').textContent);
 
-                totalPrice += productPrice * productQuantity;
-                tongGiaChuaGiam += giaChuaGiam * productQuantity;
-                tongTienGiam += (giaChuaGiam-productPrice) * productQuantity;
-                totalSoLuong ++;
+            totalPrice += productPrice * productQuantity;
+            tongGiaChuaGiam += giaChuaGiam * productQuantity;
+            tongTienGiam += (giaChuaGiam-productPrice) * productQuantity;
+            totalSoLuong ++;
 
         }
         var phanTramVoucher;
@@ -834,7 +834,7 @@
         if(tienspsaukhigiamtatca >=1000000 || idDiaChi == null){
             phiGiaoHang.textContent = formatNumber(0)
             freetienship.style.display="none"
-                phiship = 0;
+            phiship = 0;
         }else {
             if (parseInt(idDiaChi) === ${idHaNoi}){
                 phiGiaoHang.textContent = formatNumber(30000)
@@ -901,13 +901,6 @@
 
 
 </script>
-<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-<df-messenger
-        intent="WELCOME"
-        chat-title="SD40"
-        agent-id="96c8e619-f1d8-425a-a536-0cb7cecdb3b7"
-        language-code="vi"
-></df-messenger>
 </body>
 
 </html>

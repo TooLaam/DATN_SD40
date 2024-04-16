@@ -62,31 +62,31 @@ public class LoginCusController {
                           HttpSession session,
                           Model model) {
 
-            KhachHang checkLogin = khachHangCusService.login(username, password);
-            if (checkLogin != null) {
-                Long idsp = (Long) session.getAttribute("idsp");
-                Long idms = (Long) session.getAttribute("idms");
-                if (idms !=0 && idsp !=0){
-                    session.setAttribute("khachHangCus", checkLogin);
-                    session.setAttribute("idKhachHang", checkLogin.getId());
-                    return "redirect:/hienthiKCCus/"+idsp+"/"+idms;
-                }
-                if (idsp != 0 && idms == 0) {
-                    session.setAttribute("khachHangCus", checkLogin);
-                    session.setAttribute("idKhachHang", checkLogin.getId());
-                    return "redirect:/detailsanphamcus/"+idsp;
-                }
+        KhachHang checkLogin = khachHangCusService.login(username, password);
+        if (checkLogin != null) {
+            Long idsp = (Long) session.getAttribute("idsp");
+            Long idms = (Long) session.getAttribute("idms");
+            if (idms !=0 && idsp !=0){
                 session.setAttribute("khachHangCus", checkLogin);
                 session.setAttribute("idKhachHang", checkLogin.getId());
-                Long id = (Long) session.getAttribute("idKhachHang");
-                System.out.println(id);
-                return "redirect:/home";
-            } else {
-                model.addAttribute("erCheckCustomer", "Tài khoản hoặc mật khẩu chưa chính xác !!!");
-                model.addAttribute("view", "/login/index.jsp");
-                return "/customerFE/login/index";
+                return "redirect:/hienthiKCCus/"+idsp+"/"+idms;
             }
+            if (idsp != 0 && idms == 0) {
+                session.setAttribute("khachHangCus", checkLogin);
+                session.setAttribute("idKhachHang", checkLogin.getId());
+                return "redirect:/detailsanphamcus/"+idsp;
+            }
+            session.setAttribute("khachHangCus", checkLogin);
+            session.setAttribute("idKhachHang", checkLogin.getId());
+            Long id = (Long) session.getAttribute("idKhachHang");
+            System.out.println(id);
+            return "redirect:/home";
+        } else {
+            model.addAttribute("erCheckCustomer", "Tài khoản hoặc mật khẩu chưa chính xác !!!");
+            model.addAttribute("view", "/login/index.jsp");
+            return "/customerFE/login/index";
         }
+    }
     Date currentDate = new Date(System.currentTimeMillis());
     @PostMapping("/addKhachHangCus")
     public String addKhacHangCus(@RequestParam("ten")String ten,
@@ -96,7 +96,7 @@ public class LoginCusController {
                                  @RequestParam("gioiTinh")Integer gioiTinh,
                                  @RequestParam("email")String email,
                                  @RequestParam("sdt")String sdt
-                                 ) throws ParseException {
+    ) throws ParseException {
         KhachHang khachHang = new KhachHang();
         khachHang.setNgaySinh(new SimpleDateFormat("yyyy-MM-dd").parse(ngaySinh));
         khachHang.setSdt(sdt);
@@ -124,8 +124,8 @@ public class LoginCusController {
 
     @PostMapping("/checkTaiKhoanAdd")
     public ResponseEntity<?> checkTaiKhoanAdd(
-                                           @RequestParam("taiKhoan")String taiKhoan
-                                              ) {
+            @RequestParam("taiKhoan")String taiKhoan
+    ) {
         try {
             List<KhachHang> khachHangs = khachHangCusService.checlTaiKhoanAdd(taiKhoan);
             if (khachHangs.isEmpty()){

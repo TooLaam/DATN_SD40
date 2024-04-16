@@ -1,7 +1,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class="pagetitle">
@@ -41,8 +41,8 @@
                                         <th scope="row">${tt.index+1}</th>
                                         <td><strong>${mau.ten}</strong></td>
                                         <td><p style="color:${mau.trangThai==0?"chartreuse":"red"}">${mau.trangThai == 0 ? "Còn sử dụng" : "Ngừng sử dụng"}</p></td>
-                                        <td>${mau.ngayTao}</td>
-                                        <td>${mau.ngaySua}</td>
+                                        <td><fmt:formatDate value="${mau.ngayTao}" pattern="dd-MM-yyyy"/></td>
+                                        <td><fmt:formatDate value="${mau.ngaySua}" pattern="dd-MM-yyyy"/></td>
                                         <td>
                                             <a href="/kichco/detail/${mau.id}" class="btn btn-success">Chi tiết</a>
                                         </td>
@@ -51,10 +51,6 @@
                                 </tbody>
 
                             </table>
-                            <%--                            <form method="post" enctype="multipart/form-data" action="import">--%>
-                            <%--                                Thêm từ file excel: <input class="form-control" name="file" type="file">--%>
-                            <%--                                <button>Thêm</button>--%>
-                            <%--                            </form>--%>
                         </div>
 
                     </div>

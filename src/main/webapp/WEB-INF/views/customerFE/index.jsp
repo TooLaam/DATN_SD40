@@ -370,10 +370,10 @@
                     });
                 }}
             ,
-                error: function (xhr, status, error) {
-                    console.error("Error occurred while sending data: " + error);
-                }
-            });
+            error: function (xhr, status, error) {
+                console.error("Error occurred while sending data: " + error);
+            }
+        });
     }
 
     document.getElementById('btnSearch').addEventListener('click', function(event) {

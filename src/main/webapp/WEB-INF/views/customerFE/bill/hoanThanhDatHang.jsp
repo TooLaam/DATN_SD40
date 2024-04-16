@@ -13,19 +13,19 @@
 <br>
 <div class="container1">
     <div class="frame1">
-            <c:choose>
-                <c:when test="${hoaDon.trangThai==0}"><div class="header1"><p>Đơn hàng đang chờ xác nhận</p></div></c:when>
-                <c:when test="${hoaDon.trangThai==1}"><div class="header1"><p>Đơn hàng đã được xác nhận</p></div></c:when>
-                <c:when test="${hoaDon.trangThai==2}"><div class="header1"><p>Đơn hàng đang chờ giao</p></div></c:when>
-                <c:when test="${hoaDon.trangThai==3}"><div class="header1"><p>Đơn hàng đang giao</p></div></c:when>
-                <c:when test="${hoaDon.trangThai==4}"><div class="header1"><p>Đơn hàng hoàn thành</p></div></c:when>
-                <c:otherwise><div class="header1"><p>Đơn hàng đã hủy</p></div></c:otherwise>
-            </c:choose>
+        <c:choose>
+            <c:when test="${hoaDon.trangThai==0}"><div class="header1"><p>Đơn hàng đang chờ xác nhận</p></div></c:when>
+            <c:when test="${hoaDon.trangThai==1}"><div class="header1"><p>Đơn hàng đã được xác nhận</p></div></c:when>
+            <c:when test="${hoaDon.trangThai==2}"><div class="header1"><p>Đơn hàng đang chờ giao</p></div></c:when>
+            <c:when test="${hoaDon.trangThai==3}"><div class="header1"><p>Đơn hàng đang giao</p></div></c:when>
+            <c:when test="${hoaDon.trangThai==4}"><div class="header1"><p>Đơn hàng hoàn thành</p></div></c:when>
+            <c:otherwise><div class="header1"><p>Đơn hàng đã hủy</p></div></c:otherwise>
+        </c:choose>
         <br>
         <br>
         <div class="row">
             <c:if test="${hoaDon.trangThai==0}">
-                <h3>Bạn đã đặt đơn hàng có mã hóa đơn ${HD.maHoaDon} thành công</h3>
+                <h3>Bạn đã đặt đơn hàng có mã hóa đơn ${hoaDon.maHoaDon} thành công</h3>
             </c:if>
             <br>
             <div class="productContainer1">
@@ -75,10 +75,3 @@
         </div>
     </div>
 </div>
-<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-<df-messenger
-        intent="WELCOME"
-        chat-title="SD40"
-        agent-id="96c8e619-f1d8-425a-a536-0cb7cecdb3b7"
-        language-code="vi"
-></df-messenger>

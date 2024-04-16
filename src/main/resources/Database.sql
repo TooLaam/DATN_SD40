@@ -256,6 +256,7 @@ CREATE TABLE gio_hang_chi_tiet (
 );
 
 /*HÓA ĐƠN*/
+--Bảng hóa phương thức thanh toán
 CREATE TABLE phuong_thuc_thanh_toan (
                                         id			BIGINT IDENTITY(1,1) PRIMARY KEY NOT NULL,
                                         ten		NVARCHAR(MAX) NULL,
@@ -287,8 +288,14 @@ CREATE TABLE hoa_don (
 
 );
 alter table hoa_don add ghi_chu NVARCHAR(MAX)
+alter table hoa_don add ten_nguoi_nhan NVARCHAR(MAX)
+alter table hoa_don add sdt_nguoi_nhan NVARCHAR(MAX)
+alter table hoa_don add dia_chi_nguoi_nhan NVARCHAR(MAX)
+alter table hoa_don add ghi_chu NVARCHAR(MAX)
 alter table hoa_don add tong_tien_giam NVARCHAR(MAX)
 alter table hoa_don add phuong_thuc_thanh_toan_id BIGINT REFERENCES phuong_thuc_thanh_toan(id)
+alter table hoa_don add tong_tien_san_pham_chua_giam NVARCHAR(MAX)
+alter table hoa_don add phi_ship Money
 
 --Bảng hóa đơn chi tiết
 CREATE TABLE hoa_don_chi_tiet (
@@ -304,9 +311,6 @@ CREATE TABLE hoa_don_chi_tiet (
                                       REFERENCES chi_tiet_san_pham(id),
 
 );
-
---Bảng hóa phương thức thanh toán
-
 
 
 /*Giao hàng*/
@@ -339,72 +343,89 @@ CREATE TABLE giao_hang (
                                REFERENCES trang_thai_giao_hang(id),
 );
 
-
+select * from hoa_don
+select * from giao_hang
 --------------------------------------------------------------------
 /*INSERT DỮ LIỆU*/
+
+--Phương thức thanh toán
+    INSERT INTO phuong_thuc_thanh_toan(ten, ngay_tao,ngay_sua,trang_thai)
+VALUES
+    ('Thanh toán khi nhận hàng', GETDATE(), GETDATE(), 0),
+    ('VNPAY', GETDATE(), GETDATE(), 0)
 
 --Chúc vụ
 INSERT INTO chuc_vu (ten, ngay_tao, ngay_sua, trang_thai)
 VALUES
-('Quản lý', GETDATE(), GETDATE(), 0),
-('Nhân viên', GETDATE(), GETDATE(), 0)
+    ('Quản lý', GETDATE(), GETDATE(), 0),
+    ('Nhân viên', GETDATE(), GETDATE(), 0)
 
 --Nhân viên
-    INSERT INTO nhan_vien (ma, ho_ten, ngay_sinh, ngay_tao, sdt, gioi_tinh, dia_chi, hinh_anh, email, tai_khoan, mat_khau, trang_thai, chuc_vu_id)
+INSERT INTO nhan_vien (ma, ho_ten, ngay_sinh, ngay_tao, sdt, gioi_tinh, dia_chi, hinh_anh, email, tai_khoan, mat_khau, trang_thai, chuc_vu_id)
 VALUES
-    ('NV001', 'Nguyễn Văn Nam', '1990-01-15', GETDATE(), '0987654321', 1, 'Số 123 Đường ABC, Quận 1', NULL, 'namnv@example.com', 'namnv', 'password', 1, 1),
-    ('NV002', 'Trần Thị Hương', '1995-05-25', GETDATE(), '0901234567', 0, 'Số 456 Đường XYZ, Quận 2', NULL, 'huongtt@example.com', 'huongtt', 'password', 1, 2),
-    ('NV003', 'Lê Văn Minh', '1988-10-08', GETDATE(), '0978123456', 1, 'Số 789 Đường DEF, Quận 3', NULL, 'minhlv@example.com', 'minhlv', 'password', 1, 2),
-    ('NV004', 'Phạm Thị Thu', '1998-03-20', GETDATE(), '0912345678', 0, 'Số 101112 Đường GHI, Quận 4', NULL, 'thupt@example.com', 'thupt', 'password', 1, 2),
-    ('NV005', 'Hoàng Văn Hùng', '1993-07-10', GETDATE(), '0965432109', 1, 'Số 131415 Đường JKL, Quận 5', NULL, 'hunghv@example.com', 'hunghv', 'password', 1, 1);
+    ('NV001', N'Nguyễn Văn Nam', '1990-01-15', GETDATE(), '0987654321', 1, N'Số 123 Đường ABC, Quận 1', NULL, 'namnv@example.com', 'namnv', 'password', 1, 1),
+    ('NV002', N'Trần Thị Hương', '1995-05-25', GETDATE(), '0901234567', 0, N'Số 456 Đường XYZ, Quận 2', NULL, 'huongtt@example.com', 'huongtt', 'password', 1, 2),
+    ('NV003', N'Lê Văn Minh', '1988-10-08', GETDATE(), '0978123456', 1, N'Số 789 Đường DEF, Quận 3', NULL, 'minhlv@example.com', 'minhlv', 'password', 1, 2),
+    ('NV004', N'Phạm Thị Thu', '1998-03-20', GETDATE(), '0912345678', 0, N'Số 101112 Đường GHI, Quận 4', NULL, 'thupt@example.com', 'thupt', 'password', 1, 2),
+    ('NV005', N'Hoàng Văn Hùng', '1993-07-10', GETDATE(), '0965432109', 1, N'Số 131415 Đường JKL, Quận 5', NULL, 'hunghv@example.com', 'hunghv', 'password', 1, 1);
 
 
 --Hạng thành viên
 INSERT INTO hang_thanh_vien (ten, ngay_tao, ngay_sua, trang_thai, dieu_kien)
 VALUES
-('Bạc', GETDATE(), GETDATE(), 1, 100),
-('Vàng', GETDATE(), GETDATE(), 1, 200),
-('Bạch kim', GETDATE(), GETDATE(), 1, 300),
-('Kim cương', GETDATE(), GETDATE(), 1, 400);
+(N'Bạc', GETDATE(), GETDATE(), 1, 100),
+(N'Vàng', GETDATE(), GETDATE(), 1, 200),
+(N'Bạch kim', GETDATE(), GETDATE(), 1, 300),
+(N'Kim cương', GETDATE(), GETDATE(), 1, 400);
 
 --Tỉnh/thành phố
 
 INSERT INTO tinh_thanh_pho (ten, ngay_tao, ngay_sua, trang_thai)
 VALUES
-('Hà Nội', GETDATE(), GETDATE(), 1),
-('Hồ Chí Minh', GETDATE(), GETDATE(), 1),
-('Đà Nẵng', GETDATE(), GETDATE(), 1),
-('Hải Phòng', GETDATE(), GETDATE(), 1),
-('Cần Thơ', GETDATE(), GETDATE(), 1);
-
+(N'Hà Nội', GETDATE(), GETDATE(), 1),(N'Hồ Chí Minh', GETDATE(), GETDATE(), 1),(N'Hải Phòng', GETDATE(), GETDATE(), 1), (N'Đà Nẵng', GETDATE(), GETDATE(), 1), (N'Cần Thơ', GETDATE(), GETDATE(), 1),    -- 5
+(N'Hà Giang', GETDATE(), GETDATE(), 1), (N'Cao Bằng', GETDATE(), GETDATE(), 1), (N'Bắc Kạn', GETDATE(), GETDATE(), 1), (N'Tuyên Quang', GETDATE(), GETDATE(), 1),
+(N'Lào Cai', GETDATE(), GETDATE(), 1),   (N'Điện Biên', GETDATE(), GETDATE(), 1), (N'Lai Châu', GETDATE(), GETDATE(), 1),  (N'Sơn La', GETDATE(), GETDATE(), 1),
+(N'Yên Bái', GETDATE(), GETDATE(), 1),  (N'Hòa Bình', GETDATE(), GETDATE(), 1), (N'Thái Nguyên', GETDATE(), GETDATE(), 1),(N'Lạng Sơn', GETDATE(), GETDATE(), 1),
+(N'Quảng Ninh', GETDATE(), GETDATE(), 1), (N'Bắc Giang', GETDATE(), GETDATE(), 1), (N'Phú Thọ', GETDATE(), GETDATE(), 1), (N'Vĩnh Phúc', GETDATE(), GETDATE(), 1),
+(N'Bắc Ninh', GETDATE(), GETDATE(), 1),  (N'Thái Bình', GETDATE(), GETDATE(), 1),  (N'Hà Nam', GETDATE(), GETDATE(), 1), (N'Nam Định', GETDATE(), GETDATE(), 1),
+(N'Ninh Bình', GETDATE(), GETDATE(), 1),  (N'Thanh Hóa', GETDATE(), GETDATE(), 1), (N'Hà Tĩnh', GETDATE(), GETDATE(), 1), (N'Quảng Bình', GETDATE(), GETDATE(), 1),
+(N'Quảng Trị', GETDATE(), GETDATE(), 1), (N'Thừa Thiên Huế', GETDATE(), GETDATE(), 1),(N'Quảng Nam', GETDATE(), GETDATE(), 1),  (N'Quảng Ngãi', GETDATE(), GETDATE(), 1),
+(N'Bình Định', GETDATE(), GETDATE(), 1), (N'Phú Yên', GETDATE(), GETDATE(), 1), (N'Khánh Hòa', GETDATE(), GETDATE(), 1), (N'Ninh Thuận', GETDATE(), GETDATE(), 1),
+(N'Bình Thuận', GETDATE(), GETDATE(), 1),(N'Kon Tum', GETDATE(), GETDATE(), 1),(N'Gia Lai', GETDATE(), GETDATE(), 1), (N'Đắk Lắk', GETDATE(), GETDATE(), 1),
+(N'Đắk Nông', GETDATE(), GETDATE(), 1),  (N'Lâm Đồng', GETDATE(), GETDATE(), 1), (N'Bình Phước', GETDATE(), GETDATE(), 1), (N'Bình Dương', GETDATE(), GETDATE(), 1),
+(N'Đồng Nai', GETDATE(), GETDATE(), 1),  (N'Bà Rịa - Vũng Tàu', GETDATE(), GETDATE(), 1),(N'Long An', GETDATE(), GETDATE(), 1),(N'Tiền Giang', GETDATE(), GETDATE(), 1),
+(N'Bến Tre', GETDATE(), GETDATE(), 1), (N'Trà Vinh', GETDATE(), GETDATE(), 1), (N'Vĩnh Long', GETDATE(), GETDATE(), 1), (N'An Giang', GETDATE(), GETDATE(), 1),
+(N'Kiên Giang', GETDATE(), GETDATE(), 1), (N'Cần Thơ', GETDATE(), GETDATE(), 1), (N'Hậu Giang', GETDATE(), GETDATE(), 1), (N'Sóc Trăng', GETDATE(), GETDATE(), 1),
+(N'Bạc Liêu', GETDATE(), GETDATE(), 1),  (N'Cà Mau', GETDATE(), GETDATE(), 1);
+select * from tinh_thanh_pho
 --Địa chỉ
-INSERT INTO dia_chi (mo_ta, ngay_tao, ngay_sua, trang_thai, tinh_thanh_pho_id)
+    INSERT INTO dia_chi (mo_ta, ngay_tao, ngay_sua, trang_thai, tinh_thanh_pho_id)
 VALUES
-('Số 123 Đường ABC, Quận 1', GETDATE(), GETDATE(), 1, 1),
-('Số 456 Đường XYZ, Quận 2', GETDATE(), GETDATE(), 1, 2),
-('Số 789 Đường DEF, Quận 3', GETDATE(), GETDATE(), 1, 3),
-('Số 101112 Đường GHI, Quận 4', GETDATE(), GETDATE(), 1, 4),
-('Số 131415 Đường JKL, Quận 5', GETDATE(), GETDATE(), 1, 5);
+    (N'Số 123 Đường ABC, Quận 1', GETDATE(), GETDATE(), 1, 65),
+    (N'Số 456 Đường XYZ, Quận 2', GETDATE(), GETDATE(), 1, 66),
+    (N'Số 789 Đường DEF, Quận 3', GETDATE(), GETDATE(), 1, 67),
+    (N'Số 101112 Đường GHI, Quận 4', GETDATE(), GETDATE(), 1, 68),
+    (N'Số 131415 Đường JKL, Quận 5', GETDATE(), GETDATE(), 1, 69);
 
 
 --Khách hàng
 INSERT INTO khach_hang (ma, ho_ten, ngay_sinh, ngay_tao, sdt, gioi_tinh, dia_chi, email, tai_khoan, mat_khau, trang_thai, diem_tich_luy, hang_thanh_vien_id)
 VALUES
-('KH001', 'Nguyễn Văn A', '1990-01-01', GETDATE(), '0987654321', 1, 'Số 123 Đường ABC, Quận 1', 'nguyenvana@example.com', 'nguyenvana', 'password', 1, 0, 1),
-('KH002', 'Trần Thị B', '1995-05-05', GETDATE(), '0901234567', 0, 'Số 456 Đường XYZ, Quận 2', 'tranthib@example.com', 'tranthib', 'password', 1, 0, 2),
-('KH003', 'Lê Văn C', '1988-10-10', GETDATE(), '0978123456', 1, 'Số 789 Đường DEF, Quận 3', 'levanc@example.com', 'levanc', 'password', 1, 0, 3),
-('KH004', 'Phạm Thị D', '1998-03-15', GETDATE(), '0912345678', 0, 'Số 101112 Đường GHI, Quận 4', 'phamthid@example.com', 'phamthid', 'password', 1, 0, 4),
-('KH005', 'Hoàng Văn E', '1993-07-20', GETDATE(), '0965432109', 1, 'Số 131415 Đường JKL, Quận 5', 'hoangvane@example.com', 'hoangvane', 'password', 1, 0, 1);
+('KH001', N'Nguyễn Văn A', '1990-01-01', GETDATE(), '0987654321', 1, N'Số 123 Đường ABC, Quận 1', 'nguyenvana@example.com', 'nguyenvana', 'password', 1, 0, 1),
+('KH002', N'Trần Thị B', '1995-05-05', GETDATE(), '0901234567', 0, N'Số 456 Đường XYZ, Quận 2', 'tranthib@example.com', 'tranthib', 'password', 1, 0, 2),
+('KH003', N'Lê Văn C', '1988-10-10', GETDATE(), '0978123456', 1, N'Số 789 Đường DEF, Quận 3', 'levanc@example.com', 'levanc', 'password', 1, 0, 3),
+('KH004', N'Phạm Thị D', '1998-03-15', GETDATE(), '0912345678', 0, N'Số 101112 Đường GHI, Quận 4', 'phamthid@example.com', 'phamthid', 'password', 1, 0, 4),
+('KH005', N'Hoàng Văn E', '1993-07-20', GETDATE(), '0965432109', 1, N'Số 131415 Đường JKL, Quận 5', 'hoangvane@example.com', 'hoangvane', 'password', 1, 0, 1);
 
-select * from khach_hang
+select * from dia_chi
 -- địa chỉ chi tiết
     INSERT INTO dia_chi_chi_tiet (khach_hang_id, dia_chi_id, mac_dinh)
 VALUES
-    (1, 1, 1),
-    (2, 2, 1),
-    (3, 3, 1),
-    (4, 4, 1),
-    (5, 5, 1);
+    (1, 7, 1),
+    (2, 8, 1),
+    (3, 9, 1),
+    (4, 10, 1),
+    (5, 11, 1);
 
 --Đợt khuyến mãi
 
@@ -424,22 +445,22 @@ VALUES
 
 INSERT INTO mau_sac (ten, hinh_anh, ngay_tao, ngay_sua, trang_thai)
 VALUES
-('Đen', 'black_color.jpg', GETDATE(), GETDATE(), 1),
-('Trắng', 'white_color.jpg', GETDATE(), GETDATE(), 1),
-('Xanh', 'blue_color.jpg', GETDATE(), GETDATE(), 1),
-('Đỏ', 'red_color.jpg', GETDATE(), GETDATE(), 1),
-('Vàng', 'yellow_color.jpg', GETDATE(), GETDATE(), 1);
+(N'Đen', 'black_color.jpg', GETDATE(), GETDATE(), 1),
+(N'Trắng', 'white_color.jpg', GETDATE(), GETDATE(), 1),
+(N'Xanh', 'blue_color.jpg', GETDATE(), GETDATE(), 1),
+(N'Đỏ', 'red_color.jpg', GETDATE(), GETDATE(), 1),
+(N'Vàng', 'yellow_color.jpg', GETDATE(), GETDATE(), 1);
 
 
 --thể loại
 
 INSERT INTO the_loai (ten, ngay_tao, ngay_sua, trang_thai)
 VALUES
-('Giày chạy bộ', GETDATE(), GETDATE(), 1),
-('Giày bóng rổ', GETDATE(), GETDATE(), 1),
-('Giày đá banh', GETDATE(), GETDATE(), 1),
-('Giày tennis', GETDATE(), GETDATE(), 1),
-('Giày leo núi', GETDATE(), GETDATE(), 1);
+(N'Giày chạy bộ', GETDATE(), GETDATE(), 1),
+(N'Giày bóng rổ', GETDATE(), GETDATE(), 1),
+(N'Giày đá banh', GETDATE(), GETDATE(), 1),
+(N'Giày tennis', GETDATE(), GETDATE(), 1),
+(N'Giày leo núi', GETDATE(), GETDATE(), 1);
 
 
 --Kích cỡ
@@ -456,12 +477,12 @@ VALUES
 
 INSERT INTO giam_gia (ten, ngay_tao, ngay_sua, trang_thai, muc_giam)
 VALUES
-('Không', GETDATE(), GETDATE(), 1, 0),
-('Giảm giá 10%', GETDATE(), GETDATE(), 1, 10),
-('Giảm giá 20%', GETDATE(), GETDATE(), 1, 20),
-('Giảm giá 30%', GETDATE(), GETDATE(), 1, 30),
-('Giảm giá 50%', GETDATE(), GETDATE(), 1, 50),
-('Giảm giá 70%', GETDATE(), GETDATE(), 1, 70);
+(N'Không', GETDATE(), GETDATE(), 1, 0),
+(N'Giảm giá 10%', GETDATE(), GETDATE(), 1, 10),
+(N'Giảm giá 20%', GETDATE(), GETDATE(), 1, 20),
+(N'Giảm giá 30%', GETDATE(), GETDATE(), 1, 30),
+(N'Giảm giá 50%', GETDATE(), GETDATE(), 1, 50),
+(N'Giảm giá 70%', GETDATE(), GETDATE(), 1, 70);
 
 
 
@@ -469,11 +490,11 @@ VALUES
 
 INSERT INTO san_pham (ten, mo_ta, ngay_tao, ngay_sua, hinh_anh_dai_dien, nguoi_tao, trang_thai, thuong_hieu_id, the_loai_id, giam_gia_id)
 VALUES
-('Giày chạy Nike Air Zoom Pegasus', 'Giày chạy bộ cao cấp với công nghệ Zoom', GETDATE(), GETDATE(), 'nike_zoom_pegasus.jpg', 'Admin', 1, 1, 1, 1),
-('Giày bóng rổ Adidas Pro Bounce 2019', 'Giày bóng rổ chuyên nghiệp với đế Boost', GETDATE(), GETDATE(), 'adidas_pro_bounce.jpg', 'Admin', 1, 2, 2,2),
-('Giày đá banh Nike Mercurial Superfly', 'Giày đá banh siêu nhẹ và linh hoạt', GETDATE(), GETDATE(), 'nike_mercurial_superfly.jpg', 'Admin', 1, 3, 3,3),
-('Giày tennis Adidas Adizero Ubersonic 3', 'Giày tennis chuyên nghiệp với đệm Boost', GETDATE(), GETDATE(), 'adidas_adizero_ubersonic.jpg', 'Admin', 1, 4, 4,4),
-('Giày leo núi The North Face Ultra Fastpack IV Futurelight', 'Giày leo núi chống nước và thoáng khí', GETDATE(), GETDATE(), 'north_face_ultra_fastpack.jpg', 'Admin', 1, 5, 5,5);
+(N'Giày chạy Nike Air Zoom Pegasus', N'Giày chạy bộ cao cấp với công nghệ Zoom', GETDATE(), GETDATE(), 'nike_zoom_pegasus.jpg', 'Admin', 1, 1, 1, 1),
+(N'Giày bóng rổ Adidas Pro Bounce 2019', N'Giày bóng rổ chuyên nghiệp với đế Boost', GETDATE(), GETDATE(), 'adidas_pro_bounce.jpg', 'Admin', 1, 2, 2,2),
+(N'Giày đá banh Nike Mercurial Superfly', N'Giày đá banh siêu nhẹ và linh hoạt', GETDATE(), GETDATE(), 'nike_mercurial_superfly.jpg', 'Admin', 1, 3, 3,3),
+(N'Giày tennis Adidas Adizero Ubersonic 3', N'Giày tennis chuyên nghiệp với đệm Boost', GETDATE(), GETDATE(), 'adidas_adizero_ubersonic.jpg', 'Admin', 1, 4, 4,4),
+(N'Giày leo núi The North Face Ultra Fastpack IV Futurelight', N'Giày leo núi chống nước và thoáng khí', GETDATE(), GETDATE(), 'north_face_ultra_fastpack.jpg', 'Admin', 1, 5, 5,5);
 
 
 --Chi tiết sản phẩm màu sắc
@@ -511,11 +532,11 @@ VALUES
 --giỏ hàng
 INSERT INTO gio_hang (ghi_chu, trang_thai, ngay_tao, ngay_sua, khach_hang_id)
 VALUES
-('Giỏ hàng của Nguyễn Văn A', 1, GETDATE(), GETDATE(), 1),
-('Giỏ hàng của Trần Thị B', 1, GETDATE(), GETDATE(), 2),
-('Giỏ hàng của Lê Văn C', 1, GETDATE(), GETDATE(), 3),
-('Giỏ hàng của Phạm Thị D', 1, GETDATE(), GETDATE(), 4),
-('Giỏ hàng của Hoàng Văn E', 1, GETDATE(), GETDATE(), 5);
+(N'Giỏ hàng của Nguyễn Văn A', 1, GETDATE(), GETDATE(), 1),
+(N'Giỏ hàng của Trần Thị B', 1, GETDATE(), GETDATE(), 2),
+(N'Giỏ hàng của Lê Văn C', 1, GETDATE(), GETDATE(), 3),
+(N'Giỏ hàng của Phạm Thị D', 1, GETDATE(), GETDATE(), 4),
+(N'Giỏ hàng của Hoàng Văn E', 1, GETDATE(), GETDATE(), 5);
 
 
 --giỏ hàng chi tiết
@@ -544,11 +565,11 @@ select * from hoa_don
 
     INSERT INTO hoa_don_chi_tiet (hoa_don_id, chi_tiet_san_pham_id, TrangThai, so_luong, gia_hien_hanh, gia_da_giam)
 VALUES
-    (1, 1, 1, 2, 200000, 180000),
-    (1, 2, 1, 1, 300000, 240000),
-    (1, 3, 1, 3, 400000, 280000),
-    (2, 4, 1, 1, 500000, 375000),
-    (3, 5, 1, 2, 600000, 450000);
+    (6, 1, 1, 2, 200000, 180000),
+    (7, 2, 1, 1, 300000, 240000),
+    (8, 3, 1, 3, 400000, 280000),
+    (9, 4, 1, 1, 500000, 375000),
+    (10, 5, 1, 2, 600000, 450000);
 
 
 

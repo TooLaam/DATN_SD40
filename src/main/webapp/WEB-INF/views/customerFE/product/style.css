@@ -105,7 +105,7 @@
     color: black;
     text-decoration: none;
 }
-.pagea-link:hover{    
+.pagea-link:hover{
     background-color: #00575C4D;
     transition: all 0.3s ease-in-out;
 }

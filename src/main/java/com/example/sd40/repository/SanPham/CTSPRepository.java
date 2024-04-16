@@ -88,7 +88,7 @@ public interface CTSPRepository extends JpaRepository<ChiTietSanPham,Long> {
             " from ChiTietSanPham ctsp join ChiTietSanPhamMauSacHinhAnh ctsphams on ctsp.chiTietSanPhamMauSacHinhAnh.Id = ctsphams.Id" +
             " join SanPham sp on ctsphams.sanPham.id = sp.id where sp.id = ?1" +
             " group by sp.id,sp.ten,sp.hinhAnhDaiDien,sp.soLuongDaBan,sp.giamGIa.mucGiam,sp.theLoai.id")
-    List<Object> detailSanPhamCus(Long idsp);
+    Object detailSanPhamCus(Long idsp);
 
     @Transactional
     @Modifying

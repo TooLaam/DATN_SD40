@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class="pagetitle">
@@ -42,8 +42,8 @@
                                         <td><strong>${mau.ten}</strong></td>
                                         <td><img src="/assets/img/color/${mau.hinhAnh}" alt="/assets/img/color/${mau.hinhAnh}"  width="100px" height="100px"></td>
                                         <td><p style="color:${mau.trangThai==0?"chartreuse":"red"}">${mau.trangThai == 0 ? "Còn sử dụng" : "Ngừng sử dụng"}</p></td>
-                                        <td>${mau.ngayTao}</td>
-                                        <td>${mau.ngaySua}</td>
+                                        <td><fmt:formatDate value="${mau.ngayTao}" pattern="dd-MM-yyyy"/></td>
+                                        <td><fmt:formatDate value="${mau.ngaySua}" pattern="dd-MM-yyyy"/></td>
                                         <td>
                                             <a href="/mausac/detail/${mau.id}" class="btn btn-success">Chi tiết</a>
                                         </td>
@@ -80,8 +80,8 @@
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button  class="${active == null?"nav-link active":"nav-link"}" id="home-tab" data-bs-toggle="tab"
-                                    data-bs-target="#home" type="button" role="tab" aria-controls="home"
-                                    aria-selected="true">Chi tiết
+                                     data-bs-target="#home" type="button" role="tab" aria-controls="home"
+                                     aria-selected="true">Chi tiết
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">

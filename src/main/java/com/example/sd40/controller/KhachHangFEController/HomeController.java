@@ -209,7 +209,7 @@ public class HomeController {
                                  @RequestParam("sdt")String sdt,
                                  @RequestParam("gioiTinh")Integer gioiTinhn,
                                  @RequestParam("email")String email
-                                 ) throws ParseException {
+    ) throws ParseException {
         Long idKH = Long.valueOf(1);
         KhachHang khachHang = khachHangCusService.detailKhachHang(idKH);
         khachHang.setNgaySinh(new SimpleDateFormat("yyyy-MM-dd").parse(ngaySinh));

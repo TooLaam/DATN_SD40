@@ -39,36 +39,36 @@
                     </div>
                 </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-sm-2 col-form-label form-label">Họ tên</label>
-                        <div class="col-sm-10">
-                            ${kh.hoTen}
-                        </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label form-label">Họ tên</label>
+                    <div class="col-sm-10">
+                        ${kh.hoTen}
                     </div>
-                    <div class="mb-3 row">
-                        <label class="col-sm-2 col-form-label form-label">Ngày sinh</label>
-                        <div class="col-sm-10" id="birthday">
-                             ${kh.ngaySinh}
-                        </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label form-label">Ngày sinh</label>
+                    <div class="col-sm-10" id="birthday">
+                        ${kh.ngaySinh}
                     </div>
-                    <div class="mb-3 row">
-                        <label class="col-sm-2 col-form-label form-label">Số điện thoại</label>
-                        <div class="col-sm-10">
-                            ${kh.sdt}
-                        </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label form-label">Số điện thoại</label>
+                    <div class="col-sm-10">
+                        ${kh.sdt}
                     </div>
-                    <div class="mb-3 row">
-                        <label class="col-sm-2 col-form-label form-label">Giới tính</label>
-                        <div class="col-sm-10">
-                            ${kh.gioiTinh == 1 ?'Nam':'Nữ'}
-                        </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label form-label">Giới tính</label>
+                    <div class="col-sm-10">
+                        ${kh.gioiTinh == 1 ?'Nam':'Nữ'}
                     </div>
-                    <div class="mb-3 row">
-                        <label class="col-sm-2 col-form-label form-label">Email</label>
-                        <div class="col-sm-10">
-                            ${kh.email}
-                        </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label form-label">Email</label>
+                    <div class="col-sm-10">
+                        ${kh.email}
                     </div>
+                </div>
                 <div class="mb-3 row">
                     <label class="col-sm-2 col-form-label form-label">Điểm tích lũy</label>
                     <div class="col-sm-10">
@@ -117,30 +117,30 @@
     <div id="hiddenForm">
         <h3 style="color: black">Đổi tài khoản mật khẩu</h3>
         <span id="closeButton" class="closeButton">&times;</span>
-            <div style="display: flex">
-                <span><label for="taiKhoanHienTai">Tài khoản hiện tại</label></span>
-                <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errTaiKhoan">Tài khoản không đúng</span>
-            </div>
-                <input type="text" oninput="kiemTraThongTinDoiMatKhau()" id="taiKhoanHienTai" class="form-control">
-            <div>
-                <label for="taiKhoanMoi">Tài khoản mới</label>
-                <input type="text" oninput="kiemTraThongTinDoiMatKhau()" id="taiKhoanMoi" class="form-control" name="taiKhoan">
-            </div>
-            <div style="display: flex">
-                <span><label for="matKhauHienTai">Mật khẩu hiện tại</label></span>
-                <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errMatKhau">Mật khẩu không đúng</span>
-            </div>
-                <input type="password" oninput="kiemTraThongTinDoiMatKhau()" id="matKhauHienTai" class="form-control">
-            <div>
-                <label for="matKhauMoi">Mật khẩu mới</label>
-                <input type="password" oninput="kiemTraThongTinDoiMatKhau()" id="matKhauMoi" class="form-control" name="matKhau">
-            </div>
-            <div style="display: flex">
-                <span><label for="matKhauNhapLai">Nhập lại mật khẩu</label></span>
-                <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errMatKhauLai">Mật khẩu không trùng khớp</span>
-            </div>
-                <input type="password" oninput="kiemTraThongTinDoiMatKhau()" id="matKhauNhapLai" class="form-control">
-            <button class="btn btn-light" id="submitButton">Đổi mật khẩu</button>
+        <div style="display: flex">
+            <span><label for="taiKhoanHienTai">Tài khoản hiện tại</label></span>
+            <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errTaiKhoan">Tài khoản không đúng</span>
+        </div>
+        <input type="text" oninput="kiemTraThongTinDoiMatKhau()" id="taiKhoanHienTai" class="form-control">
+        <div>
+            <label for="taiKhoanMoi">Tài khoản mới</label>
+            <input type="text" oninput="kiemTraThongTinDoiMatKhau()" id="taiKhoanMoi" class="form-control" name="taiKhoan">
+        </div>
+        <div style="display: flex">
+            <span><label for="matKhauHienTai">Mật khẩu hiện tại</label></span>
+            <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errMatKhau">Mật khẩu không đúng</span>
+        </div>
+        <input type="password" oninput="kiemTraThongTinDoiMatKhau()" id="matKhauHienTai" class="form-control">
+        <div>
+            <label for="matKhauMoi">Mật khẩu mới</label>
+            <input type="password" oninput="kiemTraThongTinDoiMatKhau()" id="matKhauMoi" class="form-control" name="matKhau">
+        </div>
+        <div style="display: flex">
+            <span><label for="matKhauNhapLai">Nhập lại mật khẩu</label></span>
+            <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errMatKhauLai">Mật khẩu không trùng khớp</span>
+        </div>
+        <input type="password" oninput="kiemTraThongTinDoiMatKhau()" id="matKhauNhapLai" class="form-control">
+        <button class="btn btn-light" id="submitButton">Đổi mật khẩu</button>
     </div>
 
 </div>
@@ -205,7 +205,7 @@
 
 
     $("#submitButton").click(function(e) {
-            e.preventDefault();
+        e.preventDefault();
         var taiKhoanHienTai = document.getElementById('taiKhoanHienTai').value;
         var taiKhoanMoi = document.getElementById('taiKhoanMoi').value;
         var matKhauHienTai = document.getElementById('matKhauHienTai').value;
@@ -252,12 +252,5 @@
                 });
             }
         }
-            });
+    });
 </script>
-<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-<df-messenger
-        intent="WELCOME"
-        chat-title="SD40"
-        agent-id="96c8e619-f1d8-425a-a536-0cb7cecdb3b7"
-        language-code="vi"
-></df-messenger>
