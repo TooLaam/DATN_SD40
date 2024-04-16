@@ -92,13 +92,6 @@
     </div>
     <button style="background-color: red" onclick="huyHoaDon()" id="submitButton">Xác nhận hủy đơn hàng</button>
 </div>
-<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-<df-messenger
-        intent="WELCOME"
-        chat-title="SD40"
-        agent-id="96c8e619-f1d8-425a-a536-0cb7cecdb3b7"
-        language-code="vi"
-></df-messenger>
 <script>
     document.getElementById('btnHuy').addEventListener('click', function(event) {
         event.preventDefault(); // Ngăn chặn hành động mặc định của thẻ a
@@ -114,7 +107,7 @@
     document.getElementById('closeButton').addEventListener('click', function() {
         document.getElementById('hiddenForm').style.display = 'none';
     });
-     function huyHoaDon() {
+    function huyHoaDon() {
         var lyDo = document.getElementById('lyDo').value;
         if (lyDo == '') {
             alert("Vui lòng nhập lý do")
@@ -128,7 +121,7 @@
             },
             success: function(response) {
                 // Xử lý phản hồi từ controller nếu cần
-               alert("Hủy đơn hàng thành công !!!")
+                alert("Hủy đơn hàng thành công !!!")
                 window.location.href = "/bill/detailHoaDon/"+${HD.id};
             },
             error: function(xhr, status, error) {
@@ -137,7 +130,7 @@
         });
     };
 
-     function hoanThanhHoaDon() {
+    function hoanThanhHoaDon() {
         var cf = confirm("Bạn chắc chắn đã nhận được hàng ???")
         if (cf == true){
             $.ajax({

@@ -10,12 +10,12 @@
     <img src="/assets/img/banner/bannerHome.jpg" class="banner" alt="" />
     <div class="row">
         <c:forEach items="${listTH}" var="sp" >
-                <div class="col-md-3 col-6">
-                    <a href="/sanphamcus/thuonghieucus/${sp[0]}" class="link-recommend">
-                        <img src="/assets/img/brand/${sp[2]}" class="img-recommend" alt="" />
-                        <div class="overlay">${sp[1]}</div>
-                    </a>
-                </div>
+            <div class="col-md-3 col-6">
+                <a href="/sanphamcus/thuonghieucus/${sp[0]}" class="link-recommend">
+                    <img src="/assets/img/brand/${sp[2]}" class="img-recommend" alt="" />
+                    <div class="overlay">${sp[1]}</div>
+                </a>
+            </div>
         </c:forEach>
     </div>
     <div class="frame">
@@ -123,10 +123,3 @@
     </div>
 </div>
 <br />
-<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-<df-messenger
-        intent="WELCOME"
-        chat-title="SD40"
-        agent-id="96c8e619-f1d8-425a-a536-0cb7cecdb3b7"
-        language-code="vi"
-></df-messenger>

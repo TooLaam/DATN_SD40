@@ -107,7 +107,7 @@
                     <span class="text">${ms[1]}</span>
                 </a>
             </c:forEach>
-<%--            <span id="hienid">aloooo</span>--%>
+            <%--            <span id="hienid">aloooo</span>--%>
             <p><span style="font-weight: bold;">Kích cỡ: </span></p>
             <div id="productsContainer"></div>
 
@@ -147,14 +147,14 @@
 
                     </div>
                 </div>
-                        <form id="buyForm"  action="/bill/hienthisanpham/${SP1.id}" method="get">
-                            <input style="display: none" id="inputid1" name="kichCo">
-                            <input style="display: none" id="mauSac1" name="mauSac">
-                            <input style="display: none" id="hiengoc1" name="sl">
-                            <input style="display: none" readonly type="number" id="inputField1" class="inputTang" name="soLuong" value="1">
-                            <button id="buyButton" class="btn btn-outline"  >MUA NGAY</button>
+                <form id="buyForm"  action="/bill/hienthisanpham/${SP1.id}" method="get">
+                    <input style="display: none" id="inputid1" name="kichCo">
+                    <input style="display: none" id="mauSac1" name="mauSac">
+                    <input style="display: none" id="hiengoc1" name="sl">
+                    <input style="display: none" readonly type="number" id="inputField1" class="inputTang" name="soLuong" value="1">
+                    <button id="buyButton" class="btn btn-outline"  >MUA NGAY</button>
 
-                        </form>
+                </form>
 
 
             </div>
@@ -331,11 +331,4 @@
 
     }
 </script>
-<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-<df-messenger
-        intent="WELCOME"
-        chat-title="SD40"
-        agent-id="96c8e619-f1d8-425a-a536-0cb7cecdb3b7"
-        language-code="vi"
-></df-messenger>
 

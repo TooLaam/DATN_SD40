@@ -24,7 +24,7 @@
 
 
 
-                    <label  class="form-label">Số điện thoại: </label>
+                <label  class="form-label">Số điện thoại: </label>
                 <div class="input-wrapper">
                     <span><input style="width: 300px" oninput="validatePhoneNumber()"  id="sdtNhan" required type="text" class="form-control" name="sdt"></span>
                     <span id="phoneError" style="color: red;padding-left: 20px"></span>
@@ -76,7 +76,7 @@
                     <span style="display: none" class="productID">Tên sản phẩm: ${ctsp.id}</span>
                     <c:choose>
                         <c:when test="${ctsp.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam == 0 || ctsp.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam == null}">
-                             <span class="productPrice">Giá:  <fmt:formatNumber value=" ${ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" pattern="###,###"/>đ    </span>
+                            <span class="productPrice">Giá:  <fmt:formatNumber value=" ${ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" pattern="###,###"/>đ    </span>
                         </c:when>
                         <c:otherwise>
                             <span class="productPrice">Giá:  <span style="text-decoration: line-through;color: darkgrey"> <fmt:formatNumber value=" ${ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" pattern="###,###"/>đ    </span>  <span> <fmt:formatNumber value=" ${(ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ctsp.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}" pattern="###,###"/>đ   </span></span>
@@ -237,18 +237,22 @@
     </div>
 </div>
 <div id="hiddenForm" >
-    <h3 style="color: black">Danh sách voucher bạn có thể sử dụng</h3>
+    <h5 style="color: black">Danh sách voucher bạn có thể sử dụng</h5>
     <span id="closeButton" class="closeButton">&times;</span>
+    <!-- Đặt các trường của form ở đây -->
+    <!-- Ví dụ: -->
     <div class="scrollable">
-    <c:forEach items="${voucher}" var="v">
-        <div class="voucher" id="${v[0]}" onclick="selectProduct('${v[0]}','${v[1]}','${v[2]}','${v[3]}','${v[4]}')">
-            <div class="name">Voucher: ${v[1]}</div>
-            <div class="price">Phần trăm giảm: ${v[2]}%</div>
-            <div class="status">Giảm tối đa: <fmt:formatNumber value="${v[3]}" pattern="###,###"/>đ</div>
-            <div class="status">Giá trị tối thiểu của đơn hàng: <fmt:formatNumber value="${v[4]}" pattern="###,###"/>đ</div>
-        </div>
+        <c:forEach items="${voucher}" var="v">
+            <div class="voucher" id="${v[0]}" onclick="selectProduct('${v[0]}','${v[1]}','${v[2]}','${v[3]}','${v[4]}')">
+                <div><span class="name"><strong>Voucher: ${v[1]}</strong>   </span> <span class="price" style="color:red;">(-${v[2]}%)</span> </div>
+                <div style="color:red;" >Điều kiện: </div>
+                <div style="margin-left: 20px">
+                    <span class="status">Giảm tối đa: <fmt:formatNumber value="${v[3]}" pattern="###,###"/>đ,  </span>
+                    <span class="status">Giá trị tối thiểu của đơn hàng: <fmt:formatNumber value="${v[4]}" pattern="###,###"/>đ </span>
+                </div>
+            </div>
 
-    </c:forEach>
+        </c:forEach>
     </div>
     <button class="btn btn-light" id="submitButton">Chọn</button>
 </div>
@@ -301,8 +305,8 @@
             return;
         }
         if (sdt === '' || phoneRegex.test(sdt) == false) {
-           alert('Vui lòng nhập lại số điện thoại') ;
-           return;
+            alert('Vui lòng nhập lại số điện thoại') ;
+            return;
         }
         if (email === '' || emailRegex.test(email) == false) {
             alert('Vui lòng nhập lại email') ;
@@ -310,7 +314,7 @@
         }
 
         if (selectedOption.trim() === '') {
-           alert('Vui lòng nhập tỉnh/thành phố!') ;
+            alert('Vui lòng nhập tỉnh/thành phố!') ;
             return; // Kết thúc hàm nếu giá trị rỗng
         }
 
@@ -325,26 +329,26 @@
 
         // Hiển thị hoặc ẩn thông báo lỗi
         if (!isValid) {
-          alert('Tỉnh không hợp lệ!') ;
-          return;
+            alert('Tỉnh không hợp lệ!') ;
+            return;
         }
-             else {
-                document.getElementById('loader-overlay').style.display = 'flex';
-                errorText.style.display = 'none';
-                document.getElementById('addForm').submit(); // Submit form
-            }
+        else {
+            document.getElementById('loader-overlay').style.display = 'flex';
+            errorText.style.display = 'none';
+            document.getElementById('addForm').submit(); // Submit form
+        }
 
     });
 
     function layThongTinThanhToan2(){
-       var ten = document.getElementById('ten').value;
-       var provinceInput = document.getElementById('provinceInput').value;
-       var diaChiChiTietCho = document.getElementById('diaChiChiTietCho').value;
+        var ten = document.getElementById('ten').value;
+        var provinceInput = document.getElementById('provinceInput').value;
+        var diaChiChiTietCho = document.getElementById('diaChiChiTietCho').value;
 
-       var tongTienThanhToan = parseFloat(document.getElementById('tongTienThanhToan').textContent.replace(/[^\d]/g, ''));
-       var phiGiaoHang = parseFloat(document.getElementById('phiGiaoHang').textContent.replace(/[^\d]/g, ''));
-       var totalPriceDisplay = parseFloat(document.getElementById('totalPriceDisplay').textContent.replace(/[^\d]/g, ''));
-       var tongtiengiamSP = parseFloat(document.getElementById('tongtiengiamSP').textContent.replace(/[^\d]/g, ''));
+        var tongTienThanhToan = parseFloat(document.getElementById('tongTienThanhToan').textContent.replace(/[^\d]/g, ''));
+        var phiGiaoHang = parseFloat(document.getElementById('phiGiaoHang').textContent.replace(/[^\d]/g, ''));
+        var totalPriceDisplay = parseFloat(document.getElementById('totalPriceDisplay').textContent.replace(/[^\d]/g, ''));
+        var tongtiengiamSP = parseFloat(document.getElementById('tongtiengiamSP').textContent.replace(/[^\d]/g, ''));
         var soTienGiam = parseFloat(document.getElementById('soTienGiam').textContent.replace(/[^\d]/g, ''));
 
 
@@ -637,11 +641,11 @@
                 freetienship.textContent ='*(Bạn cần mua thêm '+ formatNumber(1000000-tienspsaukhigiamtatca)+' để được freeship)'
                 phiship = 30000;
             }else {
-            phiGiaoHang.textContent = formatNumber(40000);
+                phiGiaoHang.textContent = formatNumber(40000);
                 freetienship.style.display="block"
                 freetienship.textContent ='*(Bạn cần mua thêm '+ formatNumber(1000000-tienspsaukhigiamtatca)+' để được freeship)'
                 phiship = 40000;
-        }}
+            }}
         var tongtiensanpham = (productPrice*quantity) - giamVoucher;
         var tongtienphaitra = (productPrice*quantity) - giamVoucher+phiship;
         var totalPriceElement = document.getElementById('totalPriceDisplay');
@@ -664,17 +668,7 @@
     calculateTotalPrice();
     layThongTinThanhToan2()
 
-
-
-
 </script>
-<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-<df-messenger
-        intent="WELCOME"
-        chat-title="SD40"
-        agent-id="96c8e619-f1d8-425a-a536-0cb7cecdb3b7"
-        language-code="vi"
-></df-messenger>
 </body>
 
 </html>

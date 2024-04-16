@@ -12,8 +12,8 @@
 <div class="container" style="background-color: white">
     <div class="frame">
         <p>Giỏ hàng</p>
-    <br/>
-    <div class="row">
+        <br/>
+        <div class="row">
 
             <c:choose>
                 <c:when test="${empty listghct}">
@@ -22,60 +22,60 @@
                     </div>
                 </c:when>
                 <c:otherwise>
-                <div class="col-12">
-                    <c:forEach items="${listghct}" var="ghct" varStatus="tt">
-                        <div class="productContainer" data-product-id="${ghct.id}" onclick="toggleCheckbox(this)">
-                            <img src="/assets/img/product/${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.hinhAnh}"  width="320px" height="450px" class="productImage">
-                            <div class="productInfo">
-                                <span class="productName">Tên sản phẩm: ${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.ten}</span>
-                                <span style="display: none" class="productID">Tên sản phẩm: ${ghct.id}</span>
-                                <c:choose>
-                                    <c:when test="${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam == 0 || ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam == null}">
-                                        <span class="productPrice">Giá:  <fmt:formatNumber value=" ${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" pattern="###,###"/>đ    </span>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <span class="productPrice">Giá:  <span style="text-decoration: line-through;color: darkgrey"> <fmt:formatNumber value=" ${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" pattern="###,###"/>đ    </span>  <span> <fmt:formatNumber value=" ${(ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}" pattern="###,###"/>đ   </span></span>
-                                    </c:otherwise>
-                                </c:choose>
-                                <span style="display: none" class="productPriceT"> ${(ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}  </span>
-                                <span class="productKichCo">Kích cỡ: ${ghct.chiTietSanPham.kichCo.ten}</span>
-                                <span class="productMauSac">Màu sắc: ${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.mau_sac.ten}</span>
+                    <div class="col-12">
+                        <c:forEach items="${listghct}" var="ghct" varStatus="tt">
+                            <div class="productContainer" data-product-id="${ghct.id}" onclick="toggleCheckbox(this)">
+                                <img src="/assets/img/product/${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.hinhAnh}"  width="320px" height="450px" class="productImage">
+                                <div class="productInfo">
+                                    <span class="productName">Tên sản phẩm: ${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.ten}</span>
+                                    <span style="display: none" class="productID">Tên sản phẩm: ${ghct.id}</span>
+                                    <c:choose>
+                                        <c:when test="${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam == 0 || ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam == null}">
+                                            <span class="productPrice">Giá:  <fmt:formatNumber value=" ${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" pattern="###,###"/>đ    </span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span class="productPrice">Giá:  <span style="text-decoration: line-through;color: darkgrey"> <fmt:formatNumber value=" ${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" pattern="###,###"/>đ    </span>  <span> <fmt:formatNumber value=" ${(ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}" pattern="###,###"/>đ   </span></span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <span style="display: none" class="productPriceT"> ${(ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}  </span>
+                                    <span class="productKichCo">Kích cỡ: ${ghct.chiTietSanPham.kichCo.ten}</span>
+                                    <span class="productMauSac">Màu sắc: ${ghct.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.mau_sac.ten}</span>
 
-                                <span class="productSoLuong">
+                                    <span class="productSoLuong">
                                     <div class="containerT">
                                         <button onclick="giamSoLuong(${ghct.id})"  id="subtractButton${ghct.id}" class="buttonTang${ghct.id} buttonTangT">-</button>
                                         <input readonly type="number" id="inputField${ghct.id}" class="inputTang" name="soLuong" value="${ghct.soLuong}">
                                         <button onclick="tangSoLuong(${ghct.id})"  id="addButton${ghct.id}" class="buttonTang${ghct.id} buttonTangT">+</button>
                                     </div>
                                 </span>
+                                </div>
+                                <input type="checkbox" class="productCheckbox">
+                                <span class="customCheckbox"></span>
+                                <div class="productDelete" onclick="deleteProduct(${ghct.id})">
+                                    <svg width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+                                </div>
                             </div>
-                            <input type="checkbox" class="productCheckbox">
-                            <span class="customCheckbox"></span>
-                            <div class="productDelete" onclick="deleteProduct(${ghct.id})">
-                                <svg width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
-                            </div>
-                        </div>
-                    </c:forEach>
-                </div>
+                        </c:forEach>
+                    </div>
                     <div class="col-12">
                         <div class="table-responsive">
-                        <div class="checkout">
-                            <p>Tạm tính tổng tiền</p>
-                            <hr/>
-                            <div class="total-item">
+                            <div class="checkout">
+                                <p>Tạm tính tổng tiền</p>
+                                <hr/>
+                                <div class="total-item">
                                 <span>
                                     <span>Total : </span> <span id="totalSoLuongDisplay">0</span><span> items</span>
                                       </span>
-                                <span id="totalPriceDisplay" class="after" style="font-weight: bold;color: red"><fmt:formatNumber value="0" pattern="###,###"/>đ</span>
+                                    <span id="totalPriceDisplay" class="after" style="font-weight: bold;color: red"><fmt:formatNumber value="0" pattern="###,###"/>đ</span>
+                                </div>
                             </div>
                         </div>
+                        <button type="submit" class="btn btn-primary" id="btnSumit" style="color: white;background-color: #00575C;margin-top: 30px;width: 100%">Đặt hàng</button>
                     </div>
-                    <button type="submit" class="btn btn-primary" id="btnSumit" style="color: white;background-color: #00575C;margin-top: 30px;width: 100%">Đặt hàng</button>
-                </div>
 
                 </c:otherwise>
             </c:choose>
-    </div>
+        </div>
         <br/>
     </div>
 </div>
@@ -87,7 +87,7 @@
     function formatNumber(number) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-<c:forEach items="${listghct}" var="ghct" varStatus="tt">
+    <c:forEach items="${listghct}" var="ghct" varStatus="tt">
 
     function toggleCheckbox(container) {
         var checkbox = container.querySelector('.productCheckbox');
@@ -136,106 +136,106 @@
             });
         });
     });
-</c:forEach>
+    </c:forEach>
 
-function giamSoLuong(ghctId) {
-    var inputField = document.getElementById('inputField' + ghctId);
-    var currentValue = parseInt(inputField.value);
+    function giamSoLuong(ghctId) {
+        var inputField = document.getElementById('inputField' + ghctId);
+        var currentValue = parseInt(inputField.value);
 
-    console.log(ghctId)
-    console.log(currentValue)
-    console.log(inputField)
-    // Gửi yêu cầu cập nhật số lượng sản phẩm bằng AJAX
-    $.ajax({
-        type: 'POST', // Phương thức HTTP
-        url: '/updatesoluong', // URL của endpoint để cập nhật số lượng
-        data: {
-            idghct: ghctId, // ID của sản phẩm cần cập nhật
-            soluong: currentValue -1 // Số lượng mới
-        },
-        success: function(response) {
-            if (response === "ko"){
-                alert("Số lượng không đủ")
-                return;
-            }
-            else if (response ==="ok") {
-                // Xử lý phản hồi từ server (nếu cần)
-                console.log('Quantity updated successfully!');
-            }
-        },
-        error: function(xhr, status, error) {
-            // Xử lý lỗi (nếu có)
-            console.error('Error updating quantity:', error);
-        }
-    });
-    handleCheckboxChange()
-}
-
-function tangSoLuong(ghctId) {
-    var inputField = document.getElementById('inputField' + ghctId);
-    var currentValue = parseInt(inputField.value);
-
-    console.log(ghctId)
-    console.log(currentValue)
-    console.log(inputField)
-    // Gửi yêu cầu cập nhật số lượng sản phẩm bằng AJAX
-    $.ajax({
-        type: 'POST', // Phương thức HTTP
-        url: '/updatesoluong', // URL của endpoint để cập nhật số lượng
-        data: {
-            idghct: ghctId, // ID của sản phẩm cần cập nhật
-            soluong: currentValue +1 // Số lượng mới
-        },
-        success: function(response) {
-            if (response === "ko"){
-                alert("Số lượng không đủ")
+        console.log(ghctId)
+        console.log(currentValue)
+        console.log(inputField)
+        // Gửi yêu cầu cập nhật số lượng sản phẩm bằng AJAX
+        $.ajax({
+            type: 'POST', // Phương thức HTTP
+            url: '/updatesoluong', // URL của endpoint để cập nhật số lượng
+            data: {
+                idghct: ghctId, // ID của sản phẩm cần cập nhật
+                soluong: currentValue -1 // Số lượng mới
+            },
+            success: function(response) {
+                if (response === "ko"){
+                    alert("Số lượng không đủ")
                     return;
-            }else if (response ==="ok") {
-                // Xử lý phản hồi từ server (nếu cần)
-                console.log('Quantity updated successfully!');
+                }
+                else if (response ==="ok") {
+                    // Xử lý phản hồi từ server (nếu cần)
+                    console.log('Quantity updated successfully!');
+                }
+            },
+            error: function(xhr, status, error) {
+                // Xử lý lỗi (nếu có)
+                console.error('Error updating quantity:', error);
             }
-        },
-        error: function(xhr, status, error) {
-            // Xử lý lỗi (nếu có)
-            console.error('Error updating quantity:', error);
-        }
-    });
-    handleCheckboxChange()
-}
-
-
-function handleCheckboxChange() {
-    var checkedProductIds = [];
-    var totalPrice = 0;
-    var totalSoLuong = 0;
-    var productContainers = document.getElementsByClassName('productContainer');
-    for (var i = 0; i < productContainers.length; i++) {
-        var checkbox = productContainers[i].querySelector('.productCheckbox');
-        var productId = productContainers[i].querySelector('.productID').textContent.trim(); // Lấy ID của sản phẩm
-        var productPrice = parseFloat(productContainers[i].querySelector('.productPriceT').textContent.replace(/[^\d.-]/g, '')); // Lấy giá của sản phẩm
-        var productQuantity = parseInt(productContainers[i].querySelector('.inputTang').value); // Lấy số lượng của sản phẩm
-
-        if (checkbox.checked) {
-            // Nếu checkbox được chọn, thêm ID của sản phẩm vào mảng
-            checkedProductIds.push(productId);
-            totalPrice += productPrice * productQuantity;
-            totalSoLuong ++;
-        }
+        });
+        handleCheckboxChange()
     }
-    var totalPriceDisplay = document.getElementById('totalPriceDisplay');
-    totalPriceDisplay.textContent = formatNumber(totalPrice)+"đ"
-    var totalSoLuongDisplay = document.getElementById('totalSoLuongDisplay');
-    totalSoLuongDisplay.textContent = totalSoLuong;
-    // In ra danh sách các ID sản phẩm được chọn (đây chỉ là ví dụ)
-    console.log("Các sản phẩm được chọn: " + checkedProductIds.join(', '));
-    console.log("Tổng số lượng * giá của các sản phẩm được chọn là: " + totalPrice);
-}
 
-// Gán sự kiện change cho tất cả các ô checkbox của sản phẩm
-var checkboxes = document.querySelectorAll('.productCheckbox');
-checkboxes.forEach(function(checkbox) {
-    checkbox.addEventListener('change', handleCheckboxChange);
-});
+    function tangSoLuong(ghctId) {
+        var inputField = document.getElementById('inputField' + ghctId);
+        var currentValue = parseInt(inputField.value);
+
+        console.log(ghctId)
+        console.log(currentValue)
+        console.log(inputField)
+        // Gửi yêu cầu cập nhật số lượng sản phẩm bằng AJAX
+        $.ajax({
+            type: 'POST', // Phương thức HTTP
+            url: '/updatesoluong', // URL của endpoint để cập nhật số lượng
+            data: {
+                idghct: ghctId, // ID của sản phẩm cần cập nhật
+                soluong: currentValue +1 // Số lượng mới
+            },
+            success: function(response) {
+                if (response === "ko"){
+                    alert("Số lượng không đủ")
+                    return;
+                }else if (response ==="ok") {
+                    // Xử lý phản hồi từ server (nếu cần)
+                    console.log('Quantity updated successfully!');
+                }
+            },
+            error: function(xhr, status, error) {
+                // Xử lý lỗi (nếu có)
+                console.error('Error updating quantity:', error);
+            }
+        });
+        handleCheckboxChange()
+    }
+
+
+    function handleCheckboxChange() {
+        var checkedProductIds = [];
+        var totalPrice = 0;
+        var totalSoLuong = 0;
+        var productContainers = document.getElementsByClassName('productContainer');
+        for (var i = 0; i < productContainers.length; i++) {
+            var checkbox = productContainers[i].querySelector('.productCheckbox');
+            var productId = productContainers[i].querySelector('.productID').textContent.trim(); // Lấy ID của sản phẩm
+            var productPrice = parseFloat(productContainers[i].querySelector('.productPriceT').textContent.replace(/[^\d.-]/g, '')); // Lấy giá của sản phẩm
+            var productQuantity = parseInt(productContainers[i].querySelector('.inputTang').value); // Lấy số lượng của sản phẩm
+
+            if (checkbox.checked) {
+                // Nếu checkbox được chọn, thêm ID của sản phẩm vào mảng
+                checkedProductIds.push(productId);
+                totalPrice += productPrice * productQuantity;
+                totalSoLuong ++;
+            }
+        }
+        var totalPriceDisplay = document.getElementById('totalPriceDisplay');
+        totalPriceDisplay.textContent = formatNumber(totalPrice)+"đ"
+        var totalSoLuongDisplay = document.getElementById('totalSoLuongDisplay');
+        totalSoLuongDisplay.textContent = totalSoLuong;
+        // In ra danh sách các ID sản phẩm được chọn (đây chỉ là ví dụ)
+        console.log("Các sản phẩm được chọn: " + checkedProductIds.join(', '));
+        console.log("Tổng số lượng * giá của các sản phẩm được chọn là: " + totalPrice);
+    }
+
+    // Gán sự kiện change cho tất cả các ô checkbox của sản phẩm
+    var checkboxes = document.querySelectorAll('.productCheckbox');
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', handleCheckboxChange);
+    });
 
     // Function to handle delete button click event
     function deleteProduct(productId) {
@@ -301,10 +301,3 @@ checkboxes.forEach(function(checkbox) {
     });
 
 </script>
-<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-<df-messenger
-        intent="WELCOME"
-        chat-title="SD40"
-        agent-id="96c8e619-f1d8-425a-a536-0cb7cecdb3b7"
-        language-code="vi"
-></df-messenger>

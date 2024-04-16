@@ -1,7 +1,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class="pagetitle">
@@ -44,8 +44,8 @@
                                         <td><img src="/assets/img/brand/${mau.hinhAnh}" alt="/assets/img/brand/${mau.hinhAnh}"  width="100px" height="100px"></td>
 
                                         <td><p style="color:${mau.trangThai==0?"chartreuse":"red"}">${mau.trangThai == 0 ? "Còn sử dụng" : "Ngừng sử dụng"}</p></td>
-                                        <td>${mau.ngayTao}</td>
-                                        <td>${mau.ngaySua}</td>
+                                        <td><fmt:formatDate value="${mau.ngayTao}" pattern="dd-MM-yyyy"/></td>
+                                        <td><fmt:formatDate value="${mau.ngaySua}" pattern="dd-MM-yyyy"/></td>
                                         <td>
                                             <a href="/thuonghieu/detail/${mau.id}" class="btn btn-success">Chi tiết</a>
                                         </td>
@@ -153,16 +153,16 @@
                                     Hình ảnh :
                                     <input required type="file" name="image" accept="image/*" class="form-control"></div>
                                 <div>
-                                <div>
-                                    Trạng thái :<br>
-                                    <input type="radio" name="status" checked value="0"> Còn sử dụng <br>
-                                    <input type="radio" name="status" value="1"> Ngừng sử dụng
-                                </div>
-                                <c:if test="${errName != null}" >
+                                    <div>
+                                        Trạng thái :<br>
+                                        <input type="radio" name="status" checked value="0"> Còn sử dụng <br>
+                                        <input type="radio" name="status" value="1"> Ngừng sử dụng
+                                    </div>
+                                    <c:if test="${errName != null}" >
                                     <p style="color: red">${errName}</p>
-                                </c:if>
+                                    </c:if>
 
-                                <input type="submit" class="btn btn-primary" value="Add" style="margin-top: 10px">
+                                    <input type="submit" class="btn btn-primary" value="Add" style="margin-top: 10px">
                             </form>
                         </div>
                         <%--detail--%>

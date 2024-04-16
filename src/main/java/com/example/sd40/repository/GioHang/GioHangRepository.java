@@ -13,7 +13,7 @@ import java.util.Optional;
  */
 public interface GioHangRepository extends JpaRepository<GioHang, Long> {
 
-//    Optional<GioHang> findByTkGioHang(TaiKhoan taiKhoan);
+    //    Optional<GioHang> findByTkGioHang(TaiKhoan taiKhoan);
     @Query("select gh from GioHang gh where gh.khachHang.id=?1")
     GioHang findGioHangByKhachHang(Long idkh);
 }

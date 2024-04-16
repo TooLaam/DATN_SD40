@@ -63,7 +63,7 @@ public class GioHangCusController {
 
     @GetMapping("/hienthigiohangchitiet/{idkh}")
     public String hienthigiohangchitiet(Model model, HttpSession session,
-                               @PathVariable("idkh") Long idkh
+                                        @PathVariable("idkh") Long idkh
 
     ) {
         model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(idkh).size());
@@ -102,7 +102,6 @@ public class GioHangCusController {
         return ResponseEntity.ok("Product deleted successfully");
     }
     Date currentDate = new Date(System.currentTimeMillis());
-
 
 
 

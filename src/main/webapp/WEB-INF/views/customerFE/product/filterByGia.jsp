@@ -12,27 +12,27 @@
 <div class="container">
     <div class="content">
 
-            <c:choose>
-                <c:when test="${giaMin==0}">
-                    <span class="text-content">Giá : Dưới <fmt:formatNumber value="${giaMax}" pattern="###,###"/>đ  </span>
-                </c:when>
-                <c:when test="${giaMax==1000000000}">
-                    <span class="text-content">Giá : Trên <fmt:formatNumber value="${giaMin}" pattern="###,###"/>đ  </span>
-                </c:when>
-                <c:otherwise>
+        <c:choose>
+            <c:when test="${giaMin==0}">
+                <span class="text-content">Giá : Dưới <fmt:formatNumber value="${giaMax}" pattern="###,###"/>đ  </span>
+            </c:when>
+            <c:when test="${giaMax==1000000000}">
+                <span class="text-content">Giá : Trên <fmt:formatNumber value="${giaMin}" pattern="###,###"/>đ  </span>
+            </c:when>
+            <c:otherwise>
                 <span class="text-content">Giá : <fmt:formatNumber value="${giaMin}" pattern="###,###"/>đ - <fmt:formatNumber value="${giaMax}" pattern="###,###"/>đ </span>
-                </c:otherwise>
-            </c:choose>
+            </c:otherwise>
+        </c:choose>
 
 
-            <c:choose>
-                <c:when test="${tongSLSP == null}">
-                    <span class="available">(0)</span>
-                </c:when>
-                <c:otherwise>
-                    <span class="available">(${tongSLSP})</span>
-                </c:otherwise>
-            </c:choose>
+        <c:choose>
+            <c:when test="${tongSLSP == null}">
+                <span class="available">(0)</span>
+            </c:when>
+            <c:otherwise>
+                <span class="available">(${tongSLSP})</span>
+            </c:otherwise>
+        </c:choose>
 
     </div>
     <div class="row">
@@ -165,10 +165,3 @@
         productCount = 6; // Reset số sản phẩm đã hiển thị
     }
 </script>
-<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-<df-messenger
-        intent="WELCOME"
-        chat-title="SD40"
-        agent-id="96c8e619-f1d8-425a-a536-0cb7cecdb3b7"
-        language-code="vi"
-></df-messenger>

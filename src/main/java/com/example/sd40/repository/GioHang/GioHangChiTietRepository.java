@@ -18,7 +18,6 @@ public interface GioHangChiTietRepository extends JpaRepository<GioHangChiTiet, 
     List<GioHangChiTiet> findAllByGioHang(GioHang gioHang);
 
     void  deleteAllByGioHang(GioHang gioHang);
-
     @Query("select ghct from GioHangChiTiet ghct where ghct.gioHang.id =?1 ")
     List<GioHangChiTiet> hienthigiohangchitiet(Long idGH);
 

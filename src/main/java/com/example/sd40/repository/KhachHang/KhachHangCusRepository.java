@@ -135,5 +135,4 @@ public interface KhachHangCusRepository extends JpaRepository<KhachHang,Long> {
 
     @Query(value = "select top(1) id from khach_hang order by id desc",nativeQuery = true)
     Long idKhachHangMoiTao();
-
 }

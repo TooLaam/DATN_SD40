@@ -32,43 +32,43 @@
             <div class="information">
                 <p>Thông tin tài khoản</p>
                 <form id="updateForm" method="post" action="/updateKhachHang">
-                <div class="mb-3 row">
-                    <label class="col-sm-2 col-form-label form-label">Họ tên</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="ten" name="ten" value="${kh.hoTen}">
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label form-label">Họ tên</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="ten" name="ten" value="${kh.hoTen}">
+                        </div>
                     </div>
-                </div>
-                <div class="mb-3 row">
-                    <label class="col-sm-2 col-form-label form-label">Ngày sinh</label>
-                    <div class="col-sm-10" >
-                        <input type="date" class="form-control" id="ngaySinh" name="ngaySinh">
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label form-label">Ngày sinh</label>
+                        <div class="col-sm-10" >
+                            <input type="date" class="form-control" id="ngaySinh" name="ngaySinh">
+                        </div>
                     </div>
-                </div>
-                <div class="mb-3 row">
-                    <label class="col-sm-2 col-form-label form-label">Số điện thoại</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" oninput="layThongTinUpdate()" id="sdt" name="sdt" value="${kh.sdt}">
-                        <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errSdt">Số điện thoại không hợp lệ</span>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label form-label">Số điện thoại</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" oninput="layThongTinUpdate()" id="sdt" name="sdt" value="${kh.sdt}">
+                            <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errSdt">Số điện thoại không hợp lệ</span>
+                        </div>
                     </div>
-                </div>
-                <div class="mb-3 row">
-                    <label class="col-sm-2 col-form-label form-label">Giới tính</label>
-                    <div class="col-sm-10">
-                        <input type="radio" class="radio-input" name="gioiTinh" value="1" ${kh.gioiTinh==1?"checked":""}  id="male" autocomplete="off">
-                        <label class="radio-label" for="male">Nam</label>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label form-label">Giới tính</label>
+                        <div class="col-sm-10">
+                            <input type="radio" class="radio-input" name="gioiTinh" value="1" ${kh.gioiTinh==1?"checked":""}  id="male" autocomplete="off">
+                            <label class="radio-label" for="male">Nam</label>
 
-                        <input type="radio" class="radio-input" value="0" name="gioiTinh" ${kh.gioiTinh==0?"checked":""} id="female" autocomplete="off">
-                        <label class="radio-label" for="female">Nữ</label>
+                            <input type="radio" class="radio-input" value="0" name="gioiTinh" ${kh.gioiTinh==0?"checked":""} id="female" autocomplete="off">
+                            <label class="radio-label" for="female">Nữ</label>
 
+                        </div>
                     </div>
-                </div>
-                <div class="mb-3 row">
-                    <label class="col-sm-2 col-form-label form-label">Email</label>
-                    <div class="col-sm-10">
-                        <input type="text" oninput="layThongTinUpdate()" class="form-control" id="email" value="${kh.email}" name="email">
-                        <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errEmail">Email không hợp lệ</span>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label form-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="text" oninput="layThongTinUpdate()" class="form-control" id="email" value="${kh.email}" name="email">
+                            <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errEmail">Email không hợp lệ</span>
+                        </div>
                     </div>
-                </div>
 
                     <button type="button" id="capNhat" style="background-color: #00575C" class="btn btn-success">Cập nhật</button>
                 </form>
@@ -122,11 +122,11 @@
             return;
         }else {
             if (!phoneRegex.test(sdt)){
-            alert("Số điện thoại không hợp lệ !!!")
-            return;
+                alert("Số điện thoại không hợp lệ !!!")
+                return;
             }else if (!emailRegex.test(email)){
-            alert("Email không hợp lệ !!!")
-            return;
+                alert("Email không hợp lệ !!!")
+                return;
             }else {
                 alert("Cập nhật thành công !!!")
                 document.getElementById('updateForm').submit();
@@ -149,11 +149,11 @@
 
         if (emailRegex.test(email) || email == '') {
             document.getElementById('errEmail').style.display='none';
-                return;
+            return;
         }
         else {
             document.getElementById('errEmail').style.display='block';
-            }
+        }
 
     }
 
@@ -258,10 +258,3 @@
         }
     });
 </script>
-<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-<df-messenger
-        intent="WELCOME"
-        chat-title="SD40"
-        agent-id="96c8e619-f1d8-425a-a536-0cb7cecdb3b7"
-        language-code="vi"
-></df-messenger>
