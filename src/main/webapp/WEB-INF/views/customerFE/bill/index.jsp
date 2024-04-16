@@ -136,7 +136,7 @@
                                         <input type="text" style="display: none" name="email" id="emailNhan">
                                         <input type="text" style="display: none" name="giaHienHanh" value="${ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" >
                                         <input type="text"style="display: none" name="giaDaGiam" value="${(ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ctsp.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}" >
-                                        <input readonly type="number" id="inputField1" style="display: none" class="inputTang" name="soLuong" value="1">
+                                        <input readonly type="number" id="inputField1" style="display:none;"  class="inputTang" name="soLuong">
                                         <button class="btn btn-primary" id="btnAddHD"  style="color: white;background-color: #00575C;margin-top: 30px;margin-left: 160px">Đặt hàng</button>
                                     </form>
                                 </div>
@@ -543,9 +543,10 @@
         var inputField1 = document.getElementById('inputField1');
         var addButton = document.getElementById('addButton');
         var subtractButton = document.getElementById('subtractButton');
+        inputField1.value = inputField.value;
         addButton.addEventListener('click', function() {
             inputField.value = parseInt(inputField.value) + 1;
-            inputField1.value = parseInt(inputField1.value) + 1;
+            inputField1.value = inputField.value;
             calculateTotalPrice();
             layThongTinThanhToan2()
 
@@ -556,12 +557,7 @@
             var currentValue1 = parseInt(inputField1.value);
             if (currentValue > 1) {
                 inputField.value = currentValue - 1;
-                calculateTotalPrice();
-                layThongTinThanhToan2()
-
-            }
-            if (currentValue1 > 1) {
-                inputField1.value = currentValue1 - 1;
+                inputField1.value = inputField.value;
                 calculateTotalPrice();
                 layThongTinThanhToan2()
 
@@ -672,6 +668,13 @@
 
 
 </script>
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+        intent="WELCOME"
+        chat-title="SD40"
+        agent-id="96c8e619-f1d8-425a-a536-0cb7cecdb3b7"
+        language-code="vi"
+></df-messenger>
 </body>
 
 </html>

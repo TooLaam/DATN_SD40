@@ -43,7 +43,7 @@ public class SanPham {
     private String hinhAnhDaiDien;
 
     @Column(name = "so_luong_da_ban")
-    private String soLuongDaBan;
+    private Integer soLuongDaBan;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(

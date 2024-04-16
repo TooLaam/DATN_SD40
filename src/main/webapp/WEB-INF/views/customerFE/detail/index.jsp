@@ -191,8 +191,8 @@
             e.preventDefault();
             var kichC0 =$("#inputid").val();
             var mauSac = $("#mauSac").val();
-            var soLuong = $("#inputField2").val();
-            var hiensl = $("#hiensl").val();
+            var soLuong = $("#inputField1").val();
+            var hiensl = $("#hiengoc1").val();
             console.log(soLuong+"--------------")
             console.log(hiensl+"================")
             if (parseInt(soLuong)>parseInt(hiensl)){
@@ -215,8 +215,6 @@
                     url: "/hienthiAddHD/${SP1.id}",
                     data: formData,
                     success: function (response) {
-                        console.log("Data sent successfully!");
-                        console.log(response);
                         if (response === "update") {
                             alert("Cập nhật vào giỏ hàng thành công !!!");
                         } else if (response === "success") {
@@ -333,4 +331,11 @@
 
     }
 </script>
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+        intent="WELCOME"
+        chat-title="SD40"
+        agent-id="96c8e619-f1d8-425a-a536-0cb7cecdb3b7"
+        language-code="vi"
+></df-messenger>
 

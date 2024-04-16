@@ -51,7 +51,12 @@ public interface KhachHangCusService {
     void updateKhachHang(KhachHang khachHang);
     List<KhachHang> getAllKhachHang();
     List<KhachHang> checlTaiKhoanAdd(String taiKhoan);
-
+    void capNhatSoLuongSPSauKhiXoa(Integer soLuong, Long idctsp);
+    void HuyHoaDon(Long idhd,String lyDo);
+    void hoanThanhHoaDon(Long idhd);
+    void capNhatSoLuongSPDaBan(Integer soLuong, Long idSP);
+    List<Object[]> soLuongDaBan(Long idHD);
+    Long idKhachHangMoiTao();
 
 
 }

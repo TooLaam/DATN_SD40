@@ -85,14 +85,14 @@
             background-color: #fff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             width: 500px;
-            max-height: 700px; /* Đảm bảo đủ lớn để chứa tất cả các sản phẩm */
-            overflow-y: visible; /* Hiển thị toàn bộ nội dung mà không có thanh cuộn */
+            max-height: 700px;
+            overflow-y: visible;
         }
 
         #noResultsMessage {
-            font-size: 20px; /* Định dạng kích thước chữ */
-            padding: 20px; /* Tạo khoảng trống xung quanh */
-            text-align: center; /* Căn giữa văn bản */
+            font-size: 20px;
+            padding: 20px;
+            text-align: center;
         }
 
     </style>
@@ -321,6 +321,13 @@
 <script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
 <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
 <script src="/assets/vendor/php-email-form/validate.js"></script>
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+        intent="WELCOME"
+        chat-title="SD40"
+        agent-id="96c8e619-f1d8-425a-a536-0cb7cecdb3b7"
+        language-code="vi"
+></df-messenger>
 
 <!-- Template Main JS File -->
 <script src="/assets/js/main.js"></script>

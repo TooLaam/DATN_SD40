@@ -114,6 +114,7 @@
                                         <input type="text"  style="display: none" name="tenNguoiNhan" id="tenNguoiNhan">
                                         <input type="text" style="display: none"  name="sdt" id="sdt">
                                         <input type="text" style="display: none" name="diaChiNguoiNhan" id="diaChiNguoiNhan">
+                                        <input type="text" style="display: none" name="tinh" id="tinhNhan">
                                         <input type="text" style="display: none" name="tongTienSanPhamChuaGiam" id="tongTienSanPhamChuaGiam">
                                         <input type="text" style="display: none" name="phiShip" id="phiShip">
 
@@ -333,9 +334,10 @@
         var diaChi = document.getElementById('diaChiChiTietCho').textContent;
         var sdt = document.getElementById('sdt').value;
         var errorText = document.getElementById('errorText');
+        var tinhNhan = document.getElementById('tinhNhan');
         var phoneRegex = /^(032|033|034|035|036|037|038|039|096|097|098|086|083|084|085|081|082|088|091|094|070|079|077|076|078|090|093|089|056|058|092|059|099)[0-9]{7}$/; // Định dạng số điện thoại ở Việt Nam
 
-        if (diaChi == null){
+        if (diaChi ===''||tinhNhan ===''){
             alert("Vui lòng chọn địa chỉ")
             return;
         }
@@ -391,7 +393,7 @@
 
         var tenNguoiNhan = document.getElementById('tenNguoiNhan');
         var diaChiNguoiNhan = document.getElementById('diaChiNguoiNhan');
-
+        var tinhNhan = document.getElementById('tinhNhan')
         var tongTien = document.getElementById('tongTien');
         var tongTienGiam = document.getElementById('tongTienGiam');
         var tongTienSanPhamChuaGiam = document.getElementById('tongTienSanPhamChuaGiam');
@@ -401,7 +403,8 @@
 
         tenNguoiNhan.value = ten;
 
-        diaChiNguoiNhan.value = diaChiChiTietCho+ ', Tỉnh/Thành phố '+tinh;
+        diaChiNguoiNhan.value = diaChiChiTietCho;
+        tinhNhan.value = tinh;
         tongTien.value = tongTienThanhToan;
         tongTienGiam.value = soTienGiam+tongtiengiamSP;
         tongTienSanPhamChuaGiam.value = totalPriceDisplay;
@@ -520,7 +523,7 @@
         }
         if (selectedOption.trim() === '') {
             alert('Vui lòng nhập tỉnh/thành phố!') ;
-            return; // Kết thúc hàm nếu giá trị rỗng
+            return;
         }
 
         // Lặp qua từng option trong datalist
@@ -898,6 +901,13 @@
 
 
 </script>
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+        intent="WELCOME"
+        chat-title="SD40"
+        agent-id="96c8e619-f1d8-425a-a536-0cb7cecdb3b7"
+        language-code="vi"
+></df-messenger>
 </body>
 
 </html>

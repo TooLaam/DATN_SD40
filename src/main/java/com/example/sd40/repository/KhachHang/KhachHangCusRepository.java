@@ -108,6 +108,32 @@ public interface KhachHangCusRepository extends JpaRepository<KhachHang,Long> {
     @Query("select kh from KhachHang kh where kh.taiKhoan = ?1")
     List<KhachHang> checlTaiKhoanAdd(String taiKhoan);
 
+    @Transactional
+    @Modifying
+    @Query("update HoaDon hd set hd.trangThai =4 where hd.id=?1")
+    void hoanThanhHoaDon(Long idhd);
 
+    @Transactional
+    @Modifying
+    @Query("update HoaDon hd set hd.trangThai =5, hd.ghiChu = ?2 where hd.id = ?1")
+    void HuyHoaDon(Long idhd,String lyDo);
+
+    @Transactional
+    @Modifying
+    @Query("update ChiTietSanPham ct set ct.soLuong = ct.soLuong+?1 where ct.Id = ?2")
+    void capNhatSoLuongSPSauKhiXoa(Integer soLuong, Long idctsp);
+
+    @Transactional
+    @Modifying
+    @Query("update SanPham ct set ct.soLuongDaBan = ct.soLuongDaBan+?1 where ct.id = ?2")
+    void capNhatSoLuongSPDaBan(Integer soLuong, Long idSP);
+
+    @Query("select sum(hd.soLuong),ct.sanPham.id from HoaDonChiTiet hd join ChiTietSanPham ctsp on hd.chiTietSanPham.Id = ctsp.Id" +
+            " join ChiTietSanPhamMauSacHinhAnh ct on ctsp.chiTietSanPhamMauSacHinhAnh.Id = ct.Id where hd.hoaDon.id=?1 " +
+            " group by ct.sanPham.id")
+    List<Object[]> soLuongDaBan(Long idHD);
+
+    @Query(value = "select top(1) id from khach_hang order by id desc",nativeQuery = true)
+    Long idKhachHangMoiTao();
 
 }
