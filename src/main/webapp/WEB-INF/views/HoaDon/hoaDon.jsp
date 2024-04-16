@@ -68,8 +68,8 @@
                                             <tr>
                                                     <%--                                <th scope="row">${tt.index+1}</th>--%>
                                                 <td>${hoaDon.maHoaDon}</td>
-                                                <td>${hoaDon.khachHang.hoTen} </td>
-                                                <td>${hoaDon.khachHang.sdt}</td>
+                                                <td>${hoaDon.tenNguoiNhan} </td>
+                                                <td>${hoaDon.sdtNguoiNhan}</td>
                                                 <td>${hoaDon.tongTien}</td>
                                                 <td>${hoaDon.ngayTao}</td>
                                                 <td>
@@ -100,8 +100,8 @@
                                             <tr>
                                                     <%--                                <th scope="row">${tt.index+1}</th>--%>
                                                 <td>${hoaDon.maHoaDon}</td>
-                                                <td>${hoaDon.khachHang.hoTen} </td>
-                                                <td>${hoaDon.khachHang.sdt}</td>
+                                                <td>${hoaDon.tenNguoiNhan} </td>
+                                                <td>${hoaDon.sdtNguoiNhan}</td>
                                                 <td>${hoaDon.tongTien }</td>
                                                 <td>${hoaDon.ngayTao}</td>
                                                 <td>
@@ -132,8 +132,8 @@
                                             <tr>
                                                     <%--                                <th scope="row">${tt.index+1}</th>--%>
                                                 <td>${hoaDon.maHoaDon}</td>
-                                                <td>${hoaDon.khachHang.hoTen} </td>
-                                                <td>${hoaDon.khachHang.sdt}</td>
+                                                <td>${hoaDon.tenNguoiNhan} </td>
+                                                <td>${hoaDon.sdtNguoiNhan}</td>
                                                 <td>${hoaDon.tongTien  }</td>
                                                 <td>${hoaDon.ngayTao}</td>
                                                 <td>
@@ -164,8 +164,8 @@
                                             <tr>
                                                     <%--                                <th scope="row">${tt.index+1}</th>--%>
                                                 <td>${hoaDon.maHoaDon}</td>
-                                                <td>${hoaDon.khachHang.hoTen} </td>
-                                                <td>${hoaDon.khachHang.sdt}</td>
+                                                <td>${hoaDon.tenNguoiNhan} </td>
+                                                <td>${hoaDon.sdtNguoiNhan}</td>
                                                 <td>${hoaDon.tongTien }</td>
                                                 <td>${hoaDon.ngayTao}</td>
                                                 <td>
@@ -196,8 +196,8 @@
                                             <tr>
                                                     <%--                                <th scope="row">${tt.index+1}</th>--%>
                                                 <td>${hoaDon.maHoaDon}</td>
-                                                <td>${hoaDon.khachHang.hoTen} </td>
-                                                <td>${hoaDon.khachHang.sdt}</td>
+                                                <td>${hoaDon.tenNguoiNhan} </td>
+                                                <td>${hoaDon.sdtNguoiNhan}</td>
                                                 <td>${hoaDon.tongTien }</td>
                                                 <td>${hoaDon.ngayTao}</td>
                                                 <td>
@@ -228,8 +228,8 @@
                                             <tr>
                                                     <%--                                <th scope="row">${tt.index+1}</th>--%>
                                                 <td>${hoaDon.maHoaDon}</td>
-                                                <td>${hoaDon.khachHang.hoTen} </td>
-                                                <td>${hoaDon.khachHang.sdt}</td>
+                                                <td>${hoaDon.tenNguoiNhan} </td>
+                                                <td>${hoaDon.sdtNguoiNhan}</td>
                                                 <td>${hoaDon.tongTien  }</td>
                                                 <td>${hoaDon.ngayTao}</td>
                                                 <td>
