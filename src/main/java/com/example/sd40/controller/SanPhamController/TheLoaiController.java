@@ -5,11 +5,14 @@ import com.example.sd40.entity.San_pham.TheLoai;
 
 import com.example.sd40.service.SanPham.LoaiGiayService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.text.ParseException;
 import java.util.List;
 
 @Controller
@@ -26,68 +29,51 @@ public class TheLoaiController {
     }
 
     @GetMapping("/detail/{id}")
-    public String detail(Model model,
-                         @PathVariable("id")Long id){
-        model.addAttribute("tl",loaiGiayService.detail(id));
-        model.addAttribute("listTL",loaiGiayService.findAll());
-        model.addAttribute("view","/SanPham/TheLoai/index.jsp");
-        return "index";
+    public ResponseEntity<TheLoai> detail(Model model,
+                                         @PathVariable("id")Long id){
+        TheLoai theLoai = loaiGiayService.detail(id);
+        if (theLoai != null) {
+            return new ResponseEntity<>(theLoai, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
     Date currentDate = new Date(System.currentTimeMillis());
 
     @PostMapping("/update")
-    public String update(@RequestParam("id")String id,Model model,
-                         @RequestParam("ten")String ten,
-                         @RequestParam("status")Integer status
-    ){
-
-        if (id.isBlank()){
-            model.addAttribute("err","Bạn phải chọn đối tượng thể loại ở danh sách");
-            model.addAttribute("listTL",loaiGiayService.findAll());
-            model.addAttribute("view","/SanPham/TheLoai/index.jsp");
-            return "index";
-        }
-        else {
-            List<TheLoai> theLoais = loaiGiayService.findByNameUpdate(ten,Long.valueOf(id));
-            if (!theLoais.isEmpty()){
-                model.addAttribute("errUpdate","Trùng tên. Vui lòng đổi tên !!!");
-                model.addAttribute("tl", loaiGiayService.detail(Long.valueOf(id)));
-                model.addAttribute("listTL",loaiGiayService.findAll());
-                model.addAttribute("view","/SanPham/TheLoai/index.jsp");
-                return "index";
-            }
+    public ResponseEntity<?> update(@RequestParam("id")String id,
+                                    @RequestParam("ten")String ten,
+                                    @RequestParam("trangThai")Integer status
+    ) throws ParseException {
+        List<TheLoai> theLoais = loaiGiayService.findByNameUpdate(ten,Long.valueOf(id));
+        if (!theLoais.isEmpty()) {
+            return ResponseEntity.ok("errTrungTen");
+        } else {
             TheLoai theLoai = loaiGiayService.detail(Long.valueOf(id));
 
             theLoai.setTen(ten);
             theLoai.setTrangThai(status);
             theLoai.setNgaySua(currentDate);
             loaiGiayService.update(theLoai);
-
-            return ("redirect:/theloai/index");
+            return ResponseEntity.ok("ok");
         }
-
-
     }
 
     @PostMapping("/add")
-    public String add(@RequestParam("ten")String ten,Model model,
-                      @RequestParam("status")Integer status){
+    public ResponseEntity<?> add(
+            @RequestParam("ten")String ten,
+            @RequestParam("trangThai")Integer status
+    ) throws ParseException {
         List<TheLoai> theLoais = loaiGiayService.findByName(ten);
-        if (!theLoais.isEmpty()){
-            model.addAttribute("errName","Tên thêm mới trùng với trong danh sách. Vui lòng chọn tên mới !!!");
-            model.addAttribute("active","nav-link active");
-            model.addAttribute("listTL",loaiGiayService.findAll());
-            model.addAttribute("view","/SanPham/TheLoai/index.jsp");
-            return "index";
+        if (!theLoais.isEmpty()) {
+            return ResponseEntity.ok("errTrungTen");
+        } else {
+            TheLoai theLoai = new TheLoai();
+            theLoai.setTen(ten);
+            theLoai.setTrangThai(status);
+            theLoai.setNgayTao(currentDate);
+            loaiGiayService.add(theLoai);
+            return ResponseEntity.ok("ok");
         }
-
-        TheLoai theLoai = new TheLoai();
-        theLoai.setTen(ten);
-        theLoai.setTrangThai(status);
-        theLoai.setNgayTao(currentDate);
-        loaiGiayService.add(theLoai);
-
-        return ("redirect:/theloai/index");
-
     }
 }

@@ -36,7 +36,7 @@ public interface KhachHangCusRepository extends JpaRepository<KhachHang,Long> {
     @Query(value = "select id from tinh_thanh_pho where ten like N'Hà Nội'",nativeQuery = true )
     Object layIDTinh();
 
-    @Query(value = "select id, ten_voucher,phan_tram_giam,giam_toi_da,gia_tri_don_toi_thieu from voucher where ngay_bat_dau<=GETDATE() and ngay_ket_thuc>= getdate() and trang_thai=1 order by phan_tram_giam  desc",nativeQuery = true)
+    @Query(value = "select id, ten_voucher,phan_tram_giam,giam_toi_da,gia_tri_don_toi_thieu from voucher where ngay_bat_dau<=GETDATE() and ngay_ket_thuc>= getdate() and trang_thai=0 order by phan_tram_giam  desc",nativeQuery = true)
     List<Object> getVoucherHoaDon();
 
     @Transactional
