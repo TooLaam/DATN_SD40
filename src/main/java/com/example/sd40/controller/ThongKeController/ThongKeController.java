@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,8 +28,6 @@ public class ThongKeController {
     ThongKeService thongKeService;
     @GetMapping("/index")
     public String index(Model model) throws ParseException {
-        model.addAttribute("thongKeDonHangAll",thongKeService.TongDonHangAll("1999/12/12","2099/12/12"));
-        model.addAttribute("doanhSovaSanPhamDaBanAll",thongKeService.DoanhSoVaSanPhamDaBanAll("1999/12/12","2099/12/12"));
         model.addAttribute("hangTonKho",thongKeService.hangTonKho());
         model.addAttribute("view","/ThongKe/thongke.jsp");
         return "index";
@@ -52,13 +51,17 @@ public class ThongKeController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    @GetMapping("/thongKeDoanhSoVaSanPhamDaBanAllTheoNgay/{ngayBD}/{ngayKT}")
+    @GetMapping("/thongKeSanPhamDaBanAllTheoNgay/{ngayBD}/{ngayKT}")
     public ResponseEntity<Object> thongKeDoanhSoVaSanPhamDaBanAllTheoNgay(@PathVariable("ngayBD")String ngayBD,@PathVariable("ngayKT")String ngayKT){
-        Object objects = thongKeService.DoanhSoVaSanPhamDaBanAll(ngayBD,ngayKT);
-        if (objects != null) {
+        Integer objects = thongKeService.SanPhamDaBanAll(ngayBD,ngayKT);
+
             return new ResponseEntity<>(objects, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+
+    }
+    @GetMapping("/thongKeDoanhThuTheoNgay/{ngayBD}/{ngayKT}")
+    public ResponseEntity<Object> thongKeDoanhThuTheoNgay(@PathVariable("ngayBD")String ngayBD,@PathVariable("ngayKT")String ngayKT){
+        Object objects = thongKeService.DoanhThu(ngayBD,ngayKT);
+
+            return new ResponseEntity<>(objects, HttpStatus.OK);
     }
 }

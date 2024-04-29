@@ -19,14 +19,14 @@
         <div class="content">
             <div class="title">Đơn hàng</div>
             <hr class="hr">
-            <div class="info" id="donHang">${thongKeDonHangAll[0]}</div>
+            <div class="info" id="donHang"></div>
         </div>
     </div>
     <div class="box" id="revenue">
         <div class="content">
             <div class="title">Doanh số</div>
             <hr class="hr">
-            <div class="info" id="doanhSo">$<fmt:formatNumber value=" ${doanhSovaSanPhamDaBanAll[1]}" pattern="###,###"/></div>
+            <div class="info" id="doanhSo"></div>
         </div>
 
     </div>
@@ -34,7 +34,7 @@
         <div class="content">
             <div class="title">Sản phẩm đã bán</div>
             <hr class="hr">
-            <div class="info" id="sanPhamDaBan">${doanhSovaSanPhamDaBanAll[0]}</div>
+            <div class="info" id="sanPhamDaBan"></div>
         </div>
     </div>
     <div class="box" id="inventory">
@@ -200,13 +200,13 @@
 
     document.addEventListener("DOMContentLoaded", function() {
         LayGiaTriCuaBieuDo(2024);
-        loadConSo();
+        loadConSo("1999-12-12","2999-12-12");
 
     });
-    function loadConSo(){
+    function loadConSo(ngayBD,ngayKT){
         $.ajax({
             type: "GET",
-            url: "/thongke/thongKeTongDonHangTheoNgay/1999-12-12/2099-12-12",
+            url: "/thongke/thongKeTongDonHangTheoNgay/"+ngayBD+"/"+ngayKT,
             success: function(response) {
                 if (response[0] === 0){
                     document.getElementById('donHang').textContent="0"
@@ -237,8 +237,32 @@
                     document.getElementById('percentageHuy').textContent=formatThapPhan(response[12])+"%";
                     document.getElementById('huy').textContent=response[11];
                 }
-
                 load()
+                $.ajax({
+                    type: "GET",
+                    url: "/thongke/thongKeSanPhamDaBanAllTheoNgay/"+ngayBD+"/"+ngayKT,
+                    success: function(response) {
+                        console.log(response)
+                        if (response ===''){
+                            document.getElementById('sanPhamDaBan').textContent="0"
+                        }else {
+                            document.getElementById('sanPhamDaBan').textContent=response
+                        }}
+                });
+
+                $.ajax({
+                    type: "GET",
+                    url: "/thongke/thongKeDoanhThuTheoNgay/"+ngayBD+"/"+ngayKT,
+                    success: function(response) {
+                        console.log(response)
+                        if (response ===''){
+                            document.getElementById('doanhSo').textContent="$0"
+                        }else {
+                            document.getElementById('doanhSo').textContent='$'+formatNumber(response);
+                        }}
+                });
+
+
             }
         });
     }
@@ -368,65 +392,14 @@
        var ngayBDChuyenDoi = chuyenDoiNgay(ngayBD);
        var ngayKTChuyenDoi = chuyenDoiNgay(ngayKT)
        if (ngayBatDau.trim()===''||ngayKetThuc.trim()===''){
-          loadConSo();
+          loadConSo("1999-12-12","2999-12-12");
            return;
        }else {
            if (ngayBD>ngayKT){
                alert("Ngày bắt đầu không được lớn hơn ngày kết thúc")
                return;
            }else {
-               $.ajax({
-                   type: "GET",
-                   url: "/thongke/thongKeTongDonHangTheoNgay/" + ngayBDChuyenDoi+"/"+ngayKTChuyenDoi,
-                   success: function(response) {
-                       console.log(response)
-                       console.log(ngayBDChuyenDoi)
-                       console.log(ngayKTChuyenDoi)
-                       if (response[0] === 0){
-                           document.getElementById('donHang').textContent="0"
-                           document.getElementById('percentageChoXacNhan').textContent="0%";
-                           document.getElementById('choXacNhan').textContent="0";
-                           document.getElementById('percentageDaXacNhan').textContent="0%";
-                           document.getElementById('xacNhan').textContent="0";
-                           document.getElementById('percentageChoGiao').textContent="0%";
-                           document.getElementById('choGiao').textContent="0";
-                           document.getElementById('percentageDangGiao').textContent="0%";
-                           document.getElementById('dangGiao').textContent="0";
-                           document.getElementById('percentageThanhCong').textContent="0%";
-                           document.getElementById('thanhCong').textContent="0";
-                           document.getElementById('percentageHuy').textContent="0%";
-                           document.getElementById('huy').textContent="0";
-                       }
-                       else {document.getElementById('donHang').textContent=response[0];
-                           document.getElementById('percentageChoXacNhan').textContent=formatThapPhan(response[2]) +"%";
-                           document.getElementById('choXacNhan').textContent=response[1];
-                           document.getElementById('percentageDaXacNhan').textContent=formatThapPhan(response[4]) +"%";
-                           document.getElementById('xacNhan').textContent=response[3];
-                           document.getElementById('percentageChoGiao').textContent=formatThapPhan(response[6])+"%";
-                           document.getElementById('choGiao').textContent=response[5];
-                           document.getElementById('percentageDangGiao').textContent=formatThapPhan(response[8])+"%";
-                           document.getElementById('dangGiao').textContent=response[7];
-                           document.getElementById('percentageThanhCong').textContent=formatThapPhan(response[10])+"%";
-                           document.getElementById('thanhCong').textContent=response[9];
-                           document.getElementById('percentageHuy').textContent=formatThapPhan(response[12])+"%";
-                           document.getElementById('huy').textContent=response[11];
-                       }
-
-                       load()
-                   }
-               });
-               $.ajax({
-                   type: "GET",
-                   url: "/thongke/thongKeDoanhSoVaSanPhamDaBanAllTheoNgay/" + ngayBDChuyenDoi+"/"+ngayKTChuyenDoi,
-                   success: function(response) {
-                       if (response[0] ===null && response[1] ===null){
-                           document.getElementById('doanhSo').textContent ="$0" ;
-                           document.getElementById('sanPhamDaBan').textContent="0"
-                       }else {
-                            document.getElementById('doanhSo').textContent ="$"+formatNumber(response[1]) ;
-                            document.getElementById('sanPhamDaBan').textContent=response[0]
-                   }}
-               });
+              loadConSo(ngayBDChuyenDoi,ngayKTChuyenDoi)
 
            }
        }

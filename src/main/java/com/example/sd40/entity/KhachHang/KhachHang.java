@@ -53,16 +53,6 @@ public class KhachHang {
     @Column(name = "mat_khau")
     private String matKhau;
 
-    @Column(name = "diem_tich_luy")
-    private Integer diemTichLuy;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(
-            name = "hang_thanh_vien_id",
-            referencedColumnName = "id",
-            nullable = true
-    )
-    private HangThanhVien hangThanhVien;
 
 
 }

@@ -44,8 +44,8 @@ public class GioHangChiTietImpl implements GioHangChiTietService {
     }
 
     @Override
-    public List<GioHangChiTiet> kiemTraAddGHCT(Long idctsp) {
-        return gioHangChiTietRepository.kiemTraAddGHCT(idctsp);
+    public List<GioHangChiTiet> kiemTraAddGHCT(Long idctsp,Long idKH) {
+        return gioHangChiTietRepository.kiemTraAddGHCT(idctsp,idKH);
     }
 
     @Override

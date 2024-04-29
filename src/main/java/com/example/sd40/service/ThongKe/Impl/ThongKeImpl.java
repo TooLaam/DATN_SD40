@@ -6,6 +6,7 @@ import com.example.sd40.service.ThongKe.ThongKeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -19,8 +20,13 @@ public class ThongKeImpl implements ThongKeService {
     }
 
     @Override
-    public Object DoanhSoVaSanPhamDaBanAll(String ngayBatDau, String ngayKetThuc) {
-        return thongKeRepository.DoanhSoVaSanPhamDaBanAll(ngayBatDau,ngayKetThuc);
+    public Integer SanPhamDaBanAll(String ngayBatDau, String ngayKetThuc) {
+        return thongKeRepository.SanPhamDaBanAll(ngayBatDau,ngayKetThuc);
+    }
+
+    @Override
+    public Object DoanhThu(String ngayBatDau, String ngayKetThuc) {
+        return thongKeRepository.DoanhThu(ngayBatDau,ngayKetThuc);
     }
 
     @Override

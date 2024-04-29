@@ -67,8 +67,8 @@ public class KhachHangCusImpl implements KhachHangCusService {
     }
 
     @Override
-    public void saveHD(Integer trangThai, Date ngayTao, BigDecimal tongTien, Integer phanTramKhuyenMai, Long idVoucher, String ghiChu, BigDecimal tongTienGiam, Long phuongThucThanhToanID, String tenNguoiNhan, String sdtNguoiNhan, String diaChiNguoiNhan, BigDecimal tongTienSanPhamChuaGiam,BigDecimal phiShip) {
-        khachHangCusRepository.saveHD(trangThai,ngayTao,tongTien,phanTramKhuyenMai,idVoucher,ghiChu,tongTienGiam,phuongThucThanhToanID,tenNguoiNhan,sdtNguoiNhan,diaChiNguoiNhan,tongTienSanPhamChuaGiam,phiShip);
+    public void saveHD(Integer trangThai, Date ngayTao, BigDecimal tongTien, Integer phanTramKhuyenMai, Long idVoucher, String ghiChu, BigDecimal tongTienGiam, Long phuongThucThanhToanID, String tenNguoiNhan, String sdtNguoiNhan, String diaChiNguoiNhan, BigDecimal tongTienSanPhamChuaGiam,BigDecimal phiShip,Date ngayCapNhat,String ma) {
+        khachHangCusRepository.saveHD(trangThai,ngayTao,tongTien,phanTramKhuyenMai,idVoucher,ghiChu,tongTienGiam,phuongThucThanhToanID,tenNguoiNhan,sdtNguoiNhan,diaChiNguoiNhan,tongTienSanPhamChuaGiam,phiShip,ngayCapNhat,ma);
     }
 
 
@@ -168,8 +168,8 @@ public class KhachHangCusImpl implements KhachHangCusService {
     }
 
     @Override
-    public void saveHDKhachHang(Integer trangThai, Date ngayTao, BigDecimal tongTien, Integer phanTramKhuyenMai, Long idVoucher, String ghiChu, BigDecimal tongTienGiam, Long phuongThucThanhToanID, String tenNguoiNhan, String sdtNguoiNhan, String diaChiNguoiNhan, BigDecimal tongTienSanPhamChuaGiam, BigDecimal phiShip, Long idKhachHang) {
-        khachHangCusRepository.saveHDKhachHang(trangThai,ngayTao,tongTien,phanTramKhuyenMai,idVoucher,ghiChu,tongTienGiam,phuongThucThanhToanID,tenNguoiNhan,sdtNguoiNhan,diaChiNguoiNhan,tongTienSanPhamChuaGiam,phiShip,idKhachHang);
+    public void saveHDKhachHang(Integer trangThai, Date ngayTao, BigDecimal tongTien, Integer phanTramKhuyenMai, Long idVoucher, String ghiChu, BigDecimal tongTienGiam, Long phuongThucThanhToanID, String tenNguoiNhan, String sdtNguoiNhan, String diaChiNguoiNhan, BigDecimal tongTienSanPhamChuaGiam, BigDecimal phiShip, Long idKhachHang,Date ngayCapNhat,String ma) {
+        khachHangCusRepository.saveHDKhachHang(trangThai,ngayTao,tongTien,phanTramKhuyenMai,idVoucher,ghiChu,tongTienGiam,phuongThucThanhToanID,tenNguoiNhan,sdtNguoiNhan,diaChiNguoiNhan,tongTienSanPhamChuaGiam,phiShip,idKhachHang,ngayCapNhat,ma);
 
     }
 
@@ -235,13 +235,13 @@ public class KhachHangCusImpl implements KhachHangCusService {
     }
 
     @Override
-    public void HuyHoaDon(Long idhd, String lyDo) {
-        khachHangCusRepository.HuyHoaDon(idhd,lyDo);
+    public void HuyHoaDon(Long idhd, String lyDo,Date ngayCapNhat) {
+        khachHangCusRepository.HuyHoaDon(idhd,lyDo,ngayCapNhat);
     }
 
     @Override
-    public void hoanThanhHoaDon(Long idhd) {
-        khachHangCusRepository.hoanThanhHoaDon(idhd);
+    public void hoanThanhHoaDon(Long idhd,Date ngayThanhToan,Date ngayCapNhat) {
+        khachHangCusRepository.hoanThanhHoaDon(idhd,ngayThanhToan,ngayCapNhat);
     }
 
     @Override
@@ -257,6 +257,11 @@ public class KhachHangCusImpl implements KhachHangCusService {
     @Override
     public Long idKhachHangMoiTao() {
         return khachHangCusRepository.idKhachHangMoiTao();
+    }
+
+    @Override
+    public String MaHDCuoi() {
+        return khachHangCusRepository.MaHDCuoi();
     }
 
 

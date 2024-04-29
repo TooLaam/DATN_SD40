@@ -79,7 +79,6 @@ public class HoaDonController {
                                  @RequestParam("soLuong") Integer soLuong,HttpSession session
     ){
         Long idKH = (Long) session.getAttribute("idKhachHang");
-//        int idKH = 1;
         if (idKH == null){
 
             ChiTietSanPhamMauSacHinhAnh chiTietSanPhamMauSacHinhAnh = ctspmshaService.getHAbySPandMS(idsp,idms);
@@ -113,15 +112,31 @@ public class HoaDonController {
         }
     }
 
-    @GetMapping("/save")
-    public String createHoaDon(HttpServletRequest request){
+    @GetMapping("/vnpayNoCus")
+    public String createHoaDon(HttpServletRequest request,
+                               @PathVariable("idctsp")Long idctsp,
+                               @RequestParam("tongTien")BigDecimal tongTien,
+                               @RequestParam("phanTramKhuyenMai")Integer phamTramKhuyenMai,
+                               @RequestParam("idVoucher")Long idVoucher,
+                               @RequestParam("tongTienGiam")BigDecimal tongTienGiam,
+                               @RequestParam("tenNguoiNhan")String tenNguoiNhan,
+                               @RequestParam("sdt")String sdt,
+                               @RequestParam("diaChiNguoiNhan")String diaChiNguoiNhan,
+                               @RequestParam("diaCHiChiTiet")String diaCHiChiTiet,
+                               @RequestParam("tongTienSanPhamChuaGiam")BigDecimal tongTienSanPhamChuaGiam,
+                               @RequestParam("phiShip")BigDecimal phiShip,
+                               @RequestParam("soLuong")Integer soLuong,
+                               @RequestParam("giaHienHanh")BigDecimal giaHienHanh,
+                               @RequestParam("email")String email,
+                               @RequestParam("giaDaGiam")BigDecimal giaDaGiam,Model model
+                               ){
 //      HoaDon hoaDon =   hoaDonService.createHoaDon();
 //        if (thanhtoan!= vnpay){
 //            return "redirect:/home";
 //        }else {
         CreatePayMentMethodTransferRequest request1 = new CreatePayMentMethodTransferRequest();
         request1.setVnp_Ammount("1000000");   // tổng tiền hoaDon.getTongTien
-        request1.setVnp_TxnRef("HD001"); // mã hóa đơn hoaDon.getMa
+        request1.setVnp_TxnRef("HD002"); // mã hóa đơn hoaDon.getMa
         return "redirect:" + phuongThucThanhToanService.createVnpay(request1, request);
 //        }
     }
@@ -154,8 +169,10 @@ public class HoaDonController {
                             @RequestParam("email")String email,
                             @RequestParam("giaDaGiam")BigDecimal giaDaGiam,Model model
     ) throws MessagingException {
-
-        khachHangCusService.saveHD(0, currentDate, tongTien, phamTramKhuyenMai, idVoucher, "Hóa đơn thanh toán khi nhận hàng", tongTienGiam, Long.valueOf(1), tenNguoiNhan, sdt, diaCHiChiTiet + ",Tỉnh/Thành phố: " + diaChiNguoiNhan, tongTienSanPhamChuaGiam, phiShip);
+        String MaHoaDonCuoi = khachHangCusService.MaHDCuoi();
+        String maHD = MaHoaDonCuoi.substring(5);
+        String maHDMoi = "HD000"+(Integer.valueOf(maHD)+1);
+        khachHangCusService.saveHD(0, currentDate, tongTien, phamTramKhuyenMai, idVoucher, "Hóa đơn thanh toán khi nhận hàng", tongTienGiam, Long.valueOf(1), tenNguoiNhan, sdt, diaCHiChiTiet + ",Tỉnh/Thành phố: " + diaChiNguoiNhan, tongTienSanPhamChuaGiam, phiShip,currentDate,maHDMoi);
         Long idHoaDonMoiNhat = khachHangCusService.idHoaDonMoiTao();
         HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
         hoaDonChiTiet.setHoaDon(khachHangCusService.detailHoaDon(idHoaDonMoiNhat));
@@ -223,8 +240,11 @@ public class HoaDonController {
                                      @RequestParam("giaDaGiam")BigDecimal giaDaGiam,Model model,HttpSession session
     ) throws MessagingException {
         Long idKH = (Long) session.getAttribute("idKhachHang");
+        String MaHoaDonCuoi = khachHangCusService.MaHDCuoi();
+        String maHD = MaHoaDonCuoi.substring(5);
+        String maHDMoi = "HD000"+(Integer.valueOf(maHD)+1);
         KhachHang khachHang = khachHangCusService.detailKhachHang(Long.valueOf(idKH));
-        khachHangCusService.saveHDKhachHang(0, currentDate, tongTien, phamTramKhuyenMai, idVoucher, "Hóa đơn thanh toán khi nhận hàng", tongTienGiam, Long.valueOf(1), tenNguoiNhan, sdt, diaChiNguoiNhan+", Tỉnh/Thành phố: "+tinh, tongTienSanPhamChuaGiam, phiShip,idKH);
+        khachHangCusService.saveHDKhachHang(0, currentDate, tongTien, phamTramKhuyenMai, idVoucher, "Hóa đơn thanh toán khi nhận hàng", tongTienGiam, Long.valueOf(1), tenNguoiNhan, sdt, diaChiNguoiNhan+", Tỉnh/Thành phố: "+tinh, tongTienSanPhamChuaGiam, phiShip,idKH,currentDate,maHDMoi);
         Long idHoaDonMoiNhat = khachHangCusService.idHoaDonMoiTao();
         HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
         hoaDonChiTiet.setHoaDon(khachHangCusService.detailHoaDon(idHoaDonMoiNhat));
@@ -410,9 +430,12 @@ public class HoaDonController {
             @RequestParam("phiShip")BigDecimal phiShip,
             Model model,HttpSession session
     ) throws MessagingException {
+        String MaHoaDonCuoi = khachHangCusService.MaHDCuoi();
+        String maHD = MaHoaDonCuoi.substring(5);
+        String maHDMoi = "HD000"+(Integer.valueOf(maHD)+1);
         Long idKH = (Long) session.getAttribute("idKhachHang");
         KhachHang khachHang = khachHangCusService.detailKhachHang(Long.valueOf(idKH));
-        khachHangCusService.saveHDKhachHang(0, currentDate, tongTien, phamTramKhuyenMai, idVoucher, "Hóa đơn thanh toán khi nhận hàng", tongTienGiam, Long.valueOf(1), tenNguoiNhan, sdt, diaChiNguoiNhan+", Tỉnh/Thành phố: "+tinh, tongTienSanPhamChuaGiam, phiShip,idKH);
+        khachHangCusService.saveHDKhachHang(0, currentDate, tongTien, phamTramKhuyenMai, idVoucher, "Hóa đơn thanh toán khi nhận hàng", tongTienGiam, Long.valueOf(1), tenNguoiNhan, sdt, diaChiNguoiNhan+", Tỉnh/Thành phố: "+tinh, tongTienSanPhamChuaGiam, phiShip,idKH,currentDate,maHDMoi);
         Long idHoaDonMoiNhat = khachHangCusService.idHoaDonMoiTao();
         List<GioHangChiTiet> gioHangChiTiets = (List<GioHangChiTiet>) session.getAttribute("gioHangChiTiets");
 
@@ -508,7 +531,7 @@ public class HoaDonController {
     public ResponseEntity<?> updateProductQuantity(@PathVariable("idHD")Long idhd,
                                                    @RequestParam("lyDo") String lyDo) {
         try {
-            khachHangCusService.HuyHoaDon(idhd,"Khách hàng đã hủy hóa đơn với lý do : "+lyDo);
+            khachHangCusService.HuyHoaDon(idhd,"Khách hàng đã hủy hóa đơn với lý do : "+lyDo,currentDate);
             List<HoaDonChiTiet> hoaDonChiTiets = khachHangCusService.fidHDCTByHD(idhd);
             for(HoaDonChiTiet hoaDonChiTiet :hoaDonChiTiets){
                 khachHangCusService.capNhatSoLuongSPSauKhiXoa(hoaDonChiTiet.getSoLuong(),hoaDonChiTiet.getChiTietSanPham().getId());
@@ -527,7 +550,7 @@ public class HoaDonController {
     @PostMapping("/hoanThanhHoaDonCus/{idHD}")
     public ResponseEntity<?> hoanThanhHoaDonCus(@PathVariable("idHD")Long idhd) {
         try {
-            khachHangCusService.hoanThanhHoaDon(idhd);
+            khachHangCusService.hoanThanhHoaDon(idhd,currentDate,currentDate);
             return ResponseEntity.ok("ok");
 
         } catch (Exception e) {

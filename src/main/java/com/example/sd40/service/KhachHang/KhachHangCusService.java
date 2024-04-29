@@ -21,7 +21,7 @@ public interface KhachHangCusService {
     DiaChiChiTiet layDiaChi(Long idKH);
     List<Object> getVoucherHoaDon();
     Object layIDTinh();
-    void saveHD(Integer trangThai, Date ngayTao, BigDecimal tongTien, Integer phanTramKhuyenMai, Long idVoucher, String ghiChu, BigDecimal tongTienGiam, Long phuongThucThanhToanID, String tenNguoiNhan, String sdtNguoiNhan, String diaChiNguoiNhan, BigDecimal tongTienSanPhamChuaGiam,BigDecimal phiShip);
+    void saveHD(Integer trangThai, Date ngayTao, BigDecimal tongTien, Integer phanTramKhuyenMai, Long idVoucher, String ghiChu, BigDecimal tongTienGiam, Long phuongThucThanhToanID, String tenNguoiNhan, String sdtNguoiNhan, String diaChiNguoiNhan, BigDecimal tongTienSanPhamChuaGiam,BigDecimal phiShip,Date ngayCapNhat,String ma);
     Long idHoaDonMoiTao();
     void addHDCT(HoaDonChiTiet hoaDonChiTiet);
     HoaDon detailHoaDon(Long idHD);
@@ -39,7 +39,7 @@ public interface KhachHangCusService {
     void updateMacDinhKhac(Long idDCCT,Long idKH);
     void updateMacDinh(Long idDCCT);
     void deleteDiaChi(Long id);
-    void saveHDKhachHang(Integer trangThai, Date ngayTao, BigDecimal tongTien, Integer phanTramKhuyenMai, Long idVoucher, String ghiChu,BigDecimal tongTienGiam,Long phuongThucThanhToanID,String tenNguoiNhan,String sdtNguoiNhan,String diaChiNguoiNhan,BigDecimal tongTienSanPhamChuaGiam,BigDecimal phiShip,Long idKhachHang);
+    void saveHDKhachHang(Integer trangThai, Date ngayTao, BigDecimal tongTien, Integer phanTramKhuyenMai, Long idVoucher, String ghiChu,BigDecimal tongTienGiam,Long phuongThucThanhToanID,String tenNguoiNhan,String sdtNguoiNhan,String diaChiNguoiNhan,BigDecimal tongTienSanPhamChuaGiam,BigDecimal phiShip,Long idKhachHang,Date ngayCapNhat,String ma);
     List<HoaDonChiTiet> listHDCT(Long idHD);
     List<HoaDon> listHoaDon(Long idKH, Integer trangThai);
     List<Object[]> listHDCTByHoaDon(Long idHD);
@@ -52,11 +52,11 @@ public interface KhachHangCusService {
     List<KhachHang> getAllKhachHang();
     List<KhachHang> checlTaiKhoanAdd(String taiKhoan);
     void capNhatSoLuongSPSauKhiXoa(Integer soLuong, Long idctsp);
-    void HuyHoaDon(Long idhd,String lyDo);
-    void hoanThanhHoaDon(Long idhd);
+    void HuyHoaDon(Long idhd,String lyDo,Date ngayCapNhat);
+    void hoanThanhHoaDon(Long idhd,Date ngayThanhToan,Date ngayCapNhat);
     void capNhatSoLuongSPDaBan(Integer soLuong, Long idSP);
     List<Object[]> soLuongDaBan(Long idHD);
     Long idKhachHangMoiTao();
-
+    String MaHDCuoi();
 
 }
