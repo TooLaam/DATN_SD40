@@ -57,17 +57,6 @@
         </i>
     </div><!-- End Logo -->
 
-    <%--    <div class="search-bar">--%>
-    <%--        <form class="search-form d-flex align-items-center" method="POST" action="#">--%>
-    <%--            <input type="text" name="query" placeholder="Search" title="Enter search keyword">--%>
-    <%--            <button type="submit" title="Search">--%>
-    <%--                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"--%>
-    <%--                     viewBox="0 0 16 16">--%>
-    <%--                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>--%>
-    <%--                </svg>--%>
-    <%--            </button>--%>
-    <%--        </form>--%>
-    <%--    </div><!-- End Search Bar -->--%>
 
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
@@ -93,7 +82,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link" href="/statisticsResult">
+            <a class="nav-link collapsed" href="/thongke/index">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-bar-chart-line-fill" viewBox="0 0 16 16">
                     <path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z"/>
@@ -293,7 +282,7 @@
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
     <div class="copyright">
-        &copy; Copyright <strong><span>MEOW</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>SD40</span></strong>. All Rights Reserved
     </div>
 </footer><!-- End Footer -->
 

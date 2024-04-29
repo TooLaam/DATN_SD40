@@ -36,20 +36,20 @@ public interface KhachHangCusRepository extends JpaRepository<KhachHang,Long> {
     @Query(value = "select id from tinh_thanh_pho where ten like N'Hà Nội'",nativeQuery = true )
     Object layIDTinh();
 
-    @Query(value = "select id, ten_voucher,phan_tram_giam,giam_toi_da,gia_tri_don_toi_thieu from voucher where ngay_bat_dau<=GETDATE() and ngay_ket_thuc>= getdate() and trang_thai=1 order by phan_tram_giam  desc",nativeQuery = true)
+    @Query(value = "select id, ten_voucher,phan_tram_giam,giam_toi_da,gia_tri_don_toi_thieu from voucher where ngay_bat_dau<=GETDATE() and ngay_ket_thuc>= getdate() and trang_thai=0 order by phan_tram_giam  desc",nativeQuery = true)
     List<Object> getVoucherHoaDon();
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO hoa_don (trang_thai, ngay_tao, tong_tien, phan_tram_khuyen_mai, voucher_id,ghi_chu,tong_tien_giam,phuong_thuc_thanh_toan_id,ten_nguoi_nhan,sdt_nguoi_nhan,dia_chi_nguoi_nhan,tong_tien_san_pham_chua_giam,phi_ship) \n" +
-            "VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12,?13)",nativeQuery = true)
-    void saveHD(Integer trangThai, Date ngayTao, BigDecimal tongTien, Integer phanTramKhuyenMai, Long idVoucher, String ghiChu,BigDecimal tongTienGiam,Long phuongThucThanhToanID,String tenNguoiNhan,String sdtNguoiNhan,String diaChiNguoiNhan,BigDecimal tongTienSanPhamChuaGiam,BigDecimal phiShip);
+    @Query(value = "INSERT INTO hoa_don (trang_thai, ngay_tao, tong_tien, phan_tram_khuyen_mai, voucher_id,ghi_chu,tong_tien_giam,phuong_thuc_thanh_toan_id,ten_nguoi_nhan,sdt_nguoi_nhan,dia_chi_nguoi_nhan,tong_tien_san_pham_chua_giam,phi_ship,ngay_cap_nhat,ma) \n" +
+            "VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12,?13,?14,?15)",nativeQuery = true)
+    void saveHD(Integer trangThai, Date ngayTao, BigDecimal tongTien, Integer phanTramKhuyenMai, Long idVoucher, String ghiChu,BigDecimal tongTienGiam,Long phuongThucThanhToanID,String tenNguoiNhan,String sdtNguoiNhan,String diaChiNguoiNhan,BigDecimal tongTienSanPhamChuaGiam,BigDecimal phiShip,Date ngayCapNhat,String ma);
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO hoa_don (trang_thai, ngay_tao, tong_tien, phan_tram_khuyen_mai, voucher_id,ghi_chu,tong_tien_giam,phuong_thuc_thanh_toan_id,ten_nguoi_nhan,sdt_nguoi_nhan,dia_chi_nguoi_nhan,tong_tien_san_pham_chua_giam,phi_ship,khach_hang_id) \n" +
-            "VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12,?13,?14)",nativeQuery = true)
-    void saveHDKhachHang(Integer trangThai, Date ngayTao, BigDecimal tongTien, Integer phanTramKhuyenMai, Long idVoucher, String ghiChu,BigDecimal tongTienGiam,Long phuongThucThanhToanID,String tenNguoiNhan,String sdtNguoiNhan,String diaChiNguoiNhan,BigDecimal tongTienSanPhamChuaGiam,BigDecimal phiShip,Long idKhachHang);
+    @Query(value = "INSERT INTO hoa_don (trang_thai, ngay_tao, tong_tien, phan_tram_khuyen_mai, voucher_id,ghi_chu,tong_tien_giam,phuong_thuc_thanh_toan_id,ten_nguoi_nhan,sdt_nguoi_nhan,dia_chi_nguoi_nhan,tong_tien_san_pham_chua_giam,phi_ship,khach_hang_id,ngay_cap_nhat,ma) \n" +
+            "VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12,?13,?14,?15,?16)",nativeQuery = true)
+    void saveHDKhachHang(Integer trangThai, Date ngayTao, BigDecimal tongTien, Integer phanTramKhuyenMai, Long idVoucher, String ghiChu,BigDecimal tongTienGiam,Long phuongThucThanhToanID,String tenNguoiNhan,String sdtNguoiNhan,String diaChiNguoiNhan,BigDecimal tongTienSanPhamChuaGiam,BigDecimal phiShip,Long idKhachHang,Date ngayCapNhat,String ma);
 
 
     @Query(value = "select top(1) id from hoa_don order by id desc",nativeQuery = true)
@@ -110,13 +110,13 @@ public interface KhachHangCusRepository extends JpaRepository<KhachHang,Long> {
 
     @Transactional
     @Modifying
-    @Query("update HoaDon hd set hd.trangThai =4 where hd.id=?1")
-    void hoanThanhHoaDon(Long idhd);
+    @Query("update HoaDon hd set hd.trangThai =4,hd.ngayThanhToan = ?2,hd.ngayCapNhat=?3 where hd.id=?1")
+    void hoanThanhHoaDon(Long idhd,Date ngayThanhToan,Date ngayCapNhat);
 
     @Transactional
     @Modifying
-    @Query("update HoaDon hd set hd.trangThai =5, hd.ghiChu = ?2 where hd.id = ?1")
-    void HuyHoaDon(Long idhd,String lyDo);
+    @Query("update HoaDon hd set hd.trangThai =5, hd.ghiChu = ?2,hd.ngayCapNhat=?3 where hd.id = ?1")
+    void HuyHoaDon(Long idhd,String lyDo,Date ngayCapNhat);
 
     @Transactional
     @Modifying
@@ -135,4 +135,7 @@ public interface KhachHangCusRepository extends JpaRepository<KhachHang,Long> {
 
     @Query(value = "select top(1) id from khach_hang order by id desc",nativeQuery = true)
     Long idKhachHangMoiTao();
+
+    @Query(value = "select top(1) ma from hoa_don order by id desc",nativeQuery = true)
+    String MaHDCuoi();
 }

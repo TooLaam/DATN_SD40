@@ -16,23 +16,17 @@
                 <!-- Recent Sales -->
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
-
-
                         <div class="card-body">
-
                             <table class="table table-borderless datatable">
                                 <thead>
                                 <tr>
-
                                     <th>STT</th>
                                     <th>Tên</th>
                                     <th>Hình ảnh</th>
-
                                     <th>Trạng thái</th>
                                     <th>Ngày tạo</th>
                                     <th>Ngày sửa gần nhất</th>
                                     <th>Action</th>
-
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -45,36 +39,22 @@
                                         <td><fmt:formatDate value="${mau.ngayTao}" pattern="dd-MM-yyyy"/></td>
                                         <td><fmt:formatDate value="${mau.ngaySua}" pattern="dd-MM-yyyy"/></td>
                                         <td>
-                                            <a href="/mausac/detail/${mau.id}" class="btn btn-success">Chi tiết</a>
+                                            <a onclick="detail(${mau.id})" class="btn btn-success">Chi tiết</a>
                                         </td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
-
                             </table>
-
-                            <%--                            <form method="post" enctype="multipart/form-data" action="import">--%>
-                            <%--                                Thêm từ file excel: <input class="form-control" name="file" type="file">--%>
-                            <%--                                <button>Thêm</button>--%>
-                            <%--                            </form>--%>
                         </div>
 
                     </div>
-
-
                 </div><!-- End Recent Sales -->
-
             </div>
-
         </div><!-- End Left side columns -->
-
-
         <!-- Right side columns -->
         <div class="col-lg-4">
-
             <!-- Recent Activity -->
             <div class="card">
-
                 <div class="card-body">
                     <!-- Default Tabs -->
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -91,95 +71,165 @@
                             </button>
                         </li>
                     </ul>
-
                     <%--update--%>
                     <div class="tab-content pt-2" id="myTabContent">
                         <div class="${active == null?"tab-pane fade show active":"tab-pane fade"}" id="home" role="tabpanel"
                              aria-labelledby="home-tab">
-                            <form method="post" action="/mausac/update" enctype="multipart/form-data">
-
                                 <div>
                                     ID :
-                                    <input class="form-control" readonly name="id" value="${mau.id}">
+                                    <input class="form-control" readonly id="idUpdate">
                                 </div>
 
                                 <div>
                                     Tên :
-                                    <input required class="form-control" name="ten" value="${mau.ten}">
+                                    <input required class="form-control" id="tenUpdate">
                                 </div>
-                                <c:if test="${errUpdate != null}" >
-                                    <p style="color: red">${errUpdate}</p>
-                                </c:if>
                                 <div>
                                     Hình ảnh :
-                                    <img src="/assets/img/color/${mau.hinhAnh}" height="100px" width="100px">
-                                    <%--                                    <input class="form-control" name="image" type="file" value="${mau.image}">--%>
-                                    <input required type="file" name="image" accept="image/*" class="form-control"
-                                           value="${mau.hinhAnh}">
+                                    <img id="imageUpdate1" src="" height="100px" width="100px">
+                                    <input type="file" name="image" accept="image/*" class="form-control"
+                                           id="imageUpdate">
                                 </div>
                                 <div>
                                     Ngày tạo :
-                                    <input class="form-control" readonly name="" value="${mau.ngayTao}">
+                                    <input class="form-control" id="ngayTaoUpdate">
                                 </div>
 
                                 <div>
                                     Ngày sửa gần nhất :
-                                    <input class="form-control" readonly name="" value="${mau.ngaySua}">
+                                    <input class="form-control" id="ngaySuaUpdate">
                                 </div>
 
-                                <div>
+                                <div id="trangThaiUpdate">
                                     Trạng thái :<br>
-                                    <input type="radio" name="status" checked value="0" ${ mau.trangThai == "0" ? "checked" : "" }>
+                                    <input type="radio" name="trangThaiUpdate" checked value="0">
                                     Còn sử dụng <br>
-                                    <input type="radio" name="status" value="1" ${mau.trangThai == "1" ? "checked" : "" }>
+                                    <input type="radio" name="trangThaiUpdate" value="1">
                                     Ngừng sử dụng
                                 </div>
-                                <c:if test="${err != null}" >
-                                    <p style="color: red">${err}</p>
-                                </c:if>
-                                <input type="submit" class="btn btn-primary" value="Update" style="margin-top: 10px">
-                            </form>
+                                <input type="submit" class="btn btn-primary" onclick="update()" value="Update" style="margin-top: 10px">
                         </div>
 
                         <%--create--%>
                         <div class="${active == null?"tab-pane fade":"tab-pane fade show active"}" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <form method="post" action="/mausac/add" enctype="multipart/form-data">
                                 <div>
                                     Tên :
-                                    <input required class="form-control" name="ten">
+                                    <input required class="form-control" id="tenAdd">
                                 </div>
                                 <div>
                                     Hình ảnh :
-                                    <input required type="file" name="image" accept="image/*" class="form-control"></div>
-                                <div>
+                                    <input  type="file" id="imageAdd" accept="image/*" class="form-control"></div>
+                                <div id="trangThaiAdd">
                                     Trạng thái :<br>
-                                    <input type="radio" name="status" checked value="0"> Còn sử dụng <br>
-                                    <input type="radio" name="status" value="1"> Ngừng sử dụng
+                                    <input type="radio" name="trangThaiAdd" checked value="0"> Còn sử dụng <br>
+                                    <input type="radio" name="trangThaiAdd" value="1"> Ngừng sử dụng
                                 </div>
-                                <c:if test="${errName != null}" >
-                                    <p style="color: red">${errName}</p>
-                                </c:if>
-
-                                <input type="submit" class="btn btn-primary" value="Add" style="margin-top: 10px">
-                            </form>
+                                <input type="submit" class="btn btn-primary" onclick="add()" value="Add" style="margin-top: 10px">
                         </div>
                         <%--detail--%>
                         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                         </div>
                     </div><!-- End Default Tabs -->
-
-
                 </div>
-
             </div>
         </div><!-- End Recent Activity -->
-
-
     </div><!-- End Right side columns -->
-
     </div>
 </section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function detail(id){
+        $.ajax({
+            type: "GET",
+            url: "/mausac/detail/"+id,
+            success: function (response) {
+                $('#tenUpdate').val(response.ten);
+                $('#idUpdate').val(response.id);
+                $('#ngaySuaUpdate').val(response.ngaySua);
+                $('#ngayTaoUpdate').val(response.ngayTao);
+                $('#imageUpdate1').attr('src', '/assets/img/color/' + response.hinhAnh);
+                if (response.trangThai == 0) {
+                    $('input[name="trangThaiUpdate"][value="0"]').prop('checked', true);
+                } else if (response.trangThai == 1) {
+                    $('input[name="trangThaiUpdate"][value="1"]').prop('checked', true);
+                }
 
+            }});
+    }
+    function update() {
+        var trangThaiValue = $('input[name="trangThaiUpdate"]:checked', '#trangThaiUpdate').val();
+        var id = document.getElementById('idUpdate').value;
+        var ten = document.getElementById('tenUpdate').value;
+        var hinhAnh = document.getElementById('imageUpdate').files[0]; // Sử dụng files[0] để lấy tệp tin đã chọn
+        if (id.trim() === '') {
+            alert("Vui lòng chọn đối tượng ở danh sách");
+            return;
+        } else {
+            if (ten.trim() === '' || ten.trim() === '' || hinhAnh == null) {
+                alert("Vui lòng nhập đầy đủ thông tin");
+                return;
+            } else {
+                var formData = new FormData();
+                formData.append('id', id);
+                formData.append('ten', ten);
+                formData.append('image', hinhAnh);
+                formData.append('trangThai', trangThaiValue);
 
+                $.ajax({
+                    type: "POST",
+                    url: "/mausac/update",
+                    data: formData,
+                    contentType: false, // Không cần set contentType
+                    processData: false, // Không cần xử lý dữ liệu
+                    success: function (response) {
+                        if (response === "errTrungTen") {
+                            alert("Tên trùng trong danh sách. Vui lòng chọn tên khác !!!");
+                            return;
+                        } else {
+                            var cf = confirm("Bạn muốn cập nhập ???");
+                            if (cf == true) {
+                                alert("Cập nhật thành công");
+                                window.location.href = "/mausac/index";
+                            }
+                        }
 
+                    }
+                });
+            }
+        }
+    }
+    function add() {
+        var trangThaiValue = $('input[name="trangThaiAdd"]:checked', '#trangThaiAdd').val();
+        var ten = document.getElementById('tenAdd').value;
+        var hinhAnh = document.getElementById('imageAdd').files[0];
+        if (ten.trim() ===''||hinhAnh ==null){
+            alert("Vui lòng nhập đầy đủ thông tin")
+            return;
+        }else {
+            var formData = new FormData();
+            formData.append('ten', ten);
+            formData.append('image', hinhAnh);
+            formData.append('trangThai', trangThaiValue);
+            $.ajax({
+                type: "POST",
+                url: "/mausac/add",
+                data: formData,
+                contentType: false, // Không cần set contentType
+                processData: false, // Không cần xử lý dữ liệu
+                success: function (response) {
+                    if (response === "errTrungTen") {
+                        alert("Tên trùng trong danh sách. Vui lòng chọn tên khác !!!");
+                        return;
+                    } else {
+                        var cf = confirm("Bạn muốn thêm mới ???");
+                        if (cf == true) {
+                            alert("Thêm mới thành công");
+                            window.location.href = "/mausac/index";
+                        }
+                    }
 
+                }
+            });
+        }
+    };
+</script>

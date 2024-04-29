@@ -7,6 +7,8 @@ import com.example.sd40.service.SanPham.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -17,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -50,7 +53,6 @@ public class CTSPController {
                           @PathVariable("id") Long id
                           ){
         model.addAttribute("sp",sanPhamService.detail(id));
-//        model.addAttribute("listKC",ctspService.findKCTheoSP(id));
         model.addAttribute("listMS",ctspmshaService.findMSTheoSPDangDung(id));
         model.addAttribute("listHA", ctspmshaService.getAllHinhAnhbyIDSP(id));
         model.addAttribute("view","/SanPham/SanPham/CTSP.jsp");
@@ -58,19 +60,23 @@ public class CTSPController {
     }
 
     @GetMapping("/hienthiKC/{id}/{ms}")
-    public String hienThiKC(Model model,
-                          @PathVariable("id") Long id,
-                            @PathVariable("ms") Long ms
+    public ResponseEntity<?> hienThiKC(
+                                       @PathVariable("id") Long id,
+                                       @PathVariable("ms") Long ms
     ){
-        model.addAttribute("sp",sanPhamService.detail(id));
-        model.addAttribute("listKC",ctspService.findKCTheoSPDangDung(id,ms));
-        model.addAttribute("listMS",ctspmshaService.findMSTheoSPDangDung(id));
-        model.addAttribute("giaDaGiam",giamGiaService.hienThiTienDaGiam(id,ms));
-        model.addAttribute("listHA",ctspmshaService.getHAbySPandMS(id,ms));
-        model.addAttribute("ms",mauSacService.detail(ms));
-        model.addAttribute("view","/SanPham/SanPham/CTSPKC.jsp");
-        return "index";
+        List<Object[]> objects = ctspService.findKCTheoSPDangDung(id,ms);
+        return new ResponseEntity<>(objects, HttpStatus.OK);
     }
+
+    @GetMapping("/hienthiGiaDaGiam/{id}/{ms}")
+    public ResponseEntity<?> hienthiGiaDaGiam(
+                                       @PathVariable("id") Long id,
+                                       @PathVariable("ms") Long ms
+    ){
+        Object objects = giamGiaService.hienThiTienDaGiam(id,ms);
+        return new ResponseEntity<>(objects, HttpStatus.OK);
+    }
+
 
     @GetMapping("/themmausac/{id}")
     public String themMauSac(Model model,

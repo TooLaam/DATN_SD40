@@ -103,7 +103,6 @@ public class LoginCusController {
         khachHang.setGioiTinh(gioiTinh);
         khachHang.setEmail(email);
         khachHang.setHoTen(ten);
-        khachHang.setDiemTichLuy(0);
         khachHang.setTaiKhoan(taiKhoan);
         khachHang.setMatKhau(matKhau);
         khachHang.setNgayTao(currentDate);

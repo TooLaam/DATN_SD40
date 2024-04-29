@@ -19,7 +19,6 @@
 
                         </ol>
                     </nav>
-                    <%--                    <form action="/sanpham/update" method="post" enctype="multipart/form-data">--%>
                     <div class="row" style="margin-top: 50px;">
 
                         <div class="product-details">
@@ -43,19 +42,14 @@
                                         <strong style="font-weight: bold;">Mô tả sản phẩm: </strong> <span>${sp.moTa}</span>  <br><br>
                                     </div>
 
-
-
-
-<%--                                    <p style="font-weight: bold;">Màu sắc: </p>--%>
                                     <div>
                                         <strong>Màu sắc: </strong> <span>${ms.ten}</span>
                                     </div>
                                     <c:forEach items="${listMS}" var="ms">
-                                        <a href="/ctsp/hienthiKC/${sp.id}/${ms[0]}" class="btn btn-light" style="margin-left: 30px">
+                                        <a class="btn btn-light" style="margin-left: 30px">
                                             <img style="width: 20px;height: 20px" src="/assets/img/color/${ms[2]}" alt="Icon" class="icon">
                                             <span class="text">${ms[1]}</span>
                                         </a>
-                                        <%--                                        <a href="/sanpham/detail/${sp[0]}" class="btn btn-success" ></a>--%>
                                     </c:forEach><br><br>
 
                                     <div >
@@ -87,8 +81,6 @@
                             </div>
                             <div class="col-md-5">
                                         <img src="/assets/img/product/${listHA.hinhAnh}" style="padding-top: 60px" width="320px" height="450px">
-
-
                             </div>
 
                         </div>

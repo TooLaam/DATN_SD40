@@ -69,46 +69,7 @@
                         ${kh.email}
                     </div>
                 </div>
-                <div class="mb-3 row">
-                    <label class="col-sm-2 col-form-label form-label">Điểm tích lũy</label>
-                    <div class="col-sm-10">
-                        ${kh.diemTichLuy}
-                    </div>
-                </div>
 
-                <div class="mb-3 row">
-                    <label class="col-sm-2 col-form-label form-label">Hạng thành viên</label>
-                    <div class="col-sm-10">
-                        <c:choose>
-                            <c:when test="${kh.hangThanhVien.id == null}">
-                                Thành viên mới
-                            </c:when>
-                            <c:otherwise>
-                                ${kh.hangThanhVien.ten}
-                            </c:otherwise>
-                        </c:choose>
-
-                    </div>
-                    <div style="color: gray">
-                        <c:choose>
-                            <c:when test="${kh.hangThanhVien.id == 1}">
-                                *(Bạn cần tích thêm ${hangBac.dieuKien-kh.diemTichLuy} điểm để lên hạng Bạc)
-                            </c:when>
-                            <c:when test="${kh.hangThanhVien.id == 2}">
-                                *(Bạn cần tích thêm ${hangVang.dieuKien-kh.diemTichLuy} điểm để lên hạng Vàng)
-                            </c:when>
-                            <c:when test="${kh.hangThanhVien.id == 3}">
-                                *(Bạn cần tích thêm ${hangKimCuong.dieuKien-kh.diemTichLuy} điểm để lên hạng Kim Cương)
-                            </c:when>
-                            <c:when test="${kh.hangThanhVien.id == 4}">
-
-                            </c:when>
-                            <c:otherwise>
-                                *(Bạn cần tích thêm ${hangDong.dieuKien-kh.diemTichLuy} điểm để lên hạng Đồng)
-                            </c:otherwise>
-                        </c:choose>
-                    </div>
-                </div>
 
             </div>
         </div>

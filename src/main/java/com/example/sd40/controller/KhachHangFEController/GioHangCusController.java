@@ -44,7 +44,7 @@ public class GioHangCusController {
                                           @RequestParam("soLuong") int soLuong,
                                           @RequestParam("kichCo") Long kichCo) {
         Long idKH = (Long) session.getAttribute("idKhachHang");
-        List<GioHangChiTiet> gioHangChiTiets = gioHangChiTietService.kiemTraAddGHCT(ctspService.findCTSP(ctspmshaService.getHAbySPandMS(idsp, idms).getId(), kichCo).getId());
+        List<GioHangChiTiet> gioHangChiTiets = gioHangChiTietService.kiemTraAddGHCT(ctspService.findCTSP(ctspmshaService.getHAbySPandMS(idsp, idms).getId(), kichCo).getId(),idKH);
         if (!gioHangChiTiets.isEmpty()) {
             gioHangChiTietService.updateSoLuongKhiThem(soLuong, ctspService.findCTSP(ctspmshaService.getHAbySPandMS(idsp, idms).getId(), kichCo).getId());
             session.setAttribute("update", "update");

@@ -44,7 +44,7 @@
                                         <td><fmt:formatDate value="${mau.ngayTao}" pattern="dd-MM-yyyy"/></td>
                                         <td><fmt:formatDate value="${mau.ngaySua}" pattern="dd-MM-yyyy"/></td>
                                         <td>
-                                            <a href="/kichco/detail/${mau.id}" class="btn btn-success">Chi tiết</a>
+                                            <a onclick="detail(${mau.id})" class="btn btn-success">Chi tiết</a>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -89,62 +89,47 @@
                     <div class="tab-content pt-2" id="myTabContent">
                         <div class="${active == null?"tab-pane fade show active":"tab-pane fade"}" id="home" role="tabpanel"
                              aria-labelledby="home-tab">
-                            <form method="post" action="/kichco/update" enctype="multipart/form-data">
-
                                 <div>
                                     ID :
-                                    <input class="form-control" readonly name="id" value="${kc.id}">
+                                    <input class="form-control" readonly id="idUpdate">
                                 </div>
 
                                 <div>
                                     Tên :
-                                    <input class="form-control" required name="ten" value="${kc.ten}">
+                                    <input class="form-control" required id="tenUpdate">
                                 </div>
-                                <c:if test="${errUpdate != null}" >
-                                    <p style="color: red">${errUpdate}</p>
-                                </c:if>
                                 <div>
                                     Ngày tạo :
-                                    <input class="form-control" readonly name="ngayTao" value="${kc.ngayTao}">
+                                    <input class="form-control" id="ngayTaoUpdate">
                                 </div>
 
                                 <div>
                                     Ngày sửa gần nhất :
-                                    <input class="form-control" readonly name="" value="${kc.ngaySua}">
+                                    <input class="form-control" id="ngaySuaUpdate">
                                 </div>
 
-                                <div>
+                                <div id="trangThaiUpdate">
                                     Trạng thái :<br>
-                                    <input type="radio" name="status" checked value="0" ${ kc.trangThai == "0" ? "checked" : "" }>
+                                    <input type="radio" name="trangThaiUpdate" value="0" checked>
                                     Còn sử dụng <br>
-                                    <input type="radio" name="status" value="1" ${kc.trangThai == "1" ? "checked" : "" }>
+                                    <input type="radio" name="trangThaiUpdate" value="1">
                                     Ngừng sử dụng
                                 </div>
-                                <c:if test="${err != null}" >
-                                    <p style="color: red">${err}</p>
-                                </c:if>
-
-                                <input type="submit" class="btn btn-primary" value="Update" style="margin-top: 10px">
-                            </form>
+                            <button class="btn btn-primary" onclick="update()" style="margin-top: 10px">Cập nhật</button>
                         </div>
 
                         <%--create--%>
                         <div class="${active == null?"tab-pane fade":"tab-pane fade show active"}" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <form method="post" action="/kichco/add" enctype="multipart/form-data">
                                 <div>
                                     Tên :
-                                    <input required class="form-control" name="ten">
+                                    <input required class="form-control" id="tenAdd">
                                 </div>
-                                <div>
+                                <div id="trangThaiAdd">
                                     Trạng thái :<br>
-                                    <input type="radio" name="status" checked value="0"> Còn sử dụng <br>
-                                    <input type="radio" name="status" value="1"> Ngừng sử dụng
+                                    <input type="radio" name="trangThaiAdd" checked value="0"> Còn sử dụng <br>
+                                    <input type="radio" name="trangThaiAdd" value="1"> Ngừng sử dụng
                                 </div>
-                                <c:if test="${errName != null}" >
-                                    <p style="color: red">${errName}</p>
-                                </c:if>
-
-                                <input type="submit" class="btn btn-primary" value="Add" style="margin-top: 10px">
+                            <button class="btn btn-primary" onclick="add()" style="margin-top: 10px">Thêm</button>
                             </form>
                         </div>
                         <%--detail--%>
@@ -163,10 +148,97 @@
 
     </div>
 </section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<script>
 
+    function detail(id){
+        $.ajax({
+            type: "GET",
+            url: "/kichco/detail/"+id,
+            success: function (response) {
+                $('#tenUpdate').val(response.ten);
+                $('#idUpdate').val(response.id);
+                $('#ngaySuaUpdate').val(response.ngaySua);
+                $('#ngayTaoUpdate').val(response.ngayTao);
+                // Gán giá trị cho input radio trạng thái
+                if (response.trangThai == 0) {
+                    $('input[name="trangThaiUpdate"][value="0"]').prop('checked', true);
+                } else if (response.trangThai == 1) {
+                    $('input[name="trangThaiUpdate"][value="1"]').prop('checked', true);
+                }
 
+            }});
+    }
 
+    function update() {
 
+        var trangThaiValue = $('input[name="trangThaiUpdate"]:checked', '#trangThaiUpdate').val();
+        var id = document.getElementById('idUpdate').value;
+        var ten = document.getElementById('tenUpdate').value;
+        if (id.trim() ===''){
+            alert("Vui lòng chọn đối tượng ở danh sách")
+            return;
+        }else{
+            if (ten.trim() ===''||ten.trim() ===''){
+                alert("Vui lòng nhập đầy đủ thông tin")
+                return;
+            }else {
+                $.ajax({
+                    type: "POST",
+                    url: "/kichco/update",
+                    data: {
+                        id: id,
+                        ten: ten,
+                        trangThai: trangThaiValue
+                    },
+                    success: function (response) {
+                        if (response === "errTrungTen") {
+                            alert("Tên trùng trong danh sách. Vui lòng chọn tên khác !!!")
+                            return;
+                        } else {
+                            var cf = confirm("Bạn muốn cập nhập ???")
+                            if (cf == true) {
+                                alert("Cập nhật thành công")
+                                window.location.href = "/kichco/index";
+                            }
+                        }
 
+                    }
+                });
+            }
+        }
+    };
 
+    function add() {
+
+        var trangThaiValue = $('input[name="trangThaiAdd"]:checked', '#trangThaiAdd').val();
+        var ten = document.getElementById('tenAdd').value;
+        if (ten.trim() ===''){
+            alert("Vui lòng nhập đầy đủ thông tin")
+            return;
+        }else {
+            $.ajax({
+                type: "POST",
+                url: "/kichco/add",
+                data: {
+                    ten: ten,
+                    trangThai: trangThaiValue
+                },
+                success: function (response) {
+                    if (response === "errTrungTen") {
+                        alert("Tên trùng trong danh sách. Vui lòng chọn tên khác !!!")
+                        return;
+                    } else {
+                        var cf = confirm("Bạn muốn thêm mới ???")
+                        if (cf == true) {
+                            alert("Thêm thành công")
+                            window.location.href = "/kichco/index";
+                        }
+                    }
+
+                }
+            });
+        }
+    };
+</script>

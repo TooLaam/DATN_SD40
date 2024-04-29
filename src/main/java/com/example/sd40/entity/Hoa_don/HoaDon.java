@@ -36,6 +36,9 @@ public class HoaDon {
     @Column(name = "ngay_thanh_toan")
     private Date ngayThanhToan;
 
+    @Column(name = "ngay_cap_nhat")
+    private Date ngayCapNhat;
+
     @Column(name = "tong_tien")
     private BigDecimal tongTien;
 
