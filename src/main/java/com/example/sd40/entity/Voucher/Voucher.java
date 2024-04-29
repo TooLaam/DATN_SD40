@@ -1,5 +1,6 @@
 package com.example.sd40.entity.Voucher;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,6 +16,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @Getter
 @Setter
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Voucher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

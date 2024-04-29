@@ -166,10 +166,6 @@ public class HomeController {
         model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
         model.addAttribute("idkh",idKH );
         model.addAttribute("kh",khachHangCusService.detailKhachHang(idKH) );
-        model.addAttribute("hangDong",hangThanhVienService.detail(Long.valueOf(1)) );
-        model.addAttribute("hangBac",hangThanhVienService.detail(Long.valueOf(2)) );
-        model.addAttribute("hangVang",hangThanhVienService.detail(Long.valueOf(3)) );
-        model.addAttribute("hangKimCuong",hangThanhVienService.detail(Long.valueOf(4)) );
 
         model.addAttribute("view", "/changeAccountInfo/index.jsp");
         return "/customerFE/index";

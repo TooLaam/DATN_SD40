@@ -16,6 +16,6 @@ public interface VoucherRepository extends JpaRepository<Voucher, Long> {
     @Query("select th from Voucher th where th.tenVoucher =?1 and th.id not in (?2)")
     List<Voucher> findByNameUpdate(String ten,Long id);
 
-    @Query("select vc from Voucher vc where vc.id not in (select v.id from Voucher v where vc.maVoucher = '0')")
+    @Query("select vc from Voucher vc where vc.id not in (select v.id from Voucher v where vc.phanTramGiam = 0)")
     List<Voucher> getAll();
 }

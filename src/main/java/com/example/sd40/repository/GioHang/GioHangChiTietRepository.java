@@ -21,8 +21,8 @@ public interface GioHangChiTietRepository extends JpaRepository<GioHangChiTiet, 
     @Query("select ghct from GioHangChiTiet ghct where ghct.gioHang.id =?1 ")
     List<GioHangChiTiet> hienthigiohangchitiet(Long idGH);
 
-    @Query("select ghct from GioHangChiTiet ghct where ghct.chiTietSanPham.Id =?1 ")
-    List<GioHangChiTiet> kiemTraAddGHCT(Long idctsp);
+    @Query("select ghct from GioHangChiTiet ghct where ghct.chiTietSanPham.Id =?1 and ghct.gioHang.khachHang.id = ?2 ")
+    List<GioHangChiTiet> kiemTraAddGHCT(Long idctsp,Long idKH);
 
     @Query("select gh from GioHangChiTiet gh where gh.id =?1")
     GioHangChiTiet kiemTraSoLuongTruocKhiUpdate(Long idGHCT);

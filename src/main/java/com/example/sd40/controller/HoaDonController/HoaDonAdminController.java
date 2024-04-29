@@ -32,7 +32,7 @@ public class HoaDonAdminController {
 
     @GetMapping("/index")
     private String findAllByStatus( Model model){
-//        hoaDonService.create();
+        hoaDonService.create();
         model.addAttribute("choXacNhans", hoaDonService.findAllByStatus(0));
         model.addAttribute("xacNhans", hoaDonService.findAllByStatus(1));
         model.addAttribute("choVanChuyens", hoaDonService.findAllByStatus(2));

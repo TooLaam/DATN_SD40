@@ -13,7 +13,7 @@ public interface GioHangChiTietService {
     void updateSoLuong(Integer soLuong,Long idGHCT);
     void deleteCTGH(Long id);
     void updateSoLuongKhiThem(Integer soLuong,Long idsp);
-    List<GioHangChiTiet> kiemTraAddGHCT(Long idctsp);
+    List<GioHangChiTiet> kiemTraAddGHCT(Long idctsp,Long idKH);
     GioHangChiTiet kiemTraSoLuongTruocKhiUpdate(Long idGHCT);
     List<GioHangChiTiet> findAllById(@Param("ids") List<Long> ids);
     void deleteGHCTByCTSP(Long idGHCT);

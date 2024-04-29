@@ -1,15 +1,19 @@
 package com.example.sd40.controller.SanPhamController;
 
+import com.example.sd40.entity.San_pham.GiamGIa;
 import com.example.sd40.entity.San_pham.KichCo;
 import com.example.sd40.entity.San_pham.ThuongHieu;
 import com.example.sd40.service.SanPham.KichCoService;
 import com.example.sd40.service.SanPham.ThuongHieuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.text.ParseException;
 import java.util.List;
 
 @Controller
@@ -25,69 +29,54 @@ public class KichCoController {
         return "index";
     }
 
-    @GetMapping("/detail/{id}")
-    public String detail(Model model,
-                         @PathVariable("id")Long id){
-        model.addAttribute("kc",kichCoService.detail(id));
-        model.addAttribute("listKC",kichCoService.findAll());
-        model.addAttribute("view","/SanPham/KichCo/index.jsp");
-        return "index";
-    }
     Date currentDate = new Date(System.currentTimeMillis());
 
-    @PostMapping("/update")
-    public String update(@RequestParam("id")String id,
-                         @RequestParam("ten")String ten,
-                         @RequestParam("status")Integer status,
-                         Model model
-    ){
-        if (id.isBlank()){
-            model.addAttribute("err","Bạn phải chọn đối tượng kích cỡ ở danh sách");
-            model.addAttribute("listKC",kichCoService.findAll());
-            model.addAttribute("view","/SanPham/KichCo/index.jsp");
-            return "index";
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<KichCo> detail(Model model,
+                                          @PathVariable("id")Long id){
+        KichCo kichCo = kichCoService.detail(id);
+        if (kichCo != null) {
+            return new ResponseEntity<>(kichCo, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        else {
-            List<KichCo> kichCos = kichCoService.findByNameUpdate(ten,Long.valueOf(id));
-            if (!kichCos.isEmpty()){
-                model.addAttribute("errUpdate","Trùng tên. Vui lòng chọn tên khác !!!");
-                model.addAttribute("kc",kichCoService.detail(Long.valueOf(id)));
-                model.addAttribute("listKC",kichCoService.findAll());
-                model.addAttribute("view","/SanPham/KichCo/index.jsp");
-                return "index";
-            }
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<?> update(@RequestParam("id")String id,
+                                    @RequestParam("ten")String ten,
+                                    @RequestParam("trangThai")Integer status
+    ) throws ParseException {
+        List<KichCo> kichCos = kichCoService.findByNameUpdate(ten,Long.valueOf(id));
+        if (!kichCos.isEmpty()) {
+            return ResponseEntity.ok("errTrungTen");
+        } else {
             KichCo kichCo = kichCoService.detail(Long.valueOf(id));
 
             kichCo.setTen(ten);
             kichCo.setTrangThai(status);
             kichCo.setNgaySua(currentDate);
             kichCoService.update(kichCo);
-
-            return ("redirect:/kichco/index");
+            return ResponseEntity.ok("ok");
         }
-
-
     }
 
     @PostMapping("/add")
-    public String add(@RequestParam("ten")String ten,Model model,
-                      @RequestParam("status")Integer status) {
+    public ResponseEntity<?> add(
+            @RequestParam("ten")String ten,
+            @RequestParam("trangThai")Integer status
+    ) throws ParseException {
         List<KichCo> kichCos = kichCoService.findByName(ten);
         if (!kichCos.isEmpty()) {
-            model.addAttribute("errName", "Tên thêm mới trùng với trong danh sách. Vui lòng chọn tên mới !!!");
-            model.addAttribute("active", "nav-link active");
-            model.addAttribute("listKC", kichCoService.findAll());
-            model.addAttribute("view", "/SanPham/KichCo/index.jsp");
-            return "index";
+            return ResponseEntity.ok("errTrungTen");
         } else {
+
             KichCo kichCo = new KichCo();
             kichCo.setTen(ten);
             kichCo.setTrangThai(status);
             kichCo.setNgayTao(currentDate);
             kichCoService.add(kichCo);
-
-            return ("redirect:/kichco/index");
-
+            return ResponseEntity.ok("ok");
         }
     }
 }

@@ -86,10 +86,10 @@
                         <h4 class="row" style="margin: 20px 0; font-weight: 600 ; text-align: center">Hóa Đơn</h4>
                         <div class="row">
                             <div class="col-6">Mã hóa đơn: ${hoaDon.maHoaDon}</div>
-                            <div class="col-6">Tên Khách hàng: ${hoaDon.khachHang.hoTen}</div>
-                            <div class="col-6">Số điện thoại: ${hoaDon.khachHang.sdt}</div>
-                            <div class="col-6">Email: ${hoaDon.khachHang.email}</div>
-                            <div class="col-6">Địa chỉ: ${hoaDon.khachHang.diaChi}</div>
+                            <div class="col-6">Tên Khách hàng: ${hoaDon.tenNguoiNhan}</div>
+                            <div class="col-6">Số điện thoại: ${hoaDon.sdtNguoiNhan}</div>
+<%--                            <div class="col-6">Email: ${hoaDon.khachHang.email}</div>--%>
+                            <div class="col-6">Địa chỉ: ${hoaDon.diaChiNguoiNhan}</div>
                             <div class="col-6">Phương Thức thanh toán: ${hoaDon.phuongThucThanhToan.ten  }</div>
                             <div class="col-6">Trạng thái thanh
                                 toán: ${hoaDon.phuongThucThanhToan.trangThai == 0 ? "trả sau": "Trả trước"  }</div>
@@ -173,8 +173,8 @@
                     </div>
 
                     <div class="row" style="margin: 40px 0 ;">
-                        <div class="col-7"></div>
-                        <div class="col-5">
+                        <div class="col-6"></div>
+                        <div class="col-6">
                             <div class="row" style="font-size: 24px; font-weight: 600">
                                 <div class="row" >Tổng tiền sản phẩm: ${hoaDon.tongTien + hoaDon.tongTienGiam}</div>
                                 <div class="row">Tiền giảm: ${hoaDon.tongTienGiam}</div>
