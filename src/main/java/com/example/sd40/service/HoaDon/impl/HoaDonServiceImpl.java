@@ -66,11 +66,13 @@ public class HoaDonServiceImpl implements HoaDonService {
         if(hoaDon.getTrangThai() == 4){
             return null;
         }
+
         if(hoaDon.getTrangThai() == 3){
             PhuongThucThanhToan phuongThucThanhToan = hoaDon.getPhuongThucThanhToan();
             phuongThucThanhToan.setTrangThai(1);
             phuongThucThanhToanRepository.save(phuongThucThanhToan);
         }
+        hoaDon.setNgayCapNhat(new Date());
         hoaDon.setTrangThai(hoaDon.getTrangThai() + 1);
         hoaDonRepository.save(hoaDon);
         LichSu lichSu = new LichSu();
@@ -86,6 +88,7 @@ public class HoaDonServiceImpl implements HoaDonService {
     public String huyHoaDon(long id, String note) {
         HoaDon hoaDon = hoaDonRepository.findById(id).get();
         hoaDon.setTrangThai(5);
+        hoaDon.setNgayCapNhat(new Date());
         hoaDonRepository.save(hoaDon);
         LichSu lichSu = new LichSu();
         lichSu.setHoaDon(hoaDon);
