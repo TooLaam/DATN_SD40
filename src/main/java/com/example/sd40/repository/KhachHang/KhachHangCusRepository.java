@@ -138,4 +138,10 @@ public interface KhachHangCusRepository extends JpaRepository<KhachHang,Long> {
 
     @Query(value = "select top(1) ma from hoa_don order by id desc",nativeQuery = true)
     String MaHDCuoi();
+
+    @Query("select kh from KhachHang kh where kh.email = ?1")
+    KhachHang quenMatKhau(String email);
+
+    @Query("select kh from KhachHang kh where kh.email = ?1 and kh.id not in (?2)")
+    KhachHang KtraEmail(String email, Long id);
 }

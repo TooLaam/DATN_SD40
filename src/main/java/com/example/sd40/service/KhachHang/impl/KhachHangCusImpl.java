@@ -264,5 +264,15 @@ public class KhachHangCusImpl implements KhachHangCusService {
         return khachHangCusRepository.MaHDCuoi();
     }
 
+    @Override
+    public KhachHang quenMatKhau(String email) {
+        return khachHangCusRepository.quenMatKhau(email);
+    }
+
+    @Override
+    public KhachHang KtraEmail(String email, Long id) {
+        return khachHangCusRepository.KtraEmail(email,id);
+    }
+
 
 }

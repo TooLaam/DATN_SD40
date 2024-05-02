@@ -239,8 +239,6 @@
 <div id="hiddenForm" >
     <h5 style="color: black">Danh sách voucher bạn có thể sử dụng</h5>
     <span id="closeButton" class="closeButton">&times;</span>
-    <!-- Đặt các trường của form ở đây -->
-    <!-- Ví dụ: -->
     <div class="scrollable">
         <c:forEach items="${voucher}" var="v">
             <div class="voucher" id="${v[0]}" onclick="selectProduct('${v[0]}','${v[1]}','${v[2]}','${v[3]}','${v[4]}')">

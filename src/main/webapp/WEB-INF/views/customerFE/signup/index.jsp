@@ -139,7 +139,8 @@
             }
             else {
                 var formData = {
-                    taiKhoan: taiKhoan
+                    taiKhoan: taiKhoan,
+                    email : email
                 };
                 $.ajax({
                     type: "POST",
@@ -149,7 +150,13 @@
                         if (response ==='ok'){
                             alert("Thêm thành công !!!")
                             document.getElementById('AddKhachHang').submit();
-                        }else {
+                            return;
+                        }
+                        if (response === 'email'){
+                            alert("Email đã trùng, Vui lòng chọn Email khác !!!")
+                            return;
+                        }
+                        else {
                             alert("Tài khoản đã trùng, Vui lòng chọn tài khoản khác !!!")
                         }
                     },

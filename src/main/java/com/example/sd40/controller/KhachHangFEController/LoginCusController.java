@@ -2,8 +2,10 @@ package com.example.sd40.controller.KhachHangFEController;
 
 import com.example.sd40.entity.Gio_hang.GioHang;
 import com.example.sd40.entity.KhachHang.KhachHang;
+import com.example.sd40.entity.Mail.MailStructure;
 import com.example.sd40.service.GioHang.GioHangService;
 import com.example.sd40.service.KhachHang.KhachHangCusService;
+import com.example.sd40.service.MailService.MailService;
 import jakarta.servlet.http.HttpSession;
 //import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,8 @@ public class LoginCusController {
     KhachHangCusService khachHangCusService;
     @Autowired
     GioHangService gioHangService;
+    @Autowired
+    MailService mailService;
 
 
 
@@ -123,11 +127,54 @@ public class LoginCusController {
 
     @PostMapping("/checkTaiKhoanAdd")
     public ResponseEntity<?> checkTaiKhoanAdd(
-            @RequestParam("taiKhoan")String taiKhoan
+            @RequestParam("taiKhoan")String taiKhoan,
+            @RequestParam("email")String email
     ) {
         try {
             List<KhachHang> khachHangs = khachHangCusService.checlTaiKhoanAdd(taiKhoan);
-            if (khachHangs.isEmpty()){
+            KhachHang khachHang = khachHangCusService.quenMatKhau(email);
+            if (!khachHangs.isEmpty()){
+                return ResponseEntity.ok("ko");
+            }else {
+                if (khachHang != null){
+                    return ResponseEntity.ok("email");
+                }
+                else {
+                    return ResponseEntity.ok("ok");
+                }
+            }
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Lỗi");
+        }
+    }
+
+    @PostMapping("/quenMatKhau")
+    public ResponseEntity<?> quenMatKhau(
+            @RequestParam("email")String email
+    ) {
+        try {
+            KhachHang khachHang = khachHangCusService.quenMatKhau(email);
+            if (khachHang != null){
+                String messeage = ("Xinn chào "+ khachHang.getMa()
+                        + "\nSD40 sport gửi lại thông tin tài khoản của bạn nhé !"
+                        + "\n Tên Khách Hàng " +  khachHang.getHoTen()
+                        + "\n Ngày sinh : " +  khachHang.getNgaySinh()
+                        + "\n Số điện thoại : " +  khachHang.getSdt()
+
+                        + "\n Giới tính : " +  (khachHang.getGioiTinh()==0?"Nam":"Nữ")
+                        + "\n Email : " +khachHang.getEmail()
+                        + "\n Tài khoản:  " +  khachHang.getTaiKhoan()
+                        + "\n Mật khẩu:   " + khachHang.getMatKhau()
+
+                        + "\n Chúc bạn có một trải nghiệp tốt ở SD40 sport"
+
+                );
+                MailStructure mailStructure = new MailStructure();
+                mailStructure.setMessage(messeage);
+                mailStructure.setSubject("Đặt hàng thành công SD40 sport");
+                mailStructure.setToEmail(email);
+                mailService.sendMail(mailStructure);
                 return ResponseEntity.ok("ok");
             }else {
                 return ResponseEntity.ok("ko");

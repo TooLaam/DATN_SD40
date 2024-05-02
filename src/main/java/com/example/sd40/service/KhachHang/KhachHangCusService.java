@@ -58,5 +58,6 @@ public interface KhachHangCusService {
     List<Object[]> soLuongDaBan(Long idHD);
     Long idKhachHangMoiTao();
     String MaHDCuoi();
-
+    KhachHang quenMatKhau(String email);
+    KhachHang KtraEmail(String email, Long id);
 }

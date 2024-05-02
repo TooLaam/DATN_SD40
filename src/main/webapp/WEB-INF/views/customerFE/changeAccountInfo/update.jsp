@@ -128,8 +128,28 @@
                 alert("Email không hợp lệ !!!")
                 return;
             }else {
-                alert("Cập nhật thành công !!!")
-                document.getElementById('updateForm').submit();
+                var formData = {
+                    email: email
+                };
+                $.ajax({
+                    type: "GET",
+                    url: "/KtraEmail",
+                    data: formData,
+                    success: function (response) {
+                        if (response ==='ok'){
+                            alert("Cập nhật thành công !!!")
+                            document.getElementById('updateForm').submit();
+                        }else {
+                            alert("Email trùng với tài khoản khác. Vui lòng chọn email khác !!!")
+                        }
+
+                    },
+                    error: function (xhr, status, error) {
+                        alert("thất bại !!!");
+                        console.error("Error occurred while sending data: " + error);
+                    }
+                });
+
             }
         }
     });
