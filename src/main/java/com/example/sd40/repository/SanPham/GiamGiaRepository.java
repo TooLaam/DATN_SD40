@@ -31,6 +31,6 @@ public interface GiamGiaRepository extends JpaRepository<GiamGIa, Long> {
     @Query("update SanPham set giamGIa.Id = ?1 where id=?2 ")
     void updateGG(Long giamGia,Long idsp);
 
-    @Query("select ct.mau_sac.Id,ct.giaHienHanh,(ct.giaHienHanh*(100-gg.mucGiam))/100 from SanPham sp join GiamGIa gg on sp.giamGIa.Id= gg.Id join ChiTietSanPhamMauSacHinhAnh ct on sp.id=ct.sanPham.id where sp.id=?1 and ct.mau_sac.Id=?2")
+    @Query("select ct.mau_sac.Id,ct.giaHienHanh,(ct.giaHienHanh*(100-gg.mucGiam))/100,ct.hinhAnh from SanPham sp join GiamGIa gg on sp.giamGIa.Id= gg.Id join ChiTietSanPhamMauSacHinhAnh ct on sp.id=ct.sanPham.id where sp.id=?1 and ct.mau_sac.Id=?2")
     Object hienThiTienDaGiam(Long idsp,Long idms);
 }

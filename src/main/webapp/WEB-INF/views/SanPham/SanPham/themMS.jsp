@@ -18,16 +18,10 @@
                 <!-- Recent Sales -->
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
-
-
                         <div class="card-body">
-
-                            <form action="/ctsp/addMS" method="post" enctype="multipart/form-data">
                                 <div class="product-info">
-
-
                                     <label  class="form-label">ID sản phẩm</label>
-                                    <input type="text" class="form-control" readonly value="${sp.id}" name="id">
+                                    <input type="text" class="form-control" readonly value="${sp.id}" id="idsp">
 
                                     <label  class="form-label">Mã</label>
                                     <input type="text" class="form-control" readonly value="${sp.ma}" name="ma">
@@ -46,14 +40,14 @@
 
                                     <p>Màu sắc đang có: </p>
                                     <c:forEach items="${listMSDangCo}" var="ms">
-                                        <a href="/ctsp/updateMS/${sp.id}/${ms[0]}" class="btn btn-light" style="margin-left: 30px">
+                                        <a onclick="detailMS(${sp.id},${ms[0]})"  class="btn btn-light mauSac" id="btnMauSac${ms[0]}" style="margin-left: 30px">
                                             <img style="width: 20px;height: 20px" src="/assets/img/color/${ms[2]}" alt="Icon" class="icon">
                                             <span class="text">${ms[1]}</span>
                                         </a>
-                                        <%--                                        <a href="/sanpham/detail/${sp[0]}" class="btn btn-success" ></a>--%>
+
                                     </c:forEach>
                                     <p>Màu sắc muốn thêm: </p>
-                                    <select  class="form-select" aria-label="Default select example"name="mauSac" >
+                                    <select  class="form-select" aria-label="Default select example"name="mauSac" id="mauSacAdd" >
                                         <c:forEach items="${listMSChuaCo}" var="ms">
                                             <option value="${ms.id}" >
                                                 <img style="width: 20px;height: 20px" src="/assets/img/color/${ms.hinhAnh}" alt="Icon" class="icon">
@@ -63,19 +57,17 @@
                                     </select>
 
                                     <label  class="form-label">Giá hiện hành</label>
-                                    <input type="number" required class="form-control"  name="giaHienHanh">
+                                    <input type="number" class="form-control"  id="giaHienHanhAdd">
 
 
                                     <div>
                                         Hình ảnh :
-                                        <input  type="file" name="image" accept="image/*" required class="form-control"
+                                        <input  type="file" name="image" accept="image/*" id="imageAdd" class="form-control"
                                         >
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Thêm</button>
+                                    <button type="submit" onclick="AddMauSac()" class="btn btn-primary">Thêm</button>
 
                                 </div>
-                            </form>
-
                         </div>
 
                     </div>
@@ -108,30 +100,30 @@
                     <div class="tab-content pt-2" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel"
                              aria-labelledby="home-tab">
-                            <form action="/ctsp/updateHA/${sp.id}" method="post" enctype="multipart/form-data">
-                                <input  type="text" class="form-control" style="display: none" readonly value="${listHA.mau_sac.id}" name="idms">
+                                <input  type="text" class="form-control" style="display: none" readonly  id="idms">
 
                                 <label  class="form-label">Màu sắc muốn cập nhật</label>
-                                <input  type="text" class="form-control" required readonly value="${listHA.mau_sac.ten}" name="">
-                                <c:if test="${err != null}" >
-                                    <p style="color: red">${err}</p>
-                                </c:if>
-                                <label  class="form-label">Giá hiện hành</label>
-                                <input type="number" class="form-control" required value="${listHA.giaHienHanh}" name="giaHienHanh">
+                                <input  type="text" class="form-control" readonly id="ten" >
 
-                                <div>
+                                <label  class="form-label">Giá hiện hành</label>
+                                <input type="number" class="form-control" id="giaHienHanh" >
+
+                                <div id="trangThaiUpdate">
                                     <label  class="form-label">Trạng thái</label><br>
-                                    <input type="radio" name="trangThai" value="0" ${ listHA.trangThai == "0" ? "checked" : "" }>
+                                    <input type="radio" name="trangThai" value="0">
                                     Còn sử dụng <br>
-                                    <input type="radio" name="trangThai" value="1"  ${listHA.trangThai == "1" ? "checked" : "" }>
+                                    <input type="radio" name="trangThai" value="1" >
                                     Ngừng sử dụng
                                 </div>
 
-                                <img src="/assets/img/product/${listHA.hinhAnh}" style="padding-top: 60px" width="100px" height="150px">
-                                <input required type="file" name="image" accept="image/*" class="form-control"
-                                       value="${listHA.hinhAnh}">
-                                <button class="btn btn-primary">Cập nhật</button>
-                            </form>
+                            <div>
+                                Hình ảnh :
+                                <img id="imageUpdate1" src="" height="100px" width="100px">
+                                <input type="file" name="image" accept="image/*" class="form-control"
+                                       id="imageUpdate">
+                            </div>
+
+                                <button class="btn btn-primary" onclick="capNhatMS(${sp.id})">Cập nhật</button>
                         </div>
 
                         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -148,7 +140,113 @@
     </div><!-- End Right side columns -->
 
 </section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function detailMS(sp,ms){
+        document.getElementById('idms').value='';
+        var allButtons = document.querySelectorAll('.mauSac');
+        allButtons.forEach(function(button) {
+            button.style.backgroundColor = "";
+            button.style.color = "black";
+        });
 
+        // Đặt màu nền cho nút được click
+        document.getElementById('btnMauSac' + ms).style.backgroundColor = "#00575C";
+        document.getElementById('btnMauSac' + ms).style.color = "white";
+        $.ajax({
+            type: "GET",
+            url: "/ctsp/detailMS/"+sp+"/"+ms,
+            success: function (response) {
+                $('#ten').val(response.mau_sac.ten);
+                $('#idms').val(response.mau_sac.id);
+                $('#giaHienHanh').val(response.giaHienHanh);
+                $('#imageUpdate1').attr('src', '/assets/img/product/' + response.hinhAnh);
+                if (response.trangThai == 0) {
+                    $('input[name="trangThai"][value="0"]').prop('checked', true);
+                } else if (response.trangThai == 1) {
+                    $('input[name="trangThai"][value="1"]').prop('checked', true);
+                }
+
+            }});
+    }
+
+    function capNhatMS(idsp){
+        var idms = document.getElementById('idms').value;
+        var giaHienHanh = document.getElementById('giaHienHanh').value;
+        var trangThaiValue = $('input[name="trangThai"]:checked', '#trangThaiUpdate').val();
+        var hinhAnh = document.getElementById('imageUpdate').files[0];
+        if (idms.trim() ===''){
+            alert("Vui lòng chọn màu sắc muốn chỉnh sửa ở bên danh sách !!!")
+            return;
+        }else {
+            if (giaHienHanh.trim()===''||hinhAnh == null){
+                alert("Vui lòng nhập đầy đủ thông tin !!!")
+                return;
+            }else {
+                var formData = new FormData();
+                formData.append('idms', idms);
+                formData.append('giaHienHanh', giaHienHanh);
+                formData.append('image', hinhAnh);
+                formData.append('trangThai', trangThaiValue);
+                formData.append('idsp', idsp);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/ctsp/updateMS",
+                    data: formData,
+                    contentType: false, // Không cần set contentType
+                    processData: false, // Không cần xử lý dữ liệu
+                    success: function (response) {
+                            var cf = confirm("Bạn muốn cập nhật ???");
+                            if (cf == true) {
+                                alert("Cập nhật thành công");
+                                window.location.href = "/ctsp/hienThiChinhSuaMauSac/"+idsp;
+                            }
+
+
+                    }
+                });
+            }
+        }
+
+    }
+
+    function AddMauSac(){
+        var idsp = document.getElementById('idsp').value;
+        var idms = document.getElementById('mauSacAdd').value;
+        var giaHienHanh = document.getElementById('giaHienHanhAdd').value;
+        var image = document.getElementById('imageAdd').files[0];
+
+        if (giaHienHanh.trim() === ''|| image == null){
+            alert("Vui lòng nhập đầy đủ thông tin !!!")
+            return;
+        }else {
+            var formData = new FormData();
+            formData.append('idms', idms);
+            formData.append('giaHienHanh', giaHienHanh);
+            formData.append('image', image);
+            formData.append('idsp', idsp);
+
+            $.ajax({
+                type: "POST",
+                url: "/ctsp/addMS",
+                data: formData,
+                contentType: false, // Không cần set contentType
+                processData: false, // Không cần xử lý dữ liệu
+                success: function (response) {
+                    var cf = confirm("Bạn muốn thêm dữ liệu???");
+                    if (cf == true) {
+                        alert("Thêm thành công");
+                        window.location.href = "/ctsp/hienthithemkc/"+idsp+"/"+idms;
+                    }
+
+
+                }
+            });
+        }
+
+    }
+</script>
 
 
 

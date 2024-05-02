@@ -47,23 +47,15 @@
 
                             <label  class="form-label">Kích cỡ hiện có: </label>
                             <c:forEach items="${listKCDangCo}" var="kc1">
-                                <a href="/ctsp/hienthiupdateKC/${sp.id}/${ms.id}/${kc1.kichCo.id}" class="btn btn-primary" style="margin-left: 30px">${kc1.kichCo.ten} </a>
+                                <a onclick="detailKC(${sp.id},${ms.id},${kc1.kichCo.id})" id="btnKichCo${kc1.kichCo.id}" class="btn btn-primary kichCo" style="margin-left: 30px">${kc1.kichCo.ten} </a>
                             </c:forEach>
-
                         </div>
-
                     </div>
-
-
                 </div><!-- End Recent Sales -->
-
             </div>
-
         </div><!-- End Left side columns -->
 
-        <!-- Right side columns -->
         <div class="col-lg-4">
-
             <!-- Recent Activity -->
             <div class="card">
 
@@ -88,39 +80,33 @@
                     <div class="tab-content pt-2" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel"
                              aria-labelledby="home-tab">
-                            <form action="/ctsp/updateKC/${sp.id}/${ms.id}" method="post">
-                                <input  type="text" class="form-control" style="display: none" readonly value="${ctsp.kichCo.id}" name="idkc">
+                                <input  type="text" class="form-control" style="display: none" readonly id="idctsp">
 
                                 <div>
                                     Kích cỡ hiện tại :
-                                    <input type="text" class="form-control" required readonly name="kichCo" value="${ctsp.kichCo.ten}">
+                                    <input type="text" class="form-control" readonly  id="kichCo">
                                 </div>
-                                <c:if test="${err != null}" >
-                                    <p style="color: red">${err}</p>
-                                </c:if>
+
                                 <div>
                                     Số lượng :
-                                    <input type="number" class="form-control" required title="Vui lòng nhập số lượng !" name="soLuong" value="${ctsp.soLuong}">
-
+                                    <input type="number" class="form-control"  id="soLuong">
                                 </div>
 
-                                <div>
+                                <div id="trangThaiUpdate">
                                     Trạng thái : <br>
-                                    <input type="radio" name="trangThai" checked value="0" ${ ctsp.trangThai == "0" ? "checked" : "" }>
+                                    <input type="radio" name="trangThai" checked value="0">
                                     Còn sử dụng <br>
-                                    <input type="radio" name="trangThai" value="1" ${ctsp.trangThai == "1" ? "checked" : "" }>
+                                    <input type="radio" name="trangThai" value="1">
                                     Ngừng sử dụng
                                 </div>
-                                <input type="submit" class="btn btn-primary" value="Update" style="margin-top: 10px">
-                            </form>
+                                <input type="submit" onclick="updateKC(${sp.id},${ms.id})" class="btn btn-primary" value="Update" style="margin-top: 10px">
                         </div>
 
                         <%--create--%>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <form method="post" action="/ctsp/addKC/${sp.id}/${ms.id}">
                                 <div>
                                     Kích thước muốn thêm :
-                                    <select  class="form-select" aria-label="Default select example"name="kichCo" >
+                                    <select  class="form-select" aria-label="Default select example" id="kichCoAdd" >
                                         <c:forEach items="${listKCChuaCo}" var="kc">
                                             <option value="${kc.id}" >
                                                     ${kc.ten}
@@ -130,18 +116,17 @@
                                 </div>
                                 <div>
                                     Số lượng :
-                                    <input type="number" name="soLuong"  required class="form-control"></div>
+                                    <input type="number" id="soLuongAdd"  class="form-control"></div>
 
+                                <div id="trangThaiAdd">
+                                    Trạng thái : <br>
+                                    <input type="radio" name="trangThaiAdd" checked value="0">
+                                    Còn sử dụng <br>
+                                    <input type="radio" name="trangThaiAdd" value="1">
+                                    Ngừng sử dụng
+                                </div>
 
-
-                                        Trạng thái :<br>
-                                <div>
-                                        <input type="radio" name="trangThai" checked value="0"> Còn bán<br>
-                                        <input type="radio" name="trangThai" value="1"> Ngừng bán
-                                    </div>
-
-                                    <input type="submit" class="btn btn-primary" value="Add" style="margin-top: 10px">
-                            </form>
+                                    <input type="submit" onclick="AddKC(${sp.id},${ms.id})" class="btn btn-primary" value="Add" style="margin-top: 10px">
                         </div>
                         <%--detail--%>
                         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -158,4 +143,105 @@
     </div><!-- End Right side columns -->
 
 </section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function detailKC(idsp, idms,idkc){
 
+            document.getElementById('idctsp').value='';
+            var allButtons = document.querySelectorAll('.kichCo');
+            allButtons.forEach(function(button) {
+                button.style.backgroundColor = "";
+                button.style.color = "black";
+            });
+
+            // Đặt màu nền cho nút được click
+            document.getElementById('btnKichCo' + idkc).style.backgroundColor = "#00575C";
+            document.getElementById('btnKichCo' + idkc).style.color = "white";
+            $.ajax({
+                type: "GET",
+                url: "/ctsp/detailKC/"+idsp+"/"+idms+"/"+idkc,
+                success: function (response) {
+                    $('#idctsp').val(response.id);
+                    $('#kichCo').val(response.kichCo.ten);
+                    $('#soLuong').val(response.soLuong);
+                    if (response.trangThai == 0) {
+                        $('input[name="trangThai"][value="0"]').prop('checked', true);
+                    } else if (response.trangThai == 1) {
+                        $('input[name="trangThai"][value="1"]').prop('checked', true);
+                    }
+
+                }});
+    }
+
+    function updateKC(idsp,idms){
+        var idctsp = document.getElementById('idctsp').value;
+        var soLuong = document.getElementById('soLuong').value;
+        var trangThaiValue = $('input[name="trangThai"]:checked', '#trangThaiUpdate').val();
+        if (idctsp.trim()===''){
+            alert("Vui lòng chọn đối tượng muốn cập nhật trong danh sách")
+            return;
+        }else {
+            if (soLuong.trim()===''){
+                alert("Vui lòng nhập đầy đủ thông tin !!!")
+                return;
+            }else {
+                var formData = new FormData();
+                formData.append('idctsp', idctsp);
+                formData.append('soLuong', soLuong);
+                formData.append('trangThai', trangThaiValue);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/ctsp/updateKC",
+                    data: formData,
+                    contentType: false, // Không cần set contentType
+                    processData: false, // Không cần xử lý dữ liệu
+                    success: function (response) {
+                        var cf = confirm("Bạn muốn cập nhật ???");
+                        if (cf == true) {
+                            alert("Cập nhật thành công");
+                            window.location.href = "/ctsp/hienthithemkc/"+idsp+"/"+idms;
+                        }
+
+
+                    }
+                });
+            }
+        }
+    }
+
+    function AddKC(idsp,idms){
+        var soLuong = document.getElementById('soLuongAdd').value;
+        var kichCo = document.getElementById('kichCoAdd').value;
+        var trangThaiValue = $('input[name="trangThaiAdd"]:checked', '#trangThaiAdd').val();
+
+            if (soLuong.trim()===''){
+                alert("Vui lòng nhập đầy đủ thông tin !!!")
+                return;
+            }else {
+                var formData = new FormData();
+                formData.append('idkc', kichCo);
+                formData.append('idsp', idsp);
+                formData.append('idms', idms);
+                formData.append('soLuong', soLuong);
+                formData.append('trangThai', trangThaiValue);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/ctsp/addKC",
+                    data: formData,
+                    contentType: false, // Không cần set contentType
+                    processData: false, // Không cần xử lý dữ liệu
+                    success: function (response) {
+                        var cf = confirm("Bạn muốn thêm mới ???");
+                        if (cf == true) {
+                            alert("Thêm mới thành công");
+                            window.location.href = "/ctsp/hienthithemkc/"+idsp+"/"+idms;
+                        }
+
+
+                    }
+                });
+            }
+    }
+</script>

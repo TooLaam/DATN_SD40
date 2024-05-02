@@ -18,7 +18,7 @@ public interface CTSPRepository extends JpaRepository<ChiTietSanPham,Long> {
             " join KichCo kc on ctsp.kichCo.Id = kc.Id where ctsphams.sanPham.id = ?1 and ctsphams.mau_sac.Id=?2")
     List<Object[]> findKCTheoSP(Long idsp,Long idms);
 
-    @Query("select kc.Id,kc.ten,ctsp.soLuong,ctsp.trangThai from ChiTietSanPhamMauSacHinhAnh ctsphams join ChiTietSanPham ctsp on ctsphams.Id = ctsp.chiTietSanPhamMauSacHinhAnh.Id" +
+    @Query("select kc.Id,kc.ten,ctsp.soLuong,ctsp.trangThai,ctsphams.hinhAnh from ChiTietSanPhamMauSacHinhAnh ctsphams join ChiTietSanPham ctsp on ctsphams.Id = ctsp.chiTietSanPhamMauSacHinhAnh.Id" +
             " join KichCo kc on ctsp.kichCo.Id = kc.Id where ctsphams.sanPham.id = ?1 and ctsphams.mau_sac.Id=?2 and ctsp.trangThai = 0")
     List<Object[]> findKCTheoSPDangDung(Long idsp,Long idms);
 

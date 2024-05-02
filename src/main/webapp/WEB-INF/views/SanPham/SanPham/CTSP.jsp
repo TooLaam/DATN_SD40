@@ -76,13 +76,13 @@
                                 </div>
                             </div>
                             <div class="col-md-5">
-                                <img src="/assets/img/product/${sp.hinhAnhDaiDien}" style="padding-top: 60px" width="320px" height="450px">
+                                <img src="/assets/img/product/${sp.hinhAnhDaiDien}" id="img" style="padding-top: 60px" width="320px" height="450px">
                             </div>
 
                         </div>
                     </div>
 
-                    <a href="/ctsp/themmausac/${sp.id}"  type="submit" class="btn btn-primary">Thêm/chỉnh sửa màu sắc cho sản phẩm</a>
+                    <a href="/ctsp/hienThiChinhSuaMauSac/${sp.id}"  type="submit" class="btn btn-primary">Thêm/chỉnh sửa màu sắc cho sản phẩm</a>
                     <a href="/ctsp/giamGia/${sp.id}"  type="submit" class="btn btn-primary">Giảm giá sản phẩm</a>
                     <a  onclick="KichCoBtn()"  type="submit" class="btn btn-primary">Thêm/Sửa kích cỡ cho sản phẩm</a>
 
@@ -118,6 +118,7 @@
                     document.getElementById('idKC').textContent = response[0]
                  document.getElementById('giaHienHanh').textContent = formatNumber(response[1]) ;
                  document.getElementById('giaDaGiam').textContent = formatNumber(response[2]) ;
+                 $('#img').attr('src', '/assets/img/product/' + response[3]);
 
                 }});
 
@@ -131,6 +132,7 @@
                     var ten = data[1];
                     var soLuong = data[2];
                     var trangThai = data[3];
+                    var image = data[4]
 
                     // Tạo thẻ <a> với các thông tin và gán sự kiện onclick
                     var linkHTML = '<a id="kichco' + idkc + '" data-info="' + idkc + ',' + ten + '" onclick="getDataKC(' + soLuong + ',\'' + idkc + '\',\'' + trangThai + '\')" class="btn btn-light kichco" style="margin-left: 30px">' + ten + '</a>';
