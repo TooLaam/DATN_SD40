@@ -144,4 +144,13 @@ public class MauSacController {
             return ResponseEntity.ok("ok");
         }
     }
+    @GetMapping("/listMSNew")
+    public ResponseEntity<List<Mau_sac>> listMSNew(){
+        List<Mau_sac> mau_sacs = mauSacService.listMSNew();
+        if (mau_sacs != null) {
+            return new ResponseEntity<>(mau_sacs, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

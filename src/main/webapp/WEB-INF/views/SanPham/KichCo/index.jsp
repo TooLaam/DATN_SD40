@@ -184,6 +184,8 @@
                 alert("Vui lòng nhập đầy đủ thông tin")
                 return;
             }else {
+                var cf = confirm("Bạn muốn cập nhập ???")
+                if (cf == true) {
                 $.ajax({
                     type: "POST",
                     url: "/kichco/update",
@@ -197,16 +199,13 @@
                             alert("Tên trùng trong danh sách. Vui lòng chọn tên khác !!!")
                             return;
                         } else {
-                            var cf = confirm("Bạn muốn cập nhập ???")
-                            if (cf == true) {
                                 alert("Cập nhật thành công")
                                 window.location.href = "/kichco/index";
-                            }
                         }
 
                     }
                 });
-            }
+            }}
         }
     };
 
@@ -218,6 +217,8 @@
             alert("Vui lòng nhập đầy đủ thông tin")
             return;
         }else {
+            var cf = confirm("Bạn muốn thêm mới ???")
+            if (cf == true) {
             $.ajax({
                 type: "POST",
                 url: "/kichco/add",
@@ -230,15 +231,12 @@
                         alert("Tên trùng trong danh sách. Vui lòng chọn tên khác !!!")
                         return;
                     } else {
-                        var cf = confirm("Bạn muốn thêm mới ???")
-                        if (cf == true) {
                             alert("Thêm thành công")
                             window.location.href = "/kichco/index";
-                        }
                     }
 
                 }
             });
-        }
+        }}
     };
 </script>

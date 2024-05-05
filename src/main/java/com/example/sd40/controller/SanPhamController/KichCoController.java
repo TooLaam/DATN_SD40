@@ -79,4 +79,14 @@ public class KichCoController {
             return ResponseEntity.ok("ok");
         }
     }
+
+    @GetMapping("/listKCNew")
+    public ResponseEntity<List<KichCo>> listKCNew(){
+        List<KichCo> kichCos = kichCoService.listGGNew();
+        if (kichCos != null) {
+            return new ResponseEntity<>(kichCos, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

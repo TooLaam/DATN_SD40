@@ -152,6 +152,8 @@
                 alert("Vui lòng nhập đầy đủ thông tin");
                 return;
             } else {
+                var cf = confirm("Bạn muốn cập nhật ???");
+                if (cf == true) {
                 var formData = new FormData();
                 formData.append('id', id);
                 formData.append('ten', ten);
@@ -167,16 +169,14 @@
                             alert("Tên trùng trong danh sách. Vui lòng chọn tên khác !!!");
                             return;
                         } else {
-                            var cf = confirm("Bạn muốn cập nhật ???");
-                            if (cf == true) {
                                 alert("Cập nhật thành công");
                                 window.location.href = "/theloai/index";
-                            }
+
                         }
 
                     }
                 });
-            }
+            }}
         }
     }
     function add() {
@@ -186,6 +186,8 @@
             alert("Vui lòng nhập đầy đủ thông tin")
             return;
         }else {
+            var cf = confirm("Bạn muốn thêm mới ???");
+            if (cf == true) {
             var formData = new FormData();
             formData.append('ten', ten);
             formData.append('trangThai', trangThaiValue);
@@ -200,15 +202,12 @@
                         alert("Tên trùng trong danh sách. Vui lòng chọn tên khác !!!");
                         return;
                     } else {
-                        var cf = confirm("Bạn muốn thêm mới ???");
-                        if (cf == true) {
                             alert("Thêm mới thành công");
                             window.location.href = "/theloai/index";
-                        }
                     }
 
                 }
             });
-        }
+        }}
     };
 </script>

@@ -40,4 +40,9 @@ public class MauSacImpl implements MauSacService {
     public void add(Mau_sac theLoai) {
         mauSacRepository.save(theLoai);
     }
+
+    @Override
+    public List<Mau_sac> listMSNew() {
+        return mauSacRepository.listMSNew();
+    }
 }

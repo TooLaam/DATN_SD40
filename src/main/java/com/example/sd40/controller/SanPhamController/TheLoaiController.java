@@ -3,6 +3,7 @@ package com.example.sd40.controller.SanPhamController;
 import com.example.sd40.entity.San_pham.KichCo;
 import com.example.sd40.entity.San_pham.TheLoai;
 
+import com.example.sd40.entity.San_pham.ThuongHieu;
 import com.example.sd40.service.SanPham.LoaiGiayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -74,6 +75,16 @@ public class TheLoaiController {
             theLoai.setNgayTao(currentDate);
             loaiGiayService.add(theLoai);
             return ResponseEntity.ok("ok");
+        }
+    }
+
+    @GetMapping("/listTLNew")
+    public ResponseEntity<List<TheLoai>> listTLNew(){
+        List<TheLoai> theLoais = loaiGiayService.listTLNewwww();
+        if (theLoais != null) {
+            return new ResponseEntity<>(theLoais, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

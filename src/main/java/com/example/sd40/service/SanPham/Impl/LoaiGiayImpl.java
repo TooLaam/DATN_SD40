@@ -45,4 +45,14 @@ public class LoaiGiayImpl implements LoaiGiayService {
     public List<TheLoai> listTLConDung() {
         return loaiGiayRepository.listTLConDung();
     }
+
+    @Override
+    public List<TheLoai> listTLNewwww() {
+        return loaiGiayRepository.listTLNewwww();
+    }
+
+    @Override
+    public List<TheLoai> listTLDetail(Long id) {
+        return loaiGiayRepository.listTlDetail(id);
+    }
 }

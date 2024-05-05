@@ -15,4 +15,8 @@ public interface ThuongHieuService {
     void add(ThuongHieu thuongHieu);
     List<ThuongHieu> listTLConDung();
     List<Object> listTLHome();
+    List<ThuongHieu> listTHNew();
+    List<ThuongHieu> listTHDetail(Long id);
+
+
 }

@@ -14,4 +14,6 @@ public interface MauSacService {
     void update(Mau_sac theLoai);
     List<Mau_sac> findByName(String Ten);
     void add(Mau_sac theLoai);
+    List<Mau_sac> listMSNew();
+
 }

@@ -51,4 +51,14 @@ public class ThuongHieuImpl implements ThuongHieuService {
     public List<Object> listTLHome() {
         return thuongHieuRepository.listTLHome();
     }
+
+    @Override
+    public List<ThuongHieu> listTHNew() {
+        return thuongHieuRepository.listTHNew();
+    }
+
+    @Override
+    public List<ThuongHieu> listTHDetail(Long id) {
+        return thuongHieuRepository.listTHDetail(id);
+    }
 }

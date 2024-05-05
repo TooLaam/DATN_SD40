@@ -40,4 +40,9 @@ public class KichCoImpl implements KichCoService {
     public void add(KichCo theLoai) {
         kichCoRepository.save(theLoai);
     }
+
+    @Override
+    public List<KichCo> listGGNew() {
+        return kichCoRepository.listGGNew();
+    }
 }

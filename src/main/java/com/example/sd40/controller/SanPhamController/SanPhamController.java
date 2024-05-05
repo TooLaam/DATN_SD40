@@ -2,6 +2,7 @@ package com.example.sd40.controller.SanPhamController;
 
 import com.example.sd40.entity.San_pham.Mau_sac;
 import com.example.sd40.entity.San_pham.SanPham;
+import com.example.sd40.service.SanPham.GiamGiaService;
 import com.example.sd40.service.SanPham.LoaiGiayService;
 import com.example.sd40.service.SanPham.SanPhamService;
 import com.example.sd40.service.SanPham.ThuongHieuService;
@@ -30,6 +31,9 @@ public class SanPhamController {
     @Autowired
     LoaiGiayService loaiGiayService;
 
+    @Autowired
+    GiamGiaService giamGiaService;
+
     @GetMapping("/index")
     public String hienThi(Model model){
         model.addAttribute("listTong",sanPhamService.getAllTongSL());
@@ -46,8 +50,10 @@ public class SanPhamController {
     public String detail(Model model,
                          @PathVariable("id")Long id){
         model.addAttribute("sp",sanPhamService.detail(id));
-        model.addAttribute("listTH",thuongHieuService.getAll());
-        model.addAttribute("listTL",loaiGiayService.findAll());
+        model.addAttribute("listTH",thuongHieuService.listTHDetail(sanPhamService.detail(id).getThuongHieu().getId()));
+        model.addAttribute("listTL",loaiGiayService.listTLDetail(sanPhamService.detail(id).getTheLoai().getId()));
+        model.addAttribute("listGG",giamGiaService.listGGDetail(sanPhamService.detail(id).getGiamGIa().getId()));
+        model.addAttribute("GGDetail",sanPhamService.detail(id).getGiamGIa());
         model.addAttribute("view","/SanPham/SanPham/detail.jsp");
 
         return "index";
@@ -62,7 +68,8 @@ public class SanPhamController {
                                     @RequestParam("trangThai") int trangThai,
                                     @RequestParam("image") MultipartFile image,
                                     @RequestParam("thuongHieu") Long thuongHieu,
-                                    @RequestParam("theLoai") Long theLoai, Model model
+                                    @RequestParam("theLoai") Long theLoai,
+                                    @RequestParam("giamGia") Long giamGia
                          ) throws IOException {
 
         Date currentDate = new Date(System.currentTimeMillis());
@@ -83,10 +90,10 @@ public class SanPhamController {
             File img = new File(uploadPath, fileName);
             image.transferTo(img);
 
-            sanPhamService.update(ten,moTa,trangThai,fileName,thuongHieu,theLoai,id,currentDate);
+            sanPhamService.update(ten,moTa,trangThai,fileName,thuongHieu,theLoai,id,currentDate,giamGia);
         } else {
             // Xử lý khi không có ảnh mới được tải lên
-            sanPhamService.update(ten,moTa,trangThai,"",thuongHieu,theLoai,id,currentDate);
+            sanPhamService.update(ten,moTa,trangThai,"",thuongHieu,theLoai,id,currentDate,giamGia);
         }
 
         return ResponseEntity.ok("ok");

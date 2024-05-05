@@ -17,4 +17,10 @@ public interface LoaiGiayRepository extends JpaRepository<TheLoai, Long> {
     List<TheLoai> findByNameUpdate(String ten,Long id);
     @Query("select th from TheLoai th where th.trangThai = 0")
     List<TheLoai> listTLConDung();
+
+    @Query("select th from TheLoai th order by th.id desc ")
+    List<TheLoai> listTLNewwww();
+
+    @Query("select th from TheLoai  th where th.id not in (?1)")
+    List<TheLoai> listTlDetail(Long id);
 }

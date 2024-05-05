@@ -21,8 +21,8 @@ public interface SanPhamRepository extends JpaRepository<SanPham,Long> {
 
     @Transactional
     @Modifying
-    @Query("update SanPham set ten=?1,moTa=?2,trangThai=?3,hinhAnhDaiDien=?4,thuongHieu.id=?5,theLoai.id=?6,ngaySua=?8 where id=?7")
-    void update(String ten, String moTa,Integer trangThai, String hinhAnh, Long thuongHieu, Long theLoai, Long id, Date ngayTao);
+    @Query("update SanPham set ten=?1,moTa=?2,trangThai=?3,hinhAnhDaiDien=?4,thuongHieu.id=?5,theLoai.id=?6,ngaySua=?8,giamGIa.Id = ?9 where id=?7")
+    void update(String ten, String moTa,Integer trangThai, String hinhAnh, Long thuongHieu, Long theLoai, Long id, Date ngayTao,Long giamGia);
 
     @Query("select sp from SanPham sp where sp.ten=?1 and sp.thuongHieu.id=?2 and sp.theLoai.id = ?3")
     SanPham findSPCoTonTaiKhong(String ten, Long thuongHien, Long theLoai);

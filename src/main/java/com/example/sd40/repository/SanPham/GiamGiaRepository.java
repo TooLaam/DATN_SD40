@@ -2,6 +2,8 @@ package com.example.sd40.repository.SanPham;
 
 import com.example.sd40.entity.San_pham.GiamGIa;
 import com.example.sd40.entity.San_pham.KichCo;
+import com.example.sd40.entity.San_pham.TheLoai;
+import com.example.sd40.entity.San_pham.ThuongHieu;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -33,4 +35,10 @@ public interface GiamGiaRepository extends JpaRepository<GiamGIa, Long> {
 
     @Query("select ct.mau_sac.Id,ct.giaHienHanh,(ct.giaHienHanh*(100-gg.mucGiam))/100,ct.hinhAnh from SanPham sp join GiamGIa gg on sp.giamGIa.Id= gg.Id join ChiTietSanPhamMauSacHinhAnh ct on sp.id=ct.sanPham.id where sp.id=?1 and ct.mau_sac.Id=?2")
     Object hienThiTienDaGiam(Long idsp,Long idms);
+
+    @Query("select th from GiamGIa th order by th.Id desc ")
+    List<GiamGIa> listGGNew();
+
+    @Query("select th from GiamGIa  th where th.Id not in (?1)")
+    List<GiamGIa> listGGDetail(Long id);
 }

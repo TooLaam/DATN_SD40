@@ -2,6 +2,7 @@ package com.example.sd40.controller.SanPhamController;
 
 import com.example.sd40.entity.San_pham.GiamGIa;
 import com.example.sd40.entity.San_pham.KichCo;
+import com.example.sd40.entity.San_pham.ThuongHieu;
 import com.example.sd40.entity.Voucher.Voucher;
 import com.example.sd40.service.SanPham.GiamGiaService;
 import com.example.sd40.service.SanPham.KichCoService;
@@ -82,6 +83,16 @@ public class GiamGiaController {
             giamGIa.setMucGiam(mucGiam);
             giamGiaService.add(giamGIa);
             return ResponseEntity.ok("ok");
+        }
+    }
+
+    @GetMapping("/listGGNew")
+    public ResponseEntity<List<GiamGIa>> listGGNew(){
+        List<GiamGIa> giamGIas = giamGiaService.listGGNew();
+        if (giamGIas != null) {
+            return new ResponseEntity<>(giamGIas, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

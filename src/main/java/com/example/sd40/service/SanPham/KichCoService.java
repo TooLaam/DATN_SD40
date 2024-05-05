@@ -14,4 +14,6 @@ public interface KichCoService {
     void update(KichCo theLoai);
     List<KichCo> findByName(String Ten);
     void add(KichCo theLoai);
+    List<KichCo> listGGNew();
+
 }

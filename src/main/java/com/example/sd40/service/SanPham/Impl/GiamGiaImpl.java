@@ -60,4 +60,14 @@ public class GiamGiaImpl implements GiamGiaService {
     public List<GiamGIa> listGGConDung() {
         return giamGiaRepository.listGGConDung();
     }
+
+    @Override
+    public List<GiamGIa> listGGNew() {
+        return giamGiaRepository.listGGNew();
+    }
+
+    @Override
+    public List<GiamGIa> listGGDetail(Long id) {
+        return giamGiaRepository.listGGDetail(id);
+    }
 }

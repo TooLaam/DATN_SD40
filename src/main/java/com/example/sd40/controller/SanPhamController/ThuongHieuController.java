@@ -132,4 +132,14 @@ public class ThuongHieuController {
             return ResponseEntity.ok("ok");
         }
     }
+
+    @GetMapping("/listTHNew")
+    public ResponseEntity<List<ThuongHieu>> listTHNew(){
+        List<ThuongHieu> thuongHieu = thuongHieuService.listTHNew();
+        if (thuongHieu != null) {
+            return new ResponseEntity<>(thuongHieu, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
