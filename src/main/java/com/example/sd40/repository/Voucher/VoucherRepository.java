@@ -2,7 +2,9 @@ package com.example.sd40.repository.Voucher;
 
 import com.example.sd40.entity.Voucher.Voucher;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,4 +20,9 @@ public interface VoucherRepository extends JpaRepository<Voucher, Long> {
 
     @Query("select vc from Voucher vc where vc.id not in (select v.id from Voucher v where vc.phanTramGiam = 0)")
     List<Voucher> getAll();
+
+    @Transactional
+    @Modifying
+    @Query("update Voucher dc set dc.soLuong=dc.soLuong-1 where dc.id =?1")
+    void updateVoucher(Long idVoucher);
 }

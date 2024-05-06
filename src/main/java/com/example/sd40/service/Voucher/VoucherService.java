@@ -12,4 +12,5 @@ public interface VoucherService {
     Voucher detail(Long id);
     List<Voucher> findByNameUpdate(String ten,Long id);
     List<Voucher> findByName(String ten);
+    void updateVoucher(Long idVoucher);
 }

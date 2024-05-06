@@ -47,28 +47,54 @@
                 <p><strong>Số điện thoại:</strong> ${HD.sdtNguoiNhan}</p>
                 <p><strong>Địa chỉ:</strong> ${HD.diaChiNguoiNhan}</p>
             </div>
-            <div class="payment-info3">
-                <h4>Thanh toán khi nhận hàng</h4>
-                <p><strong>Tổng tiền sản phẩm:</strong> <fmt:formatNumber value="${HD.tongTienSanPhamChuaGiam}" pattern="###,###"/>đ</p>
-                <p><strong>Tổng giảm giá:</strong> <fmt:formatNumber value="${HD.tongTienGiam}" pattern="###,###"/>đ</p>
-                <p><strong>Phí ship:</strong> <fmt:formatNumber value="${HD.phiShip}" pattern="###,###"/>đ</p>
-                <p><strong>Số tiền thanh toán:</strong> <fmt:formatNumber value="${HD.tongTien}" pattern="###,###"/>đ</p>
-            </div>
+            <c:choose>
+                <c:when test="${HD.phuongThucThanhToan.id ==1}">
+                    <div class="payment-info3">
+                        <h4>Thanh toán khi nhận hàng</h4>
+                        <p><strong>Tổng tiền sản phẩm:</strong> <fmt:formatNumber value="${HD.tongTienSanPhamChuaGiam}" pattern="###,###"/>đ</p>
+                        <p><strong>Tổng giảm giá:</strong> <fmt:formatNumber value="${HD.tongTienGiam}" pattern="###,###"/>đ</p>
+                        <p><strong>Phí ship:</strong> <fmt:formatNumber value="${HD.phiShip}" pattern="###,###"/>đ</p>
+                        <p><strong>Số tiền thanh toán:</strong> <fmt:formatNumber value="${HD.tongTien}" pattern="###,###"/>đ</p>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="payment-info3">
+                        <h4>Thanh toán VNPAY</h4>
+                        <p><strong>Tổng tiền sản phẩm:</strong> <fmt:formatNumber value="${HD.tongTienSanPhamChuaGiam}" pattern="###,###"/>đ</p>
+                        <p><strong>Tổng giảm giá:</strong> <fmt:formatNumber value="${HD.tongTienGiam}" pattern="###,###"/>đ</p>
+                        <p><strong>Phí ship:</strong> <fmt:formatNumber value="${HD.phiShip}" pattern="###,###"/>đ</p>
+                        <p><strong>Số tiền thanh toán:</strong> <fmt:formatNumber value="0" pattern="###,###"/>đ</p>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+
         </div>
         <div>
             <c:choose>
-                <c:when test="${HD.trangThai == 0 || HD.trangThai == 1}">
-                    <div class="btnTrangThai">
-                        <a  id="btnHuy">Hủy hóa đơn</a>
-                    </div>
+                <c:when test="${HD.phuongThucThanhToan.id == 1}">
+                    <c:choose>
+                        <c:when test="${HD.trangThai == 0 || HD.trangThai == 1}">
+                            <div class="btnTrangThai">
+                                <a  id="btnHuy">Hủy hóa đơn</a>
+                            </div>
 
+                        </c:when>
+                        <c:when test="${HD.trangThai==3}">
+                            <div class="btnTrangThai">
+                                <a onclick="hoanThanhHoaDon()" id="btnThanhCong">Đã nhận được hàng</a>
+                            </div>
+                        </c:when>
+                    </c:choose>
                 </c:when>
-                <c:when test="${HD.trangThai==3}">
-                    <div class="btnTrangThai">
-                        <a onclick="hoanThanhHoaDon()" id="btnThanhCong">Đã nhận được hàng</a>
-                    </div>
-                </c:when>
+                <c:otherwise>
+                    <c:if test="${HD.trangThai==3}">
+                        <div class="btnTrangThai">
+                            <a onclick="hoanThanhHoaDonVNPAY()" >Đã nhận được hàng</a>
+                        </div>
+                    </c:if>
+                </c:otherwise>
             </c:choose>
+
         </div>
         <c:choose>
             <c:when test="${HD.trangThai==0}">
@@ -136,6 +162,21 @@
             $.ajax({
                 type: "POST",
                 url: "/bill/hoanThanhHoaDonCus/"+${HD.id},
+                success: function(response) {
+                    window.location.href = "/bill/detailHoaDon/"+${HD.id};
+                },
+                error: function(xhr, status, error) {
+                    console.error("Đã xảy ra lỗi khi gửi dữ liệu: " + error);
+                }
+            });
+        }
+    };
+    function hoanThanhHoaDonVNPAY() {
+        var cf = confirm("Bạn chắc chắn đã nhận được hàng ???")
+        if (cf == true){
+            $.ajax({
+                type: "POST",
+                url: "/bill/hoanThanhHoaDonCusVNPAY/"+${HD.id},
                 success: function(response) {
                     window.location.href = "/bill/detailHoaDon/"+${HD.id};
                 },

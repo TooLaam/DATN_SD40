@@ -17,5 +17,6 @@ public interface GioHangChiTietService {
     GioHangChiTiet kiemTraSoLuongTruocKhiUpdate(Long idGHCT);
     List<GioHangChiTiet> findAllById(@Param("ids") List<Long> ids);
     void deleteGHCTByCTSP(Long idGHCT);
+    void deleteGHCTByCTSPAndIDKH(Long idGH, Long idCTSP);
 
 }

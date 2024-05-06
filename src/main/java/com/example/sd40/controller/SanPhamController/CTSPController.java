@@ -305,6 +305,6 @@ public class CTSPController {
 
     ){
         giamGiaService.updateGG(giamGia,id);
-        return "redirect:/ctsp/giamGia/" + id;
+        return "redirect:/ctsp/hienthi/" + id;
     }
 }

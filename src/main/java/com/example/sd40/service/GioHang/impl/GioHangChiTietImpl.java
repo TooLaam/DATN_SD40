@@ -63,4 +63,9 @@ public class GioHangChiTietImpl implements GioHangChiTietService {
         gioHangChiTietRepository.deleteGHCTByCTSP(idGHCT);
     }
 
+    @Override
+    public void deleteGHCTByCTSPAndIDKH(Long idGH, Long idCTSP) {
+        gioHangChiTietRepository.deleteGHCTByCTSPAndIDKH(idGH,idCTSP);
+    }
+
 }

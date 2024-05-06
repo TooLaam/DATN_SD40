@@ -1,6 +1,7 @@
 package com.example.sd40.entity.Hoa_don;
 
 import com.example.sd40.entity.San_pham.ChiTietSanPham;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +20,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Getter
 @Setter
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class HoaDonChiTiet {
 
     @Id

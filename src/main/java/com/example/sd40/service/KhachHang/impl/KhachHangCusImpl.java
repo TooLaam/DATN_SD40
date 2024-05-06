@@ -168,8 +168,8 @@ public class KhachHangCusImpl implements KhachHangCusService {
     }
 
     @Override
-    public void saveHDKhachHang(Integer trangThai, Date ngayTao, BigDecimal tongTien, Integer phanTramKhuyenMai, Long idVoucher, String ghiChu, BigDecimal tongTienGiam, Long phuongThucThanhToanID, String tenNguoiNhan, String sdtNguoiNhan, String diaChiNguoiNhan, BigDecimal tongTienSanPhamChuaGiam, BigDecimal phiShip, Long idKhachHang,Date ngayCapNhat,String ma) {
-        khachHangCusRepository.saveHDKhachHang(trangThai,ngayTao,tongTien,phanTramKhuyenMai,idVoucher,ghiChu,tongTienGiam,phuongThucThanhToanID,tenNguoiNhan,sdtNguoiNhan,diaChiNguoiNhan,tongTienSanPhamChuaGiam,phiShip,idKhachHang,ngayCapNhat,ma);
+    public void saveHDKhachHang(Integer trangThai, Date ngayTao, BigDecimal tongTien, Integer phanTramKhuyenMai, Long idVoucher, String ghiChu, BigDecimal tongTienGiam, Long phuongThucThanhToanID, String tenNguoiNhan, String sdtNguoiNhan, String diaChiNguoiNhan, BigDecimal tongTienSanPhamChuaGiam, BigDecimal phiShip, Long idKhachHang,Date ngayCapNhat,String ma,Date ngayThanhToan) {
+        khachHangCusRepository.saveHDKhachHang(trangThai,ngayTao,tongTien,phanTramKhuyenMai,idVoucher,ghiChu,tongTienGiam,phuongThucThanhToanID,tenNguoiNhan,sdtNguoiNhan,diaChiNguoiNhan,tongTienSanPhamChuaGiam,phiShip,idKhachHang,ngayCapNhat,ma,ngayThanhToan);
 
     }
 
@@ -272,6 +272,11 @@ public class KhachHangCusImpl implements KhachHangCusService {
     @Override
     public KhachHang KtraEmail(String email, Long id) {
         return khachHangCusRepository.KtraEmail(email,id);
+    }
+
+    @Override
+    public void hoanThanhHoaDonVNPAY(Long idhd, Date ngayCapNhat) {
+        khachHangCusRepository.hoanThanhHoaDonVNPAY(idhd,ngayCapNhat);
     }
 
 
