@@ -8,9 +8,9 @@ import lombok.Data;
 public abstract class VnPayConstant {
     public static String vnp_Version = "2.1.0";
     public static String vnp_Command = "2.1.0";
-    public static String vnp_TmnCode = "11CG57AD";
+    public static String vnp_TmnCode = "KEAVXQXS";
 
-    public static String vnp_HashSecret = "OOVYIJVYUBGEZMREEZTJRFKHSLGVTJSE";
+    public static String vnp_HashSecret = "ILF2QLDME7D1GKWM99C9CX7O88UXGXSG";
 
     public static String vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
     public static String vnp_BankCode = "";
