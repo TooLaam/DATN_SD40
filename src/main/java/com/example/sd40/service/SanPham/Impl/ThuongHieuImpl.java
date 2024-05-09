@@ -5,8 +5,8 @@ import com.example.sd40.repository.SanPham.ThuongHieuRepository;
 import com.example.sd40.service.SanPham.ThuongHieuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+
 @Service
 public class ThuongHieuImpl implements ThuongHieuService {
     @Autowired

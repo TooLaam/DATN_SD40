@@ -1,9 +1,10 @@
 package com.example.sd40.controller.SanPhamController;
 
 
-import com.example.sd40.entity.San_pham.GiamGIa;
+import com.example.sd40.entity.NhanVien.NhanVien;
 import com.example.sd40.entity.San_pham.Mau_sac;
 import com.example.sd40.service.SanPham.MauSacService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
@@ -13,10 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.text.ParseException;
 import java.util.List;
@@ -29,10 +28,17 @@ public class MauSacController {
     MauSacService mauSacService;
 
     @GetMapping("/index")
-    public String hienThi(Model model){
-        model.addAttribute("listMS",mauSacService.findAll());
-        model.addAttribute("view","/SanPham/MauSac/index.jsp");
-        return "index";
+    public String hienThi(Model model, HttpSession session){
+        NhanVien nhanVien = (NhanVien) session.getAttribute("nhanVien");
+        if (nhanVien == null){
+            return "redirect:/admin/login";
+        }else{
+            model.addAttribute("nhanvien",nhanVien);
+            model.addAttribute("listMS",mauSacService.findAll());
+            model.addAttribute("view","/SanPham/MauSac/index.jsp");
+            return "index";
+        }
+
     }
 
     @GetMapping("/detail/{id}")

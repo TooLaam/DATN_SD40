@@ -1,9 +1,5 @@
 package com.example.sd40.controller.KhachHangFEController;
 
-import com.example.sd40.entity.KhachHang.KhachHang;
-import com.example.sd40.entity.San_pham.ChiTietSanPhamMauSacHinhAnh;
-import com.example.sd40.entity.San_pham.SanPham;
-import com.example.sd40.service.GioHang.GioHangChiTietService;
 import com.example.sd40.service.SanPham.*;
 import com.example.sd40.service.KhachHang.KhachHangCusService;
 import jakarta.servlet.http.HttpSession;
@@ -14,13 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class SanPhamFEController {

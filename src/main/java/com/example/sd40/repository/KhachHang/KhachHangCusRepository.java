@@ -4,16 +4,13 @@ import com.example.sd40.entity.Gio_hang.GioHangChiTiet;
 import com.example.sd40.entity.Hoa_don.HoaDon;
 import com.example.sd40.entity.Hoa_don.HoaDonChiTiet;
 import com.example.sd40.entity.KhachHang.DiaChiChiTiet;
-import com.example.sd40.entity.KhachHang.tinhThanhPho;
 import com.example.sd40.entity.KhachHang.KhachHang;
 import com.example.sd40.entity.San_pham.ChiTietSanPham;
-import com.example.sd40.entity.Voucher.Voucher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;

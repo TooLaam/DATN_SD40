@@ -83,7 +83,7 @@
                     </div>
 
                     <a href="/ctsp/hienThiChinhSuaMauSac/${sp.id}"  type="submit" class="btn btn-primary">Thêm/chỉnh sửa màu sắc cho sản phẩm</a>
-                    <a href="/ctsp/giamGia/${sp.id}"  type="submit" class="btn btn-primary">Giảm giá sản phẩm</a>
+                    <a style="cursor:pointer" onclick="giamGia()" type="submit" class="btn btn-primary">Giảm giá sản phẩm</a>
                     <a  onclick="KichCoBtn()"  type="submit" class="btn btn-primary">Thêm/Sửa kích cỡ cho sản phẩm</a>
 
                 </div>
@@ -95,6 +95,15 @@
 </section>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    function giamGia(){
+        var nhanvien = ${nhanvien.chucVu.id};
+        if (nhanvien==2){
+            alert("Quản lý mới được sử dụng chức năng này !!!")
+            return;
+        }else {
+            window.location.href = "/ctsp/giamGia/${sp.id}";
+        }
+    }
     function formatNumber(price) {
         var formattedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Math.round(price));
         formattedPrice = formattedPrice.replace(/(\d+)(?:\.(\d+))? đ/, '$1');

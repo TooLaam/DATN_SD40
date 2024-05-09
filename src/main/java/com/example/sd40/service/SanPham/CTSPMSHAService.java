@@ -1,10 +1,7 @@
 package com.example.sd40.service.SanPham;
 
-import com.example.sd40.entity.San_pham.ChiTietSanPham;
 import com.example.sd40.entity.San_pham.ChiTietSanPhamMauSacHinhAnh;
 import com.example.sd40.entity.San_pham.Mau_sac;
-import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;

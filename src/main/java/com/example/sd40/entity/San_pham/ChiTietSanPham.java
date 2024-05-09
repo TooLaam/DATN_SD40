@@ -3,8 +3,6 @@ package com.example.sd40.entity.San_pham;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.math.BigDecimal;
 import java.util.Date;
 
 @Data

@@ -1,8 +1,8 @@
 package com.example.sd40.entity.NhanVien;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.Date;
 
 @Data
@@ -13,6 +13,7 @@ import java.util.Date;
 @Entity
 @Builder
 @Table(name = "chuc_vu")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ChucVu {
     @jakarta.persistence.Id
     @Column(name = "id")

@@ -7,10 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.List;
+
 @Repository
 public interface SanPhamRepository extends JpaRepository<SanPham,Long> {
     @Query("select sp.id, sp.ma,sp.ten,sp.hinhAnhDaiDien,sum(ctsp.soLuong),sp.thuongHieu.ten,sp.theLoai.ten from SanPham sp join ChiTietSanPhamMauSacHinhAnh ctsphams on sp.id=ctsphams.sanPham.id" +

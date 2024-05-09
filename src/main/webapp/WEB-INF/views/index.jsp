@@ -55,6 +55,7 @@
                       d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
             </svg>
         </i>
+        <span style="margin-left: 850px;font-size: 20px">Xin chào : <strong>${nhanvien.hoTen}</strong>  </span>
     </div><!-- End Logo -->
 
 
@@ -82,12 +83,12 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="/thongke/index">
+            <a class="nav-link collapsed" onclick="thongKe()" style="cursor:pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-bar-chart-line-fill" viewBox="0 0 16 16">
                     <path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z"/>
                 </svg>
-                <span>Tổng quan</span>
+                <span>Thống Kê</span>
             </a>
         </li><!-- End Dashboard Nav -->
 
@@ -159,13 +160,13 @@
             </a>
             <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="/employee/index">
+                    <a onclick="nhanVien()" style="cursor:pointer" >
                         <i class="bi bi-circle"></i>
                         <span>Nhân viên</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/customer/index">
+                    <a href="/khachhang/index">
                         <i class="bi bi-circle"></i><span>Khách hàng</span>
                     </a>
                 </li>
@@ -190,7 +191,7 @@
             </a>
             <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="/bill/index">
+                    <a href="/billadmin/index">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              class="bi bi-receipt" viewBox="0 0 16 16">
                             <path d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z"/>
@@ -200,7 +201,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/voucher/index">
+                    <a onclick="voucher()" style="cursor:pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 576 512">
                             <path d="M64 64C28.7 64 0 92.7 0 128v64c0 8.8 7.4 15.7 15.7 18.6C34.5 217.1 48 235 48 256s-13.5 38.9-32.3 45.4C7.4
                             304.3 0 311.2 0 320v64c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V320c0-8.8-7.4-15.7-15.7-18.6C541.5 294.9 528 277
@@ -219,9 +220,9 @@
         <li class="nav-heading">Pages</li>
 
         <c:choose>
-            <c:when test="${Name == null}">
+            <c:when test="${nhanvien == null}">
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="/employee/index">
+                    <a class="nav-link collapsed" href="/admin/login">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              class="bi bi-person-fill" viewBox="0 0 16 16">
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
@@ -232,33 +233,9 @@
                 <!-- End Profile Page Nav -->
             </c:when>
             <c:otherwise>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="/employee/detail/${empLogin.id}">
-
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-person-fill" viewBox="0 0 16 16">
-                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
-                        </svg>
-                        <span>Profile</span>
-                    </a>
-                </li>
-                <!-- End Profile Page Nav -->
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="/employee/viewAdd">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-person-plus-fill" viewBox="0 0 16 16">
-                            <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                            <path fill-rule="evenodd"
-                                  d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-                        </svg>
-                        <span>Register</span>
-                    </a>
-                </li>
-                <!-- End Register Page Nav -->
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="/logout">
+                    <a class="nav-link collapsed" href="/admin/logout">
                             <%--<i class="bi bi-box-arrow-right"></i>--%>
                         <svg xmlns="http://www.w3.org/2000/svg" height="1em" style="margin-right: 10px;"
                              viewBox="0 0 512 512">
@@ -308,7 +285,35 @@
 
 <!-- Template Main JS File -->
 <script src="/assets/js/main.js"></script>
-<script src="/assets/js/ctsp.js"></script>
+<script>
+    function thongKe(){
+        var nhanvien = ${nhanvien.chucVu.id};
+        if (nhanvien==2){
+            alert("Quản lý mới được sử dụng chức năng này !!!")
+            return;
+        }else {
+            window.location.href = "/thongke/index";
+        }
+    }
+    function nhanVien(){
+        var nhanvien = ${nhanvien.chucVu.id};
+        if (nhanvien==2){
+            alert("Quản lý mới được sử dụng chức năng này !!!")
+            return;
+        }else {
+            window.location.href = "/nhanvien/index";
+        }
+    }
+    function voucher(){
+        var nhanvien = ${nhanvien.chucVu.id};
+        if (nhanvien==2){
+            alert("Quản lý mới được sử dụng chức năng này !!!")
+            return;
+        }else {
+            window.location.href = "/voucher/index";
+        }
+    }
+</script>
 
 </body>
 

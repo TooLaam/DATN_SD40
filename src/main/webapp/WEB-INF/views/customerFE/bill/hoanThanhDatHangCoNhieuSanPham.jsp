@@ -33,7 +33,7 @@
                     <div class="product-info3">
                         <h4>${sp.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.ten}</h4>
                         <p class="product-price3">
-                            <fmt:formatNumber value="${(sp.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-sp.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}" pattern="###,###"/>đ
+                            <fmt:formatNumber value="${sp.giaDaGiam}" pattern="###,###"/>đ
                         </p>
                         <p>Kích cỡ: ${sp.chiTietSanPham.kichCo.ten}</p>
                         <p>Màu sắc: ${sp.chiTietSanPham.chiTietSanPhamMauSacHinhAnh.mau_sac.ten}</p>

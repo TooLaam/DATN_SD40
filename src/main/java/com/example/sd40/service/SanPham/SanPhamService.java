@@ -2,8 +2,6 @@ package com.example.sd40.service.SanPham;
 
 import com.example.sd40.entity.San_pham.SanPham;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Service;
-
 import java.util.Date;
 import java.util.List;
 

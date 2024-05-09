@@ -5,7 +5,6 @@ import com.example.sd40.repository.KhachHang.TinhRepository;
 import com.example.sd40.service.KhachHang.TinhThanhPhoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

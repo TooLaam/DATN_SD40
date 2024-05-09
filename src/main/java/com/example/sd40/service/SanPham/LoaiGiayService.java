@@ -1,10 +1,7 @@
 package com.example.sd40.service.SanPham;
 
-import com.example.sd40.controller.SanPhamController.TheLoaiController;
-import com.example.sd40.entity.San_pham.GiamGIa;
 import com.example.sd40.entity.San_pham.TheLoai;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

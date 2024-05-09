@@ -1,14 +1,10 @@
 package com.example.sd40.controller.KhachHangFEController;
 
-import com.example.sd40.entity.Gio_hang.GioHangChiTiet;
 import com.example.sd40.entity.KhachHang.KhachHang;
-import com.example.sd40.entity.San_pham.KichCo;
-import com.example.sd40.service.KhachHang.HangThanhVienService;
 import com.example.sd40.service.SanPham.SanPhamService;
 import com.example.sd40.service.SanPham.ThuongHieuService;
 import com.example.sd40.service.KhachHang.KhachHangCusService;
 import jakarta.servlet.http.HttpSession;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -32,8 +27,7 @@ public class HomeController {
     @Autowired
     KhachHangCusService khachHangCusService;
 
-    @Autowired
-    HangThanhVienService hangThanhVienService;
+
 
 
     @GetMapping("/home" )

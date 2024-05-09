@@ -1,18 +1,12 @@
 package com.example.sd40.service.HoaDon.impl;
 
 import com.example.sd40.config.Config;
-import com.example.sd40.entity.Hoa_don.HoaDon;
-import com.example.sd40.entity.Hoa_don.PhuongThucThanhToan;
-import com.example.sd40.repository.HoaDon.PhuongThucThanhToanRepository;
 import com.example.sd40.service.HoaDon.PhuongThucThanhToanService;
 import com.example.sd40.vnpay.CreatePayMentMethodTransferRequest;
 import com.example.sd40.vnpay.PayMentVnpayRequest;
 import com.example.sd40.vnpay.VnPayConstant;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;

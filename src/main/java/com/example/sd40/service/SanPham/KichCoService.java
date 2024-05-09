@@ -1,11 +1,9 @@
 package com.example.sd40.service.SanPham;
 
-import com.example.sd40.controller.SanPhamController.KichCoController;
 import com.example.sd40.entity.San_pham.KichCo;
-import com.example.sd40.entity.San_pham.TheLoai;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+
 @Service
 public interface KichCoService {
     List<KichCo> findAll();

@@ -1,9 +1,7 @@
 package com.example.sd40.service.SanPham;
 
-import com.example.sd40.entity.San_pham.KichCo;
 import com.example.sd40.entity.San_pham.Mau_sac;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

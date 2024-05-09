@@ -1,9 +1,6 @@
 package com.example.sd40.service.Voucher;
 
-
-
 import com.example.sd40.entity.Voucher.Voucher;
-
 import java.util.List;
 
 public interface VoucherService {

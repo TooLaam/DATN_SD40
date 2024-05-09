@@ -1,6 +1,7 @@
 package com.example.sd40.controller.VoucherController;
 
 
+import com.example.sd40.entity.NhanVien.NhanVien;
 import com.example.sd40.entity.Voucher.Voucher;
 import com.example.sd40.service.Voucher.VoucherService;
 import jakarta.servlet.http.HttpSession;
@@ -10,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.text.ParseException;
@@ -23,10 +23,21 @@ public class VoucherController {
     VoucherService voucherService;
 
     @GetMapping("/index")
-    public String getAll(Model model){
-        model.addAttribute("listVC",voucherService.getAll());
-        model.addAttribute("view","/Voucher/index.jsp");
-        return "index";
+    public String getAll(Model model, HttpSession session){
+        NhanVien nhanVien = (NhanVien) session.getAttribute("nhanVien");
+        if (nhanVien == null){
+            return "redirect:/admin/login";
+        }else {
+            if (nhanVien.getChucVu().getId() == 2){
+                return "redirect:/admin/login";
+            }else {
+                model.addAttribute("nhanvien",nhanVien);
+                model.addAttribute("listVC",voucherService.getAll());
+                model.addAttribute("view","/Voucher/index.jsp");
+                return "index";
+            }
+        }
+
     }
 
 

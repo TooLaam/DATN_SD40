@@ -8,14 +8,12 @@ import com.example.sd40.entity.KhachHang.Dia_Chi;
 import com.example.sd40.entity.KhachHang.KhachHang;
 import com.example.sd40.entity.KhachHang.tinhThanhPho;
 import com.example.sd40.entity.San_pham.ChiTietSanPham;
-import com.example.sd40.entity.Voucher.Voucher;
 import com.example.sd40.repository.HoaDon.HoaDonChiTietRepository;
 import com.example.sd40.repository.HoaDon.HoaDonRepository;
 import com.example.sd40.repository.KhachHang.*;
 import com.example.sd40.service.KhachHang.KhachHangCusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;

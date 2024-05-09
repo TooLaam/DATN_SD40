@@ -1,14 +1,10 @@
 package com.example.sd40.repository.ThongKe;
 
 import com.example.sd40.entity.Hoa_don.HoaDon;
-import com.example.sd40.entity.ThongKe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 @Repository

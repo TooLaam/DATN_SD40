@@ -1,7 +1,6 @@
 package com.example.sd40.service.SanPham;
 
 import com.example.sd40.entity.San_pham.GiamGIa;
-
 import java.util.List;
 
 public interface GiamGiaService {

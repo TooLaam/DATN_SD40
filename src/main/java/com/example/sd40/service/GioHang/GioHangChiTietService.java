@@ -1,9 +1,7 @@
 package com.example.sd40.service.GioHang;
 
-import com.example.sd40.entity.Gio_hang.GioHang;
 import com.example.sd40.entity.Gio_hang.GioHangChiTiet;
 import org.springframework.data.repository.query.Param;
-
 import java.util.List;
 
 public interface GioHangChiTietService {

@@ -1,11 +1,12 @@
 package com.example.sd40.controller.SanPhamController;
 
+import com.example.sd40.entity.NhanVien.NhanVien;
 import com.example.sd40.entity.San_pham.ChiTietSanPham;
 import com.example.sd40.entity.San_pham.ChiTietSanPhamMauSacHinhAnh;
 import com.example.sd40.entity.San_pham.SanPham;
 import com.example.sd40.service.SanPham.*;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -50,13 +50,19 @@ public class CTSPController {
 
     @GetMapping("/hienthi/{id}")
     public String hienThi(Model model,
-                          @PathVariable("id") Long id
+                          @PathVariable("id") Long id, HttpSession session
                           ){
-        model.addAttribute("sp",sanPhamService.detail(id));
-        model.addAttribute("listMS",ctspmshaService.findMSTheoSPDangDung(id));
-        model.addAttribute("listHA", ctspmshaService.getAllHinhAnhbyIDSP(id));
-        model.addAttribute("view","/SanPham/SanPham/CTSP.jsp");
-        return "index";
+        NhanVien nhanVien = (NhanVien) session.getAttribute("nhanVien");
+        if (nhanVien == null){
+            return "redirect:/admin/login";
+        }else {
+            model.addAttribute("nhanvien",nhanVien);
+            model.addAttribute("sp",sanPhamService.detail(id));
+            model.addAttribute("listMS",ctspmshaService.findMSTheoSPDangDung(id));
+            model.addAttribute("listHA", ctspmshaService.getAllHinhAnhbyIDSP(id));
+            model.addAttribute("view","/SanPham/SanPham/CTSP.jsp");
+            return "index";
+        }
     }
 
     @GetMapping("/hienthiKC/{id}/{ms}")
@@ -80,14 +86,21 @@ public class CTSPController {
 
     @GetMapping("/hienThiChinhSuaMauSac/{id}")
     public String themMauSac(Model model,
-                            @PathVariable("id") Long id
+                            @PathVariable("id") Long id,HttpSession session
 
     ){
-        model.addAttribute("sp",sanPhamService.detail(id));
-        model.addAttribute("listMSDangCo",ctspmshaService.findMSTheoSP(id));
-        model.addAttribute("listMSChuaCo",ctspmshaService.getMSNotInCTSPMSByIdsp(id));
-        model.addAttribute("view","/SanPham/SanPham/themMS.jsp");
-        return "index";
+        NhanVien nhanVien = (NhanVien) session.getAttribute("nhanVien");
+        if (nhanVien == null){
+            return "redirect:/admin/login";
+        }else {
+            model.addAttribute("nhanvien",nhanVien);
+            model.addAttribute("sp",sanPhamService.detail(id));
+            model.addAttribute("listMSDangCo",ctspmshaService.findMSTheoSP(id));
+            model.addAttribute("listMSChuaCo",ctspmshaService.getMSNotInCTSPMSByIdsp(id));
+            model.addAttribute("view","/SanPham/SanPham/themMS.jsp");
+            return "index";
+        }
+
     }
 
 
@@ -167,16 +180,23 @@ public class CTSPController {
     @GetMapping("/hienthithemkc/{idsp}/{idms}")
     public String hienthithemkc(Model model,
                              @PathVariable("idsp") Long idsp,
-                             @PathVariable("idms") Long idms
+                             @PathVariable("idms") Long idms,HttpSession session
 
     ){
-        ChiTietSanPhamMauSacHinhAnh chiTietSanPhamMauSacHinhAnh = ctspmshaService.getHAbySPandMS(idsp,idms);
-        model.addAttribute("sp",sanPhamService.detail(idsp));
-        model.addAttribute("ms",mauSacService.detail(idms));
-        model.addAttribute("listKCChuaCo",ctspService.findKCNotInCTSP(chiTietSanPhamMauSacHinhAnh.getId()));
-        model.addAttribute("listKCDangCo",ctspService.findCTSP2(chiTietSanPhamMauSacHinhAnh.getId()));
-        model.addAttribute("view","/SanPham/SanPham/themKC.jsp");
-        return "index";
+        NhanVien nhanVien = (NhanVien) session.getAttribute("nhanVien");
+        if (nhanVien == null){
+            return "redirect:/admin/login";
+        }else {
+            ChiTietSanPhamMauSacHinhAnh chiTietSanPhamMauSacHinhAnh = ctspmshaService.getHAbySPandMS(idsp,idms);
+            model.addAttribute("nhanvien",nhanVien);
+            model.addAttribute("sp",sanPhamService.detail(idsp));
+            model.addAttribute("ms",mauSacService.detail(idms));
+            model.addAttribute("listKCChuaCo",ctspService.findKCNotInCTSP(chiTietSanPhamMauSacHinhAnh.getId()));
+            model.addAttribute("listKCDangCo",ctspService.findCTSP2(chiTietSanPhamMauSacHinhAnh.getId()));
+            model.addAttribute("view","/SanPham/SanPham/themKC.jsp");
+            return "index";
+        }
+
     }
 
     @GetMapping("/detailKC/{idsp}/{idms}/{idkc}")
@@ -235,12 +255,19 @@ public class CTSPController {
     }
 
     @GetMapping("/hienThiaddSP")
-    public String hienThiaddSP(Model model){
-        model.addAttribute("listTL",loaiGiayService.listTLConDung());
-        model.addAttribute("listTH",thuongHieuService.listTLConDung());
-        model.addAttribute("listGG",giamGiaService.listGGConDung());
-        model.addAttribute("view","/SanPham/SanPham/addSP.jsp");
-        return "index";
+    public String hienThiaddSP(Model model,HttpSession session){
+        NhanVien nhanVien = (NhanVien) session.getAttribute("nhanVien");
+        if (nhanVien == null){
+            return "redirect:/admin/login";
+        }else {
+            model.addAttribute("nhanvien",nhanVien);
+            model.addAttribute("listTL",loaiGiayService.listTLConDung());
+            model.addAttribute("listTH",thuongHieuService.listTLConDung());
+            model.addAttribute("listGG",giamGiaService.listGGConDung());
+            model.addAttribute("view","/SanPham/SanPham/addSP.jsp");
+            return "index";
+        }
+
     }
     @PostMapping("/addSP")
     public ResponseEntity<?> addSP(@RequestParam("ten")String ten,
@@ -282,21 +309,33 @@ public class CTSPController {
 
     @GetMapping("/giamGia/{id}")
     public String giamGia(Model model,
-                          @PathVariable("id") Long id
+                          @PathVariable("id") Long id,HttpSession session
 
     ){
-        SanPham sanPham = sanPhamService.detail(id);
+        NhanVien nhanVien = (NhanVien) session.getAttribute("nhanVien");
+        if (nhanVien == null){
+            return "redirect:/admin/login";
+        }else {
+            if (nhanVien.getChucVu().getId() == 2){
+                return "redirect:/admin/login";
+            }else {
+                SanPham sanPham = sanPhamService.detail(id);
+                if (sanPham.getGiamGIa() == null){
+                    model.addAttribute("sp",sanPhamService.detail(id));
+                    model.addAttribute("listGG",giamGiaService.getAll());
+                    model.addAttribute("nhanvien",nhanVien);
+                    model.addAttribute("view","/SanPham/SanPham/giamGia.jsp");
+                    return "index";
+                }
+                model.addAttribute("sp",sanPhamService.detail(id));
+                model.addAttribute("listGG",giamGiaService.findByIDSP(id));
+                model.addAttribute("nhanvien",nhanVien);
+                model.addAttribute("view","/SanPham/SanPham/giamGia.jsp");
+                return "index";
+            }
 
-        if (sanPham.getGiamGIa() == null){
-            model.addAttribute("sp",sanPhamService.detail(id));
-            model.addAttribute("listGG",giamGiaService.getAll());
-            model.addAttribute("view","/SanPham/SanPham/giamGia.jsp");
-            return "index";
         }
-        model.addAttribute("sp",sanPhamService.detail(id));
-        model.addAttribute("listGG",giamGiaService.findByIDSP(id));
-        model.addAttribute("view","/SanPham/SanPham/giamGia.jsp");
-        return "index";
+
     }
     @PostMapping("/updategiamGia/{id}")
     public String UpdateGiamGia(Model model,

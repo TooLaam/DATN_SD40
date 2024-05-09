@@ -1,10 +1,6 @@
 package com.example.sd40.controller.KhachHangFEController;
 
 import com.example.sd40.entity.Gio_hang.GioHangChiTiet;
-import com.example.sd40.entity.KhachHang.DiaChiChiTiet;
-import com.example.sd40.entity.KhachHang.Dia_Chi;
-import com.example.sd40.entity.San_pham.ChiTietSanPham;
-import com.example.sd40.entity.San_pham.ChiTietSanPhamMauSacHinhAnh;
 import com.example.sd40.service.GioHang.GioHangChiTietService;
 import com.example.sd40.service.GioHang.GioHangService;
 import com.example.sd40.service.KhachHang.KhachHangCusService;

@@ -1,17 +1,15 @@
 package com.example.sd40.controller.SanPhamController;
 
-import com.example.sd40.entity.San_pham.KichCo;
+import com.example.sd40.entity.NhanVien.NhanVien;
 import com.example.sd40.entity.San_pham.TheLoai;
-
-import com.example.sd40.entity.San_pham.ThuongHieu;
 import com.example.sd40.service.SanPham.LoaiGiayService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.sql.Date;
 import java.text.ParseException;
 import java.util.List;
@@ -23,10 +21,16 @@ public class TheLoaiController {
     LoaiGiayService loaiGiayService;
 
     @GetMapping("/index")
-    public String getAll(Model model){
-        model.addAttribute("listTL",loaiGiayService.findAll());
-        model.addAttribute("view","/SanPham/TheLoai/index.jsp");
-        return "index";
+    public String getAll(Model model, HttpSession session){
+        NhanVien nhanVien = (NhanVien) session.getAttribute("nhanVien");
+        if (nhanVien == null){
+            return "redirect:/admin/login";
+        }else {
+            model.addAttribute("nhanvien",nhanVien);
+            model.addAttribute("listTL",loaiGiayService.findAll());
+            model.addAttribute("view","/SanPham/TheLoai/index.jsp");
+            return "index";
+        }
     }
 
     @GetMapping("/detail/{id}")

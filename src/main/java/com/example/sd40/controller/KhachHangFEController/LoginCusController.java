@@ -5,9 +5,9 @@ import com.example.sd40.entity.KhachHang.KhachHang;
 import com.example.sd40.entity.Mail.MailStructure;
 import com.example.sd40.service.GioHang.GioHangService;
 import com.example.sd40.service.KhachHang.KhachHangCusService;
+import com.example.sd40.service.KhachHang.KhachHangService;
 import com.example.sd40.service.MailService.MailService;
 import jakarta.servlet.http.HttpSession;
-//import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +30,8 @@ public class LoginCusController {
     GioHangService gioHangService;
     @Autowired
     MailService mailService;
+    @Autowired
+    KhachHangService khachHangService;
 
 
 
@@ -111,7 +113,7 @@ public class LoginCusController {
         khachHang.setMatKhau(matKhau);
         khachHang.setNgayTao(currentDate);
         khachHang.setTrangThai(0);
-        khachHang.setMa("KH"+(khachHangCusService.getAllKhachHang().size()+1));
+        khachHang.setMa("KH00"+(khachHangService.IdKHCuoi()+1));
         khachHangCusService.updateKhachHang(khachHang);
 
 

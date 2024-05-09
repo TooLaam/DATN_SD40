@@ -5,6 +5,7 @@ import com.example.sd40.entity.Gio_hang.GioHangChiTiet;
 import com.example.sd40.entity.Hoa_don.HDCT;
 import com.example.sd40.entity.Hoa_don.HoaDon;
 import com.example.sd40.entity.Hoa_don.HoaDonChiTiet;
+import com.example.sd40.entity.Hoa_don.ThaoTacHoaDon;
 import com.example.sd40.entity.KhachHang.DiaChiChiTiet;
 import com.example.sd40.entity.KhachHang.Dia_Chi;
 import com.example.sd40.entity.KhachHang.KhachHang;
@@ -14,11 +15,9 @@ import com.example.sd40.entity.San_pham.ChiTietSanPhamMauSacHinhAnh;
 
 import com.example.sd40.service.HoaDon.HoaDonService;
 import com.example.sd40.service.HoaDon.PhuongThucThanhToanService;
-import com.example.sd40.repository.KhachHang.DiaChiChiTietRepository;
 import com.example.sd40.service.GioHang.GioHangChiTietService;
 import com.example.sd40.service.GioHang.GioHangService;
-import com.example.sd40.service.HoaDon.HoaDonService;
-import com.example.sd40.service.HoaDon.PhuongThucThanhToanService;
+import com.example.sd40.service.HoaDon.ThaoTacHoaDonService;
 import com.example.sd40.service.KhachHang.KhachHangCusService;
 import com.example.sd40.service.KhachHang.TinhThanhPhoService;
 import com.example.sd40.service.MailService.MailService;
@@ -29,7 +28,6 @@ import com.example.sd40.vnpay.PayMentVnpayRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpSession;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -68,7 +66,10 @@ public class HoaDonController {
     @Autowired
     VoucherService voucherService;
     @Autowired
+    ThaoTacHoaDonService thaoTacHoaDonService;
+    @Autowired
     GioHangService gioHangService;
+
 
     Date currentDate = new Date(System.currentTimeMillis());
 
@@ -254,6 +255,13 @@ public class HoaDonController {
                     gioHangChiTietService.deleteGHCTByCTSPAndIDKH(gioHang.getId(),hdct.getIdctsp());
                 }
             }
+            ThaoTacHoaDon thaoTacHoaDon = new ThaoTacHoaDon();
+            thaoTacHoaDon.setHoaDon(hoaDonService.detailHoaDon(idHoaDonMoiNhat));
+            thaoTacHoaDon.setThaoTac("Khách hàng mua hàng");
+            thaoTacHoaDon.setTrangThai(0);
+            thaoTacHoaDon.setNgayTao(currentDate);
+            thaoTacHoaDonService.save(thaoTacHoaDon);
+
             List<Object[]>objects = khachHangCusService.soLuongDaBan(idHoaDonMoiNhat);
             for (Object[] ob : objects){
                 khachHangCusService.capNhatSoLuongSPDaBan(Integer.valueOf(String.valueOf(ob[0])),Long.valueOf(String.valueOf(ob[1])));
@@ -338,6 +346,13 @@ public class HoaDonController {
         ChiTietSanPham chiTietSanPham = ctspService.findCTSP(ctspService.detail(idctsp).getChiTietSanPhamMauSacHinhAnh().getId(),ctspService.detail(idctsp).getKichCo().getId());
         voucherService.updateVoucher(idVoucher);
 
+        ThaoTacHoaDon thaoTacHoaDon = new ThaoTacHoaDon();
+        thaoTacHoaDon.setHoaDon(hoaDonService.detailHoaDon(idHoaDonMoiNhat));
+        thaoTacHoaDon.setThaoTac("Khách hàng mua hàng");
+        thaoTacHoaDon.setTrangThai(0);
+        thaoTacHoaDon.setNgayTao(currentDate);
+        thaoTacHoaDonService.save(thaoTacHoaDon);
+
         model.addAttribute("ctsp",ctspService.findCTSP(ctspService.detail(idctsp).getChiTietSanPhamMauSacHinhAnh().getId(),ctspService.detail(idctsp).getKichCo().getId()));
         model.addAttribute("soLuong",soLuong);
         List<HoaDonChiTiet> hoaDonChiTiets = khachHangCusService.listHDCT(idHoaDonMoiNhat);
@@ -409,6 +424,12 @@ public class HoaDonController {
         khachHangCusService.capNhatSoLuongSPDaBan(soLuong , hoaDonChiTiet.getChiTietSanPham().getChiTietSanPhamMauSacHinhAnh().getSanPham().getId());
         ChiTietSanPham chiTietSanPham = ctspService.findCTSP(ctspService.detail(idctsp).getChiTietSanPhamMauSacHinhAnh().getId(),ctspService.detail(idctsp).getKichCo().getId());
         voucherService.updateVoucher(idVoucher);
+        ThaoTacHoaDon thaoTacHoaDon = new ThaoTacHoaDon();
+        thaoTacHoaDon.setHoaDon(hoaDonService.detailHoaDon(idHoaDonMoiNhat));
+        thaoTacHoaDon.setThaoTac("Khách hàng mua hàng");
+        thaoTacHoaDon.setTrangThai(0);
+        thaoTacHoaDon.setNgayTao(currentDate);
+        thaoTacHoaDonService.save(thaoTacHoaDon);
 
 
         model.addAttribute("ctsp",ctspService.findCTSP(ctspService.detail(idctsp).getChiTietSanPhamMauSacHinhAnh().getId(),ctspService.detail(idctsp).getKichCo().getId()));
@@ -605,6 +626,13 @@ public class HoaDonController {
         for (Object[] ob : objects){
             khachHangCusService.capNhatSoLuongSPDaBan(Integer.valueOf(String.valueOf(ob[0])),Long.valueOf(String.valueOf(ob[1])));
         }
+        ThaoTacHoaDon thaoTacHoaDon = new ThaoTacHoaDon();
+        thaoTacHoaDon.setHoaDon(hoaDonService.detailHoaDon(idHoaDonMoiNhat));
+        thaoTacHoaDon.setThaoTac("Khách hàng mua hàng");
+        thaoTacHoaDon.setTrangThai(0);
+        thaoTacHoaDon.setNgayTao(currentDate);
+        thaoTacHoaDonService.save(thaoTacHoaDon);
+
         voucherService.updateVoucher(idVoucher);
         HoaDon hoaDon = khachHangCusService.detailHoaDon(idHoaDonMoiNhat);
         List<HoaDonChiTiet> hoaDonChiTiets = khachHangCusService.listHDCT(idHoaDonMoiNhat);
@@ -692,6 +720,12 @@ public class HoaDonController {
             for (Object[] ob : objects){
                 khachHangCusService.capNhatSoLuongSPDaBan(-Integer.valueOf(String.valueOf(ob[0])),Long.valueOf(String.valueOf(ob[1])));
             }
+            ThaoTacHoaDon thaoTacHoaDon = new ThaoTacHoaDon();
+            thaoTacHoaDon.setHoaDon(hoaDonService.detailHoaDon(idhd));
+            thaoTacHoaDon.setThaoTac("Khách hàng hủy đơn hàng");
+            thaoTacHoaDon.setTrangThai(0);
+            thaoTacHoaDon.setNgayTao(currentDate);
+            thaoTacHoaDonService.save(thaoTacHoaDon);
             return ResponseEntity.ok("ok");
 
         } catch (Exception e) {
@@ -703,6 +737,12 @@ public class HoaDonController {
     public ResponseEntity<?> hoanThanhHoaDonCus(@PathVariable("idHD")Long idhd) {
         try {
             khachHangCusService.hoanThanhHoaDon(idhd,currentDate,currentDate);
+            ThaoTacHoaDon thaoTacHoaDon = new ThaoTacHoaDon();
+            thaoTacHoaDon.setHoaDon(hoaDonService.detailHoaDon(idhd));
+            thaoTacHoaDon.setThaoTac("Khách hàng xác nhận hoàn thành đơn hàng");
+            thaoTacHoaDon.setTrangThai(0);
+            thaoTacHoaDon.setNgayTao(currentDate);
+            thaoTacHoaDonService.save(thaoTacHoaDon);
             return ResponseEntity.ok("ok");
 
         } catch (Exception e) {
@@ -714,6 +754,12 @@ public class HoaDonController {
     public ResponseEntity<?> hoanThanhHoaDonCusVNPAY(@PathVariable("idHD")Long idhd) {
         try {
             khachHangCusService.hoanThanhHoaDonVNPAY(idhd,currentDate);
+            ThaoTacHoaDon thaoTacHoaDon = new ThaoTacHoaDon();
+            thaoTacHoaDon.setHoaDon(hoaDonService.detailHoaDon(idhd));
+            thaoTacHoaDon.setThaoTac("Khách hàng xác nhận hoàn thành đơn hàng");
+            thaoTacHoaDon.setTrangThai(0);
+            thaoTacHoaDon.setNgayTao(currentDate);
+            thaoTacHoaDonService.save(thaoTacHoaDon);
             return ResponseEntity.ok("ok");
 
         } catch (Exception e) {

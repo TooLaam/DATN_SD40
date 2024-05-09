@@ -5,8 +5,8 @@ import com.example.sd40.repository.SanPham.GiamGiaRepository;
 import com.example.sd40.service.SanPham.GiamGiaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+
 @Service
 public class GiamGiaImpl implements GiamGiaService {
     @Autowired
