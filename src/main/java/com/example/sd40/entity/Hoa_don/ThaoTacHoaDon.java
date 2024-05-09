@@ -22,7 +22,7 @@ public class ThaoTacHoaDon {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "TrangThai")
+    @Column(name = "trang_thai")
     private Integer trangThai;
 
     @Column(name = "thao_tac")

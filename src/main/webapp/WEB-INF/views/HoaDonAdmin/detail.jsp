@@ -114,6 +114,7 @@
         <button style="background-color: red" onclick="huyHoaDon()" id="submitButton">Xác nhận hủy đơn hàng</button>
     </div>
 </section>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
      function btnHuy() {
@@ -170,6 +171,7 @@
             }
         });
         } };
+
 
 
 </script>

@@ -86,7 +86,7 @@
                                                     </td>
                                                     <td>
                                                         <a href="/billadmin/detailHoaDon/${mau.id}" class="btn btn-success">Chi tiết</a>
-                                                        <a onclick="lichSu(${mau.id})" class="btn btn-success">Lịch sử</a>
+                                                        <a onclick="openFormNew(${mau.id})" class="btn btn-success">Lịch sử</a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -434,6 +434,25 @@
 
     </div>
 </section>
+<form id="subForm">
+    <button id="closeBtn" onclick="closeFormNew()" type="button">&times;</button> <!-- Nút đóng -->
+    <h2 >Lịch sử thao tác</h2>
+    <div class="table-container">
+        <table id="dataTable" class="sub-table">
+            <thead>
+            <tr>
+                <th>Mã hóa đơn</th>
+                <th>Thao tác</th>
+                <th>Mã nhân viên</th>
+                <th>Tên nhân viên</th>
+                <th>Ngày</th>
+            </tr>
+            </thead>
+            <tbody id="lichSu">
+            </tbody>
+        </table>
+    </div>
+</form>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -466,5 +485,64 @@
     }
     function lichSu(idhd){
 
+    }
+
+    function openFormNew(idhd) {
+        document.getElementById("subForm").style.display = "block";
+        $('#lichSu').empty();
+        $.ajax({
+            type: "GET",
+            url: "/billadmin/lichSu/" +idhd,
+            success: function (response) {
+
+                $.each(response, function (index, data) {
+                    var maHD = data.hoaDon.maHoaDon;
+                    var thaoTac = data.thaoTac;
+                    var maNV = data.nhanVien ? data.nhanVien.ma : "N/A"; // Kiểm tra nếu nhanVien không null
+                    var tenNV = data.nhanVien ? data.nhanVien.hoTen : "N/A"; // Kiểm tra nếu nhanVien không null
+                    var ngay = data.ngayTao;
+
+                    var linkHTML = ' <tr> <td>'+maHD+'</td>' +
+                        ' <td>'+thaoTac+'</td>' +
+                        ' <td>'+maNV+'</td>' +
+                        ' <td>'+tenNV+'</td>' +
+                        ' <td>'+chuyendoingay(ngay)+'</td> </tr>';
+
+                    $('#lichSu').append(linkHTML);
+
+                });
+            },
+            error: function (xhr, status, error) {
+                // Xử lý lỗi
+                console.error("Error occurred while fetching data: " + error);
+            }
+        });
+
+    };
+
+    function closeFormNew() {
+        document.getElementById("subForm").style.display = "none";
+    };
+
+    function chuyendoingay(dateString) {
+        // Chuyển đổi chuỗi thành đối tượng Date
+        var dateObject = new Date(dateString);
+
+        // Lấy các giá trị
+        var year = dateObject.getFullYear();
+        var month = dateObject.getMonth() + 1; // Tháng bắt đầu từ 0 nên cần cộng thêm 1
+        var day = dateObject.getDate();
+        var hours = dateObject.getHours();
+        var minutes = dateObject.getMinutes();
+
+        // Format các giá trị
+        month = month < 10 ? '0' + month : month; // Thêm số 0 phía trước nếu tháng nhỏ hơn 10
+        day = day < 10 ? '0' + day : day; // Thêm số 0 phía trước nếu ngày nhỏ hơn 10
+        hours = hours < 10 ? '0' + hours : hours; // Thêm số 0 phía trước nếu giờ nhỏ hơn 10
+        minutes = minutes < 10 ? '0' + minutes : minutes; // Thêm số 0 phía trước nếu phút nhỏ hơn 10
+
+
+        // Trả về chuỗi định dạng ngày/tháng/năm giờ/phút/giây
+        return day + "/" + month + "/" + year + " " + hours + ":" + minutes;
     }
 </script>

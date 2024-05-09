@@ -209,6 +209,11 @@ public class HoaDonAdminController {
         return ResponseEntity.ok("ko");
     }
 
+    @GetMapping("/lichSu/{idHD}")
+    public ResponseEntity<?> lichSu(@PathVariable("idHD")Long idHD){
+        List<ThaoTacHoaDon> thaoTacHoaDons = thaoTacHoaDonService.getAllByHoaDon(idHD);
+        return new ResponseEntity<>(thaoTacHoaDons, HttpStatus.OK);
+    }
 
 }
 
