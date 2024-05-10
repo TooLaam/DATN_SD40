@@ -142,6 +142,8 @@
                                                     <td><p style="color: #7E72B1">Chờ xác nhận</p></td>
                                                     <td>
                                                         <a href="/billadmin/detailHoaDon/${mau.id}" class="btn btn-success">Chi tiết</a>
+                                                        <a onclick="openFormNew(${mau.id})" class="btn btn-success">Lịch sử</a>
+
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -197,6 +199,8 @@
                                                     <td><p style="color: #90A860">Đã xác nhận</p></td>
                                                     <td>
                                                         <a href="/billadmin/detailHoaDon/${mau.id}" class="btn btn-success">Chi tiết</a>
+                                                        <a onclick="openFormNew(${mau.id})" class="btn btn-success">Lịch sử</a>
+
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -252,6 +256,8 @@
                                                     <td><p style="color: #A074A2">Chờ giao hàng</p></td>
                                                     <td>
                                                         <a href="/billadmin/detailHoaDon/${mau.id}" class="btn btn-success">Chi tiết</a>
+                                                        <a onclick="openFormNew(${mau.id})" class="btn btn-success">Lịch sử</a>
+
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -307,6 +313,8 @@
                                                     <td><p style="color: #E5F172">Đang giao hàng</p></td>
                                                     <td>
                                                         <a href="/billadmin/detailHoaDon/${mau.id}" class="btn btn-success">Chi tiết</a>
+                                                        <a onclick="openFormNew(${mau.id})" class="btn btn-success">Lịch sử</a>
+
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -362,6 +370,8 @@
                                                     <td><p style="color: #8DC894">Thành công</p></td>
                                                     <td>
                                                         <a href="/billadmin/detailHoaDon/${mau.id}" class="btn btn-success">Chi tiết</a>
+                                                        <a onclick="openFormNew(${mau.id})" class="btn btn-success">Lịch sử</a>
+
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -417,6 +427,8 @@
                                                     <td><p style="color: #EE6A6A">Hủy</p></td>
                                                     <td>
                                                         <a href="/billadmin/detailHoaDon/${mau.id}" class="btn btn-success">Chi tiết</a>
+                                                        <a onclick="openFormNew(${mau.id})" class="btn btn-success">Lịch sử</a>
+
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -494,7 +506,6 @@
             type: "GET",
             url: "/billadmin/lichSu/" +idhd,
             success: function (response) {
-
                 $.each(response, function (index, data) {
                     var maHD = data.hoaDon.maHoaDon;
                     var thaoTac = data.thaoTac;
