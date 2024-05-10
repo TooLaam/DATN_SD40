@@ -139,7 +139,7 @@ public class HoaDonController {
                                ){
 
         Long IDHoaDonCuoi = khachHangCusService.idHoaDonMoiTao();
-        String maHDMoi = "HD000"+(IDHoaDonCuoi+1);
+        String maHDMoi = "HD00"+(IDHoaDonCuoi+1);
 
         CreatePayMentMethodTransferRequest request1 = new CreatePayMentMethodTransferRequest();
         request1.setVnp_Ammount(String.valueOf(tongTien));   // tổng tiền hoaDon.getTongTien
@@ -191,7 +191,7 @@ public class HoaDonController {
     ){
         List<GioHangChiTiet> gioHangChiTiets = (List<GioHangChiTiet>) session.getAttribute("gioHangChiTiets");
         Long IDHoaDonCuoi = khachHangCusService.idHoaDonMoiTao();
-        String maHDMoi = "HD000"+(IDHoaDonCuoi+1);
+        String maHDMoi = "HD00"+(IDHoaDonCuoi+1);
 
         CreatePayMentMethodTransferRequest request1 = new CreatePayMentMethodTransferRequest();
         request1.setVnp_Ammount(String.valueOf(tongTien));   // tổng tiền hoaDon.getTongTien
@@ -329,7 +329,7 @@ public class HoaDonController {
                             @RequestParam("giaDaGiam")BigDecimal giaDaGiam,Model model
     ) throws MessagingException {
         Long IDHoaDonCuoi = khachHangCusService.idHoaDonMoiTao();
-        String maHDMoi = "HD000"+(IDHoaDonCuoi+1);
+        String maHDMoi = "HD00"+(IDHoaDonCuoi+1);
         khachHangCusService.saveHD(0, currentDate, tongTien, phamTramKhuyenMai, idVoucher, "Hóa đơn thanh toán khi nhận hàng", tongTienGiam, Long.valueOf(1), tenNguoiNhan, sdt, diaCHiChiTiet + ",Tỉnh/Thành phố: " + diaChiNguoiNhan, tongTienSanPhamChuaGiam, phiShip,currentDate,maHDMoi);
         Long idHoaDonMoiNhat = khachHangCusService.idHoaDonMoiTao();
         HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
@@ -407,7 +407,7 @@ public class HoaDonController {
     ) throws MessagingException {
         Long idKH = (Long) session.getAttribute("idKhachHang");
         Long IDHoaDonCuoi = khachHangCusService.idHoaDonMoiTao();
-        String maHDMoi = "HD000"+(IDHoaDonCuoi+1);
+        String maHDMoi = "HD00"+(IDHoaDonCuoi+1);
         KhachHang khachHang = khachHangCusService.detailKhachHang(Long.valueOf(idKH));
         khachHangCusService.saveHDKhachHang(0, currentDate, tongTien, phamTramKhuyenMai, idVoucher, "Hóa đơn thanh toán khi nhận hàng", tongTienGiam, Long.valueOf(1), tenNguoiNhan, sdt, diaChiNguoiNhan+", Tỉnh/Thành phố: "+tinh, tongTienSanPhamChuaGiam, phiShip,idKH,currentDate,maHDMoi,null);
         Long idHoaDonMoiNhat = khachHangCusService.idHoaDonMoiTao();

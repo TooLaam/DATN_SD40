@@ -409,6 +409,8 @@
                 alert("Vui lòng nhập đầy đủ thông tin !!!")
                 return;
             }else {
+                var cf = confirm("Bạn muốn thêm mới ???");
+                if (cf == true) {
                 var formData = new FormData();
                 formData.append('idkc', kichCo);
                 formData.append('idsp', idsp);
@@ -423,15 +425,14 @@
                     contentType: false, // Không cần set contentType
                     processData: false, // Không cần xử lý dữ liệu
                     success: function (response) {
-                        var cf = confirm("Bạn muốn thêm mới ???");
-                        if (cf == true) {
+
                             alert("Thêm mới thành công");
                             window.location.href = "/ctsp/hienthithemkc/"+idsp+"/"+idms;
                         }
 
 
-                    }
+
                 });
-            }
+            }}
     }
 </script>

@@ -40,7 +40,7 @@ public interface SanPhamRepository extends JpaRepository<SanPham,Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "insert into san_pham(ten,mo_ta,ngay_tao,ngay_sua,hinh_anh_dai_dien,trang_thai,thuong_hieu_id,the_loai_id,giam_gia_id) values(?1,?2,getdate(),getdate(),?3,0,?4,?5,?6)",nativeQuery = true)
+    @Query(value = "insert into san_pham(ten,mo_ta,ngay_tao,ngay_sua,hinh_anh_dai_dien,trang_thai,thuong_hieu_id,the_loai_id,giam_gia_id,so_luong_da_ban) values(?1,?2,getdate(),getdate(),?3,0,?4,?5,?6,0)",nativeQuery = true)
     void save(String ten,String moTa,String hinhAnh,Long thuongHieu,Long theLoai,Long giamGia);
 
     @Query("SELECT s.id,s.hinhAnhDaiDien, s.ten,th.ten,tl.ten FROM SanPham s join ThuongHieu th on th.id = s.thuongHieu.id " +
