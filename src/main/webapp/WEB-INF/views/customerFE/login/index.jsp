@@ -82,6 +82,42 @@
             z-index: 9998; /* Lớp dưới form-container */
             display: none; /* Mặc định ẩn */
         }
+        .loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Màu đen có độ mờ 50% */
+            z-index: 9999; /* Đảm bảo overlay nằm trên tất cả các phần tử khác */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .loader {
+            border: 16px solid #f3f3f3; /* Màu nền của loader */
+            border-top: 16px solid #3498db; /* Màu của phần loader */
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Màu đen mờ với độ trong suốt 50% */
+            z-index: 9998; /* Lớp dưới form-container */
+            display: none; /* Mặc định ẩn */
+        }
     </style>
 </head>
 
@@ -109,7 +145,7 @@
                         <span>Bạn chưa có tài khoản?</span>
                         <a href="/signup" class="link-text">Đăng ký</a>
                     </div>
-                    <form action="/loginOK" method="post">
+<%--                    <form action="/loginOK" method="post">--%>
                         <div class="mb-3">
                             <label for="exampleInputUsername"  class="form-label">Tài khoản</label>
                             <input class="form-control" required id="exampleInputUsername" name="taiKhoan" />
@@ -118,17 +154,15 @@
                             <label for="exampleInputPassword" class="form-label">Mật khẩu</label>
                             <input type="password" required class="form-control" id="exampleInputPassword" name="matKhau"/>
                         </div>
-                        <c:if test="${erCheckCustomer != null}" >
-                            <p style="color: red">${erCheckCustomer}</p>
-                        </c:if>
+
+                         <input style="display: none" value="${sp}" id="idsp">
                         <a style="cursor: pointer;" onclick="showNewForm()"><i>Quên mật khẩu?</i></a><br>
                         <br>
                         <div class="d-grid">
-                            <button type="submit" class="btn login">Đăng nhập</button>
+                            <button type="submit" onclick="dangNhap()" class="btn login">Đăng nhập</button>
                         </div>
 
                         <a href="/home"><img src="/assets/img/SD40logo.png" class="logo" style="margin-top: 6rem;" alt="logo" /></a>
-                    </form>
                 </div>
             </div>
             <div class="col-1"></div>
@@ -138,9 +172,7 @@
 </div>
 <div class="overlay" id="overlay"></div>
 <div class="form-container" id="new-form">
-    <!-- Nút đóng -->
     <span class="close-btn" onclick="closeNewForm()">X</span>
-    <!-- Các trường và nút của form mới -->
     <h2 class="form-title">Quên mật khẩu</h2>
     <div class="form-group">
         <label for="email">Email:</label>
@@ -149,6 +181,9 @@
     <div class="form-group">
         <input type="submit" onclick="QuenMatKhau()" value="Gửi">
     </div>
+</div>
+<div id="loader-overlay" class="loader-overlay" style="display: none;">
+    <div class="loader"></div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -173,17 +208,20 @@
                 alert('Vui lòng nhập lại email') ;
                 return;
             }else {
+                document.getElementById('loader-overlay').style.display = 'flex';
             var formData = new FormData();
             formData.append('email', email);
             $.ajax({
                 type: "POST",
-                url: "/quenMatKhau",
+                url: "/quenMatKhauCus",
                 data: formData,
                 contentType: false, // Không cần set contentType
                 processData: false, // Không cần xử lý dữ liệu
                 success: function (response) {
+                    document.getElementById('loader-overlay').style.display = 'none';
                     if (response === "ok") {
                         alert("Thông tin đã được gửi về Email của bạn !!!");
+                        closeNewForm();
                         return;
                     } else {
                             alert("Email chưa đăng ký !!!");
@@ -193,6 +231,45 @@
                 }
             });
         }}
+    };
+
+    function dangNhap() {
+        var taiKhoan = document.getElementById('exampleInputUsername').value;
+        var matKhau = document.getElementById('exampleInputPassword').value;
+        var idsp = document.getElementById('idsp').value;
+        if (taiKhoan.trim() ===''||matKhau.trim()===''){
+            alert("Vui lòng nhập đầy đủ tài khoản mật khẩu !!!")
+            return;
+        }else {
+                var formData = new FormData();
+                formData.append('taiKhoan', taiKhoan);
+                formData.append('matKhau', matKhau);
+                $.ajax({
+                    type: "POST",
+                    url: "/loginOK",
+                    data: formData,
+                    contentType: false, // Không cần set contentType
+                    processData: false, // Không cần xử lý dữ liệu
+                    success: function (response) {
+                        document.getElementById('loader-overlay').style.display = 'none';
+                        if (response === "loi"){
+                            alert("Tài khoản hoặc mật khẩu không đúng");
+                            return;
+                        }
+                        else {
+                            if (idsp ==0){
+                                window.location.href = "/home";
+                                alert("Đăng nhập thành công !!!")
+                                return;
+                            }else {
+                                window.location.href = "/detailsanphamcus/"+idsp;
+                                return;
+                            }
+                        }
+
+                    }
+                });
+            }
     };
 </script>
 </body>

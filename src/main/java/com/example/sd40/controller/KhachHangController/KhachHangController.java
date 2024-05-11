@@ -3,6 +3,7 @@ package com.example.sd40.controller.KhachHangController;
 
 import com.example.sd40.entity.KhachHang.KhachHang;
 import com.example.sd40.entity.NhanVien.NhanVien;
+import com.example.sd40.service.KhachHang.KhachHangCusService;
 import com.example.sd40.service.KhachHang.KhachHangService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ import java.util.List;
 public class KhachHangController {
     @Autowired
     KhachHangService khachHangService;
+    @Autowired
+    KhachHangCusService khachHangCusService;
 
     @GetMapping("/index")
     public String getAll(Model model, HttpSession session){
@@ -61,9 +64,13 @@ public class KhachHangController {
                                     @RequestParam("matKhau")String matKhau
     ) throws ParseException {
         List<KhachHang> khachHangs = khachHangService.findByUserNameUpdate(taiKhoan,id);
+        List<KhachHang> khachHangs1 = khachHangService.findByEmailUpdate(email,id);
         if (!khachHangs.isEmpty()) {
             return ResponseEntity.ok("errTrungTen");
-        } else {
+        }else if (!khachHangs1.isEmpty()){
+            return ResponseEntity.ok("errTrungEmail");
+        }
+        else {
             KhachHang khachHang = khachHangService.detail(id);
 
             khachHang.setHoTen(ten);
@@ -94,8 +101,11 @@ public class KhachHangController {
         String maKHMoi = "KH00"+(IDKHCuoi+1);
 
         List<KhachHang> khachHangs = khachHangService.findByUserName(taiKhoan);
+        List<KhachHang> khachHangs1 = khachHangService.findByEmal(email);
         if (!khachHangs.isEmpty()) {
             return ResponseEntity.ok("errTrungTen");
+        }else if (!khachHangs1.isEmpty()){
+            return ResponseEntity.ok("errTrungEmail");
         } else {
             KhachHang khachHang = new KhachHang();
 

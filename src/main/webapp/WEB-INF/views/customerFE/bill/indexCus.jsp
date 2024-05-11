@@ -259,6 +259,7 @@
                 <div><span class="name"><strong>Voucher: ${v[1]}</strong>   </span> <span class="price" style="color:red;">(-${v[2]}%)</span> </div>
                 <div style="color:red;" >Điều kiện: </div>
                 <div style="margin-left: 20px">
+                    <span class="status">Số lượng : ${v[5]}</span><br>
                     <span class="status">Giảm tối đa: <fmt:formatNumber value="${v[3]}" pattern="###,###"/>đ,  </span>
                     <span class="status">Giá trị tối thiểu của đơn hàng: <fmt:formatNumber value="${v[4]}" pattern="###,###"/>đ </span>
                 </div>
@@ -387,7 +388,7 @@
         }
 
         else {
-            // document.getElementById('loader-overlay').style.display = 'flex';
+            document.getElementById('loader-overlay').style.display = 'flex';
             errorText.style.display = 'none';
             document.getElementById('addForm').submit(); // Submit form
         }
@@ -423,7 +424,7 @@
         }
 
         else {
-            // document.getElementById('loader-overlay').style.display = 'flex';
+            document.getElementById('loader-overlay').style.display = 'flex';
             errorText.style.display = 'none';
             document.getElementById('addFormVN').submit(); // Submit form
         }
@@ -821,11 +822,19 @@
             voucherDetail.innerHTML = htmlvoucherDetail;
             tenVoucher.innerHTML = selectedVoucher.ten;
             hiddenForm.style.display = 'none';
-            phamTramKhuyenMai.value = selectedVoucher.phamTramGiam;
-            phamTramKhuyenMaiVN.value = selectedVoucher.phamTramGiam;
-            idVoucher.value = selectedVoucher.id
-            idVoucherVN.value = selectedVoucher.id
-            console.log("Sản phẩm được chọn:", selectedVoucher);
+            var tongtienSPDaGiam = document.getElementById('tongtienSPDaGiam').textContent;
+            var giaTriSauKhiLoaiBo = tongtienSPDaGiam.replace(/[đ.]/g, '');
+            if (parseFloat(giaTriSauKhiLoaiBo)>parseFloat(selectedVoucher.donToiThieu)||parseFloat(tongtienSPDaGiam)==parseFloat(selectedVoucher.donToiThieu)){
+                document.getElementById('phamTramKhuyenMai').value = selectedVoucher.phamTramGiam;
+                document.getElementById('phamTramKhuyenMaiVN').value = selectedVoucher.phamTramGiam;
+                document.getElementById('idVoucherVN').value = selectedVoucher.id
+                document.getElementById('idVoucher').value = selectedVoucher.id
+            }else {
+                document.getElementById('phamTramKhuyenMai').value = 0;
+                document.getElementById('phamTramKhuyenMaiVN').value = 0;
+                document.getElementById('idVoucherVN').value = ${voucher0};
+                document.getElementById('idVoucher').value = ${voucher0};
+            }
         } else {
             console.log("Chưa chọn sản phẩm nào.");
             alert("Vui lòng chọn voucher !!")
@@ -860,6 +869,19 @@
             inputField1VN.value = inputField.value;
             calculateTotalPrice();
             layThongTinThanhToan2();
+            var tongtienSPDaGiam = document.getElementById('tongtienSPDaGiam').textContent;
+            var giaTriSauKhiLoaiBo = tongtienSPDaGiam.replace(/[đ.]/g, '');
+            if (parseFloat(giaTriSauKhiLoaiBo)>parseFloat(selectedVoucher.donToiThieu)||parseFloat(tongtienSPDaGiam)==parseFloat(selectedVoucher.donToiThieu)){
+                document.getElementById('phamTramKhuyenMai').value = selectedVoucher.phamTramGiam;
+                document.getElementById('phamTramKhuyenMaiVN').value = selectedVoucher.phamTramGiam;
+                document.getElementById('idVoucherVN').value = selectedVoucher.id
+                document.getElementById('idVoucher').value = selectedVoucher.id
+            }else {
+                document.getElementById('phamTramKhuyenMai').value = 0;
+                document.getElementById('phamTramKhuyenMaiVN').value = 0;
+                document.getElementById('idVoucherVN').value = ${voucher0};
+                document.getElementById('idVoucher').value = ${voucher0};
+            }
 
         });
 
@@ -872,6 +894,19 @@
                 inputField1VN.value = inputField.value
                 calculateTotalPrice();
                 layThongTinThanhToan2()
+                var tongtienSPDaGiam = document.getElementById('tongtienSPDaGiam').textContent;
+                var giaTriSauKhiLoaiBo = tongtienSPDaGiam.replace(/[đ.]/g, '');
+                if (parseFloat(giaTriSauKhiLoaiBo)>parseFloat(selectedVoucher.donToiThieu)||parseFloat(tongtienSPDaGiam)==parseFloat(selectedVoucher.donToiThieu)){
+                    document.getElementById('phamTramKhuyenMai').value = selectedVoucher.phamTramGiam;
+                    document.getElementById('phamTramKhuyenMaiVN').value = selectedVoucher.phamTramGiam;
+                    document.getElementById('idVoucherVN').value = selectedVoucher.id
+                    document.getElementById('idVoucher').value = selectedVoucher.id
+                }else {
+                    document.getElementById('phamTramKhuyenMai').value = 0;
+                    document.getElementById('phamTramKhuyenMaiVN').value = 0;
+                    document.getElementById('idVoucherVN').value = ${voucher0};
+                    document.getElementById('idVoucher').value = ${voucher0};
+                }
 
             }
         });

@@ -22,4 +22,8 @@ public interface KhachHangService {
 
     Long IdKHCuoi();
 
+    List<KhachHang> findByEmailUpdate(String ten,Long id);
+
+    List<KhachHang> findByEmal(String ten);
+
 }

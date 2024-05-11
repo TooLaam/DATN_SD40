@@ -172,5 +172,9 @@
 .red-background {
     background-color: #ccc !important;
 }
+.scroll-container {
+    max-height: 100%;
+    overflow-y: auto;
+}
 
 

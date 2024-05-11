@@ -15,6 +15,10 @@ public interface KhachHangRepository extends JpaRepository<KhachHang, Long> {
     List<KhachHang> findByUserName(String ten);
     @Query("select th from KhachHang th where th.taiKhoan =?1 and th.id not in (?2)")
     List<KhachHang> findByUserNameUpdate(String ten,Long id);
+    @Query("select th from KhachHang th where th.email =?1")
+    List<KhachHang> findByEmal(String ten);
+    @Query("select th from KhachHang th where th.email =?1 and th.id not in (?2)")
+    List<KhachHang> findByEmailUpdate(String ten,Long id);
     @Query(value = "select top(1) id from khach_hang order by id desc",nativeQuery = true)
     Long IdKHCuoi();
 }

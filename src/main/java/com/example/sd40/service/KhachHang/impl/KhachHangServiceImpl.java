@@ -48,4 +48,14 @@ public class KhachHangServiceImpl implements KhachHangService {
     public Long IdKHCuoi() {
         return khachHangRepository.IdKHCuoi();
     }
+
+    @Override
+    public List<KhachHang> findByEmailUpdate(String ten, Long id) {
+        return khachHangRepository.findByEmailUpdate(ten,id);
+    }
+
+    @Override
+    public List<KhachHang> findByEmal(String ten) {
+        return khachHangRepository.findByEmal(ten);
+    }
 }

@@ -264,6 +264,9 @@
                                 if (response === "errTrungTen") {
                                     alert("Tài khoản trùng trong danh sách. Vui lòng chọn tài khoản khác !!!");
                                     return;
+                                }else if (response === "errTrungEmail"){
+                                    alert("Email trùng trong danh sách. Vui lòng chọn email khác !!!");
+                                    return;
                                 } else {
                                     alert("Cập nhật thành công");
                                     window.location.href = "/khachhang/index";
@@ -323,7 +326,11 @@
                             if (response === "errTrungTen") {
                                 alert("Tài khoản trùng trong danh sách. Vui lòng chọn tài khoản khác !!!");
                                 return;
-                            } else {
+                            }else if (response === "errTrungEmail"){
+                                alert("Email trùng trong danh sách. Vui lòng chọn email khác !!!");
+                                return;
+                            }
+                            else {
                                 alert("Thêm thành công");
                                 window.location.href = "/khachhang/index";
                             }

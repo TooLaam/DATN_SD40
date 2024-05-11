@@ -236,7 +236,6 @@
                             Try our View in Your Room feature, manage registries and save
                             payment info.
                         </p>
-                        <img src="/assets/img/logo_appstore.png" id="logo_appstore"/>
                     </div>
                     <div class="col-md-4 col-6">
                         <p class="text_content_footer">Our Company</p>

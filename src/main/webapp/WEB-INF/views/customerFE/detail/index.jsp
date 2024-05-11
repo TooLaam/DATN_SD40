@@ -15,14 +15,17 @@
 <div class="container">
     <div class="row">
         <div class="col-6 row">
-            <div class="product-content-big-img col-9">
-                <img width="100%" src="/assets/img/product/${sp[2]}" alt="" />
+            <div class="product-content-big-img col-9" id="bigImgDiv" >
+                <img id="hinhAnhDaiDien" width="100%" src="/assets/img/product/${sp[2]}" alt="" />
             </div>
-            <div class="product-content-small-img col-3">
-                <c:forEach items="${listHA}" var="sp">
-                    <img width="100%" src="/assets/img/product/${sp.hinhAnh}" alt="" />
-                </c:forEach>
+            <div class="product-content-small-img col-3" id="smallImgDiv" >
+                <div class="scroll-container" id="scrollContainer">
+                    <c:forEach items="${listHA}" var="sp" varStatus="loop">
+                        <img width="100%" src="/assets/img/product/${sp.hinhAnh}" alt="" />
+                    </c:forEach>
+                </div>
             </div>
+
         </div>
         <div class="col-6">
 
@@ -102,7 +105,7 @@
             <p><span style="font-weight: bold;">Color: </span></p>
 
             <c:forEach items="${listMS}" var="ms">
-                <a id="mausac${ms[0]}" onclick="getDataForColor(${sp[0]},${ms[0]},${ms[3]},${ms[4]},${ms[5]})" class="btn btn-light ${ms[0]}" style="margin-left: 30px">
+                <a id="mausac${ms[0]}" onclick="getDataForColor(${sp[0]},${ms[0]},${ms[3]},${ms[4]},${ms[5]},'${ms[6]}')" class="btn btn-light ${ms[0]}" style="margin-left: 30px">
                     <img width="100%" style="width: 20px;height: 20px" src="/assets/img/color/${ms[2]}" alt="Icon" class="icon">
                     <span class="text">${ms[1]}</span>
                 </a>
@@ -193,8 +196,6 @@
             var mauSac = $("#mauSac").val();
             var soLuong = $("#inputField1").val();
             var hiensl = $("#hiengoc1").val();
-            console.log(soLuong+"--------------")
-            console.log(hiensl+"================")
             if (parseInt(soLuong)>parseInt(hiensl)){
                 alert("Số lượng sản phẩm không đủ")
                 return;
@@ -240,10 +241,6 @@
         var mauSac = document.getElementById('mauSac1').value;
         var soLuong = $("#inputField1").val();
         var hiensl = $("#hiengoc1").val();
-        console.log(soLuong+"--------------")
-        console.log(hiensl+"================")
-
-
         if (!kichCo || !mauSac) {
             alert("Vui lòng chọn màu săc và kích cỡ!"); // Hiển thị cảnh báo nếu có trường input không được điền đầy đủ
             return; // Dừng việc chuyển hướng nếu có lỗi
@@ -260,12 +257,14 @@
 
 
     var previousSelectedId = null;
-    function getDataForColor(idsp, idms,giaGoc,mucGiam,giaGiam) {
+    function getDataForColor(idsp, idms,giaGoc,mucGiam,giaGiam,hinhAnh) {
+
         document.getElementById('inputid').value = null;
         document.getElementById('inputid1').value = null;
+        $('#hinhAnhDaiDien').attr('src', '/assets/img/product/'+hinhAnh);
+
 
         var element = document.getElementById('mausac' + idms);
-
         if (previousSelectedId !== null) {
             var previousSelected = document.getElementById('mausac' + previousSelectedId);
             previousSelected.classList.remove('red-background'); // Xóa class red-background từ nút trước đó
@@ -330,5 +329,19 @@
         });
 
     }
+
+
+        matchSmallImgHeightToBigImgHeight();
+
+
+    function matchSmallImgHeightToBigImgHeight() {
+        var bigImgDiv = document.getElementById('hinhAnhDaiDien');
+        var smallImgDiv = document.getElementById('smallImgDiv');
+
+        var bigImgHeight = bigImgDiv.offsetHeight;
+        smallImgDiv.style.height = bigImgHeight + 'px';
+    }
+
+
 </script>
 

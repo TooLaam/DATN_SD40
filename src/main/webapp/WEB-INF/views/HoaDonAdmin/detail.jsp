@@ -93,8 +93,11 @@
                         </div>
                     </c:otherwise>
                 </c:choose>
-
             </div>
+            <c:if test="${HD.trangThai == 5}">
+                <div class="confirmationMessage1"><strong>Ghi chú : </strong>${HD.ghiChu}</div>
+
+            </c:if>
             <div>
                     <c:if test="${HD.trangThai == 0 || HD.trangThai == 1||HD.trangThai==2||HD.trangThai==3}">
                         <div class="btnTrangThai">
