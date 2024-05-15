@@ -38,7 +38,7 @@ public class VoucherImpl implements VoucherService {
     }
 
     @Override
-    public void updateVoucher(Long idVoucher) {
-        voucherRepository.updateVoucher(idVoucher);
+    public void updateVoucher(Long idVoucher,Integer soLuong) {
+        voucherRepository.updateVoucher(idVoucher,soLuong);
     }
 }

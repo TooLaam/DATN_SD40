@@ -91,12 +91,12 @@
                             </div>
                             <div>
                                 Ngày tạo :
-                                <input class="form-control" id="ngayTaoUpdate">
+                                <input class="form-control" id="ngayTaoUpdate" readonly>
                             </div>
 
                             <div>
                                 Ngày sửa gần nhất :
-                                <input class="form-control" id="ngaySuaUpdate">
+                                <input class="form-control" id="ngaySuaUpdate" readonly>
                             </div>
 
                             <div id="trangThaiUpdate">

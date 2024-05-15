@@ -267,7 +267,7 @@ public class HoaDonController {
                 khachHangCusService.capNhatSoLuongSPDaBan(Integer.valueOf(String.valueOf(ob[0])),Long.valueOf(String.valueOf(ob[1])));
             }
 
-            voucherService.updateVoucher(idVoucher);
+            voucherService.updateVoucher(idVoucher,1);
 
             HoaDon hoaDon = khachHangCusService.detailHoaDon(idHoaDonMoiNhat);
             List<HoaDonChiTiet> hoaDonChiTiets1 = khachHangCusService.listHDCT(idHoaDonMoiNhat);
@@ -344,7 +344,7 @@ public class HoaDonController {
         ctspService.truSanPhamSauKhiMua(soLuong,idctsp);
         khachHangCusService.capNhatSoLuongSPDaBan(soLuong , hoaDonChiTiet.getChiTietSanPham().getChiTietSanPhamMauSacHinhAnh().getSanPham().getId());
         ChiTietSanPham chiTietSanPham = ctspService.findCTSP(ctspService.detail(idctsp).getChiTietSanPhamMauSacHinhAnh().getId(),ctspService.detail(idctsp).getKichCo().getId());
-        voucherService.updateVoucher(idVoucher);
+        voucherService.updateVoucher(idVoucher,1);
 
         ThaoTacHoaDon thaoTacHoaDon = new ThaoTacHoaDon();
         thaoTacHoaDon.setHoaDon(hoaDonService.detailHoaDon(idHoaDonMoiNhat));
@@ -423,7 +423,7 @@ public class HoaDonController {
         ctspService.truSanPhamSauKhiMua(soLuong,idctsp);
         khachHangCusService.capNhatSoLuongSPDaBan(soLuong , hoaDonChiTiet.getChiTietSanPham().getChiTietSanPhamMauSacHinhAnh().getSanPham().getId());
         ChiTietSanPham chiTietSanPham = ctspService.findCTSP(ctspService.detail(idctsp).getChiTietSanPhamMauSacHinhAnh().getId(),ctspService.detail(idctsp).getKichCo().getId());
-        voucherService.updateVoucher(idVoucher);
+        voucherService.updateVoucher(idVoucher,1);
         ThaoTacHoaDon thaoTacHoaDon = new ThaoTacHoaDon();
         thaoTacHoaDon.setHoaDon(hoaDonService.detailHoaDon(idHoaDonMoiNhat));
         thaoTacHoaDon.setThaoTac("Khách hàng mua hàng");
@@ -633,7 +633,7 @@ public class HoaDonController {
         thaoTacHoaDon.setNgayTao(currentDate);
         thaoTacHoaDonService.save(thaoTacHoaDon);
 
-        voucherService.updateVoucher(idVoucher);
+        voucherService.updateVoucher(idVoucher,1);
         HoaDon hoaDon = khachHangCusService.detailHoaDon(idHoaDonMoiNhat);
         List<HoaDonChiTiet> hoaDonChiTiets = khachHangCusService.listHDCT(idHoaDonMoiNhat);
         model.addAttribute("HD",hoaDon);
@@ -672,6 +672,13 @@ public class HoaDonController {
         model.addAttribute("hoaDonThanhCong",khachHangCusService.listHoaDon(idKH,4));
         model.addAttribute("hoaDonHuy",khachHangCusService.listHoaDon(idKH,5));
         model.addAttribute("allHoaDon",khachHangCusService.getAllHDByIdKhachHang(idKH));
+        model.addAttribute("hoaDonChoXacNhanSize",khachHangCusService.listHoaDon(idKH,0).size());
+        model.addAttribute("hoaDonDaXacNhanSize",khachHangCusService.listHoaDon(idKH,1).size());
+        model.addAttribute("hoaDonChoGiaoSize",khachHangCusService.listHoaDon(idKH,2).size());
+        model.addAttribute("hoaDonDangGiaoSize",khachHangCusService.listHoaDon(idKH,3).size());
+        model.addAttribute("hoaDonThanhCongSize",khachHangCusService.listHoaDon(idKH,4).size());
+        model.addAttribute("hoaDonHuySize",khachHangCusService.listHoaDon(idKH,5).size());
+        model.addAttribute("allHoaDonSize",khachHangCusService.getAllHDByIdKhachHang(idKH).size());
         model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(idKH).size());
         model.addAttribute("idkh",idKH );
 
@@ -726,6 +733,8 @@ public class HoaDonController {
             thaoTacHoaDon.setTrangThai(0);
             thaoTacHoaDon.setNgayTao(currentDate);
             thaoTacHoaDonService.save(thaoTacHoaDon);
+
+            voucherService.updateVoucher(hoaDonService.detailHoaDon(idhd).getVoucher().getId(),(-1));
             return ResponseEntity.ok("ok");
 
         } catch (Exception e) {

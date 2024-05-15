@@ -159,8 +159,7 @@
                     return;
                 }
                 else if (response ==="ok") {
-                    // Xử lý phản hồi từ server (nếu cần)
-                    console.log('Quantity updated successfully!');
+
                 }
             },
             error: function(xhr, status, error) {
