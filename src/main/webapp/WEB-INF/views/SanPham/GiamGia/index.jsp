@@ -204,6 +204,8 @@
                 alert("Vui lòng nhập đầy đủ thông tin")
                 return;
             }else {
+                var cf = confirm("Bạn muốn cập nhập ???")
+                if (cf == true) {
                     $.ajax({
                         type: "POST",
                         url: "/giamgia/update",
@@ -218,16 +220,13 @@
                                 alert("Tên trùng trong danh sách. Vui lòng chọn tên khác !!!")
                                 return;
                             } else {
-                                var cf = confirm("Bạn muốn cập nhập ???")
-                                if (cf == true) {
                                     alert("Cập nhật thành công")
                                     window.location.href = "/giamgia/index";
-                                }
                             }
 
                         }
                     });
-                }
+                }}
             }
     };
 
@@ -240,6 +239,8 @@
             alert("Vui lòng nhập đầy đủ thông tin")
             return;
         }else {
+            var cf = confirm("Bạn muốn thêm mới ???");
+            if (cf) {
                 $.ajax({
                     type: "POST",
                     url: "/giamgia/add",
@@ -253,15 +254,12 @@
                             alert("Tên trùng trong danh sách. Vui lòng chọn tên khác !!!")
                             return;
                         } else {
-                            var cf = confirm("Bạn muốn thêm mới ???")
-                            if (cf == true) {
                                 alert("Thêm thành công")
                                 window.location.href = "/giamgia/index";
-                            }
                         }
 
                     }
                 });
-            }
+            }}
     };
 </script>

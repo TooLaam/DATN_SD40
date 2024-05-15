@@ -137,7 +137,24 @@
                                 </div>
 
                                 <div id="Tab2" class="tabcontent">
-                                    <button class="btn btn-primary" style="color: white;background-color: #00575C;margin-top: 30px;margin-left: 160px">Thanh toán</button>
+                                    <form id="addFormVN" action="/bill/vnpayNoCus" method="get">
+                                        <input type="text" style="display: none" name="tongTien" id="tongTienVN">
+                                        <input type="text" style="display: none" name="idctsp" value="${ctsp.id}" >
+                                        <input type="text" style="display: none" value="0" name="phanTramKhuyenMai" id="phamTramKhuyenMaiVN">
+                                        <input type="text" style="display: none" value="${voucher0}" name="idVoucher" id="idVoucherVN">
+                                        <input type="text" style="display: none" name="tongTienGiam" id="tongTienGiamVN">
+                                        <input type="text" style="display: none" name="tenNguoiNhan" id="tenNguoiNhanVN">
+                                        <input type="text" style="display: none" name="sdt" id="sdtVN">
+                                        <input type="text" style="display: none" name="diaChiNguoiNhan" id="diaChiNguoiNhanVN">
+                                        <input type="text" style="display: none" name="tinh" id="tinhNhanVN">
+                                        <input type="text" style="display: none" name="tongTienSanPhamChuaGiam" id="tongTienSanPhamChuaGiamVN">
+                                        <input type="text" style="display: none" name="phiShip" id="phiShipVN">
+                                        <input type="text" style="display: none" name="email" value="${diachimacdinh.khachHang.email}">
+                                        <input type="text" style="display: none" name="giaHienHanh" value="${ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh}" >
+                                        <input type="text" style="display: none" name="giaDaGiam" value="${(ctsp.chiTietSanPhamMauSacHinhAnh.giaHienHanh*(100-ctsp.chiTietSanPhamMauSacHinhAnh.sanPham.giamGIa.mucGiam))/100}" >
+                                        <input readonly style="display: none" type="number" id="inputField1VN"   class="inputTang" name="soLuong">
+                                        <button class="btn btn-primary" id="btnAddHDVN"  style="color: white;background-color: #00575C;margin-top: 30px;margin-left: 160px">Thanh toán</button>
+                                    </form>
                                 </div>
                             </td>
                             <td></td>
@@ -242,6 +259,7 @@
                 <div><span class="name"><strong>Voucher: ${v[1]}</strong>   </span> <span class="price" style="color:red;">(-${v[2]}%)</span> </div>
                 <div style="color:red;" >Điều kiện: </div>
                 <div style="margin-left: 20px">
+                    <span class="status">Số lượng : ${v[5]}</span><br>
                     <span class="status">Giảm tối đa: <fmt:formatNumber value="${v[3]}" pattern="###,###"/>đ,  </span>
                     <span class="status">Giá trị tối thiểu của đơn hàng: <fmt:formatNumber value="${v[4]}" pattern="###,###"/>đ </span>
                 </div>
@@ -377,6 +395,42 @@
 
     });
 
+    document.getElementById('btnAddHDVN').addEventListener('click', function(event) {
+        event.preventDefault();
+
+        var tenNguoiNhan = document.getElementById('tenNguoiNhanVN').value;
+        var diaChiChiTietCho = document.getElementById('diaChiNguoiNhanVN').value;
+        var tinh = document.getElementById('tinhNhanVN').value;
+        var inputField1 = document.getElementById('inputField1VN').value;
+        var sdt = document.getElementById('sdtVN').value;
+        var errorText = document.getElementById('errorText');
+        var phoneRegex = /^(032|033|034|035|036|037|038|039|096|097|098|086|083|084|085|081|082|088|091|094|070|079|077|076|078|090|093|089|056|058|092|059|099)[0-9]{7}$/; // Định dạng số điện thoại ở Việt Nam
+
+        if (inputField1 > ${ctsp.soLuong}){
+            alert('Số lượng sản phẩm hiện tại không đủ') ;
+            return;
+        }
+        if (diaChiChiTietCho ==='' || tinh ===''){
+            alert("Vui lòng chọn địa chỉ")
+            return;
+        }
+        if (tenNguoiNhan === '') {
+            alert('Vui lòng nhập tên người nhận') ;
+            return;
+        }
+        if (sdt === '' || phoneRegex.test(sdt) == false) {
+            alert('Vui lòng nhập lại số điện thoại') ;
+            return;
+        }
+
+        else {
+            document.getElementById('loader-overlay').style.display = 'flex';
+            errorText.style.display = 'none';
+            document.getElementById('addFormVN').submit(); // Submit form
+        }
+
+    });
+
     function layThongTinThanhToan2(){
         var ten = document.getElementById('ten').value;
         var diaChiChiTietCho = document.getElementById('diaChiChiTietCho').textContent;
@@ -397,16 +451,31 @@
         var phiShip = document.getElementById('phiShip');
         var tinhnhan = document.getElementById('tinhNhan');
 
+        var tenNguoiNhanVN = document.getElementById('tenNguoiNhanVN');
+        var diaChiNguoiNhanVN = document.getElementById('diaChiNguoiNhanVN');
+        var tinhnhanVN = document.getElementById('tinhNhanVN');
+        var tongTienVN = document.getElementById('tongTienVN');
+        var tongTienGiamVN = document.getElementById('tongTienGiamVN');
+        var tongTienSanPhamChuaGiamVN = document.getElementById('tongTienSanPhamChuaGiamVN');
+        var phiShipVN = document.getElementById('phiShipVN');
+
 
 
         tenNguoiNhan.value = ten;
-
         diaChiNguoiNhan.value = diaChiChiTietCho;
         tinhnhan.value = tinh
         tongTien.value = tongTienThanhToan;
         tongTienGiam.value = soTienGiam+tongtiengiamSP;
         tongTienSanPhamChuaGiam.value = totalPriceDisplay;
         phiShip.value = phiGiaoHang;
+
+        tenNguoiNhanVN.value = ten;
+        diaChiNguoiNhanVN.value = diaChiChiTietCho;
+        tinhnhanVN.value = tinh
+        tongTienVN.value = tongTienThanhToan;
+        tongTienGiamVN.value = soTienGiam+tongtiengiamSP;
+        tongTienSanPhamChuaGiamVN.value = totalPriceDisplay;
+        phiShipVN.value = phiGiaoHang;
 
 
     }
@@ -438,12 +507,15 @@
         if (phoneNumber.trim() === '') {
             document.getElementById('phoneError').textContent = ''; // Ẩn thông báo lỗi nếu ô input trống
             document.getElementById("sdt").value = phoneNumber;
+            document.getElementById("sdtVN").value = phoneNumber;
         } else if (phoneRegex.test(phoneNumber)) {
             document.getElementById('phoneError').textContent = ''; // Số điện thoại hợp lệ
             document.getElementById("sdt").value = phoneNumber;
+            document.getElementById("sdtVN").value = phoneNumber;
         } else {
             document.getElementById('phoneError').textContent = 'Số điện thoại không hợp lệ'; // Số điện thoại không hợp lệ
             document.getElementById("sdt").value = phoneNumber;
+            document.getElementById("sdtVN").value = phoneNumber;
         }
     }
 
@@ -738,7 +810,9 @@
         var tenVoucher = document.getElementById('tenVoucher');
         var hiddenForm = document.getElementById('hiddenForm');
         var phamTramKhuyenMai = document.getElementById('phamTramKhuyenMai');
+        var phamTramKhuyenMaiVN = document.getElementById('phamTramKhuyenMaiVN');
         var idVoucher = document.getElementById('idVoucher');
+        var idVoucherVN = document.getElementById('idVoucherVN');
         // Kiểm tra xem đã chọn sản phẩm nào chưa
         if (selectedVoucher !== null) {
             // Thực hiện các hành động với sản phẩm được chọn ở đây
@@ -748,9 +822,19 @@
             voucherDetail.innerHTML = htmlvoucherDetail;
             tenVoucher.innerHTML = selectedVoucher.ten;
             hiddenForm.style.display = 'none';
-            phamTramKhuyenMai.value = selectedVoucher.phamTramGiam;
-            idVoucher.value = selectedVoucher.id
-            console.log("Sản phẩm được chọn:", selectedVoucher);
+            var tongtienSPDaGiam = document.getElementById('tongtienSPDaGiam').textContent;
+            var giaTriSauKhiLoaiBo = tongtienSPDaGiam.replace(/[đ.]/g, '');
+            if (parseFloat(giaTriSauKhiLoaiBo)>parseFloat(selectedVoucher.donToiThieu)||parseFloat(tongtienSPDaGiam)==parseFloat(selectedVoucher.donToiThieu)){
+                document.getElementById('phamTramKhuyenMai').value = selectedVoucher.phamTramGiam;
+                document.getElementById('phamTramKhuyenMaiVN').value = selectedVoucher.phamTramGiam;
+                document.getElementById('idVoucherVN').value = selectedVoucher.id
+                document.getElementById('idVoucher').value = selectedVoucher.id
+            }else {
+                document.getElementById('phamTramKhuyenMai').value = 0;
+                document.getElementById('phamTramKhuyenMaiVN').value = 0;
+                document.getElementById('idVoucherVN').value = ${voucher0};
+                document.getElementById('idVoucher').value = ${voucher0};
+            }
         } else {
             console.log("Chưa chọn sản phẩm nào.");
             alert("Vui lòng chọn voucher !!")
@@ -774,14 +858,30 @@
     document.addEventListener('DOMContentLoaded', function() {
         var inputField = document.getElementById('inputField');
         var inputField1 = document.getElementById('inputField1');
+        var inputField1VN = document.getElementById('inputField1VN');
         var addButton = document.getElementById('addButton');
         var subtractButton = document.getElementById('subtractButton');
         inputField1.value = inputField.value;
+        inputField1VN.value = inputField.value;
         addButton.addEventListener('click', function() {
             inputField.value = parseInt(inputField.value) + 1;
             inputField1.value = inputField.value;
+            inputField1VN.value = inputField.value;
             calculateTotalPrice();
             layThongTinThanhToan2();
+            var tongtienSPDaGiam = document.getElementById('tongtienSPDaGiam').textContent;
+            var giaTriSauKhiLoaiBo = tongtienSPDaGiam.replace(/[đ.]/g, '');
+            if (parseFloat(giaTriSauKhiLoaiBo)>parseFloat(selectedVoucher.donToiThieu)||parseFloat(tongtienSPDaGiam)==parseFloat(selectedVoucher.donToiThieu)){
+                document.getElementById('phamTramKhuyenMai').value = selectedVoucher.phamTramGiam;
+                document.getElementById('phamTramKhuyenMaiVN').value = selectedVoucher.phamTramGiam;
+                document.getElementById('idVoucherVN').value = selectedVoucher.id
+                document.getElementById('idVoucher').value = selectedVoucher.id
+            }else {
+                document.getElementById('phamTramKhuyenMai').value = 0;
+                document.getElementById('phamTramKhuyenMaiVN').value = 0;
+                document.getElementById('idVoucherVN').value = ${voucher0};
+                document.getElementById('idVoucher').value = ${voucher0};
+            }
 
         });
 
@@ -791,8 +891,22 @@
             if (currentValue > 1) {
                 inputField.value = currentValue - 1;
                 inputField1.value = inputField.value
+                inputField1VN.value = inputField.value
                 calculateTotalPrice();
                 layThongTinThanhToan2()
+                var tongtienSPDaGiam = document.getElementById('tongtienSPDaGiam').textContent;
+                var giaTriSauKhiLoaiBo = tongtienSPDaGiam.replace(/[đ.]/g, '');
+                if (parseFloat(giaTriSauKhiLoaiBo)>parseFloat(selectedVoucher.donToiThieu)||parseFloat(tongtienSPDaGiam)==parseFloat(selectedVoucher.donToiThieu)){
+                    document.getElementById('phamTramKhuyenMai').value = selectedVoucher.phamTramGiam;
+                    document.getElementById('phamTramKhuyenMaiVN').value = selectedVoucher.phamTramGiam;
+                    document.getElementById('idVoucherVN').value = selectedVoucher.id
+                    document.getElementById('idVoucher').value = selectedVoucher.id
+                }else {
+                    document.getElementById('phamTramKhuyenMai').value = 0;
+                    document.getElementById('phamTramKhuyenMaiVN').value = 0;
+                    document.getElementById('idVoucherVN').value = ${voucher0};
+                    document.getElementById('idVoucher').value = ${voucher0};
+                }
 
             }
         });

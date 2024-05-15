@@ -2,8 +2,6 @@ package com.example.sd40.service.SanPham;
 
 import com.example.sd40.entity.San_pham.ChiTietSanPham;
 import com.example.sd40.entity.San_pham.KichCo;
-import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.util.List;
 

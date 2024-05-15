@@ -5,8 +5,8 @@ import com.example.sd40.repository.SanPham.GiamGiaRepository;
 import com.example.sd40.service.SanPham.GiamGiaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+
 @Service
 public class GiamGiaImpl implements GiamGiaService {
     @Autowired
@@ -59,5 +59,15 @@ public class GiamGiaImpl implements GiamGiaService {
     @Override
     public List<GiamGIa> listGGConDung() {
         return giamGiaRepository.listGGConDung();
+    }
+
+    @Override
+    public List<GiamGIa> listGGNew() {
+        return giamGiaRepository.listGGNew();
+    }
+
+    @Override
+    public List<GiamGIa> listGGDetail(Long id) {
+        return giamGiaRepository.listGGDetail(id);
     }
 }

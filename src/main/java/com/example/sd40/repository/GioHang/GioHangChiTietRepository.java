@@ -43,4 +43,8 @@ public interface GioHangChiTietRepository extends JpaRepository<GioHangChiTiet, 
     @Modifying
     @Query("delete from GioHangChiTiet gh where gh.id=?1")
     void deleteGHCTByCTSP(Long idGHCT);
+
+    @Modifying
+    @Query("delete from GioHangChiTiet gh where gh.gioHang.id=?1 and gh.chiTietSanPham.Id=?2")
+    void deleteGHCTByCTSPAndIDKH(Long idGH, Long idCTSP);
 }

@@ -53,12 +53,12 @@
                                    placeholder="Mật khẩu" name="matKhau" />
                         </div>
                         <div class="mb-3">
-                            <input type="text" oninput="layThongTinUpdate()" class="form-control" id="exampleInputPhoneNumber"
+                            <input type="text" oninput="laySDTUpdate()" class="form-control" id="exampleInputPhoneNumber"
                                    placeholder="Số điện thoại" name="sdt" />
                             <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errSdt">Số điện thoại không hợp lệ</span>
                         </div>
                         <div class="mb-3">
-                            <input type="email" oninput="layThongTinUpdate()" class="form-control" id="exampleInputEmail" placeholder="Email" name="email" />
+                            <input type="email" oninput="layEmailUpdate()" class="form-control" id="exampleInputEmail" placeholder="Email" name="email" />
                             <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errEmail">Email không hợp lệ</span>
                         </div>
                         <div class="mb-3">
@@ -67,10 +67,10 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Giới tính: </label>
-                            <input type="radio" class="radio-input" name="gioiTinh" value="1"  checked id="male" autocomplete="off">
+                            <input type="radio" class="radio-input" name="gioiTinh" value="0"  checked id="male" autocomplete="off">
                             <label class="radio-label" for="male">Nam</label>
 
-                            <input type="radio" class="radio-input" value="0" name="gioiTinh" id="female" autocomplete="off">
+                            <input type="radio" class="radio-input" value="1" name="gioiTinh" id="female" autocomplete="off">
                             <label class="radio-label" for="female">Nữ</label>
                         </div>
 
@@ -87,28 +87,25 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    function layThongTinUpdate (){
-
-        var email = document.getElementById('exampleInputEmail').value;
+    function laySDTUpdate (){
         var sdt = document.getElementById('exampleInputPhoneNumber').value;
         var phoneRegex = /^(032|033|034|035|036|037|038|039|096|097|098|086|083|084|085|081|082|088|091|094|070|079|077|076|078|090|093|089|056|058|092|059|099)[0-9]{7}$/; // Định dạng số điện thoại ở Việt Nam
-        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
         if (phoneRegex.test(sdt)||sdt == ''){
             document.getElementById('errSdt').style.display='none';
             return;
         }else {
             document.getElementById('errSdt').style.display='block';
         }
-
+    }
+    function layEmailUpdate () {
+        var email = document.getElementById('exampleInputEmail').value;
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (emailRegex.test(email) || email == '') {
-            document.getElementById('errEmail').style.display='none';
+            document.getElementById('errEmail').style.display = 'none';
             return;
+        } else {
+            document.getElementById('errEmail').style.display = 'block';
         }
-        else {
-            document.getElementById('errEmail').style.display='block';
-        }
-
     }
 
     $("#capNhat").click(function(e) {
@@ -138,26 +135,37 @@
                 return;
             }
             else {
-                var formData = {
-                    taiKhoan: taiKhoan
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "/checkTaiKhoanAdd",
-                    data: formData,
-                    success: function (response) {
-                        if (response ==='ok'){
-                            alert("Thêm thành công !!!")
-                            document.getElementById('AddKhachHang').submit();
-                        }else {
-                            alert("Tài khoản đã trùng, Vui lòng chọn tài khoản khác !!!")
+                var cf = confirm("Bạn muốn đăng ký ???");
+                if (cf == true){
+                    var formData = {
+                        taiKhoan: taiKhoan,
+                        email : email
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url: "/checkTaiKhoanAdd",
+                        data: formData,
+                        success: function (response) {
+                            if (response ==='ok'){
+                                alert("Đăng ký thành công. Mời bạn đăng nhập")
+                                document.getElementById('AddKhachHang').submit();
+                                return;
+                            }
+                            if (response === 'email'){
+                                alert("Email đã trùng, Vui lòng chọn Email khác !!!")
+                                return;
+                            }
+                            else {
+                                alert("Tài khoản đã trùng, Vui lòng chọn tài khoản khác !!!")
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            alert("thất bại !!!");
+                            console.error("Error occurred while sending data: " + error);
                         }
-                    },
-                    error: function (xhr, status, error) {
-                        alert("thất bại !!!");
-                        console.error("Error occurred while sending data: " + error);
-                    }
-                });
+                    });
+                }
+
             }
         }});
 </script>

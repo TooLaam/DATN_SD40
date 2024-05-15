@@ -7,10 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.List;
+
 @Repository
 public interface SanPhamRepository extends JpaRepository<SanPham,Long> {
     @Query("select sp.id, sp.ma,sp.ten,sp.hinhAnhDaiDien,sum(ctsp.soLuong),sp.thuongHieu.ten,sp.theLoai.ten from SanPham sp join ChiTietSanPhamMauSacHinhAnh ctsphams on sp.id=ctsphams.sanPham.id" +
@@ -21,8 +21,8 @@ public interface SanPhamRepository extends JpaRepository<SanPham,Long> {
 
     @Transactional
     @Modifying
-    @Query("update SanPham set ten=?1,moTa=?2,trangThai=?3,hinhAnhDaiDien=?4,thuongHieu.id=?5,theLoai.id=?6,ngaySua=?8 where id=?7")
-    void update(String ten, String moTa,Integer trangThai, String hinhAnh, Long thuongHieu, Long theLoai, Long id, Date ngayTao);
+    @Query("update SanPham set ten=?1,moTa=?2,trangThai=?3,hinhAnhDaiDien=?4,thuongHieu.id=?5,theLoai.id=?6,ngaySua=?8,giamGIa.Id = ?9 where id=?7")
+    void update(String ten, String moTa,Integer trangThai, String hinhAnh, Long thuongHieu, Long theLoai, Long id, Date ngayTao,Long giamGia);
 
     @Query("select sp from SanPham sp where sp.ten=?1 and sp.thuongHieu.id=?2 and sp.theLoai.id = ?3")
     SanPham findSPCoTonTaiKhong(String ten, Long thuongHien, Long theLoai);
@@ -40,7 +40,7 @@ public interface SanPhamRepository extends JpaRepository<SanPham,Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "insert into san_pham(ten,mo_ta,ngay_tao,ngay_sua,hinh_anh_dai_dien,trang_thai,thuong_hieu_id,the_loai_id,giam_gia_id) values(?1,?2,getdate(),getdate(),?3,0,?4,?5,?6)",nativeQuery = true)
+    @Query(value = "insert into san_pham(ten,mo_ta,ngay_tao,ngay_sua,hinh_anh_dai_dien,trang_thai,thuong_hieu_id,the_loai_id,giam_gia_id,so_luong_da_ban) values(?1,?2,getdate(),getdate(),?3,0,?4,?5,?6,0)",nativeQuery = true)
     void save(String ten,String moTa,String hinhAnh,Long thuongHieu,Long theLoai,Long giamGia);
 
     @Query("SELECT s.id,s.hinhAnhDaiDien, s.ten,th.ten,tl.ten FROM SanPham s join ThuongHieu th on th.id = s.thuongHieu.id " +

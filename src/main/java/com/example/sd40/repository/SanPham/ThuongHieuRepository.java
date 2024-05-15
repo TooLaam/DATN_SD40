@@ -4,7 +4,6 @@ import com.example.sd40.entity.San_pham.ThuongHieu;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository
@@ -23,5 +22,12 @@ public interface ThuongHieuRepository extends JpaRepository<ThuongHieu,Long> {
             " group by thuong_hieu.id, thuong_hieu.ten, thuong_hieu.hinh_anh\n" +
             " order by SUM(chi_tiet_san_pham.so_luong) desc ",nativeQuery = true)
     List<Object> listTLHome();
+
+    @Query("select th from ThuongHieu th order by th.id desc ")
+    List<ThuongHieu> listTHNew();
+
+    @Query("select th from ThuongHieu th where th.id not in (?1)")
+    List<ThuongHieu> listTHDetail(Long id);
+
 
 }

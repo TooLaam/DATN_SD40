@@ -8,8 +8,6 @@ import com.example.sd40.entity.KhachHang.Dia_Chi;
 import com.example.sd40.entity.KhachHang.KhachHang;
 import com.example.sd40.entity.KhachHang.tinhThanhPho;
 import com.example.sd40.entity.San_pham.ChiTietSanPham;
-import com.example.sd40.entity.Voucher.Voucher;
-
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -39,7 +37,7 @@ public interface KhachHangCusService {
     void updateMacDinhKhac(Long idDCCT,Long idKH);
     void updateMacDinh(Long idDCCT);
     void deleteDiaChi(Long id);
-    void saveHDKhachHang(Integer trangThai, Date ngayTao, BigDecimal tongTien, Integer phanTramKhuyenMai, Long idVoucher, String ghiChu,BigDecimal tongTienGiam,Long phuongThucThanhToanID,String tenNguoiNhan,String sdtNguoiNhan,String diaChiNguoiNhan,BigDecimal tongTienSanPhamChuaGiam,BigDecimal phiShip,Long idKhachHang,Date ngayCapNhat,String ma);
+    void saveHDKhachHang(Integer trangThai, Date ngayTao, BigDecimal tongTien, Integer phanTramKhuyenMai, Long idVoucher, String ghiChu,BigDecimal tongTienGiam,Long phuongThucThanhToanID,String tenNguoiNhan,String sdtNguoiNhan,String diaChiNguoiNhan,BigDecimal tongTienSanPhamChuaGiam,BigDecimal phiShip,Long idKhachHang,Date ngayCapNhat,String ma,Date ngayThanhToan);
     List<HoaDonChiTiet> listHDCT(Long idHD);
     List<HoaDon> listHoaDon(Long idKH, Integer trangThai);
     List<Object[]> listHDCTByHoaDon(Long idHD);
@@ -58,5 +56,7 @@ public interface KhachHangCusService {
     List<Object[]> soLuongDaBan(Long idHD);
     Long idKhachHangMoiTao();
     String MaHDCuoi();
-
+    KhachHang quenMatKhau(String email);
+    KhachHang KtraEmail(String email, Long id);
+    void hoanThanhHoaDonVNPAY(Long idhd,Date ngayCapNhat);
 }

@@ -1,7 +1,6 @@
 package com.example.sd40.service.SanPham;
 
 import com.example.sd40.entity.San_pham.GiamGIa;
-
 import java.util.List;
 
 public interface GiamGiaService {
@@ -15,4 +14,8 @@ public interface GiamGiaService {
     void updateGG(Long giamGia,Long idsp);
     Object hienThiTienDaGiam(Long idsp,Long idms);
     List<GiamGIa> listGGConDung();
+    List<GiamGIa> listGGNew();
+    List<GiamGIa> listGGDetail(Long id);
+
+
 }

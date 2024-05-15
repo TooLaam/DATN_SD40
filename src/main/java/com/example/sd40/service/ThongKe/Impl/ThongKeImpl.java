@@ -1,13 +1,9 @@
 package com.example.sd40.service.ThongKe.Impl;
 
-import com.example.sd40.entity.ThongKe;
 import com.example.sd40.repository.ThongKe.ThongKeRepository;
 import com.example.sd40.service.ThongKe.ThongKeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 @Service

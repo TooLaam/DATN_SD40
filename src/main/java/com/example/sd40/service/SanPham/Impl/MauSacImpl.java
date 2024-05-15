@@ -5,8 +5,8 @@ import com.example.sd40.repository.SanPham.MauSacRepository;
 import com.example.sd40.service.SanPham.MauSacService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+
 @Service
 public class MauSacImpl implements MauSacService {
     @Autowired
@@ -39,5 +39,10 @@ public class MauSacImpl implements MauSacService {
     @Override
     public void add(Mau_sac theLoai) {
         mauSacRepository.save(theLoai);
+    }
+
+    @Override
+    public List<Mau_sac> listMSNew() {
+        return mauSacRepository.listMSNew();
     }
 }

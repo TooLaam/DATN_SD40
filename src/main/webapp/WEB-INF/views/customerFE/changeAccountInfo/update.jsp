@@ -47,7 +47,7 @@
                     <div class="mb-3 row">
                         <label class="col-sm-2 col-form-label form-label">Số điện thoại</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" oninput="layThongTinUpdate()" id="sdt" name="sdt" value="${kh.sdt}">
+                            <input type="text" class="form-control" oninput="laySDTUpdate()" id="sdt" name="sdt" value="${kh.sdt}">
                             <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errSdt">Số điện thoại không hợp lệ</span>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                     <div class="mb-3 row">
                         <label class="col-sm-2 col-form-label form-label">Email</label>
                         <div class="col-sm-10">
-                            <input type="text" oninput="layThongTinUpdate()" class="form-control" id="email" value="${kh.email}" name="email">
+                            <input type="text" oninput="layEmailUpdate()" class="form-control" id="email" value="${kh.email}" name="email">
                             <span class="error-message" style="display: none;color: red;margin-left: 20px" id="errEmail">Email không hợp lệ</span>
                         </div>
                     </div>
@@ -117,6 +117,8 @@
         var sdt = document.getElementById('sdt').value;
         var phoneRegex = /^(032|033|034|035|036|037|038|039|096|097|098|086|083|084|085|081|082|088|091|094|070|079|077|076|078|090|093|089|056|058|092|059|099)[0-9]{7}$/; // Định dạng số điện thoại ở Việt Nam
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var currentDate = new Date();
+        var birthdayDate = new Date(ngaySinh);
         if (ten ==''|| ngaySinh == ''||email==''||sdt==''){
             alert("Vui lòng nhập đầu đủ thông tin !!")
             return;
@@ -127,34 +129,55 @@
             }else if (!emailRegex.test(email)){
                 alert("Email không hợp lệ !!!")
                 return;
-            }else {
-                alert("Cập nhật thành công !!!")
-                document.getElementById('updateForm').submit();
+            }else if (birthdayDate>currentDate){
+                alert("Ngày sinh không được lớn hơn ngày hiện tại !!!")
+                return;
+            }
+            else {
+                var formData = {
+                    email: email
+                };
+                $.ajax({
+                    type: "GET",
+                    url: "/KtraEmail",
+                    data: formData,
+                    success: function (response) {
+                        if (response ==='ok'){
+                            alert("Cập nhật thành công !!!")
+                            document.getElementById('updateForm').submit();
+                        }else {
+                            alert("Email trùng với tài khoản khác. Vui lòng chọn email khác !!!")
+                        }
+
+                    },
+                    error: function (xhr, status, error) {
+                        alert("thất bại !!!");
+                        console.error("Error occurred while sending data: " + error);
+                    }
+                });
+
             }
         }
     });
-    function layThongTinUpdate (){
-
-        var email = document.getElementById('email').value;
+    function laySDTUpdate (){
         var sdt = document.getElementById('sdt').value;
         var phoneRegex = /^(032|033|034|035|036|037|038|039|096|097|098|086|083|084|085|081|082|088|091|094|070|079|077|076|078|090|093|089|056|058|092|059|099)[0-9]{7}$/; // Định dạng số điện thoại ở Việt Nam
-        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
         if (phoneRegex.test(sdt)||sdt == ''){
             document.getElementById('errSdt').style.display='none';
             return;
         }else {
             document.getElementById('errSdt').style.display='block';
         }
-
+    }
+    function layEmailUpdate () {
+        var email = document.getElementById('email').value;
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (emailRegex.test(email) || email == '') {
-            document.getElementById('errEmail').style.display='none';
+            document.getElementById('errEmail').style.display = 'none';
             return;
+        } else {
+            document.getElementById('errEmail').style.display = 'block';
         }
-        else {
-            document.getElementById('errEmail').style.display='block';
-        }
-
     }
 
     document.getElementById('doiMatKhau').addEventListener('click', function(event) {

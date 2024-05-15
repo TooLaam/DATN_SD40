@@ -1,8 +1,7 @@
 package com.example.sd40.controller.ThongKeController;
 
-import com.example.sd40.entity.KhachHang.KhachHang;
-import com.example.sd40.entity.San_pham.GiamGIa;
-import com.example.sd40.entity.ThongKe;
+
+import com.example.sd40.entity.NhanVien.NhanVien;
 import com.example.sd40.service.ThongKe.ThongKeService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.math.BigDecimal;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -27,10 +21,21 @@ public class ThongKeController {
     @Autowired
     ThongKeService thongKeService;
     @GetMapping("/index")
-    public String index(Model model) throws ParseException {
-        model.addAttribute("hangTonKho",thongKeService.hangTonKho());
-        model.addAttribute("view","/ThongKe/thongke.jsp");
-        return "index";
+    public String index(Model model, HttpSession session) throws ParseException {
+        NhanVien nhanVien = (NhanVien) session.getAttribute("nhanVien");
+        if (nhanVien == null){
+            return "redirect:/admin/login";
+        }else {
+            if (nhanVien.getChucVu().getId() == 2){
+                return "redirect:/admin/login";
+            }else {
+                model.addAttribute("nhanvien",nhanVien);
+                model.addAttribute("hangTonKho",thongKeService.hangTonKho());
+                model.addAttribute("view","/ThongKe/thongke.jsp");
+                return "index";
+            }
+        }
+
     }
     @GetMapping("/bieuDo/{nam}")
     public ResponseEntity<List<Object[]>> bieuDo(@PathVariable("nam")String nam){

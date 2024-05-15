@@ -1,9 +1,6 @@
 package com.example.sd40.service.Voucher;
 
-
-
 import com.example.sd40.entity.Voucher.Voucher;
-
 import java.util.List;
 
 public interface VoucherService {
@@ -12,4 +9,5 @@ public interface VoucherService {
     Voucher detail(Long id);
     List<Voucher> findByNameUpdate(String ten,Long id);
     List<Voucher> findByName(String ten);
+    void updateVoucher(Long idVoucher,Integer soLuong);
 }

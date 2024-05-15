@@ -12,28 +12,22 @@
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-right: 80px; /* Khoảng cách giữa các input */
-    flex-grow: 0.7; /* Phần tử input sẽ mở rộng để chiếm hết không gian còn lại */
+    margin-right: 80px;
+    flex-grow: 0.7;
 }
 
-/* Định dạng cho button */
-.timkiem button {
+/* Định dạng cho nút Thống kê */
+.thongke-btn {
+    background-color: #28a745;
     padding: 8px 16px;
-    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-/* Định dạng cho nút Thống kê */
-.timkiem .thongke-btn {
-    background-color: #28a745; /* Màu xanh lá cây */
-}
-
-/* Định dạng cho nút Thống kê khi hover */
-.timkiem .thongke-btn:hover {
-    background-color: #218838; /* Màu xanh lá cây tối hơn khi hover */
+.thongke-btn:hover {
+    background-color: #218838;
 }
 .containerThongKe {
     display: grid;

@@ -2,7 +2,6 @@ package com.example.sd40.service.SanPham;
 
 import com.example.sd40.entity.San_pham.ThuongHieu;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -15,4 +14,8 @@ public interface ThuongHieuService {
     void add(ThuongHieu thuongHieu);
     List<ThuongHieu> listTLConDung();
     List<Object> listTLHome();
+    List<ThuongHieu> listTHNew();
+    List<ThuongHieu> listTHDetail(Long id);
+
+
 }

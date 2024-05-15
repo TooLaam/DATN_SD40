@@ -5,8 +5,8 @@ import com.example.sd40.repository.SanPham.LoaiGiayRepository;
 import com.example.sd40.service.SanPham.LoaiGiayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+
 @Service
 public class LoaiGiayImpl implements LoaiGiayService {
     @Autowired
@@ -44,5 +44,15 @@ public class LoaiGiayImpl implements LoaiGiayService {
     @Override
     public List<TheLoai> listTLConDung() {
         return loaiGiayRepository.listTLConDung();
+    }
+
+    @Override
+    public List<TheLoai> listTLNewwww() {
+        return loaiGiayRepository.listTLNewwww();
+    }
+
+    @Override
+    public List<TheLoai> listTLDetail(Long id) {
+        return loaiGiayRepository.listTlDetail(id);
     }
 }

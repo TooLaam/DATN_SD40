@@ -6,13 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 public interface CTSPMSHARepository extends JpaRepository<ChiTietSanPhamMauSacHinhAnh,Long> {
-    @Query("select ms.Id,ms.ten,ms.hinhAnh, ctmsha.giaHienHanh,ctmsha.sanPham.giamGIa.mucGiam,(ctmsha.giaHienHanh*(100-ctmsha.sanPham.giamGIa.mucGiam))/100 from SanPham sp join ChiTietSanPhamMauSacHinhAnh ctmsha on sp.id = ctmsha.sanPham.id" +
+    @Query("select ms.Id,ms.ten,ms.hinhAnh, ctmsha.giaHienHanh,ctmsha.sanPham.giamGIa.mucGiam,(ctmsha.giaHienHanh*(100-ctmsha.sanPham.giamGIa.mucGiam))/100,ctmsha.hinhAnh from SanPham sp join ChiTietSanPhamMauSacHinhAnh ctmsha on sp.id = ctmsha.sanPham.id" +
             " join Mau_sac ms on ctmsha.mau_sac.Id = ms.Id where sp.id =?1 and ctmsha.trangThai = 0")
     List<Object[]> findMSTheoSPDangDung (Long id);
     @Query("select ms.Id,ms.ten,ms.hinhAnh from SanPham sp join ChiTietSanPhamMauSacHinhAnh ctmsha on sp.id = ctmsha.sanPham.id" +

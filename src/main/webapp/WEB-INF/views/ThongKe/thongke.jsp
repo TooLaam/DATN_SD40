@@ -12,8 +12,9 @@
 <div class="timkiem">
     Ngày bắt đầu: <input type="date" class="start-date" id="ngayBatDau" style="margin-left: 20px;">
     Ngày kết thúc: <input type="date" class="end-date" id="ngayKetThuc" style="margin-left: 20px;">
-    <button class="thongke-btn" onclick="thongKe()">Thống kê</button>
+    <a class="thongke-btn" onclick="thongKea()">Thống kê</a>
 </div>
+
 <div class="containerThongKe">
     <div class="box" id="order">
         <div class="content">
@@ -165,6 +166,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
     function formatNumber(price) {
         var formattedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Math.round(price));
@@ -184,10 +187,7 @@
         }
     }
     function chuyenDoiNgay(dateString) {
-        // Tạo một đối tượng Date từ chuỗi đầu vào
         var date = new Date(dateString);
-
-        // Lấy ngày, tháng và năm từ đối tượng Date
         var day = date.getDate();
         var month = date.getMonth() + 1; // Lưu ý: Tháng bắt đầu từ 0, nên cần cộng thêm 1
         var year = date.getFullYear();
@@ -198,11 +198,9 @@
         return formattedDate;
     }
 
-    document.addEventListener("DOMContentLoaded", function() {
         LayGiaTriCuaBieuDo(2024);
         loadConSo("1999-12-12","2999-12-12");
 
-    });
     function loadConSo(ngayBD,ngayKT){
         $.ajax({
             type: "GET",
@@ -382,27 +380,56 @@
 
         requestAnimationFrame(animateCircle);
     }
-    load();
+
 
     function thongKe(){
        var ngayBatDau = document.getElementById("ngayBatDau").value;
        var ngayKetThuc = document.getElementById("ngayKetThuc").value;
-       var ngayBD = new Date(ngayBatDau);
-       var ngayKT = new Date(ngayKetThuc);
-       var ngayBDChuyenDoi = chuyenDoiNgay(ngayBD);
-       var ngayKTChuyenDoi = chuyenDoiNgay(ngayKT)
+       console.log(ngayBatDau)
+        console.log(ngayKetThuc)
+       // var ngayBD = new Date(ngayBatDau);
+       // var ngayKT = new Date(ngayKetThuc);
+       // var ngayBDChuyenDoi = chuyenDoiNgay(ngayBD);
+       // var ngayKTChuyenDoi = chuyenDoiNgay(ngayKT)
        if (ngayBatDau.trim()===''||ngayKetThuc.trim()===''){
-          loadConSo("1999-12-12","2999-12-12");
+          // loadConSo("1999-12-12","2999-12-12");
+           alert("không")
            return;
        }else {
            if (ngayBD>ngayKT){
                alert("Ngày bắt đầu không được lớn hơn ngày kết thúc")
                return;
            }else {
-              loadConSo(ngayBDChuyenDoi,ngayKTChuyenDoi)
+              // loadConSo(ngayBDChuyenDoi,ngayKTChuyenDoi)
+               alert("Mẹ nó")
 
            }
        }
+    }
+
+    function thongKea(){
+        var ngayBatDau = document.getElementById("ngayBatDau").value;
+        var ngayKetThuc = document.getElementById("ngayKetThuc").value;
+        console.log(ngayBatDau)
+        console.log(ngayKetThuc)
+        var ngayBD = new Date(ngayBatDau);
+        var ngayKT = new Date(ngayKetThuc);
+        var ngayBDChuyenDoi = chuyenDoiNgay(ngayBD);
+        var ngayKTChuyenDoi = chuyenDoiNgay(ngayKT)
+        if (ngayBatDau.trim()===''||ngayKetThuc.trim()===''){
+            loadConSo("1999-12-12","2999-12-12");
+            // alert("không")
+            return;
+        }else {
+            if (ngayBD>ngayKT){
+                alert("Ngày bắt đầu không được lớn hơn ngày kết thúc")
+                return;
+            }else {
+                loadConSo(ngayBDChuyenDoi,ngayKTChuyenDoi)
+                // alert("Mẹ nó")
+
+            }
+        }
     }
 
 

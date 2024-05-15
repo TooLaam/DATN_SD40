@@ -1,0 +1,106 @@
+.tabs {
+    display: flex;
+    justify-content: space-between;
+    background-color: #00575C;
+    color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.tab {
+    flex: 1;
+    text-align: center;
+    padding: 15px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.tab:hover {
+    background-color: #002d30;
+}
+
+.tab.active {
+    background-color: #75d563;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.tab-content.active {
+    display: block;
+}
+.tabcontent {
+    display: none;
+    padding: 20px;
+    border-top: 2px solid #333;
+    border-radius: 0 0 10px 10px;
+}
+
+.tabcontent.show {
+    display: block;
+}
+
+/*--------------------------------------*/
+#subForm {
+    display: none; /* Ẩn form phụ ban đầu */
+    position: fixed;
+    width: 800px;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    background-color: #f9f7f7;
+    font-family: Arial, sans-serif;
+}
+#closeBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #999999;
+    background-color: transparent;
+    border: none;
+}
+#closeBtn:hover {
+    color: #333333;
+}
+
+
+.table-container {
+    max-height: 300px; /* Điều chỉnh độ cao tối đa của bảng */
+    overflow-x: auto; /* Thêm thanh trượt ngang khi cần */
+}
+/* Style cho table */
+.table-container {
+    max-height: 300px; /* Điều chỉnh độ cao tối đa của bảng */
+    overflow-x: auto; /* Thêm thanh trượt ngang khi cần */
+}
+/* Style cho table form phụ */
+.sub-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.sub-table th, .sub-table td {
+    border: 1px solid #dddddd;
+    padding: 12px;
+    text-align: left;
+}
+.sub-table th {
+    background-color: #f2f2f2;
+    color: #333333;
+}
+.sub-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.sub-table tr:hover {
+    background-color: #f2f2f2;
+}

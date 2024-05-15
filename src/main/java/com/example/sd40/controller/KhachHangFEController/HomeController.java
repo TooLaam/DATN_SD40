@@ -1,8 +1,6 @@
 package com.example.sd40.controller.KhachHangFEController;
 
-import com.example.sd40.entity.Gio_hang.GioHangChiTiet;
 import com.example.sd40.entity.KhachHang.KhachHang;
-import com.example.sd40.service.KhachHang.HangThanhVienService;
 import com.example.sd40.service.SanPham.SanPhamService;
 import com.example.sd40.service.SanPham.ThuongHieuService;
 import com.example.sd40.service.KhachHang.KhachHangCusService;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -30,8 +27,7 @@ public class HomeController {
     @Autowired
     KhachHangCusService khachHangCusService;
 
-    @Autowired
-    HangThanhVienService hangThanhVienService;
+
 
 
     @GetMapping("/home" )
@@ -162,7 +158,8 @@ public class HomeController {
     }
     @GetMapping("/infoKhachHang")
     public String infoKhachHang(Model model,HttpSession session){
-        Long idKH = Long.valueOf(1);
+        Long idKH = (Long) session.getAttribute("idKhachHang");
+
         model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
         model.addAttribute("idkh",idKH );
         model.addAttribute("kh",khachHangCusService.detailKhachHang(idKH) );
@@ -173,8 +170,7 @@ public class HomeController {
     @PostMapping("/doiMatKhau")
     public ResponseEntity<?> updateMacDinh(@RequestParam("taiKhoan") String taiKhoan,@RequestParam("matKhau") String matKhau, HttpSession session) {
         try {
-//            Long idKH = (Long) session.getAttribute("idKhachHang");
-            Long idKH = Long.valueOf(1);
+            Long idKH = (Long) session.getAttribute("idKhachHang");
             List<KhachHang> khachHangs = khachHangCusService.checkTaiKhoan(idKH,taiKhoan);
             if (khachHangs.isEmpty()){
                 khachHangCusService.doiMatKhau(taiKhoan,matKhau,idKH);
@@ -190,7 +186,7 @@ public class HomeController {
 
     @GetMapping("/hienThiUpdateKhachHang")
     public String hienThiUpdateKhachHang(Model model,HttpSession session){
-        Long idKH = Long.valueOf(1);
+        Long idKH = (Long) session.getAttribute("idKhachHang");
         model.addAttribute("slspgh",khachHangCusService.detailSPGioHang(Long.valueOf(idKH)).size());
         model.addAttribute("idkh",idKH );
         model.addAttribute("kh",khachHangCusService.detailKhachHang(idKH) );
@@ -206,7 +202,7 @@ public class HomeController {
                                  @RequestParam("gioiTinh")Integer gioiTinhn,
                                  @RequestParam("email")String email
     ) throws ParseException {
-        Long idKH = Long.valueOf(1);
+        Long idKH = (Long) session.getAttribute("idKhachHang");
         KhachHang khachHang = khachHangCusService.detailKhachHang(idKH);
         khachHang.setNgaySinh(new SimpleDateFormat("yyyy-MM-dd").parse(ngaySinh));
         khachHang.setHoTen(ten);
@@ -215,5 +211,18 @@ public class HomeController {
         khachHang.setGioiTinh(gioiTinhn);
         khachHangCusService.updateKhachHang(khachHang);
         return "redirect:/infoKhachHang";
+    }
+
+    @GetMapping("/KtraEmail")
+    public ResponseEntity<?> KtraEmail(HttpSession session,
+                                        @RequestParam("email") String email
+                                               ){
+        Long idKH = (Long) session.getAttribute("idKhachHang");
+        KhachHang khachHang = khachHangCusService.KtraEmail(email,idKH);
+        if (khachHang == null) {
+            return ResponseEntity.ok("ok");
+        } else {
+            return ResponseEntity.ok("ko");
+        }
     }
 }

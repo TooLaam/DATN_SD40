@@ -295,7 +295,18 @@ CREATE TABLE hoa_don_chi_tiet (
 
 );
 
+CREATE TABLE thao_tac_hoa_don (
+                                  id			BIGINT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 
+                                  thao_tac	NVARCHAR(MAX),
+                                  trang_thai    INT,
+                                  ngay_tao DATETIME,
+                                  hoa_don_id	BIGINT
+                                      REFERENCES hoa_don(id),
+                                  nhan_vien_id	BIGINT
+                                      REFERENCES nhan_vien(id),
+
+);
 
 --------------------------------------------------------------------
 /*INSERT DỮ LIỆU*/

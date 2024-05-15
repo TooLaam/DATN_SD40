@@ -2,7 +2,6 @@ package com.example.sd40.entity.KhachHang;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.Date;
 
 @Data

@@ -1,9 +1,5 @@
 package com.example.sd40.service.ThongKe;
 
-import com.example.sd40.entity.ThongKe;
-
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 public interface ThongKeService {

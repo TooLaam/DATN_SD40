@@ -1,11 +1,7 @@
 package com.example.sd40.entity.KhachHang;
 
-import com.example.sd40.entity.San_pham.GiamGIa;
-import com.example.sd40.entity.San_pham.TheLoai;
-import com.example.sd40.entity.San_pham.ThuongHieu;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.Date;
 
 @Data

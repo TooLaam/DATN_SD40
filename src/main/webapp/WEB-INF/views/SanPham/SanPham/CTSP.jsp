@@ -76,14 +76,14 @@
                                 </div>
                             </div>
                             <div class="col-md-5">
-                                <img src="/assets/img/product/${sp.hinhAnhDaiDien}" style="padding-top: 60px" width="320px" height="450px">
+                                <img src="/assets/img/product/${sp.hinhAnhDaiDien}" id="img" style="padding-top: 60px" width="320px" height="450px">
                             </div>
 
                         </div>
                     </div>
 
-                    <a href="/ctsp/themmausac/${sp.id}"  type="submit" class="btn btn-primary">Thêm/chỉnh sửa màu sắc cho sản phẩm</a>
-                    <a href="/ctsp/giamGia/${sp.id}"  type="submit" class="btn btn-primary">Giảm giá sản phẩm</a>
+                    <a href="/ctsp/hienThiChinhSuaMauSac/${sp.id}"  type="submit" class="btn btn-primary">Thêm/chỉnh sửa màu sắc cho sản phẩm</a>
+                    <a style="cursor:pointer" onclick="giamGia()" type="submit" class="btn btn-primary">Giảm giá sản phẩm</a>
                     <a  onclick="KichCoBtn()"  type="submit" class="btn btn-primary">Thêm/Sửa kích cỡ cho sản phẩm</a>
 
                 </div>
@@ -95,6 +95,15 @@
 </section>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    function giamGia(){
+        var nhanvien = ${nhanvien.chucVu.id};
+        if (nhanvien==2){
+            alert("Quản lý mới được sử dụng chức năng này !!!")
+            return;
+        }else {
+            window.location.href = "/ctsp/giamGia/${sp.id}";
+        }
+    }
     function formatNumber(price) {
         var formattedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Math.round(price));
         formattedPrice = formattedPrice.replace(/(\d+)(?:\.(\d+))? đ/, '$1');
@@ -118,6 +127,7 @@
                     document.getElementById('idKC').textContent = response[0]
                  document.getElementById('giaHienHanh').textContent = formatNumber(response[1]) ;
                  document.getElementById('giaDaGiam').textContent = formatNumber(response[2]) ;
+                 $('#img').attr('src', '/assets/img/product/' + response[3]);
 
                 }});
 
@@ -131,6 +141,7 @@
                     var ten = data[1];
                     var soLuong = data[2];
                     var trangThai = data[3];
+                    var image = data[4]
 
                     // Tạo thẻ <a> với các thông tin và gán sự kiện onclick
                     var linkHTML = '<a id="kichco' + idkc + '" data-info="' + idkc + ',' + ten + '" onclick="getDataKC(' + soLuong + ',\'' + idkc + '\',\'' + trangThai + '\')" class="btn btn-light kichco" style="margin-left: 30px">' + ten + '</a>';

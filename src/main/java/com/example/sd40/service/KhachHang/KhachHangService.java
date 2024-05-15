@@ -1,9 +1,7 @@
 package com.example.sd40.service.KhachHang;
 
 import com.example.sd40.entity.KhachHang.KhachHang;
-import com.example.sd40.repuest.KhachHangRequest;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 /**
@@ -12,11 +10,20 @@ import java.util.List;
 @Service
 public interface KhachHangService {
 
-    List<KhachHang> findByKhachHang();
+    List<KhachHang> getAll();
 
-    KhachHang create(KhachHangRequest requyest);
-
-    KhachHang update(KhachHangRequest requyest);
+    void save(KhachHang khachHang);
 
     KhachHang detail(Long id);
+
+    List<KhachHang> findByUserName(String ten);
+
+    List<KhachHang> findByUserNameUpdate(String ten,Long id);
+
+    Long IdKHCuoi();
+
+    List<KhachHang> findByEmailUpdate(String ten,Long id);
+
+    List<KhachHang> findByEmal(String ten);
+
 }

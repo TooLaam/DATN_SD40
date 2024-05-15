@@ -91,12 +91,12 @@
                             </div>
                             <div>
                                 Ngày tạo :
-                                <input class="form-control" id="ngayTaoUpdate">
+                                <input class="form-control" id="ngayTaoUpdate" readonly>
                             </div>
 
                             <div>
                                 Ngày sửa gần nhất :
-                                <input class="form-control" id="ngaySuaUpdate">
+                                <input class="form-control" id="ngaySuaUpdate" readonly>
                             </div>
 
                             <div id="trangThaiUpdate">
@@ -168,6 +168,8 @@
                 alert("Vui lòng nhập đầy đủ thông tin");
                 return;
             } else {
+                var cf = confirm("Bạn muốn cập nhập ???");
+                if (cf == true) {
                 var formData = new FormData();
                 formData.append('id', id);
                 formData.append('ten', ten);
@@ -185,16 +187,13 @@
                             alert("Tên trùng trong danh sách. Vui lòng chọn tên khác !!!");
                             return;
                         } else {
-                            var cf = confirm("Bạn muốn cập nhập ???");
-                            if (cf == true) {
                                 alert("Cập nhật thành công");
                                 window.location.href = "/thuonghieu/index";
-                            }
                         }
 
                     }
                 });
-            }
+            }}
         }
     }
     function add() {
@@ -205,6 +204,8 @@
             alert("Vui lòng nhập đầy đủ thông tin")
             return;
         }else {
+            var cf = confirm("Bạn muốn thêm mới ???");
+            if (cf == true) {
             var formData = new FormData();
             formData.append('ten', ten);
             formData.append('image', hinhAnh);
@@ -220,15 +221,13 @@
                         alert("Tên trùng trong danh sách. Vui lòng chọn tên khác !!!");
                         return;
                     } else {
-                        var cf = confirm("Bạn muốn thêm mới ???");
-                        if (cf == true) {
                             alert("Thêm mới thành công");
                             window.location.href = "/thuonghieu/index";
-                        }
+
                     }
 
                 }
             });
-        }
+        }}
     };
 </script>

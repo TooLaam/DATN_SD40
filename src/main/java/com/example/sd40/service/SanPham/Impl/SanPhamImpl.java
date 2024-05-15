@@ -5,7 +5,6 @@ import com.example.sd40.repository.SanPham.SanPhamRepository;
 import com.example.sd40.service.SanPham.SanPhamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Date;
 import java.util.List;
 
@@ -29,8 +28,8 @@ public class SanPhamImpl implements SanPhamService {
     }
 
     @Override
-    public void update(String ten, String moTa, Integer trangThai, String hinhAnh, Long thuongHieu, Long theLoai, Long id, Date ngayTao) {
-        sanPhamRepository.update(ten,moTa,trangThai,hinhAnh,thuongHieu,theLoai,id,ngayTao);
+    public void update(String ten, String moTa, Integer trangThai, String hinhAnh, Long thuongHieu, Long theLoai, Long id, Date ngayTao,Long giamGia) {
+        sanPhamRepository.update(ten,moTa,trangThai,hinhAnh,thuongHieu,theLoai,id,ngayTao,giamGia);
     }
 
     @Override

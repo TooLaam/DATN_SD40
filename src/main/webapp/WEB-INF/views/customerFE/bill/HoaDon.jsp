@@ -15,12 +15,12 @@
 <div class="containerHD">
     <h1>Quản lý Đơn hàng</h1>
     <div class="tabs">
-        <div class="tab active" data-tab="tab1">Chờ xác nhận</div>
-        <div class="tab" data-tab="tab2">Xác nhận</div>
-        <div class="tab" data-tab="tab3">Chờ giao</div>
-        <div class="tab" data-tab="tab4">Đang giao</div>
-        <div class="tab" data-tab="tab5">Thành công</div>
-        <div class="tab" data-tab="tab6">Hủy</div>
+        <div class="tab active" data-tab="tab1">Chờ xác nhận(${hoaDonChoXacNhanSize})</div>
+        <div class="tab" data-tab="tab2">Xác nhận(${hoaDonDaXacNhanSize})</div>
+        <div class="tab" data-tab="tab3">Chờ giao(${hoaDonChoGiaoSize})</div>
+        <div class="tab" data-tab="tab4">Đang giao(${hoaDonDangGiaoSize})</div>
+        <div class="tab" data-tab="tab5">Thành công(${hoaDonThanhCongSize})</div>
+        <div class="tab" data-tab="tab6">Hủy(${hoaDonHuySize})</div>
     </div>
 
     <div class="tab-content" id="tab1">
