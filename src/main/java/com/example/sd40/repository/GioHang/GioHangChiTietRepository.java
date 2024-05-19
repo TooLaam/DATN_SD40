@@ -2,6 +2,7 @@ package com.example.sd40.repository.GioHang;
 
 import com.example.sd40.entity.Gio_hang.GioHang;
 import com.example.sd40.entity.Gio_hang.GioHangChiTiet;
+import com.example.sd40.entity.San_pham.ChiTietSanPham;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -47,4 +48,10 @@ public interface GioHangChiTietRepository extends JpaRepository<GioHangChiTiet, 
     @Modifying
     @Query("delete from GioHangChiTiet gh where gh.gioHang.id=?1 and gh.chiTietSanPham.Id=?2")
     void deleteGHCTByCTSPAndIDKH(Long idGH, Long idCTSP);
+
+    @Query("SELECT g FROM GioHangChiTiet g JOIN g.chiTietSanPham c WHERE g.soLuong > c.soLuong+1 AND g.id IN :ids")
+    List<GioHangChiTiet> findAllByIdsAndSoLuongLessThanChiTietSanPham(@Param("ids") List<Long> ids);
+
+    @Query("SELECT c.chiTietSanPham FROM GioHangChiTiet c WHERE c.id IN :ids")
+    List<ChiTietSanPham> findByGioHangChiTietIds(@Param("ids") List<Long> gioHangChiTietIds);
 }

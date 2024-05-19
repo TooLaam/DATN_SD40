@@ -24,7 +24,7 @@ public interface GiamGiaRepository extends JpaRepository<GiamGIa, Long> {
     @Query("select th from GiamGIa th where th.ten =?1 and th.Id not in (select t.Id from GiamGIa t where t.Id = ?2)")
     List<GiamGIa> findByNameUpdate(String ten,Long id);
 
-    @Query("select th from GiamGIa th where th.Id not in (select sp.giamGIa.Id from SanPham sp where sp.id = ?1)")
+    @Query("select th from GiamGIa th where th.Id not in (select sp.giamGIa.Id from SanPham sp where sp.id = ?1) order by th.mucGiam asc ")
     List<GiamGIa> findByIDSP(Long idsp);
 
     @Transactional
@@ -40,4 +40,10 @@ public interface GiamGiaRepository extends JpaRepository<GiamGIa, Long> {
 
     @Query("select th from GiamGIa  th where th.Id not in (?1)")
     List<GiamGIa> listGGDetail(Long id);
+
+    @Query("select th from GiamGIa th where th.Id not in (select t.Id from GiamGIa t where t.mucGiam = 0) order by th.mucGiam asc ")
+    List<GiamGIa> getAllAscNotInMucGiam0();
+
+    @Query("select th from GiamGIa th order by th.mucGiam asc ")
+    List<GiamGIa> getAllAsc();
 }

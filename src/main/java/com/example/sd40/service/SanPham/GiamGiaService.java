@@ -16,6 +16,8 @@ public interface GiamGiaService {
     List<GiamGIa> listGGConDung();
     List<GiamGIa> listGGNew();
     List<GiamGIa> listGGDetail(Long id);
+    List<GiamGIa> getAllAscNotInMucGiam0();
+    List<GiamGIa> getAllAsc();
 
 
 }

@@ -66,4 +66,9 @@ public class GioHangChiTietImpl implements GioHangChiTietService {
         gioHangChiTietRepository.deleteGHCTByCTSPAndIDKH(idGH,idCTSP);
     }
 
+    @Override
+    public List<GioHangChiTiet> getGioHangChiTietByIdsAndSoLuongLessThanChiTietSanPham(List<Long> ids) {
+        return gioHangChiTietRepository.findAllByIdsAndSoLuongLessThanChiTietSanPham(ids);
+    }
+
 }

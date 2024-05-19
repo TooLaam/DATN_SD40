@@ -204,29 +204,35 @@
                 alert("Vui lòng nhập đầy đủ thông tin")
                 return;
             }else {
-                var cf = confirm("Bạn muốn cập nhập ???")
-                if (cf == true) {
-                    $.ajax({
-                        type: "POST",
-                        url: "/giamgia/update",
-                        data: {
-                            id: id,
-                            ten: ten,
-                            mucGiam: mucGiam,
-                            trangThai: trangThaiValue
-                        },
-                        success: function (response) {
-                            if (response === "errTrungTen") {
-                                alert("Tên trùng trong danh sách. Vui lòng chọn tên khác !!!")
-                                return;
-                            } else {
+                if(parseInt(mucGiam)<0||parseInt(mucGiam)==0||mucGiam >100){
+                    alert("Mức giảm phải lớn hơn 0 và nhỏ hơn 100 !!!")
+                    return;
+                }else {
+                    var cf = confirm("Bạn muốn cập nhập ???")
+                    if (cf == true) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/giamgia/update",
+                            data: {
+                                id: id,
+                                ten: ten,
+                                mucGiam: mucGiam,
+                                trangThai: trangThaiValue
+                            },
+                            success: function (response) {
+                                if (response === "errTrungTen") {
+                                    alert("Tên trùng trong danh sách. Vui lòng chọn tên khác !!!")
+                                    return;
+                                } else {
                                     alert("Cập nhật thành công")
                                     window.location.href = "/giamgia/index";
-                            }
+                                }
 
-                        }
-                    });
-                }}
+                            }
+                        });
+                    }
+                }
+               }
             }
     };
 
@@ -239,6 +245,10 @@
             alert("Vui lòng nhập đầy đủ thông tin")
             return;
         }else {
+            if(parseInt(mucGiam)<0||parseInt(mucGiam)==0||mucGiam >100){
+                alert("Mức giảm phải lớn hơn 0 và nhỏ hơn 100 !!!")
+                return;
+            }else {
             var cf = confirm("Bạn muốn thêm mới ???");
             if (cf) {
                 $.ajax({
@@ -261,5 +271,5 @@
                     }
                 });
             }}
-    };
+    }};
 </script>

@@ -370,10 +370,6 @@
         var errorText = document.getElementById('errorText');
         var phoneRegex = /^(032|033|034|035|036|037|038|039|096|097|098|086|083|084|085|081|082|088|091|094|070|079|077|076|078|090|093|089|056|058|092|059|099)[0-9]{7}$/; // Định dạng số điện thoại ở Việt Nam
 
-        if (inputField1 > ${ctsp.soLuong}){
-            alert('Số lượng sản phẩm hiện tại không đủ') ;
-            return;
-        }
         if (diaChiChiTietCho ==='' || tinh ===''){
             alert("Vui lòng chọn địa chỉ")
             return;
@@ -388,11 +384,23 @@
         }
 
         else {
-            document.getElementById('loader-overlay').style.display = 'flex';
-            errorText.style.display = 'none';
-            document.getElementById('addForm').submit(); // Submit form
+            $.ajax({
+                type: "POST",
+                url: "/ctsp/soLuongHangTonKho/${ctsp.id}",
+                success: function (response) {
+                    var soLuongTonKho = response;
+                    console.log(soLuongTonKho)
+                    if (inputField1 > parseInt(soLuongTonKho)){
+                        alert('Số lượng sản phẩm đã được cập nhật. Số lượng bạn muốn mua không đủ. Hiện sản phẩm chi còn '+response+' sản phẩm') ;
+                        return;
+                    }else {
+                        document.getElementById('loader-overlay').style.display = 'flex';
+                        errorText.style.display = 'none';
+                        document.getElementById('addForm').submit(); // Submit form
+                    }
+                }
+            });
         }
-
     });
 
     document.getElementById('btnAddHDVN').addEventListener('click', function(event) {
@@ -406,10 +414,7 @@
         var errorText = document.getElementById('errorText');
         var phoneRegex = /^(032|033|034|035|036|037|038|039|096|097|098|086|083|084|085|081|082|088|091|094|070|079|077|076|078|090|093|089|056|058|092|059|099)[0-9]{7}$/; // Định dạng số điện thoại ở Việt Nam
 
-        if (inputField1 > ${ctsp.soLuong}){
-            alert('Số lượng sản phẩm hiện tại không đủ') ;
-            return;
-        }
+
         if (diaChiChiTietCho ==='' || tinh ===''){
             alert("Vui lòng chọn địa chỉ")
             return;
@@ -424,11 +429,23 @@
         }
 
         else {
-            document.getElementById('loader-overlay').style.display = 'flex';
-            errorText.style.display = 'none';
-            document.getElementById('addFormVN').submit(); // Submit form
+            $.ajax({
+                type: "POST",
+                url: "/ctsp/soLuongHangTonKho/${ctsp.id}",
+                success: function (response) {
+                    var soLuongTonKho = response;
+                    console.log(soLuongTonKho)
+                    if (inputField1 > parseInt(soLuongTonKho)){
+                        alert('Số lượng sản phẩm đã được cập nhật. Số lượng bạn muốn mua không đủ. Hiện sản phẩm chi còn '+response+' sản phẩm') ;
+                        return;
+                    }else {
+                        document.getElementById('loader-overlay').style.display = 'flex';
+                        errorText.style.display = 'none';
+                        document.getElementById('addFormVN').submit();
+                    }
+                }
+            });
         }
-
     });
 
     function layThongTinThanhToan2(){

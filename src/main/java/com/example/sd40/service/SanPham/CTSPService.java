@@ -26,7 +26,7 @@ public interface CTSPService {
     List<Object[]> findKCTheoSPDangDung(Long idsp,Long idms);
     ChiTietSanPham detail(Long idctsp);
     void truSanPhamSauKhiMua(Integer soLuongMua,Long idctsp);
-
+    Integer soLuongHangTonKho(Long idctsp);
 
 
 }

@@ -207,6 +207,8 @@
 
 <script>
 
+
+
     function detail(id){
         $.ajax({
             type: "GET",
@@ -254,6 +256,22 @@
             }else {
                 if (ngayBatDau>ngayKetThuc){
                     alert("Ngày bắt đầu không được lớn hơn ngày kết thúc")
+                    return;
+                }
+                if(parseInt(soLuong)<0||parseInt(soLuong)==0){
+                    alert("Số lượng phải lớn hơn 0 !!!")
+                    return;
+                }
+                if(parseInt(phanTramGiam)<0||parseInt(phanTramGiam)==0||parseInt(phanTramGiam)>100){
+                    alert("Phần trăm giảm phải lớn hơn 0 và nhỏ hơn 100 !!!")
+                    return;
+                }
+                if(parseInt(giamToiDa)<0){
+                    alert("Giá trị giảm tối đa phải lớn hơn hoặc bằng 0 !!!")
+                    return;
+                }
+                if(parseInt(giaTriDonToiThieu)<0){
+                    alert("Giá trị đơn hàng tối thiểu phải lớn hơn hoặc bằng 0 !!!")
                     return;
                 }
                 else {
@@ -310,7 +328,25 @@
                     alert("Ngày bắt đầu không được lớn hơn ngày kết thúc")
                     return;
                 }
+                if(parseInt(soLuong)<0||parseInt(soLuong)==0){
+                    alert("Số lượng phải lớn hơn 0 !!!")
+                    return;
+                }
+                if(parseInt(phanTramGiam)<0||parseInt(phanTramGiam)==0||parseInt(phanTramGiam)>100){
+                    alert("Phần trăm giảm phải lớn hơn 0 và nhỏ hơn 100 !!!")
+                    return;
+                }
+                if(parseInt(giamToiDa)<0){
+                    alert("Giá trị giảm tối đa phải lớn hơn hoặc bằng 0 !!!")
+                    return;
+                }
+                if(parseInt(giaTriDonToiThieu)<0){
+                    alert("Giá trị đơn hàng tối thiểu phải lớn hơn hoặc bằng 0 !!!")
+                    return;
+                }
                 else {
+                    var cf = confirm("Bạn muốn thêm mới ???")
+                    if (cf == true) {
                     $.ajax({
                         type: "POST",
                         url: "/voucher/add",
@@ -329,16 +365,13 @@
                                 alert("Tên trùng trong danh sách. Vui lòng chọn tên khác !!!")
                                 return;
                             } else {
-                                var cf = confirm("Bạn muốn thêm mới ???")
-                                if (cf == true) {
+
                                     alert("Thêm thành công")
                                     window.location.href = "/voucher/index";
                                 }
                             }
-
-                        }
                     });
                 }
-            }
+            }}
     };
 </script>

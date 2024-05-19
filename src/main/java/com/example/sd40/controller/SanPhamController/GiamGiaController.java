@@ -27,7 +27,7 @@ public class GiamGiaController {
             return "redirect:/admin/login";
         }else {
             model.addAttribute("nhanvien",nhanVien);
-            model.addAttribute("listGG",giamGiaService.getAll());
+            model.addAttribute("listGG",giamGiaService.getAllAscNotInMucGiam0());
             model.addAttribute("view","/SanPham/GiamGia/index.jsp");
             return "index";
         }

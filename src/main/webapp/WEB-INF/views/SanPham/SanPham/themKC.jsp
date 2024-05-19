@@ -375,31 +375,29 @@
                 alert("Vui lòng nhập đầy đủ thông tin !!!")
                 return;
             }else {
-                var formData = new FormData();
-                formData.append('idctsp', idctsp);
-                formData.append('soLuong', soLuong);
-                formData.append('trangThai', trangThaiValue);
-
-                $.ajax({
-                    type: "POST",
-                    url: "/ctsp/updateKC",
-                    data: formData,
-                    contentType: false, // Không cần set contentType
-                    processData: false, // Không cần xử lý dữ liệu
-                    success: function (response) {
-                        var cf = confirm("Bạn muốn cập nhật ???");
-                        if (cf == true) {
-                            alert("Cập nhật thành công");
-                            window.location.href = "/ctsp/hienthithemkc/"+idsp+"/"+idms;
-                        }
-
-
-                    }
-                });
-            }
-        }
+                if (parseInt(soLuong)<0||parseInt(soLuong)==0){
+                    alert("Số lượng phải lớn hơn 0")
+                    return;
+                }else {
+                    var cf = confirm("Bạn muốn cập nhật ???");
+                    if (cf == true) {
+                        var formData = new FormData();
+                        formData.append('idctsp', idctsp);
+                        formData.append('soLuong', soLuong);
+                        formData.append('trangThai', trangThaiValue);
+                        $.ajax({
+                            type: "POST",
+                            url: "/ctsp/updateKC",
+                            data: formData,
+                            contentType: false, // Không cần set contentType
+                            processData: false, // Không cần xử lý dữ liệu
+                            success: function (response) {
+                                alert("Cập nhật thành công");
+                                window.location.href = "/ctsp/hienthithemkc/"+idsp+"/"+idms;
+                            }
+                        });
+                    }}}}
     }
-
     function AddKC(idsp,idms){
         var soLuong = document.getElementById('soLuongAdd').value;
         var kichCo = document.getElementById('kichCoAdd').value;
@@ -409,30 +407,29 @@
                 alert("Vui lòng nhập đầy đủ thông tin !!!")
                 return;
             }else {
-                var cf = confirm("Bạn muốn thêm mới ???");
-                if (cf == true) {
-                var formData = new FormData();
-                formData.append('idkc', kichCo);
-                formData.append('idsp', idsp);
-                formData.append('idms', idms);
-                formData.append('soLuong', soLuong);
-                formData.append('trangThai', trangThaiValue);
-
-                $.ajax({
-                    type: "POST",
-                    url: "/ctsp/addKC",
-                    data: formData,
-                    contentType: false, // Không cần set contentType
-                    processData: false, // Không cần xử lý dữ liệu
-                    success: function (response) {
-
-                            alert("Thêm mới thành công");
-                            window.location.href = "/ctsp/hienthithemkc/"+idsp+"/"+idms;
-                        }
-
-
-
-                });
-            }}
+                if (parseInt(soLuong)<0||parseInt(soLuong)==0){
+                    alert("Số lượng phải lớn hơn 0")
+                    return;
+                }else {
+                    var cf = confirm("Bạn muốn thêm mới ???");
+                    if (cf == true) {
+                        var formData = new FormData();
+                        formData.append('idkc', kichCo);
+                        formData.append('idsp', idsp);
+                        formData.append('idms', idms);
+                        formData.append('soLuong', soLuong);
+                        formData.append('trangThai', trangThaiValue);
+                        $.ajax({
+                            type: "POST",
+                            url: "/ctsp/addKC",
+                            data: formData,
+                            contentType: false, // Không cần set contentType
+                            processData: false, // Không cần xử lý dữ liệu
+                            success: function (response) {
+                                alert("Thêm mới thành công");
+                                window.location.href = "/ctsp/hienthithemkc/"+idsp+"/"+idms;
+                            }
+                        });
+                    }}}
     }
 </script>

@@ -1,9 +1,11 @@
 package com.example.sd40.controller.SanPhamController;
 
+import com.example.sd40.entity.Gio_hang.GioHangChiTiet;
 import com.example.sd40.entity.NhanVien.NhanVien;
 import com.example.sd40.entity.San_pham.ChiTietSanPham;
 import com.example.sd40.entity.San_pham.ChiTietSanPhamMauSacHinhAnh;
 import com.example.sd40.entity.San_pham.SanPham;
+import com.example.sd40.service.GioHang.GioHangChiTietService;
 import com.example.sd40.service.SanPham.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,8 @@ public class CTSPController {
 
     @Autowired
     KichCoService kichCoService;
+    @Autowired
+    GioHangChiTietService gioHangChiTietService;
 
     @Autowired
     ThuongHieuService thuongHieuService;
@@ -219,7 +223,6 @@ public class CTSPController {
     @PostMapping("/updateKC")
     public ResponseEntity<?> updateKC(@RequestParam("idctsp")Long idctsp,
                            @RequestParam("soLuong") int soLuong,
-
                            @RequestParam("trangThai") int trangThai
                            ){
         Date currentDate = new Date(System.currentTimeMillis());
@@ -322,7 +325,7 @@ public class CTSPController {
                 SanPham sanPham = sanPhamService.detail(id);
                 if (sanPham.getGiamGIa() == null){
                     model.addAttribute("sp",sanPhamService.detail(id));
-                    model.addAttribute("listGG",giamGiaService.getAll());
+                    model.addAttribute("listGG",giamGiaService.getAllAsc());
                     model.addAttribute("nhanvien",nhanVien);
                     model.addAttribute("view","/SanPham/SanPham/giamGia.jsp");
                     return "index";
@@ -345,5 +348,19 @@ public class CTSPController {
     ){
         giamGiaService.updateGG(giamGia,id);
         return "redirect:/ctsp/hienthi/" + id;
+    }
+
+    @PostMapping("/soLuongHangTonKhoGioHang/{ghctId}")
+    public ResponseEntity<Integer> soLuongHangTonKhoGioHang(@PathVariable("ghctId")Long idghct
+    ){
+        GioHangChiTiet gioHangChiTiet = gioHangChiTietService.detail(idghct);
+        Integer soLuongTonKho= ctspService.soLuongHangTonKho(gioHangChiTiet.getChiTietSanPham().getId());
+        return new ResponseEntity<>(soLuongTonKho, HttpStatus.OK);
+    }
+    @PostMapping("/soLuongHangTonKho/{idctsp}")
+    public ResponseEntity<Integer> soLuongHangTonKho(@PathVariable("idctsp")Long idctsp
+    ){
+        Integer soLuongTonKho= ctspService.soLuongHangTonKho(idctsp);
+        return new ResponseEntity<>(soLuongTonKho, HttpStatus.OK);
     }
 }

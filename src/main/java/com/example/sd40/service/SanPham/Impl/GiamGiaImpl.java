@@ -70,4 +70,14 @@ public class GiamGiaImpl implements GiamGiaService {
     public List<GiamGIa> listGGDetail(Long id) {
         return giamGiaRepository.listGGDetail(id);
     }
+
+    @Override
+    public List<GiamGIa> getAllAscNotInMucGiam0() {
+        return giamGiaRepository.getAllAscNotInMucGiam0();
+    }
+
+    @Override
+    public List<GiamGIa> getAllAsc() {
+        return giamGiaRepository.getAllAsc();
+    }
 }
