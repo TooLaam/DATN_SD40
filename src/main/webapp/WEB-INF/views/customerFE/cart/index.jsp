@@ -142,31 +142,33 @@
         var inputField = document.getElementById('inputField' + ghctId);
         var currentValue = parseInt(inputField.value);
 
-        console.log(ghctId)
-        console.log(currentValue)
-        console.log(inputField)
-        // Gửi yêu cầu cập nhật số lượng sản phẩm bằng AJAX
         $.ajax({
-            type: 'POST', // Phương thức HTTP
-            url: '/updatesoluong', // URL của endpoint để cập nhật số lượng
-            data: {
-                idghct: ghctId, // ID của sản phẩm cần cập nhật
-                soluong: currentValue -1 // Số lượng mới
-            },
-            success: function(response) {
-                if (response === "ko"){
-                    alert("Số lượng không đủ")
-                    return;
-                }
-                else if (response ==="ok") {
+            type: "POST",
+            url: "/ctsp/soLuongHangTonKhoGioHang/"+ghctId,
+            success: function (response) {
+                var soLuongTonKho = response;
+                console.log(soLuongTonKho)
+                $.ajax({
+                    type: 'POST', // Phương thức HTTP
+                    url: '/updatesoluong', // URL của endpoint để cập nhật số lượng
+                    data: {
+                        idghct: ghctId, // ID của sản phẩm cần cập nhật
+                        soluong: currentValue -1 // Số lượng mới
+                    },
+                    success: function(response) {
+                        if (response === "ko"){
+                            inputField.value = soLuongTonKho
+                            alert("Số lượng không đủ. Hiện tại sản phẩm chỉ còn "+soLuongTonKho+' sản phẩm')
+                            return;
+                        }
+                        else if (response ==="ok") {
 
-                }
-            },
-            error: function(xhr, status, error) {
-                // Xử lý lỗi (nếu có)
-                console.error('Error updating quantity:', error);
+                        }
+                    },
+                });
             }
         });
+
         handleCheckboxChange()
     }
 
@@ -174,31 +176,33 @@
         var inputField = document.getElementById('inputField' + ghctId);
         var currentValue = parseInt(inputField.value);
 
-        console.log(ghctId)
-        console.log(currentValue)
-        console.log(inputField)
-        // Gửi yêu cầu cập nhật số lượng sản phẩm bằng AJAX
         $.ajax({
-            type: 'POST', // Phương thức HTTP
-            url: '/updatesoluong', // URL của endpoint để cập nhật số lượng
-            data: {
-                idghct: ghctId, // ID của sản phẩm cần cập nhật
-                soluong: currentValue +1 // Số lượng mới
-            },
-            success: function(response) {
-                if (response === "ko"){
-                    alert("Số lượng không đủ")
-                    return;
-                }else if (response ==="ok") {
-                    // Xử lý phản hồi từ server (nếu cần)
-                    console.log('Quantity updated successfully!');
-                }
-            },
-            error: function(xhr, status, error) {
-                // Xử lý lỗi (nếu có)
-                console.error('Error updating quantity:', error);
+            type: "POST",
+            url: "/ctsp/soLuongHangTonKhoGioHang/"+ghctId,
+            success: function (response) {
+                var soLuongTonKho = response;
+                console.log(soLuongTonKho)
+                $.ajax({
+                    type: 'POST', // Phương thức HTTP
+                    url: '/updatesoluong', // URL của endpoint để cập nhật số lượng
+                    data: {
+                        idghct: ghctId, // ID của sản phẩm cần cập nhật
+                        soluong: currentValue +1 // Số lượng mới
+                    },
+                    success: function(response) {
+                        if (response === "ko"){
+                            inputField.value = soLuongTonKho
+                            alert("Số lượng không đủ. Hiện tại sản phẩm chỉ còn "+soLuongTonKho+' sản phẩm')
+                            return;
+                        }else if (response ==="ok") {
+                            // Xử lý phản hồi từ server (nếu cần)
+                            console.log('Quantity updated successfully!');
+                        }
+                    },
+                });
             }
         });
+
         handleCheckboxChange()
     }
 
@@ -281,7 +285,7 @@
             alert("Vui lòng chọn sản phẩm")
             return;
         }
-        // Gán danh sách ID vào trường ẩn trước khi gửi form
+
         $.ajax({
             type: "POST",
             contentType: "application/json",
@@ -289,14 +293,37 @@
             data: JSON.stringify(selectedProductIds),
             dataType: 'json',
             success: function(response) {
-                // Xử lý phản hồi từ controller nếu cần
-                console.log("Danh sách ID sản phẩm đã được gửi thành công!");
-                window.location.href = "/bill/hienThiSanPhamHoaDon";
+                if ($.isEmptyObject(response)){
+                    window.location.href = "/bill/hienThiSanPhamHoaDon";
+                }else {
+
+                    let alertMessage = "Hiện tại có sản phẩm sau đây không đủ số lượng:\n";
+
+                    for (let i = 0; i < response.length; i++) {
+                        alertMessage += `    Tên: `+response[i].ten+`, `+response[i].mauSac+`, size: `+response[i].kichCo+`, Số lượng hiện tại: `+response[i].soLuong+`\n\n`;
+                    }
+
+                    alert(alertMessage);
+                }
+
+
             },
             error: function(xhr, status, error) {
                 console.error("Đã xảy ra lỗi khi gửi dữ liệu: " + error);
             }
         });
     });
+
+    function displayInsufficientProductsAlert(products) {
+        let alertMessage = "Hiện tại đang có sản phẩm không đủ số lượng :\n";
+
+        products.forEach(product => {
+            alertMessage += `
+        Tên sản phẩm: ${product.chiTietSanPham.chiTietSanPhamMauSac.sanPham.ten}
+        Số lượng hiện tại: ${product.chiTietSanPham.soLuong}\n`;
+        });
+
+        alert(alertMessage);
+    }
 
 </script>

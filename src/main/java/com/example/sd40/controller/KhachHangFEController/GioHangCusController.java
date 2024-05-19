@@ -79,6 +79,7 @@ public class GioHangCusController {
             // Gọi phương thức trong service để cập nhật số lượng sản phẩm
             GioHangChiTiet gioHangChiTiet = gioHangChiTietService.kiemTraSoLuongTruocKhiUpdate(idghct);
             if (soluong > gioHangChiTiet.getChiTietSanPham().getSoLuong()){
+                gioHangChiTietService.updateSoLuong(gioHangChiTiet.getChiTietSanPham().getSoLuong(),idghct);
                 return ResponseEntity.ok("ko");
             }else {
                 gioHangChiTietService.updateSoLuong(soluong, idghct);

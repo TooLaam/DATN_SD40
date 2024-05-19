@@ -95,4 +95,6 @@ public interface CTSPRepository extends JpaRepository<ChiTietSanPham,Long> {
     @Query("update ChiTietSanPham ct set ct.soLuong = ct.soLuong-?1 where ct.Id = ?2")
     void truSanPhamSauKhiMua(Integer soLuongMua,Long idctsp);
 
+    @Query("select sl.soLuong from ChiTietSanPham sl where sl.Id = ?1")
+    Integer soLuongHangTonKho(Long idctsp);
 }

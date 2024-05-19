@@ -13,6 +13,7 @@ import com.example.sd40.entity.Mail.MailStructure;
 import com.example.sd40.entity.San_pham.ChiTietSanPham;
 import com.example.sd40.entity.San_pham.ChiTietSanPhamMauSacHinhAnh;
 
+import com.example.sd40.entity.San_pham.view.Sp;
 import com.example.sd40.service.HoaDon.HoaDonService;
 import com.example.sd40.service.HoaDon.PhuongThucThanhToanService;
 import com.example.sd40.service.GioHang.GioHangChiTietService;
@@ -547,17 +548,25 @@ public class HoaDonController {
 
 
     @PostMapping("/datHangTuGioHang")
-    public ResponseEntity<?> processSelectedProducts(@RequestBody List<Long> selectedProductIds,HttpSession session) {
-
-        try {
-            session.setAttribute("listLong",selectedProductIds);
-            return new ResponseEntity<>(selectedProductIds, HttpStatus.OK);
+    public ResponseEntity<?> processSelectedProducts(@RequestBody List<Long> selectedProductIds, HttpSession session) {
+        List<GioHangChiTiet> gioHangChiTiets = gioHangChiTietService.getGioHangChiTietByIdsAndSoLuongLessThanChiTietSanPham(selectedProductIds);
+        List<Sp> chiTietSanPhamIds = new ArrayList<>();
+        for (GioHangChiTiet gioHangChiTiet : gioHangChiTiets) {
+            Sp sp = new Sp();
+            sp.setTen(gioHangChiTiet.getChiTietSanPham().getChiTietSanPhamMauSacHinhAnh().getSanPham().getTen());
+            sp.setSoLuong(gioHangChiTiet.getChiTietSanPham().getSoLuong());
+            sp.setKichCo(gioHangChiTiet.getChiTietSanPham().getKichCo().getTen());
+            sp.setMauSac(gioHangChiTiet.getChiTietSanPham().getChiTietSanPhamMauSacHinhAnh().getMau_sac().getTen());
+            chiTietSanPhamIds.add(sp);
         }
-        catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Lỗi xóa địa chỉ.");
+        if (gioHangChiTiets.isEmpty()) {
+            session.setAttribute("listLong", selectedProductIds);
+            return ResponseEntity.ok().body("{}");
+        } else {
+            return new ResponseEntity<>(chiTietSanPhamIds, HttpStatus.OK);
         }
-
     }
+
 
 
     @GetMapping("/hienThiSanPhamHoaDon")

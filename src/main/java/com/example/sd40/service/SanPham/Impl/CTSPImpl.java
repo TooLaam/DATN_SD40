@@ -108,5 +108,10 @@ public class CTSPImpl implements CTSPService {
         ctspRepository.truSanPhamSauKhiMua(soLuongMua,idctsp);
     }
 
+    @Override
+    public Integer soLuongHangTonKho(Long idctsp) {
+        return ctspRepository.soLuongHangTonKho(idctsp);
+    }
+
 
 }

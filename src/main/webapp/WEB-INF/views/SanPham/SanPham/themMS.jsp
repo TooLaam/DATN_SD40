@@ -263,7 +263,7 @@
             <input  type="file" id="imageAddMauSac" accept="image/*" class="form-control">
         </div><br>
         <div class="form-group">
-            <input type="submit" onclick="addMauSac()" value="Thêm">
+            <input type="submit" onclick="addms()" value="Thêm">
         </div>
     </div>
 </section>
@@ -306,36 +306,37 @@
             alert("Vui lòng chọn màu sắc muốn chỉnh sửa ở bên danh sách !!!")
             return;
         }else {
-            if (giaHienHanh.trim()===''||hinhAnh == null){
+            if (giaHienHanh.trim() === '' || hinhAnh == null) {
                 alert("Vui lòng nhập đầy đủ thông tin !!!")
                 return;
-            }else {
-                var formData = new FormData();
-                formData.append('idms', idms);
-                formData.append('giaHienHanh', giaHienHanh);
-                formData.append('image', hinhAnh);
-                formData.append('trangThai', trangThaiValue);
-                formData.append('idsp', idsp);
+            } else {
+                if (parseFloat(giaHienHanh) < 0) {
+                    alert("Giá hiện hành phải lớn hơn hoặc bằng 0 !!!")
+                    return;
+                } else {
+                    var cf = confirm("Bạn muốn cập nhật ???");
+                    if (cf == true) {
+                    var formData = new FormData();
+                    formData.append('idms', idms);
+                    formData.append('giaHienHanh', giaHienHanh);
+                    formData.append('image', hinhAnh);
+                    formData.append('trangThai', trangThaiValue);
+                    formData.append('idsp', idsp);
 
-                $.ajax({
-                    type: "POST",
-                    url: "/ctsp/updateMS",
-                    data: formData,
-                    contentType: false, // Không cần set contentType
-                    processData: false, // Không cần xử lý dữ liệu
-                    success: function (response) {
-                            var cf = confirm("Bạn muốn cập nhật ???");
-                            if (cf == true) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/ctsp/updateMS",
+                        data: formData,
+                        contentType: false, // Không cần set contentType
+                        processData: false, // Không cần xử lý dữ liệu
+                        success: function (response) {
                                 alert("Cập nhật thành công");
-                                window.location.href = "/ctsp/hienThiChinhSuaMauSac/"+idsp;
+                                window.location.href = "/ctsp/hienThiChinhSuaMauSac/" + idsp;
                             }
-
-
-                    }
-                });
+                    });
+                }
             }
-        }
-
+        }}
     }
 
     function AddMauSac(){
@@ -348,30 +349,31 @@
             alert("Vui lòng nhập đầy đủ thông tin !!!")
             return;
         }else {
-            var formData = new FormData();
-            formData.append('idms', idms);
-            formData.append('giaHienHanh', giaHienHanh);
-            formData.append('image', image);
-            formData.append('idsp', idsp);
+            if (parseFloat(giaHienHanh) < 0) {
+                alert("Giá hiện hành phải lớn hơn hoặc bằng 0 !!!")
+                return;
+            } else {
+                var cf = confirm("Bạn muốn thêm dữ liệu???");
+                if (cf == true) {
+                var formData = new FormData();
+                formData.append('idms', idms);
+                formData.append('giaHienHanh', giaHienHanh);
+                formData.append('image', image);
+                formData.append('idsp', idsp);
 
-            $.ajax({
-                type: "POST",
-                url: "/ctsp/addMS",
-                data: formData,
-                contentType: false, // Không cần set contentType
-                processData: false, // Không cần xử lý dữ liệu
-                success: function (response) {
-                    var cf = confirm("Bạn muốn thêm dữ liệu???");
-                    if (cf == true) {
-                        alert("Thêm thành công");
-                        window.location.href = "/ctsp/hienthithemkc/"+idsp+"/"+idms;
+                $.ajax({
+                    type: "POST",
+                    url: "/ctsp/addMS",
+                    data: formData,
+                    contentType: false, // Không cần set contentType
+                    processData: false, // Không cần xử lý dữ liệu
+                    success: function (response) {
+                            alert("Thêm thành công");
+                            window.location.href = "/ctsp/hienthithemkc/" + idsp + "/" + idms;
                     }
-
-
-                }
-            });
-        }
-
+                });
+            }
+        }}
     }
     function showNewFormMauSac() {
         document.getElementById("new-formMauSac").style.display = "block";
@@ -383,7 +385,7 @@
         document.getElementById("overlay").style.display = "none";
     }
 
-    function addMauSac() {
+    function addms() {
         var trangThaiValue = '0';
         var ten = document.getElementById('tenAdd').value;
         var hinhAnh = document.getElementById('imageAddMauSac').files[0];
