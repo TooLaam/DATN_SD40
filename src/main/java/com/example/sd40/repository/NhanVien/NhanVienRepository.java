@@ -22,4 +22,6 @@ public interface NhanVienRepository extends JpaRepository<NhanVien, Long> {
     Long IdNvCuoi();
     @Query("select nv from NhanVien nv where nv.taiKhoan = ?1 and nv.matKhau=?2")
     NhanVien login(String taiKhoan , String matKhau);
+    @Query("select th from NhanVien th order by th.id desc ")
+    List<NhanVien> getAllDesc();
 }

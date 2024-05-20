@@ -34,7 +34,7 @@ public class MauSacController {
             return "redirect:/admin/login";
         }else{
             model.addAttribute("nhanvien",nhanVien);
-            model.addAttribute("listMS",mauSacService.findAll());
+            model.addAttribute("listMS",mauSacService.listMSNew());
             model.addAttribute("view","/SanPham/MauSac/index.jsp");
             return "index";
         }

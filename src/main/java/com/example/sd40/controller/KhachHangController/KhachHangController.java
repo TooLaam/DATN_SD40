@@ -35,7 +35,7 @@ public class KhachHangController {
             return "redirect:/admin/login";
         }else {
             model.addAttribute("nhanvien",nhanVien);
-            model.addAttribute("listKH",khachHangService.getAll());
+            model.addAttribute("listKH",khachHangService.getAllDesc());
             model.addAttribute("view","/KhachHang/index.jsp");
             return "index";
         }

@@ -15,7 +15,7 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, Long> {
     @Query("select hd from HoaDon hd order by hd.id desc ")
     List<HoaDon> getAll();
 
-    @Query("select hd from HoaDon hd where hd.trangThai=?1 order by hd.id desc")
+    @Query("select hd from HoaDon hd where hd.trangThai=?1 order by hd.ngayCapNhat desc")
     List<HoaDon> getHDByTrangThai(Integer trangThai);
 
     @Transactional

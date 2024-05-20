@@ -26,4 +26,6 @@ public interface KhachHangService {
 
     List<KhachHang> findByEmal(String ten);
 
+    List<KhachHang> getAllDesc();
+
 }

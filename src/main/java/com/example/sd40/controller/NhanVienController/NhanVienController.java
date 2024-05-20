@@ -33,7 +33,7 @@ public class NhanVienController {
                 return "redirect:/admin/login";
             }else {
                 model.addAttribute("nhanvien",nhanVien);
-                model.addAttribute("listNV",nhanVienService.getAll());
+                model.addAttribute("listNV",nhanVienService.getAllDesc());
                 model.addAttribute("view","/NhanVien/index.jsp");
                 return "index";
             }

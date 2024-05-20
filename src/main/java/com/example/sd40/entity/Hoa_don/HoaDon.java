@@ -83,6 +83,4 @@ public class HoaDon {
 
     @Column(name = "phi_ship")
     private BigDecimal phiShip;
-
-
 }

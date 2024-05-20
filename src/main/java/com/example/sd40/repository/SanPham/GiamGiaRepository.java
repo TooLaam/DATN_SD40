@@ -41,7 +41,7 @@ public interface GiamGiaRepository extends JpaRepository<GiamGIa, Long> {
     @Query("select th from GiamGIa  th where th.Id not in (?1)")
     List<GiamGIa> listGGDetail(Long id);
 
-    @Query("select th from GiamGIa th where th.Id not in (select t.Id from GiamGIa t where t.mucGiam = 0) order by th.mucGiam asc ")
+    @Query("select th from GiamGIa th where th.Id not in (select t.Id from GiamGIa t where t.mucGiam = 0) order by th.Id desc ")
     List<GiamGIa> getAllAscNotInMucGiam0();
 
     @Query("select th from GiamGIa th order by th.mucGiam asc ")

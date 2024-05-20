@@ -16,4 +16,5 @@ public interface NhanVienService {
     ChucVu detailChucVu(Long id);
     Long IdNvCuoi();
     NhanVien login(String taiKhoan , String matKhau);
+    List<NhanVien> getAllDesc();
 }

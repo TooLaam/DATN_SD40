@@ -27,7 +27,7 @@ public class TheLoaiController {
             return "redirect:/admin/login";
         }else {
             model.addAttribute("nhanvien",nhanVien);
-            model.addAttribute("listTL",loaiGiayService.findAll());
+            model.addAttribute("listTL",loaiGiayService.listTLNewwww());
             model.addAttribute("view","/SanPham/TheLoai/index.jsp");
             return "index";
         }

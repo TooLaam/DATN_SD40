@@ -7,6 +7,7 @@ import com.example.sd40.entity.NhanVien.NhanVien;
 import com.example.sd40.service.HoaDon.HoaDonService;
 import com.example.sd40.service.HoaDon.ThaoTacHoaDonService;
 import com.example.sd40.service.KhachHang.KhachHangCusService;
+import com.example.sd40.service.MailService.MailService;
 import com.example.sd40.service.NhanVien.NhanVienService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.time.Instant;
 import java.util.List;
 
 /**
@@ -34,9 +36,14 @@ public class HoaDonAdminController {
     NhanVienService nhanVienService;
     @Autowired
     KhachHangCusService khachHangCusService;
+    @Autowired
+    MailService mailService;
 
 
     Date currentDate = new Date(System.currentTimeMillis());
+    Instant currentInstant = Instant.now();
+    java.util.Date currentDate1 = Date.from(currentInstant);
+
 
     @GetMapping("/index")
     private String findAllByStatus(Model model, HttpSession session){
@@ -115,91 +122,94 @@ public class HoaDonAdminController {
         HoaDon hoaDon = hoaDonService.detailHoaDon(idHD);
         if (hoaDon.getPhuongThucThanhToan().getId() == 1){
             if (trangThai == 0){
-                hoaDonService.chuyenTrangThaiHoaDon(1,idHD,currentDate,null);
+                hoaDonService.chuyenTrangThaiHoaDon(1,idHD,currentDate1,null);
                 ThaoTacHoaDon thaoTacHoaDon = new ThaoTacHoaDon();
                 thaoTacHoaDon.setHoaDon(hoaDonService.detailHoaDon(idHD));
                 thaoTacHoaDon.setThaoTac("Nhân viên xác nhận đơn hàng");
                 thaoTacHoaDon.setTrangThai(0);
-                thaoTacHoaDon.setNgayTao(currentDate);
+                thaoTacHoaDon.setNgayTao(currentDate1);
                 thaoTacHoaDon.setNhanVien(nhanVien);
                 thaoTacHoaDonService.save(thaoTacHoaDon);
                 return ResponseEntity.ok("ok");
             }
             if (trangThai == 1){
-                hoaDonService.chuyenTrangThaiHoaDon(2,idHD,currentDate,null);
+                hoaDonService.chuyenTrangThaiHoaDon(2,idHD,currentDate1,null);
                 ThaoTacHoaDon thaoTacHoaDon = new ThaoTacHoaDon();
                 thaoTacHoaDon.setHoaDon(hoaDonService.detailHoaDon(idHD));
                 thaoTacHoaDon.setThaoTac("Nhân viên chuyển sang trạng thái chờ giao");
                 thaoTacHoaDon.setTrangThai(0);
-                thaoTacHoaDon.setNgayTao(currentDate);
+                thaoTacHoaDon.setNgayTao(currentDate1);
                 thaoTacHoaDon.setNhanVien(nhanVien);
                 thaoTacHoaDonService.save(thaoTacHoaDon);
                 return ResponseEntity.ok("ok");
             }
             if (trangThai == 2){
-                hoaDonService.chuyenTrangThaiHoaDon(3,idHD,currentDate,null);
+                hoaDonService.chuyenTrangThaiHoaDon(3,idHD,currentDate1,null);
                 ThaoTacHoaDon thaoTacHoaDon = new ThaoTacHoaDon();
                 thaoTacHoaDon.setHoaDon(hoaDonService.detailHoaDon(idHD));
                 thaoTacHoaDon.setThaoTac("Nhân viên chuyển sang trạng thái đang giao");
                 thaoTacHoaDon.setTrangThai(0);
-                thaoTacHoaDon.setNgayTao(currentDate);
+                thaoTacHoaDon.setNgayTao(currentDate1);
                 thaoTacHoaDon.setNhanVien(nhanVien);
                 thaoTacHoaDonService.save(thaoTacHoaDon);
                 return ResponseEntity.ok("ok");
             }
             if (trangThai == 3){
-                hoaDonService.chuyenTrangThaiHoaDon(4,idHD,currentDate,currentDate);
+                hoaDonService.chuyenTrangThaiHoaDon(4,idHD,currentDate1,currentDate1);
                 ThaoTacHoaDon thaoTacHoaDon = new ThaoTacHoaDon();
                 thaoTacHoaDon.setHoaDon(hoaDonService.detailHoaDon(idHD));
                 thaoTacHoaDon.setThaoTac("Nhân viên hoàn thành đơn hàng");
                 thaoTacHoaDon.setTrangThai(0);
-                thaoTacHoaDon.setNgayTao(currentDate);
+                thaoTacHoaDon.setNgayTao(currentDate1);
                 thaoTacHoaDon.setNhanVien(nhanVien);
                 thaoTacHoaDonService.save(thaoTacHoaDon);
+
+
+
                 return ResponseEntity.ok("ok");
             }
         }
         else {
             if (trangThai == 0){
-                hoaDonService.chuyenTrangThaiHoaDon(1,idHD,currentDate,hoaDon.getNgayThanhToan());
+                hoaDonService.chuyenTrangThaiHoaDon(1,idHD,currentDate1,hoaDon.getNgayThanhToan());
                 ThaoTacHoaDon thaoTacHoaDon = new ThaoTacHoaDon();
                 thaoTacHoaDon.setHoaDon(hoaDonService.detailHoaDon(idHD));
                 thaoTacHoaDon.setThaoTac("Nhân viên xác nhận đơn hàng");
                 thaoTacHoaDon.setTrangThai(0);
-                thaoTacHoaDon.setNgayTao(currentDate);
+                thaoTacHoaDon.setNgayTao(currentDate1);
                 thaoTacHoaDon.setNhanVien(nhanVien);
                 thaoTacHoaDonService.save(thaoTacHoaDon);
                 return ResponseEntity.ok("ok");
             }
             if (trangThai == 1){
-                hoaDonService.chuyenTrangThaiHoaDon(2,idHD,currentDate,hoaDon.getNgayThanhToan());
+                hoaDonService.chuyenTrangThaiHoaDon(2,idHD,currentDate1,hoaDon.getNgayThanhToan());
                 ThaoTacHoaDon thaoTacHoaDon = new ThaoTacHoaDon();
                 thaoTacHoaDon.setHoaDon(hoaDonService.detailHoaDon(idHD));
                 thaoTacHoaDon.setThaoTac("Nhân viên chuyển sang trạng thái chờ giao");
                 thaoTacHoaDon.setTrangThai(0);
-                thaoTacHoaDon.setNgayTao(currentDate);
+                thaoTacHoaDon.setNgayTao(currentDate1);
                 thaoTacHoaDon.setNhanVien(nhanVien);
                 thaoTacHoaDonService.save(thaoTacHoaDon);
                 return ResponseEntity.ok("ok");
             }
             if (trangThai == 2){
-                hoaDonService.chuyenTrangThaiHoaDon(3,idHD,currentDate,hoaDon.getNgayThanhToan());
+                hoaDonService.chuyenTrangThaiHoaDon(3,idHD,currentDate1,hoaDon.getNgayThanhToan());
                 ThaoTacHoaDon thaoTacHoaDon = new ThaoTacHoaDon();
                 thaoTacHoaDon.setHoaDon(hoaDonService.detailHoaDon(idHD));
                 thaoTacHoaDon.setThaoTac("Nhân viên chuyển sang trạng thái đang giao");
                 thaoTacHoaDon.setTrangThai(0);
-                thaoTacHoaDon.setNgayTao(currentDate);
+                thaoTacHoaDon.setNgayTao(currentDate1);
                 thaoTacHoaDon.setNhanVien(nhanVien);
                 thaoTacHoaDonService.save(thaoTacHoaDon);
                 return ResponseEntity.ok("ok");
             }
             if (trangThai == 3){
-                hoaDonService.chuyenTrangThaiHoaDon(4,idHD,currentDate,hoaDon.getNgayThanhToan());
+                hoaDonService.chuyenTrangThaiHoaDon(4,idHD,currentDate1,hoaDon.getNgayThanhToan());
                 ThaoTacHoaDon thaoTacHoaDon = new ThaoTacHoaDon();
                 thaoTacHoaDon.setHoaDon(hoaDonService.detailHoaDon(idHD));
                 thaoTacHoaDon.setThaoTac("Nhân viên hoàn thành đơn hàng");
                 thaoTacHoaDon.setTrangThai(0);
-                thaoTacHoaDon.setNgayTao(currentDate);
+                thaoTacHoaDon.setNgayTao(currentDate1);
                 thaoTacHoaDon.setNhanVien(nhanVien);
                 thaoTacHoaDonService.save(thaoTacHoaDon);
                 return ResponseEntity.ok("ok");

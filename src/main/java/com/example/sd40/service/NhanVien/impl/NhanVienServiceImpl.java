@@ -59,5 +59,10 @@ public class NhanVienServiceImpl implements NhanVienService {
         return nhanVienRepository.login(taiKhoan,matKhau);
     }
 
+    @Override
+    public List<NhanVien> getAllDesc() {
+        return nhanVienRepository.getAllDesc();
+    }
+
 
 }

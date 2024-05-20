@@ -21,4 +21,6 @@ public interface KhachHangRepository extends JpaRepository<KhachHang, Long> {
     List<KhachHang> findByEmailUpdate(String ten,Long id);
     @Query(value = "select top(1) id from khach_hang order by id desc",nativeQuery = true)
     Long IdKHCuoi();
+    @Query("select th from KhachHang th order by th.id desc ")
+    List<KhachHang> getAllDesc();
 }

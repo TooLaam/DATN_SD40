@@ -58,4 +58,9 @@ public class KhachHangServiceImpl implements KhachHangService {
     public List<KhachHang> findByEmal(String ten) {
         return khachHangRepository.findByEmal(ten);
     }
+
+    @Override
+    public List<KhachHang> getAllDesc() {
+        return khachHangRepository.getAllDesc();
+    }
 }

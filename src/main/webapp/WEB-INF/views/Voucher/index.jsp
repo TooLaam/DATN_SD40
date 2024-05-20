@@ -106,7 +106,7 @@
                                 </div>
 
                                 <div>
-                                    Ngày sửa gần nhất :
+                                    Ngày kết thúc :
                                     <input type="date" class="form-control" id="ngayKTUpdate" value="${vc.ngayKetThuc}">
                                 </div>
                                 <div>
@@ -152,7 +152,7 @@
                                 </div>
 
                                 <div>
-                                    Ngày sửa gần nhất :
+                                    Ngày kết thúc :
                                     <input type="date" class="form-control" id="ngayKTAdd" required>
                                 </div>
 

@@ -34,7 +34,7 @@ public class ThuongHieuController {
             return "redirect:/admin/login";
         }else {
             model.addAttribute("nhanvien",nhanVien);
-            model.addAttribute("listTH",thuongHieuService.getAll());
+            model.addAttribute("listTH",thuongHieuService.listTHNew());
             model.addAttribute("view","/SanPham/ThuongHieu/index.jsp");
             return "index";
         }

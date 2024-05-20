@@ -27,7 +27,7 @@ public class KichCoController {
             return "redirect:/admin/login";
         }else {
             model.addAttribute("nhanvien",nhanVien);
-            model.addAttribute("listKC",kichCoService.findAll());
+            model.addAttribute("listKC",kichCoService.listGGNew());
             model.addAttribute("view","/SanPham/KichCo/index.jsp");
             return "index";
         }
